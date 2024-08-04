@@ -27,7 +27,7 @@ num_topics = 10
 nmf_model = NMF(n_components=num_topics, random_state=1)
 W = nmf_model.fit_transform(tfidf_matrix)
 H = nmf_model.components_
-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
+
 # 将每个推文的主题分布添加到数据框中
 for i in range(num_topics):
     df[f'topic_{i}'] = W[:, i]
