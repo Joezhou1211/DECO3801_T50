@@ -1,1 +1,3 @@
 data/raw/v_forest.bson
+data/processed/tweets_with_final_nmf_topics_final.csv
+data/processed/final_nmf_model.pkl
