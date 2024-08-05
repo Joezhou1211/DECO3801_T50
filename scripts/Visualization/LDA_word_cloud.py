@@ -2,9 +2,9 @@ from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 from gensim import corpora, models
 
-final_lda_model = models.LdaModel.load('../models/lda_model.gensim')
-dictionary = corpora.Dictionary.load('../data/processed/dictionary.gensim')
-corpus = corpora.MmCorpus('../data/processed/corpus.mm')
+final_lda_model = models.LdaModel.load('../../models/lda_model.gensim')
+dictionary = corpora.Dictionary.load('../../data/processed/dictionary.gensim')
+corpus = corpora.MmCorpus('../../data/processed/corpus.mm')
 
 
 # 自定义函数将所有词汇转换为大写
@@ -38,5 +38,5 @@ for i, ax in enumerate(axes.flatten()):
 
 # 调整子图布局
 plt.tight_layout()
-plt.savefig('all_topics_wordcloud.png', format='png', bbox_inches='tight')
+plt.savefig('LDA_wordcloud.png', format='png', bbox_inches='tight')
 plt.show()
