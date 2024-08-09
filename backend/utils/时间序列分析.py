@@ -22,6 +22,10 @@ from dash import dcc, html
 from dash.dependencies import Input, Output
 import plotly.graph_objects as go
 
+
+# 加载数据
+sentiment_sequance = pd.read_csv('../../data/processed/final_data.csv')
+
 # 读取数据
 df = pd.read_csv('../../data/processed/tweets_with_final_nmf_topics_final.csv')
 
@@ -75,7 +79,7 @@ app.layout = html.Div([
 
 @app.callback(
     Output('time-series-chart', 'figure'),
-    Input('time-series-chart', 'id')  # Dummy input to trigger callback
+    Input('time-series-chart', 'id')
 )
 def update_figure(_):
     fig = go.Figure()
