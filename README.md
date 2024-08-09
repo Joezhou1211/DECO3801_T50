@@ -1,3 +1,6 @@
+# Project Structure
+
+```plaintext
 project-root/
 │
 ├── backend/                        # 后端代码和服务
