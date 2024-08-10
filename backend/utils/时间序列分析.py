@@ -15,22 +15,19 @@
 #(Timestamp('2019-04-08 23:12:31+0000', tz='UTC'),
 # Timestamp('2020-02-19 18:42:10+0000', tz='UTC'))
 
-
 import pandas as pd
 import dash
 from dash import dcc, html
 from dash.dependencies import Input, Output
 import plotly.graph_objects as go
 
-
-# 加载数据
-sentiment_sequance = pd.read_csv('../../data/processed/final_data.csv')
-
 # 读取数据
-df = pd.read_csv('../../data/processed/tweets_with_final_nmf_topics_final.csv')
+df = pd.read_csv('../../data/processed/final_data.csv')
+time_sequance = pd.read_csv('../../data/processed/hourly_weighted_sentiment_vader.csv')
 
 # 将时间戳转换为datetime格式，并指定格式
 df['created_at'] = pd.to_datetime(df['created_at'], errors='coerce')
+time_sequance['created_at_hour'] = pd.to_datetime(time_sequance['created_at_hour'], errors='coerce')
 
 # 检查是否有NaT值并处理
 df = df.dropna(subset=['created_at'])
@@ -84,9 +81,15 @@ app.layout = html.Div([
 def update_figure(_):
     fig = go.Figure()
 
+    # 添加推特数量时间序列
     fig.add_trace(go.Scatter(x=tweet_counts.index, y=tweet_counts,
                              mode='lines', name='Tweet Count'))
 
+    # 添加情绪时间序列
+    fig.add_trace(go.Scatter(x=time_sequance['created_at_hour'], y=time_sequance['weighted_sentiment'],
+                             mode='lines', name='Weighted Sentiment', line=dict(color='blue')))
+
+    # 添加重要时间节点的垂直线和注释
     for event_time, event_details in initial_events.items():
         color = 'red' if event_details[1] == 'N' else 'green'
         fig.add_vline(x=pd.Timestamp(event_time), line=dict(color=color, dash='dash'))
