@@ -11,6 +11,7 @@ app.register_blueprint(api, url_prefix='/api')
 def serve_static():
     return send_from_directory(app.static_folder, 'search.html')
 # 访问http://localhost:5001 接口  如果访问192.168.0.1:5001/接口会报错（CROS） 后期使用Nginx进行接口映射
+# 用之前需要看一下elasticsearch_service.py的备注
 
 
 if __name__ == '__main__':

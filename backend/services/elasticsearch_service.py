@@ -10,7 +10,7 @@ from elasticsearch import Elasticsearch
 6. 运行main.py服务器 访问http://localhost:5001 可查看搜索页面并交互
 
 
-后端更新备注：
+下阶段后端更新计划：
 使用docker容器化部署ElasticSearch
 使用Nginx进行接口映射
 根据前端需求拓展数据框接口
