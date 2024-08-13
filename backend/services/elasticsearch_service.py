@@ -1,7 +1,7 @@
 from elasticsearch import Elasticsearch
 
 '''
-启用ElasticSearch并在前端执行搜索的方法（前端示例页面已完成: backend/static/index.html）
+启用ElasticSearch并在前端执行搜索的方法（前端示例页面已完成: backend/static/network.html）
 1. 下载ElasticSearch：https://www.elastic.co/downloads/elasticsearch
 2. 找到下载的文件 打开/config/elasticsearch.yml: xpack.security.enabled: true -> xpack.security.enabled: false禁用elasticsearch的验证功能 
 3. 终端运行‘ ./bin/elasticsearch ’ 启动ElasticSearch （端口9200 打开http://localhost:9200/ 可查看是否启动成功）
