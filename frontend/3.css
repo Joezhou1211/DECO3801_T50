@@ -1,29 +1,73 @@
-body {
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
     font-family: Arial, sans-serif;
-}
-
-#map-container {
     display: flex;
-    flex-direction: row;
-}
-
-#regions_div {
-    width: 70%;
-    height: 600px;
-}
-
-#sidebar {
-    width: 30%;
-    height: 600px;
-    padding: 20px;
-    border-left: 1px solid #ccc;
-    box-shadow: -3px 0 5px rgba(0, 0, 0, 0.1);
-    display: none;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #752d2d;
+    color: white;
 }
 
-#sidebar.visible {
+.header {
+    position: absolute;
+    top: 0;
+    width: 100%;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #752d2d;
+}
+
+.logo img {
+    width: 50px;
+    height: 50px;
+}
+
+.nav {
+    display: flex;
+    background-color: rgba(128, 128, 128, 0.5);
+    border-radius: 10px;
+    padding: 10px 0;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-icon img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.register-container {
+    background-color: #8c3d3d;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px; /* 控制注册框的宽度 */
+    margin-top: 50px; /* 调整距离顶部的距离，使其在导航栏下方 */
+}
+
+.register-container input, .register-container button {
+    display: block;
+    width: 80%; /* 控制输入框和按钮的宽度 */
+    margin: 10px auto; /* 居中显示 */
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.register-container button {
+    background-color: #632121;
+    cursor: pointer;
 }
