@@ -12,9 +12,13 @@ body, html {
     height: 100vh;
 }
 
-/* 左侧图标栏样式 */
+/* 宸︿晶鍥炬爣鏍忔牱寮� */
 .sidebar {
+    position: fixed;
+    top: 50px;
+    left: 0;
     width: 60px;
+    height: calc(100vh - 50px);
     background-color: #333;
     display: flex;
     flex-direction: column;
@@ -23,7 +27,7 @@ body, html {
 }
 
 .icon {
-    margin: 20px 0;
+    margin: 50px 0; /* 澧炲姞鍥炬爣涔嬮棿鐨勪笂涓嬮棿璺� */
     color: #ddd;
     font-size: 1.5rem;
     cursor: pointer;
@@ -34,30 +38,41 @@ body, html {
     color: #fff;
 }
 
-/* 顶部导航栏样式 */
 .header {
-    width: calc(100% - 60px);
-    height: 60px;
-    background-color: #fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
+    background-color: #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: 50px;
     position: fixed;
     top: 0;
-    left: 60px;
     z-index: 1000;
 }
 
-.logo img {
-    height: 40px;
+.icon {
+    color: #ddd;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin: 20px 0;
+}
+
+.icon:hover {
+    color: #fff;
+}
+
+.nav-container, .search-container {
+    display: flex;
+    align-items: center;
 }
 
 .nav-container {
-    flex-grow: 1;
     display: flex;
     justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 .nav a {
@@ -65,18 +80,34 @@ body, html {
     color: #333;
     text-decoration: none;
     font-weight: bold;
+    font-size: 16px;
 }
 
-.search-box input {
-    padding: 5px 10px;
-    border: 2px solid #333;
-    border-radius: 3px;
+#searchQuery, button {
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+#searchQuery {
+    border: 1px solid #ccc;
+}
+
+button {
+    background-color: #004d40;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+button:hover {
+    background-color: #00382e;
 }
 
 .user-icon img {
-    height: 40px;
+    height: 30px;
 }
-
 .node {
     position: absolute;
     width: 60px;
@@ -97,19 +128,88 @@ body, html {
     transform: scale(1.1);
 }
 
+.line {
+    position: absolute;
+    background-color: #000; /* 绾挎潯棰滆壊 */
+    height: 2px; /* 绾挎潯瀹藉害 */
+    transform-origin: 0 0;
+    z-index: 2000; /* 纭繚绾挎潯鍦ㄥ叾浠栧厓绱犱笂鏂规樉绀� */
+}
+
+
 .right-sidebar {
-    width: 300px;
-    height: 100vh;
-    background-color: #fff;
+    width: 600px;
+    height: 70vh;
+    background-color: #e6e6e6; /* 璁剧疆渚ц竟鏍忕殑鑳屾櫙鑹� */
     position: fixed;
-    top: 0;
-    right: -300px; /* 初始状态下隐藏在页面右侧 */
+    top: 15vh; /* 浣夸晶杈规爮璺濈椤堕儴 15% 鐨勮鍙ｉ珮搴� */
+    right: -600px; /* 鍒濆鐘舵€佷笅闅愯棌鍦ㄩ〉闈㈠彸渚� */
     transition: right 0.3s ease;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
-    z-index: 1001; /* 确保侧边栏在最前面 */
+    z-index: 1001; /* 纭繚渚ц竟鏍忓湪鏈€鍓嶉潰 */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     padding: 20px;
+    border-radius: 20px; /* 璁剧疆渚ц竟鏍忓洓瑙掔殑鍦嗚鍗婂緞 */
 }
 
 .right-sidebar.open {
-    right: 0; /* 当添加 open 类时，侧边栏显示 */
+    right: 0; /* 褰撴坊鍔� open 绫绘椂锛屼晶杈规爮鏄剧ず */
+}
+
+.sidebar-header {
+    text-align: left;
+    padding-bottom: 10px;
+}
+
+.sidebar-header i {
+    font-size: 1.5rem;
+    color: #555;
+    cursor: pointer;
+}
+
+/* 缂╁皬涓婃柟鍐呭鍖哄煙鐨勯珮搴� */
+.sidebar-content {
+    flex-grow: 0.8; /* 鍑忓皯楂樺害 */
+    background-color: #d8d8d8; /* 鍐呭鍖哄煙鑳屾櫙鑹� */
+    border-radius: 10px;
+    margin-bottom: 10px; /* 璋冩暣搴曢儴璺濈 */
+    padding: 10px; /* 缂╁皬鍐呭鐨勫唴杈硅窛 */
+}
+
+.sidebar-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px; /* 閫氳繃 margin-top 璋冩暣浣嶇疆 */
+    height: 200px; /* 鐩存帴璁剧疆楂樺害 */
+}
+
+.stat-item {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* 鏁板瓧鍜屾枃瀛楀湪搴曢儴瀵归綈 */
+    align-items: center; /* 鍥炬爣鍦ㄦ按骞虫柟鍚戝眳涓� */
+    padding: 10px;
+    border-radius: 10px;
+    color: #fff;
+}
+
+.stat-item i {
+    font-size: 3rem;
+    margin-bottom: auto; /* 灏嗗浘鏍囨帹鍚戝鍣ㄩ《閮紝浣垮叾鍦ㄥ瀭鐩存柟鍚戝眳涓� */
+    margin-top: 30px;
+}
+
+.stat-item p {
+    margin: 0; /* 鍘婚櫎榛樿澶栬竟璺� */
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.stat-item span {
+    font-size: 0.9rem;
+    margin-top: 2px; /* 缁欐枃瀛楀拰鏁板瓧涔嬮棿澧炲姞涓€鐐归棿璺� */
 }
