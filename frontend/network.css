@@ -106,7 +106,7 @@ body, html {
     right: -300px; /* 初始状态下隐藏在页面右侧 */
     transition: right 0.3s ease;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
-    z-index: 1001; /* 确保侧边栏在最前面 */
+    z-index: 1001; /* 确保侧边栏在最前面1 */
     padding: 20px;
 }
 

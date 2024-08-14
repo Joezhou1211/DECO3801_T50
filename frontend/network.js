@@ -6,3 +6,4 @@ function closeSidebar() {
     document.getElementById("rightSidebar").classList.remove("open");
 }
 
+
