@@ -76,7 +76,7 @@ t50_project/
 │   ├── main.js
 │   ├── styles.css
 │   ├── user_icon.png
-│   ├── worldMap.js
+│   ├── map.js
 ├── models/
 │   ├── scripts/
 │   │   ├── AI训练（备用）.py
