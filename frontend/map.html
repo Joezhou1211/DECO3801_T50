@@ -2,29 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Interactive Website</title>
-    <link rel="stylesheet" href="2.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="map.css" rel="stylesheet">
+    <script src="https://www.gstatic.com/charts/loader.js" type="text/javascript"></script>
+    <script src="map.js" type="text/javascript"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="header">
+        <div class="left-sidebar">
+            <div class="icon"><i class="fas fa-bars"></i></div>
+            <div class="icon"><i class="fas fa-cog"></i></div>
+            <div class="icon"><i class="fas fa-chart-pie"></i></div>
+            <div class="icon"><i class="fas fa-user"></i></div>
+        </div>
         <div class="logo">
-            <img src="https://via.placeholder.com/50" alt="Website Logo">
+            <img alt="Website Logo" src="https://via.placeholder.com/50">
         </div>
         <div class="nav-container">
             <div class="nav">
-                <a href="#bushfire">Bushfire</a>
-                <a href="#twitter-authenticity">Twitter Data</a>
-                <a href="#lorem-ipsum">Lorem Ipsum</a>
-                <a href="#contact">Contact</a>
+                <a href="map.html">Overview</a>
+                <a href="6.html">Statistics</a>
+                <a href="4.html">Dashboard</a>
+                <a href="5.html">Support</a>
             </div>
+        </div>
+        <div class="search-container">
+            <input id="searchQuery" placeholder="Enter search term..." type="text">
+            <button onclick="performSearch()">Search</button>
         </div>
         <div class="user-icon">
             <a href="logIn.html">
-                <img src="/project/user_icon.png" alt="User Icon">
+                <img alt="User Icon" src="https://via.placeholder.com/40">
             </a>
+        </div>
+    </div>
+    <div id="map-container">
+        <div id="regions_div"></div>
+        <div class="right-sidebar">
+            <button id="backButton" style="display:none;">Back to World Map</button>
+            <div id="regionDetails"></div>
         </div>
     </div>
 </body>
