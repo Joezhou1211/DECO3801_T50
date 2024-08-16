@@ -6,3 +6,6 @@ data/processed/final_data.json
 data/processed/final_data.csv
 data/processed/daily_weighted_sentiment_vader.csv
 data/raw/v_forest.csv
+data/processed/final_data(filtered).json
+data/processed/tweets_bushfire_related_keywords.csv
+data/processed/tweets_with_topics.csv
