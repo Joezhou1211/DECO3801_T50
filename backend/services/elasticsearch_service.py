@@ -1,11 +1,11 @@
 from elasticsearch import Elasticsearch
 
 '''
-启用ElasticSearch并在前端执行搜索的方法（前端示例页面已完成: backend/static/network.html）
+启用ElasticSearch并在前端执行搜索的方法（前端示例页面已完成: backend/static/search.html）
 1. 下载ElasticSearch：https://www.elastic.co/downloads/elasticsearch
 2. 找到下载的文件 打开/config/elasticsearch.yml: xpack.security.enabled: true -> xpack.security.enabled: false禁用elasticsearch的验证功能 
 3. 终端运行‘ ./bin/elasticsearch ’ 启动ElasticSearch （端口9200 打开http://localhost:9200/ 可查看是否启动成功）
-4. 在pycharm运行pip install elasticsearch 安装elasticsearch模块
+4. 运行pip install elasticsearch 安装elasticsearch模块
 5. 运行data_importer.py导入数据到ElasticSearch （需要先在sentiment.ipynb获取final_data.csv 并使用CSV_to_Json.py转换为final_data.json）
 6. 运行main.py服务器 访问http://localhost:5001 可查看搜索页面并交互
 
