@@ -21,15 +21,15 @@ The project leverages a variety of tools and technologies across different stage
 ## 3. Project Structure
 
 ```plaintext
-t50_project/
+t50_project/                                          
 ├── backend/
-│   ├── notebooks/
-│   │   ├── LDA_modeling_main+sub.ipynb               # LDA topic modeling for both main and subtopics
-│   │   ├── location.ipynb                            # Analysis of tweet locations
-│   │   ├── NMF_modeling.ipynb                        # Non-negative matrix factorization for topic modeling
-│   │   ├── pattern_regonisation & sampling.ipynb     # Pattern recognition and sampling techniques
-│   │   ├── preprocess+pre_LDA.ipynb                  # Preprocessing and preliminary LDA modeling
-│   │   ├── sentiment.ipynb                           # Sentiment analysis of tweets
+│   ├── notebooks/                                    # ⬇ Execution Order (Smaller Number First)
+│   │   ├── LDA_modeling_main+sub.ipynb               # 3.2  LDA topic modeling for both main and subtopics
+│   │   ├── location.ipynb                            # 2.3  Analysis of tweet locations
+│   │   ├── NMF_modeling.ipynb                        # 2.2  Non-negative matrix factorization for topic modeling
+│   │   ├── pattern_regonisation & sampling.ipynb     # 3.1  Pattern recognition and sampling techniques
+│   │   ├── preprocess+pre_LDA.ipynb                  # 1.1  Preprocessing and preliminary LDA modeling
+│   │   ├── sentiment.ipynb                           # 2.1  Sentiment analysis of tweets
 │   ├── routes/
 │   │   ├── api_routes.py                             # API routes for backend services
 │   ├── services/
@@ -46,7 +46,7 @@ t50_project/
 │   │   ├── time_squence_analysis.py                  # Time sequence analysis for sentiment and topic changes
 │   ├── main.py                                       # Main entry point for server
 ├── data/
-│   ├── processed/
+│   ├── processed/                                   
 │   │   ├── daily_weighted_sentiment_vader.csv        # Daily aggregated sentiment scores from VADER
 │   │   ├── final_data(filtered).json                 # Final filtered dataset in JSON format
 │   │   ├── final_data.csv                            # Final dataset in CSV format
@@ -57,21 +57,32 @@ t50_project/
 │   │   ├── tweets_with_final_nmf_topics_final.csv    # Tweets with final NMF topic assignments
 │   │   ├── tweets_with_topics.csv                    # Tweets with topic assignments
 │   ├── raw/
-│   │   ├── v_forest.bson                             # Raw BSON data file
-│   │   ├── v_forest.csv                              # Raw CSV data file
+│   │   ├── v_forest.bson                             # Raw BSON data file (Original)
+│   │   ├── v_forest.csv                              # Raw CSV data file (Original, for MongoDB only)
 ├── frontend/
 │   ├── assets/
-│   │   ├── user_icon.png                             # User icon image used in the frontend
+│   │   ├── user_icon.png                       
+│   │   ├── statistics.png
+│   │   ├── visible.png
+│   │   ├── search-file.png                  
 │   ├── css/
 │   │   ├── map.css                                   # CSS for the map visualization
 │   │   ├── network.css                               # CSS for the network visualization
+│   │   ├── search.css
+│   │   ├── Fstyle.css
+│   │   ├── topics.css
 │   ├── js/
 │   │   ├── map.js                                    # JavaScript for the map visualization
 │   │   ├── network.js                                # JavaScript for the network visualization
+│   │   ├── map.js                                    # JavaScript for the map visualization
+│   │   ├── search.js                                 # JavaScript for the search page
+│   │   ├── topics.js                                 # JavaScript for the topics visualization
 │   ├── pages/
-│   │   ├── logIn.html                                # Login page for the frontend
+│   │   ├── logIn.html                                # Login page
 │   │   ├── map.html                                  # Map visualization page
 │   │   ├── network.html                              # Network visualization page
+│   │   ├── search.html                               # Search page
+│   │   ├── topics.html                               # Topics visualization page
 ├── models/
 │   ├── main_topics/
 │   │   ├── corpus_subtopics                          # Corpus data for subtopics
@@ -103,5 +114,5 @@ Not yet available.
 ## 5. Contributing
 Not yet available.
 
-## ....
+## 6. Maybe Something Else Here? But Also Not yet available :(
 

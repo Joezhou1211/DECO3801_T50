@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Interactive Diagram</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+
+    <link href="../css/topics.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="container">
+    <!-- left sidebar -->
+    <div class="sidebar">
+        <div class="icon"><i class="fas fa-bars"></i></div>
+        <div class="icon"><i class="fas fa-cog"></i></div>
+        <div class="icon"><i class="fas fa-chart-pie"></i></div>
+        <div class="icon"><i class="fas fa-user"></i></div>
+    </div>
+    <!-- main content -->
+    <div class="main-content">
+        <!-- Header section -->
+        <div class="header">
+            <!-- Logo section -->
+            <div class="logo">
+                <img alt="Logo" src="https://via.placeholder.com/50">
+            </div>
+            <!-- Navigation links -->
+            <div class="nav-container">
+                <div class="nav">
+                    <a href="map.html">Overview</a>
+                    <a href="6.html">Statistics</a>
+                    <a href="4.html">Dashboard</a>
+                    <a href="5.html">Support</a>
+                </div>
+            </div>
+            <!-- Search bar -->
+            <div class="search-container">
+                <input type="text" id="searchQuery" placeholder="Enter search term...">
+                <button onclick="SearchWithQuery(document.getElementById('searchQuery').value)">Search</button>
+            </div>
+            <div class="user-icon">
+                <a href="logIn.html">
+                    <img alt="User Icon" src="https://via.placeholder.com/40">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Topic Modeling -->
+    <div id="content-wrapper">
+        <div class="topic-modeling-container">
+            <h1>Topic Modeling</h1>
+            <div class="circle-wrapper">
+                <div class="circle-container">
+                    <div class="outer-circle">
+                        <div class="inner-circle"></div>
+                    </div>
+                </div>
+                <!-- Bubble Chart -->
+                <!--<div id="bubble-container"></div>-->
+            </div>
+        </div>
+
+
+        <!-- Statistics Section -->
+        <div class="statistics-container">
+            <div class="stat-item">
+                <img src="../assets/statistics.png" alt="Trend Icon">
+                <p>TREND GOODS</p>
+                <h2>204</h2>
+            </div>
+            <div class="stat-item">
+                <img src="../assets/search-file.png" alt="Detail Icon">
+                <p>DETAIL</p>
+                <h2>TOPIC</h2>
+            </div>
+            <div class="stat-item">
+                <img src="../assets/visible.png" alt="View Icon">
+                <p>VIEWS</p>
+                <h2>5.8k</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Topic Sidebar -->
+    <div class="topic-sidebar">
+        <div class="topic-header">
+            <span>Topic</span>
+            <span class="toggle-btn">&gt;</span>
+        </div>
+        <div class="topic-content">
+            <div>Australia - Climate</div>
+            <div>Australia - Wildlife</div>
+            <div>Australia - Politics</div>
+            <div>Australia - Economy</div>
+            <div>Australia - Culture</div>
+            <div>Australia - Sports</div>
+            <div>Australia - Technology</div>
+        </div>
+    </div>
+</div>
+
+<script src="../js/topics.js"></script>
+<script src="../js/main.js"></script>
+</body>
+
+</html>

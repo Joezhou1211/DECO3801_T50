@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Website</title>
-    <link href="../css/map.css" rel="stylesheet">
-    <script src="https://www.gstatic.com/charts/loader.js" type="text/javascript"></script>
-    <script src="../js/map.js" type="text/javascript"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/map.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap">
 </head>
 <body>
     <!-- Header section -->
@@ -36,8 +36,8 @@
         </div>
         <!-- Search bar -->
         <div class="search-container">
-            <input id="searchQuery" placeholder="Enter search term..." type="text">
-            <button onclick="performSearch()">Search</button>
+            <input type="text" id="searchQuery" placeholder="Enter search term...">
+            <button onclick="SearchWithQuery(document.getElementById('searchQuery').value)">Search</button>
         </div>
         <div class="user-icon">
             <a href="logIn.html">
@@ -56,5 +56,10 @@
             <div id="regionDetails"></div>
         </div>
     </div>
+
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/map.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>
