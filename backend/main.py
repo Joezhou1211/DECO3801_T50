@@ -1,8 +1,10 @@
 from flask import Flask, send_from_directory
 from routes.api_routes import api
+from flask_cors import CORS
 
 app = Flask(__name__, static_url_path='', static_folder='static')
 
+CORS(app)
 
 app.register_blueprint(api, url_prefix='/api')
 
