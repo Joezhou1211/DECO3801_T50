@@ -7,12 +7,12 @@
     <title>Interactive Diagram</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
-    <link href="network.css" rel="stylesheet">
+    <link href="../css/network.css" rel="stylesheet">
 </head>
 
 <body>
 <div class="container">
-    <!-- 宸︿晶鍥炬爣鏍� -->
+    <!-- Sidebar with icons -->
     <div class="sidebar">
         <div class="icon"><i class="fas fa-bars"></i></div>
         <div class="icon"><i class="fas fa-cog"></i></div>
@@ -21,9 +21,9 @@
         <div class="icon"><i class="fas fa-user"></i></div>
     </div>
 
-    <!-- 涓诲唴瀹� -->
+    <!-- Main content area -->
     <div class="main-content">
-        <!-- 椤堕儴瀵艰埅鏍� -->
+        <!-- Header section with logo, navigation, search, and user icon -->
         <div class="header">
             <div class="logo">
                 <img alt="Logo" src="https://via.placeholder.com/50">
@@ -37,6 +37,7 @@
                 </div>
             </div>
             <div class="search-container">
+                <!-- Search input and button -->
                 <input id="searchQuery" placeholder="Enter search term..." type="text">
                 <button onclick="performSearch()">Search</button>
             </div>
@@ -47,52 +48,74 @@
             </div>
         </div>
 
-        <!-- 涓ぎ鍥捐〃鍖哄煙 -->
+        <!-- Diagram area with interactive nodes -->
         <div class="diagram-area">
-            <!-- 宸﹁竟鑱氶泦鐨�5涓妭鐐� -->
+            <!-- Nodes in the left cluster -->
             <div class="node" id="node1"
                  onclick="openSidebar()"
-                 style="top: 30%; left: 15%; width: 50px; height: 50px; background-color: #eff5f8;"><i class="fas fa-chart-bar"></i></div>
+                 style="top: 30%; left: 15%; width: 50px; height: 50px; background-color: #eff5f8;">
+                <i class="fas fa-chart-bar"></i>
+            </div>
             <div class="node" id="node2"
                  onclick="openSidebar()"
-                 style="top: 35%; left: 20%; width: 70px; height: 70px; background-color: #eff5f8;"><i class="fas fa-cogs"></i></div>
+                 style="top: 35%; left: 20%; width: 70px; height: 70px; background-color: #eff5f8;">
+                <i class="fas fa-cogs"></i>
+            </div>
             <div class="node" id="node3"
                  onclick="openSidebar()"
-                 style="top: 40%; left: 10%; width: 40px; height: 40px; background-color: #eff5f8;"><i class="fas fa-heartbeat"></i></div>
+                 style="top: 40%; left: 10%; width: 40px; height: 40px; background-color: #eff5f8;">
+                <i class="fas fa-heartbeat"></i>
+            </div>
             <div class="node" id="node4"
                  onclick="openSidebar()"
-                 style="top: 50%; left: 18%; width: 60px; height: 60px; background-color: #eff5f8;"><i class="fas fa-users"></i></div>
+                 style="top: 50%; left: 18%; width: 60px; height: 60px; background-color: #eff5f8;">
+                <i class="fas fa-users"></i>
+            </div>
             <div class="node" id="node5"
                  onclick="openSidebar()"
-                 style="top: 45%; left: 25%; width: 80px; height: 80px; background-color: #eff5f8;"><i class="fas fa-shield-alt"></i></div>
+                 style="top: 45%; left: 25%; width: 80px; height: 80px; background-color: #eff5f8;">
+                <i class="fas fa-shield-alt"></i>
+            </div>
 
-            <!-- 鍙宠竟鑱氶泦鐨�5涓妭鐐� -->
+            <!-- Nodes in the right cluster -->
             <div class="node" id="node6"
                  onclick="openSidebar()"
-                 style="top: 70%; left: 65%; width: 50px; height: 50px; background-color: #1d1c1b;"><i class="fas fa-chart-bar"></i></div>
+                 style="top: 70%; left: 65%; width: 50px; height: 50px; background-color: #1d1c1b;">
+                <i class="fas fa-chart-bar"></i>
+            </div>
             <div class="node" id="node7"
                  onclick="openSidebar()"
-                 style="top: 75%; left: 70%; width: 70px; height: 70px; background-color: #1d1c1b;"><i class="fas fa-cogs"></i></div>
+                 style="top: 75%; left: 70%; width: 70px; height: 70px; background-color: #1d1c1b;">
+                <i class="fas fa-cogs"></i>
+            </div>
             <div class="node" id="node8"
                  onclick="openSidebar()"
-                 style="top: 80%; left: 60%; width: 40px; height: 40px; background-color: #1d1c1b;"><i class="fas fa-heartbeat"></i></div>
+                 style="top: 80%; left: 60%; width: 40px; height: 40px; background-color: #1d1c1b;">
+                <i class="fas fa-heartbeat"></i>
+            </div>
             <div class="node" id="node9"
                  onclick="openSidebar()"
-                 style="top: 85%; left: 68%; width: 60px; height: 60px; background-color: #1d1c1b;"><i class="fas fa-users"></i></div>
+                 style="top: 85%; left: 68%; width: 60px; height: 60px; background-color: #1d1c1b;">
+                <i class="fas fa-users"></i>
+            </div>
             <div class="node" id="node10"
                  onclick="openSidebar()"
-                 style="top: 90%; left: 75%; width: 80px; height: 80px; background-color: #1d1c1b;"><i class="fas fa-shield-alt"></i></div>
+                 style="top: 90%; left: 75%; width: 80px; height: 80px; background-color: #1d1c1b;">
+                <i class="fas fa-shield-alt"></i>
+            </div>
         </div>
 
-        <!-- 鍙充晶渚ц竟鏍� -->
+        <!-- Right sidebar with stats -->
         <div class="right-sidebar" id="rightSidebar">
             <div class="sidebar-header">
+                <!-- Close sidebar button -->
                 <i class="fas fa-arrow-right" onclick="closeSidebar()"></i>
             </div>
             <div class="sidebar-content">
-                <!-- 杩欓噷鏄晶杈规爮涓昏鍐呭鍖哄煙 -->
+                <!-- Content will be dynamically loaded here -->
             </div>
             <div class="sidebar-stats">
+                <!-- Statistics items with icons -->
                 <div class="stat-item" style="background-color: #a18ff3;">
                     <i class="fas fa-share-alt"></i>
                     <p>342,054</p>
@@ -113,7 +136,7 @@
 
     </div>
 
-    <script src="network.js"></script>
+    <script src="../js/network.js"></script>
 </body>
 
 </html>
