@@ -1,3 +1,4 @@
+/* Global Styles */
 body, html {
     margin: 0;
     padding: 0;
@@ -9,6 +10,7 @@ body, html {
     flex-direction: column;
 }
 
+/* Header Styles */
 .header {
     display: flex;
     justify-content: space-between;
@@ -23,6 +25,7 @@ body, html {
     z-index: 1000;
 }
 
+/* Left Sidebar Styles */
 .left-sidebar {
     position: fixed;
     top: 50px;
@@ -47,6 +50,7 @@ body, html {
     color: #fff;
 }
 
+/* Navigation and Search Container Styles */
 .nav-container, .search-container {
     display: flex;
     align-items: center;
@@ -93,6 +97,7 @@ button:hover {
     height: 30px;
 }
 
+/* Module 5: Main Content and Map Container */
 #map-container {
     padding-top: 50px;
     display: flex;
@@ -104,9 +109,10 @@ button:hover {
     flex-grow: 1;
     height: 100%;
     transition: width 0.3s ease;
-    width: calc(100% - 300px); /* 调整宽度以确保侧边栏有足够空间 */
+    width: calc(100% - 300px);
 }
 
+/* Right Sidebar Styles */
 .right-sidebar {
     display: none;
     width: 300px;

@@ -1,19 +1,22 @@
+// Load the Google Charts library and specify the 'geochart' package.
 google.charts.load('current', {
     'packages': ['geochart'],
     'mapsApiKey': 'YOUR_GOOGLE_MAPS_API_KEY'
 });
 google.charts.setOnLoadCallback(drawRegionsMap);
 
-const color_start = '#e0f2f1';  // 渐变起始颜色
-const color_end = '#004d40'; // 渐变结束颜色
+// Define the start and end colors for the map's color gradient
+const color_start = '#e0f2f1';
+const color_end = '#004d40';
 
+// Fetch Data and Draw Initial Map
 function drawRegionsMap() {
-
     $.getJSON('../../data/processed/location_counts.json', function(jsonData) {
         drawMap(jsonData);
     });
 }
 
+// Draw Map with Data
 function drawMap(jsonData) {
     var dataArray = [['Country', 'Tweet Count']];
     for (var location in jsonData.count) {
@@ -33,7 +36,8 @@ function drawMap(jsonData) {
     setupInteraction(chart, jsonData);
 }
 
-var regionMapping = {  // Region mapping for Australia  只有澳洲设置了子区域 其他国家应该不需要
+// Region Mapping for Australian Territories
+var regionMapping = {
     "Victoria, Australia": "AU-VIC",
     "New South Wales, Australia": "AU-NSW",
     "Queensland, Australia": "AU-QLD",
@@ -44,6 +48,7 @@ var regionMapping = {  // Region mapping for Australia  只有澳洲设置了子
     "Australian Capital Territory, Australia": "AU-ACT",
 };
 
+// Zoom into Specific Regions
 function zoomRegion(region, jsonData) {
     var dataArray = [['Country', 'Tweet Count']];
     for (var location in jsonData.count) {
@@ -69,12 +74,12 @@ function zoomRegion(region, jsonData) {
 
     document.getElementById('backButton').style.display = 'block';
 
-
     google.visualization.events.addListener(chart, 'regionClick', function (event) {
         showSidebar(event.region);
     });
 }
 
+// Display Sidebar with Region Details
 function showSidebar(region) {
     var sidebar = document.querySelector('.right-sidebar');
     var regionsDiv = document.getElementById('regions_div');
@@ -83,12 +88,11 @@ function showSidebar(region) {
     sidebar.style.display = 'flex';
     regionsDiv.style.width = 'calc(100% - 300px)';
 
-    // 填充侧边栏中的区域详情
-    // 侧边栏插入统计信息 或者帖子列表？ 等待UI指示
     var regionName = Object.keys(regionMapping).find(key => regionMapping[key] === region) || region;
     regionDetails.innerHTML = '<h2>' + regionName + '</h2><p>Details about ' + regionName + '...</p>';
 }
 
+// Setup Back Button Functionality
 function setupBackButton() {
     var backButton = document.getElementById('backButton');
     if (backButton) {
@@ -104,6 +108,7 @@ function setupBackButton() {
     }
 }
 
+// Setup Map Interaction
 function setupInteraction(chart, jsonData) {
     var sidebar = document.querySelector('.right-sidebar');
     var regionsDiv = document.getElementById('regions_div');
