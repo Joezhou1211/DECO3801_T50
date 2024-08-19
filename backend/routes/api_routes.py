@@ -4,6 +4,7 @@ from backend.services.elasticsearch_service import es_service
 api = Blueprint('api', __name__)
 
 
+# Route to search for a query in the Elasticsearch index
 @api.route('/search', methods=['GET'])
 def search():
     query = request.args.get('query')
