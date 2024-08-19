@@ -3,8 +3,8 @@ from dash import Dash, dcc, html
 from dash.dependencies import Input, Output
 import pandas as pd
 
-df = pd.read_json('../../backend/static/test_data.json')
-df = df[['_id', 'created_at','sentiment','weighted_sentiment', 'main-topic', 'influence_tweet_factor']]
+df = pd.read_json('../../data/processed/final_data(filtered).json')
+df = df[['_id', 'created_at', 'sentiment', 'weighted_sentiment',   'main-topic', 'influence_tweet_factor']]
 
 # to datetime and add day and hour columns
 df['created_at'] = pd.to_datetime(df['created_at'])
