@@ -4,24 +4,28 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Interactive Website</title>
-    <link href="map.css" rel="stylesheet">
+    <link href="../css/map.css" rel="stylesheet">
     <script src="https://www.gstatic.com/charts/loader.js" type="text/javascript"></script>
-    <script src="map.js" type="text/javascript"></script>
+    <script src="../js/map.js" type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Header section -->
     <div class="header">
+        <!-- Sidebar with icons for different functionalities -->
         <div class="left-sidebar">
             <div class="icon"><i class="fas fa-bars"></i></div>
             <div class="icon"><i class="fas fa-cog"></i></div>
             <div class="icon"><i class="fas fa-chart-pie"></i></div>
             <div class="icon"><i class="fas fa-user"></i></div>
         </div>
+        <!-- Logo section -->
         <div class="logo">
             <img alt="Website Logo" src="https://via.placeholder.com/50">
         </div>
+        <!-- Navigation links -->
         <div class="nav-container">
             <div class="nav">
                 <a href="map.html">Overview</a>
@@ -30,6 +34,7 @@
                 <a href="5.html">Support</a>
             </div>
         </div>
+        <!-- Search bar -->
         <div class="search-container">
             <input id="searchQuery" placeholder="Enter search term..." type="text">
             <button onclick="performSearch()">Search</button>
@@ -40,8 +45,12 @@
             </a>
         </div>
     </div>
+
+    <!-- Main content area -->
     <div id="map-container">
+        <!-- Div for rendering the map -->
         <div id="regions_div"></div>
+        <!-- Sidebar for showing detailed information about a selected region -->
         <div class="right-sidebar">
             <button id="backButton" style="display:none;">Back to World Map</button>
             <div id="regionDetails"></div>
