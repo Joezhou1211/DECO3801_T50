@@ -1,30 +1,29 @@
 from elasticsearch import Elasticsearch
 
 '''
-启用ElasticSearch并在前端执行搜索的方法（前端示例页面已完成: backend/static/search.html）
-1. 下载ElasticSearch：https://www.elastic.co/downloads/elasticsearch
-2. 找到下载的文件 打开/config/elasticsearch.yml: xpack.security.enabled: true -> xpack.security.enabled: false禁用elasticsearch的验证功能 
-3. 终端运行‘ ./bin/elasticsearch ’ 启动ElasticSearch （端口9200 打开http://localhost:9200/ 可查看是否启动成功）
-4. 运行pip install elasticsearch 安装elasticsearch模块
-5. 运行data_importer.py导入数据到ElasticSearch （需要先在sentiment.ipynb获取final_data.csv 并使用CSV_to_Json.py转换为final_data.json）
-6. 运行main.py服务器 访问http://localhost:5001 可查看搜索页面并交互
+*** Instruction for Frontend team mates ***
+
+1. Download ElasticSearch from https://www.elastic.co/downloads/elasticsearch.
+2. Locate the downloaded file and open /config/elasticsearch.yml. Disable ElasticSearch authentication by setting xpack.security.enabled: true to xpack.security.enabled: false.
+3. Run ./bin/elasticsearch in the terminal to start ElasticSearch (Port 9200). Check if it started successfully by opening http://localhost:9200/.
+4. Install the ElasticSearch module by running pip install elasticsearch.
+5. Import data into ElasticSearch by running data_importer.py. First, obtain final_data.csv from sentiment.ipynb and convert it to final_data.json using CSV_to_Json.py.
+6. un main.py to start the server. Access http://localhost:5001 to view and interact with the search page.
 
 
-下阶段后端更新计划：
-使用docker容器化部署ElasticSearch
-使用Nginx进行接口映射
-根据前端需求拓展数据框接口
+Next phase backend update plan:
+Containerize ElasticSearch deployment using Docker.
+Use Nginx for interface mapping.
+Expand data frame interfaces based on frontend requirements.
 '''
 
 
 class ElasticSearchService:
     def __init__(self, index_name):
-        # 连接ElasticSearch实例
-        self.es = Elasticsearch(hosts=["http://localhost:9200"])
+        self.es = Elasticsearch(hosts=["http://localhost:9200"])   # connect to ElasticSearch
         self.index_name = index_name
 
-    def search(self, query):
-        # 搜索text字段，返回id和text字段
+    def search(self, query):  # search text field and return id and text
         es_query = {
             "query": {
                 "match": {
@@ -33,9 +32,10 @@ class ElasticSearchService:
             },
             "_source": ["text"]
         }
+
         response = self.es.search(index=self.index_name, body=es_query)
         results = []
-        for hit in response['hits']['hits']:  # 遍历搜索结果
+        for hit in response['hits']['hits']:
             results.append({
                 "id": hit["_id"],
                 "text": hit["_source"]["text"]
@@ -43,5 +43,4 @@ class ElasticSearchService:
         return results
 
 
-# 实例化
 es_service = ElasticSearchService('final_data_index')
