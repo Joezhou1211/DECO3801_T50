@@ -12,13 +12,13 @@ This project endeavors to construct a rigorous analytical framework that bridges
 
 ## 3. Features and Technologies
 
-### 3.1 Features to be Built
+### 3.1 Features
 This project incorporates several key features to analyze and visualize the public sentiment and misinformation during the 2019-20 Australian bushfires. Sentiment analysis is implemented using VADER and TextBlob to assess the emotional tone of tweets. Topic modeling is conducted using Latent Dirichlet Allocation (LDA) to identify the main topics of discussion during the crisis. To detect fake news, we employ a range of machine learning models, including Logistic Regression, Random Forest, XGBoost, SVM, LSTM, and BERT. Finally, the project includes interactive data visualizations powered by ElasticSearch, enabling real-time data querying and filtering to provide users with a dynamic exploration of the tweet data.
 
 ### 3.2 Tools/Technologies/Frameworks
 The project leverages a variety of tools and technologies across different stages of data processing, analysis, and visualization. Data processing is handled using Pandas, NLTK, TextBlob, and VADER, while natural language processing (NLP) and machine learning tasks are performed using TF-IDF, Word2Vec, BERT, Scikit-learn, TensorFlow, and Keras. For data visualization, the project utilizes D3.js, Chart.js, Plotly.js, Leaflet, and Mapbox. UX design is informed by research through Google Scholar and user interviews, with UI design executed using Sketch, Miro, and Figma. The backend infrastructure is built with Flask and ElasticSearch, while the frontend is developed using Vue.js, along with CSS, HTML, and JavaScript.
 
-## 3. Project Structure
+## 3. Project Structure (Unfinished)
 
 ```plaintext
 t50_project/                                          
@@ -46,7 +46,7 @@ t50_project/
 │   │   ├── time_squence_analysis.py                  # Time sequence analysis for sentiment and topic changes
 │   ├── main.py                                       # Main entry point for server
 ├── data/
-│   ├── processed/                                   
+│   ├── processed/  (Some of the this part's files are excluded from uplaoding due to large file size)                                
 │   │   ├── daily_weighted_sentiment_vader.csv        # Daily aggregated sentiment scores from VADER
 │   │   ├── final_data(filtered).json                 # Final filtered dataset in JSON format
 │   │   ├── final_data.csv                            # Final dataset in CSV format
@@ -56,7 +56,7 @@ t50_project/
 │   │   ├── tweets_bushfire_related_keywords.csv      # Tweets related to bushfire keywords
 │   │   ├── tweets_with_final_nmf_topics_final.csv    # Tweets with final NMF topic assignments
 │   │   ├── tweets_with_topics.csv                    # Tweets with topic assignments
-│   ├── raw/
+│   ├── raw/   (This part is excluded from uplaoding due to large file size)
 │   │   ├── v_forest.bson                             # Raw BSON data file (Original)
 │   │   ├── v_forest.csv                              # Raw CSV data file (Original, for MongoDB only)
 ├── frontend/
@@ -66,17 +66,17 @@ t50_project/
 │   │   ├── visible.png
 │   │   ├── search-file.png                  
 │   ├── css/
-│   │   ├── map.css                                   # CSS for the map visualization
-│   │   ├── network.css                               # CSS for the network visualization
+│   │   ├── map.css                                   # CSS for visualization
+│   │   ├── network.css                               
 │   │   ├── search.css
 │   │   ├── Fstyle.css
 │   │   ├── topics.css
 │   ├── js/
-│   │   ├── map.js                                    # JavaScript for the map visualization
-│   │   ├── network.js                                # JavaScript for the network visualization
-│   │   ├── map.js                                    # JavaScript for the map visualization
+│   │   ├── main.js                                   # Universal JavaScript for all pages
+│   │   ├── network.js                                # JavaScript for the network page
+│   │   ├── map.js                                    # JavaScript for the map page
 │   │   ├── search.js                                 # JavaScript for the search page
-│   │   ├── topics.js                                 # JavaScript for the topics visualization
+│   │   ├── topics.js                                 # JavaScript for the topics page
 │   ├── pages/
 │   │   ├── logIn.html                                # Login page
 │   │   ├── map.html                                  # Map visualization page
@@ -84,7 +84,7 @@ t50_project/
 │   │   ├── search.html                               # Search page
 │   │   ├── topics.html                               # Topics visualization page
 ├── models/
-│   ├── main_topics/
+│   ├── main_topics/ (This part is excluded from uplaoding due to large file size)
 │   │   ├── corpus_subtopics                          # Corpus data for subtopics
 │   │   ├── corpus_subtopics.index                    # Index file for subtopics corpus
 │   │   ├── dictionary_subtopics                      # Dictionary of subtopics
@@ -92,7 +92,7 @@ t50_project/
 │   │   ├── lda_model_subtopics.expElogbeta.npy       # Numpy array for LDA model beta values
 │   │   ├── lda_model_subtopics.id2word               # Word-to-ID mapping for subtopics LDA model
 │   │   ├── lda_model_subtopics.state                 # State file for subtopics LDA model
-│   ├── pre_topics/
+│   ├── pre_topics/ (This part is excluded from uplaoding due to large file size
 │   │   ├── corpus.mm                                 # Corpus data for pre-topics
 │   │   ├── corpus.mm.index                           # Index file for pre-topics corpus
 │   │   ├── dictionary.gensim                         # Gensim dictionary for pre-topics
@@ -109,10 +109,11 @@ t50_project/
 ```
 
 ## 4. Getting Started
-Not yet available.
+Not yet available :(
 
 ## 5. Contributing
-Not yet available.
+Not yet available :(
 
-## 6. Maybe Something Else Here? But Also Not yet available :(
+## 6. Maybe Something Else Here? 
+Not yet available :(
 
