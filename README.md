@@ -66,7 +66,7 @@ t50_project/
 │   │   ├── visible.png
 │   │   ├── search-file.png                  
 │   ├── css/
-│   │   ├── map.css                                   # CSS for visualization
+│   │   ├── map.css                                   
 │   │   ├── network.css                               
 │   │   ├── search.css
 │   │   ├── Fstyle.css
@@ -103,6 +103,28 @@ t50_project/
 │   │   ├── lda_model.gensim.state                    # State file for Gensim LDA model
 │   ├── scripts/
 │   │   ├── BERT.ipynb                                # Jupyter notebook for BERT model training and analysis
+│   ├── UI/
+│   │   ├── UI assets/                                # UI assets for the project
+│   │   │   ├── Network Side Bar In.png 
+│   │   │   ├── Network Side Bar Out.png
+│   │   │   ├── Topic Slider Bar In.png
+│   │   │   ├── Topic Slider Bar Out.png
+│   │   │   ├── Twitters.png
+│   │   │   ├── map.png
+│   │   │   ├── network.png
+│   │   │   ├── network full version.png
+│   │   │   ├── webframe 1.png
+│   │   │   ├── webframe 2.png
+│   │   │   ├── webframe 3.png
+│   │   ├── UX assets/  
+│   │   │   ├── Deeply analysis of user group.png
+│   │   │   ├── Further relational researchs.png
+│   │   │   ├── Research and design reason.png
+│   │   │   ├── Research of visualization.png
+│   │   │   ├── Target audience mindmap.png
+│   │   │   ├── Website Purpose& Fake news imapct.png
+│   │   │   ├── site map.jpg
+│   │   │   ├── first version of LFI.jpg
 ├── .gitattributes                                    # Git attributes configuration
 ├── .gitignore                                        # Git ignore file for excluding unnecessary files from version control
 └── README.md                                         # Project documentation (this file)
