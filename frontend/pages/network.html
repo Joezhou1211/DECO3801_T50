@@ -9,34 +9,29 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/network.css">
 
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap">
 </head>
 
 <body>
 <div class="container">
-    <!-- Sidebar with icons -->
-    <div class="sidebar">
-        <div class="icon"><i class="fas fa-bars"></i></div>
-        <div class="icon"><i class="fas fa-cog"></i></div>
-        <div class="icon"><i class="fas fa-chart-pie"></i></div>
-        <div class="icon"><i class="fas fa-user"></i></div>
-        <div class="icon"><i class="fas fa-user"></i></div>
-    </div>
 
     <!-- Main content area -->
     <div class="main-content">
         <!-- Header section with logo, navigation, search, and user icon -->
         <div class="header">
             <div class="logo">
-                <img alt="Logo" src="https://via.placeholder.com/50">
+                <img alt="Logo" src="../assets/logo.png">
             </div>
             <div class="nav-container">
                 <div class="nav">
-                    <a href="map.html">Overview</a>
-                    <a href="6.html">Statistics</a>
-                    <a href="4.html">Dashboard</a>
-                    <a href="5.html">Support</a>
+                    <a href="index.html">Home</a>
+                    <a href="topics.html">Topic Modeling</a>
+                    <a href="map.html">Map</a>
+                    <a href="network.html">Network</a>
+                    <a href="FakeNews.html">FakeNewsDetection</a>
                 </div>
             </div>
             <div class="search-container">
@@ -44,100 +39,90 @@
                 <input type="text" id="searchQuery" placeholder="Enter search term...">
                 <button onclick="SearchWithQuery(document.getElementById('searchQuery').value)">Search</button>
             </div>
-            <div class="user-icon">
-                <a href="logIn.html">
-                    <img alt="User Icon" src="https://via.placeholder.com/40">
-                </a>
-            </div>
         </div>
-
-        <!-- Diagram area with interactive nodes -->
-        <div class="diagram-area">
-            <!-- Nodes in the left cluster -->
-            <div class="node" id="node1"
-                 onclick="openSidebar()"
-                 style="top: 30%; left: 15%; width: 50px; height: 50px; background-color: #eff5f8;">
-                <i class="fas fa-chart-bar"></i>
-            </div>
-            <div class="node" id="node2"
-                 onclick="openSidebar()"
-                 style="top: 35%; left: 20%; width: 70px; height: 70px; background-color: #eff5f8;">
-                <i class="fas fa-cogs"></i>
-            </div>
-            <div class="node" id="node3"
-                 onclick="openSidebar()"
-                 style="top: 40%; left: 10%; width: 40px; height: 40px; background-color: #eff5f8;">
-                <i class="fas fa-heartbeat"></i>
-            </div>
-            <div class="node" id="node4"
-                 onclick="openSidebar()"
-                 style="top: 50%; left: 18%; width: 60px; height: 60px; background-color: #eff5f8;">
-                <i class="fas fa-users"></i>
-            </div>
-            <div class="node" id="node5"
-                 onclick="openSidebar()"
-                 style="top: 45%; left: 25%; width: 80px; height: 80px; background-color: #eff5f8;">
-                <i class="fas fa-shield-alt"></i>
-            </div>
-
-            <!-- Nodes in the right cluster -->
-            <div class="node" id="node6"
-                 onclick="openSidebar()"
-                 style="top: 70%; left: 65%; width: 50px; height: 50px; background-color: #1d1c1b;">
-                <i class="fas fa-chart-bar"></i>
-            </div>
-            <div class="node" id="node7"
-                 onclick="openSidebar()"
-                 style="top: 75%; left: 70%; width: 70px; height: 70px; background-color: #1d1c1b;">
-                <i class="fas fa-cogs"></i>
-            </div>
-            <div class="node" id="node8"
-                 onclick="openSidebar()"
-                 style="top: 80%; left: 60%; width: 40px; height: 40px; background-color: #1d1c1b;">
-                <i class="fas fa-heartbeat"></i>
-            </div>
-            <div class="node" id="node9"
-                 onclick="openSidebar()"
-                 style="top: 85%; left: 68%; width: 60px; height: 60px; background-color: #1d1c1b;">
-                <i class="fas fa-users"></i>
-            </div>
-            <div class="node" id="node10"
-                 onclick="openSidebar()"
-                 style="top: 90%; left: 75%; width: 80px; height: 80px; background-color: #1d1c1b;">
-                <i class="fas fa-shield-alt"></i>
-            </div>
-        </div>
-
-        <!-- Right sidebar with stats -->
-        <div class="right-sidebar" id="rightSidebar">
-            <div class="sidebar-header">
-                <!-- Close sidebar button -->
-                <i class="fas fa-arrow-right" onclick="closeSidebar()"></i>
-            </div>
-            <div class="sidebar-content">
-                <!-- Content will be dynamically loaded here -->
-            </div>
-            <div class="sidebar-stats">
-                <!-- Statistics items with icons -->
-                <div class="stat-item" style="background-color: #a18ff3;">
-                    <i class="fas fa-share-alt"></i>
-                    <p>342,054</p>
-                    <span>Shares</span>
-                </div>
-                <div class="stat-item" style="background-color: #5ac2f5;">
-                    <i class="fas fa-thumbs-up"></i>
-                    <p>342,054</p>
-                    <span>Likes</span>
-                </div>
-                <div class="stat-item" style="background-color: #f49575;">
-                    <i class="fas fa-comment"></i>
-                    <p>342,054</p>
-                    <span>Comments</span>
-                </div>
-            </div>
-        </div>
-
     </div>
+
+    <div class="content-container">
+        <div class="title">
+            Result of Sentiment Analysis
+        </div>
+        <!-- Emotion analysis container -->
+        <div class="emotion-container">
+            <div class="container positive">
+                <div class="circle">
+                    <svg>
+                        <circle class="background-circle" cx="75" cy="75" r="70"></circle>
+                        <circle class="progress-circle" cx="75" cy="75" r="70"></circle>
+                    </svg>
+                    <div class="percentage" id="positive-percentage">40%</div>
+                </div>
+                <div class="label">positive </div>
+                <div class="number" id="positive-number">200 tweets</div>
+            </div>
+
+            <div class="container neutral">
+                <div class="circle">
+                    <svg>
+                        <circle class="background-circle" cx="75" cy="75" r="70"></circle>
+                        <circle class="progress-circle" cx="75" cy="75" r="70"></circle>
+                    </svg>
+                    <div class="percentage" id="neutral-percentage">30%</div>
+                </div>
+                <div class="label">neutral </div>
+                <div class="number" id="neutral-number">150 tweets</div>
+            </div>
+
+            <div class="container negative">
+                <div class="circle">
+                    <svg>
+                        <circle class="background-circle" cx="75" cy="75" r="70"></circle>
+                        <circle class="progress-circle" cx="75" cy="75" r="70"></circle>
+                    </svg>
+                    <div class="percentage" id="negative-percentage">30%</div>
+                </div>
+                <div class="label">negative </div>
+                <div class="number" id="negative-number">150 tweets</div>
+            </div>
+        </div>
+
+            <!-- Text description -->
+            <div class="text-description">
+                We have analysised over Five million tweets, and use LDA model to analyse the Sentiment of tweets.
+                It is clearly that there are 40% of the tweets are positive and 20% of them are neutral, 40% of them
+                are negative. What's more, we found that the famous or influential people will influence other users.
+                Below is the two network:
+            </div>
+
+            <!-- First image -->
+            <div class="image-container">
+                <img src="..\assets\network1.png" alt="Graph Analysis">
+            </div>
+
+            <div class="text-description">
+                figure1: network
+            </div>
+
+            <!-- Second image -->
+            <div class="image-container">
+                <img src="..\assets\network2.png" alt="Network Analysis">
+            </div>
+
+            <div class="text-description">
+                figure2: transmission chains
+            </div>
+
+            <!-- Analysis text -->
+            <div class="text-description">
+                From figure1, it is clearly that the users are influenced by the influential people. When the influential people's tweet
+                is negative, then the users who transpond this tweet will also show the negative emotion.</p>
+                From figure2, the transmission chains show that the influence of Fake news. With the influence of Fake news, the publick will
+                often become negative emotion, hence it is important to control the information spreading and reduce the panic of the public.
+            </p>
+            </p>
+            </div>
+        </div>
+
+
 </div>
     <script src="../js/main.js"></script>
     <script src="../js/network.js"></script>

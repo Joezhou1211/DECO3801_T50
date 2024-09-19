@@ -15,13 +15,6 @@
 
 <body>
 <div class="container">
-    <!-- left sidebar -->
-    <div class="sidebar">
-        <div class="icon"><i class="fas fa-bars"></i></div>
-        <div class="icon"><i class="fas fa-cog"></i></div>
-        <div class="icon"><i class="fas fa-chart-pie"></i></div>
-        <div class="icon"><i class="fas fa-user"></i></div>
-    </div>
     <!-- main content -->
     <div class="main-content">
         <!-- Header section -->
@@ -33,21 +26,19 @@
             <!-- Navigation links -->
             <div class="nav-container">
                 <div class="nav">
-                    <a href="map.html">Overview</a>
-                    <a href="6.html">Statistics</a>
-                    <a href="4.html">Dashboard</a>
-                    <a href="5.html">Support</a>
+                    <div class="nav">
+                        <a href="index.html">Home</a>
+                        <a href="topics.html">Topic Modeling</a>
+                        <a href="map.html">Map</a>
+                        <a href="network.html">Network</a>
+                        <a href="FakeNews.html">FakeNewsDetection</a>
+                    </div>
                 </div>
             </div>
             <!-- Search bar -->
             <div class="search-container">
-                <input type="text" id="searchQuery" placeholder="Enter search term...">
+                <input id="searchQuery" placeholder="Enter search term..." type="text">
                 <button onclick="SearchWithQuery(document.getElementById('searchQuery').value)">Search</button>
-            </div>
-            <div class="user-icon">
-                <a href="logIn.html">
-                    <img alt="User Icon" src="https://via.placeholder.com/40">
-                </a>
             </div>
         </div>
     </div>
@@ -71,17 +62,17 @@
         <!-- Statistics Section -->
         <div class="statistics-container">
             <div class="stat-item">
-                <img src="../assets/statistics.png" alt="Trend Icon">
+                <img alt="Trend Icon" src="../assets/statistics.png">
                 <p>TREND GOODS</p>
                 <h2>204</h2>
             </div>
             <div class="stat-item">
-                <img src="../assets/search-file.png" alt="Detail Icon">
+                <img alt="Detail Icon" src="../assets/search-file.png">
                 <p>DETAIL</p>
                 <h2>TOPIC</h2>
             </div>
             <div class="stat-item">
-                <img src="../assets/visible.png" alt="View Icon">
+                <img alt="View Icon" src="../assets/visible.png">
                 <p>VIEWS</p>
                 <h2>5.8k</h2>
             </div>

@@ -1,69 +1,86 @@
-// Sidebar Control Functions
-function openSidebar() {
-    document.getElementById("rightSidebar").classList.add("open");
-}
-
 function closeSidebar() {
     document.getElementById("rightSidebar").classList.remove("open");
 }
 
-// Calculate Distance and Angle Between Two Points
-function getAngelLength(x1, y1, x2, y2) {
-    var a = x1 - x2;
-    var b = y1 - y2;
-    var c = Math.sqrt(a * a + b * b);
-    var angle = Math.PI - Math.atan2(-b, a);
-    return [c, angle];
-}
 
-// Draw a Line Connecting Two Nodes
-function connectNodes(node1, node2) {
-    var pos1 = node1.getBoundingClientRect();
-    var pos2 = node2.getBoundingClientRect();
+d3.csv("test_data_2.csv").then(function(data) {
+        console.log(data);
 
-    // Calculate the center points of the two nodes
-    var x1 = pos1.left + pos1.width / 2;
-    var y1 = pos1.top + pos1.height / 2;
-    var x2 = pos2.left + pos2.width / 2;
-    var y2 = pos2.top + pos2.height / 2;
+        const nodeData = [
+            { nodeId: "node1", dataIndex: 0 },
+            { nodeId: "node2", dataIndex: 1 },
+            { nodeId: "node3", dataIndex: 2 },
+            { nodeId: "node4", dataIndex: 3 },
+            { nodeId: "node5", dataIndex: 4 },
+            { nodeId: "node6", dataIndex: 5 },
+            { nodeId: "node7", dataIndex: 6 },
+            { nodeId: "node8", dataIndex: 7 },
+        ];
 
-    var [length, angle] = getAngelLength(x1, y1, x2, y2);
+        nodeData.forEach(function(node) {
+            document.getElementById(node.nodeId).addEventListener("click", function() {
+                const nodeStats = data[node.dataIndex];
+                openSidebar(nodeStats);
+            });
+        });
 
-    // Create a line element and set its dimensions and position
-    var line = document.createElement('div');
-    line.className = 'line';
-    line.style.width = length + 'px';
-    line.style.top = y1 + 'px';
-    line.style.left = x1 + 'px';
-    line.style.transform = `rotate(${angle}rad)`;
+    }).catch(function(error) {
+        console.log("Error loading CSV data: " + error);
+    });
 
-    document.getElementById('body').appendChild(line);
-}
+    function openSidebar(stats) {
+        const sidebar = document.getElementById('rightSidebar');
+        document.getElementById("rightSidebar").classList.add("open");
+        document.getElementById('likesCount').textContent = stats["favourite_count"];
+        document.getElementById('sharesCount').textContent = stats["retweet_count"];
+        document.getElementById('commentsCount').textContent = stats["reply_count"];
+        document.getElementById('topSection').textContent = stats["text"];
+        document.getElementById('bottomLeft').textContent = stats["_id"];
+        document.getElementById('bottomRight').textContent = stats["sentiment"];
 
-// Connect All Nodes in the Network
-function connectAllNodes() {
-    var nodes = [
-        document.getElementById('node1'),
-        document.getElementById('node2'),
-        document.getElementById('node3'),
-        document.getElementById('node4'),
-        document.getElementById('node5'),
-        document.getElementById('node6'),
-        document.getElementById('node7'),
-        document.getElementById('node8'),
-        document.getElementById('node9'),
-        document.getElementById('node10')
-    ];
-
-    // Nested loops to connect each pair of nodes
-    for (var i = 0; i < nodes.length - 1; i++) {
-        for (var j = i + 1; j < nodes.length; j++) {
-            connectNodes(nodes[i], nodes[j]);
-        }
+        sidebar.style.display = 'block';
     }
+
+// Dataset
+const positiveData = { percentage: 40, count: 200 };
+const neutralData = { percentage: 30, count: 150 };
+const negativeData = { percentage: 30, count: 150 };
+
+// Dynamically update the circle animation
+function updateCircle(container, data, duration) {
+    const circle = container.querySelector('.progress-circle');
+    const percentageElement = container.querySelector('.percentage');
+    const numberElement = container.querySelector('.number');
+
+    const radius = 70;
+    const circumference = 2 * Math.PI * radius;
+
+    // Dynamically update percentage values
+    let startPercentage = 0;
+    const endPercentage = data.percentage;
+    const stepTime = duration / endPercentage; 
+
+     const interval = setInterval(() => {
+        startPercentage += 1;
+        if (startPercentage > endPercentage) {
+             clearInterval(interval);
+        } else {
+             const offset = circumference - (startPercentage / 100) * circumference;
+             circle.style.strokeDashoffset = offset;
+
+              percentageElement.textContent = startPercentage + '%';
+         }
+      }, stepTime);
+
+    numberElement.textContent = data.count + ' tweets';
 }
 
-// Initialize Node Connections on Page Load
-window.onload = function() {
-    connectAllNodes();
-};
+// Get each container
+const positiveContainer = document.querySelector('.positive');
+const neutralContainer = document.querySelector('.neutral');
+const negativeContainer = document.querySelector('.negative');
+
+// Dynamically update circles and numbers in 1 second
+updateCircle(positiveContainer, positiveData, 1000);
+updateCircle(neutralContainer, neutralData, 1000);
+updateCircle(negativeContainer, negativeData, 1000);
