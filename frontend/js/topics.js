@@ -50,10 +50,10 @@ toggleBtn.addEventListener('click', () => {
 //     // 模拟鼠标悬停效果
 //     document.querySelectorAll('.bubble').forEach(bubble => {
 //         bubble.addEventListener('mouseenter', () => {
-//             bubble.style.transform += ' scale(1.2)'; // 放大
+//             bubble.style.transform += ' scale(Page Design Doc.2)'; // 放大
 //         });
 //         bubble.addEventListener('mouseleave', () => {
-//             bubble.style.transform = bubble.style.transform.replace(' scale(1.2)', ''); // 恢复
+//             bubble.style.transform = bubble.style.transform.replace(' scale(Page Design Doc.2)', ''); // 恢复
 //         });
 //     });
 //
@@ -61,10 +61,10 @@ toggleBtn.addEventListener('click', () => {
 //     document.querySelectorAll('.bubble').forEach(bubble => {
 //         bubble.addEventListener('click', () => {
 //             // 重置所有 bubbles 的样式
-//             document.querySelectorAll('.bubble').forEach(b => b.style.transform = b.style.transform.replace(' scale(1.2)', ''));
+//             document.querySelectorAll('.bubble').forEach(b => b.style.transform = b.style.transform.replace(' scale(Page Design Doc.2)', ''));
 //
 //             // 设置点击的 bubble 为中心
-//             bubble.style.transform = 'translate(-50%, -50%) scale(1.5)';
+//             bubble.style.transform = 'translate(-50%, -50%) scale(Page Design Doc.5)';
 //             bubble.style.top = '50%';
 //             bubble.style.left = '50%';
 //             bubble.style.zIndex = '10';
