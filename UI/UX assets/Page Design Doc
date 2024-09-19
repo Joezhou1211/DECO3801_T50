@@ -1,0 +1,78 @@
+Homepage:
+Definition:
+The homepage provides a summary of past events using a fixed window design (the webpage size remains fixed, and content scrolls within the window instead of scrolling the entire page, preventing excessively long pages). A navigation bar is used to help users quickly reach the desired sections.
+
+Content includes:
+
+Background introduction with a brief description of events.
+Map visualization of the bushfire locations.
+Social impact analysis.
+Insights learned from the bushfire event (a critical perspective aimed at helping the government learn from these experiences).
+Brief data on topics.
+Analysis of misinformation spread (analyzing both breadth and depth).
+User Story/Use Case:
+Joe casually browses the homepage, scrolling to find content of interest. Upon finding something intriguing, he clicks to expand the specific entry for more details. After reading, Joe clicks again to collapse the content. Joe also uses the navigation bar to jump directly to content he cares about, and clicks another tab in the navigation bar to explore different sections.
+
+Features:
+
+Navigation bar jump functionality (JavaScript).
+Fixed window design.
+Content fades in/out.
+Modularized data display.
+Module expand/collapse function (JavaScript).
+Unresolved Content-related Issues:
+
+Interaction-related issues:
+Should the content scroll to reach the target when clicking on the navigation bar, or should it jump instantly?
+Answer: Instant jump.
+Can clicking the map lead to the map page? Should there be any external links on the homepage?
+Answer: Not for now, as the map primarily represents the bushfire events (uncertain whether map interaction is necessary at this stage, so not implemented yet).
+Usability Design Questions:
+
+How can users know which blocks can be expanded?
+How can users identify their current position on the page (what indicator will be used)?
+
+
+
+
+MAP Page:
+Definition:
+Displays how the number of tweets changes over time using a timeline filter. Hovering over a region on the map will show the number of tweets in that area. A bar chart at the bottom of the page will show the proportion of tweets from each country relative to the global tweet total.
+
+User Story/Use Case:
+When the user selects a point in time on the timeline, they can view the distribution of global tweets at that moment. The data and map colors will change according to the timeline controls, and the color intensity of the heatmap will represent the discussion intensity in each region. When hovering over the map, a popup shows detailed tweet data for that area, including interactions (tweets/comments/retweets/likes), overall sentiment proportions, and the probability of true vs. false news.
+
+Features:
+
+Mouse hover display.
+Timeline.
+Unresolved Content-related Issues:
+
+What should the map’s sidebar display?
+Unresolved Interaction-related Issues:
+
+Can the sidebar’s content be interactive?
+Topic Modeling Page (Hashtags, Keywords):
+Definition:
+Visualizes each topic by the number of tweets using bubble sizes (visual view). Users can switch to a more detailed mode (grid view) for a tabular display of topics. Clicking on "detailed data" shows specific data (similar to an Excel format).
+
+Features:
+
+In bubble mode:
+Bubble colors represent emotions with the highest proportion in each topic.
+Bubbles cannot be interacted with; however, hovering over a bubble causes it to expand and become the visual focus, pushing nearby bubbles aside for clearer display.
+The three charts at the bottom display related data (still unclear what exact data should be classified).
+The sidebar will show the topic categories and provide quick access to tweet analysis (including sentiment and fake news analysis) for each category.
+Currently, 10 main topics have been identified. Should more granular topics be explored?
+Answer: As much precision as possible is preferred, but it can be shown in a parent-child relationship in the detailed view, so the number of topics isn’t a concern.
+Unresolved Interaction-related Issues:
+
+Are the bubbles and background dynamic?
+What interactive effects should hovering, clicking, and other dynamic actions have for the bubbles, background, and the three charts at the bottom?
+Answer: Only the bubble under the cursor will expand, pushing others aside. Data beneath the page could show interaction data, sentiment feedback, and true/false news proportions for that topic.
+User Story/Use Case:
+In visual view, when the user hovers over a bubble, the bubble expands, and its text becomes clearer. Nearby bubbles are pushed aside to accommodate this. Adjusting the timeline filter causes the bubbles on the page to change. In chart view, data is presented in a table format. When the user clicks on "detailed data," an Excel-like data window appears, which can be closed, moved, or downloaded.
+
+Backend Data Analysis Idea:
+
+Can keywords be retrieved by counting the number of times each word appears in tweets? Perhaps record only one occurrence of each word per tweet for analysis, with two sets of keyword data for further analysis.

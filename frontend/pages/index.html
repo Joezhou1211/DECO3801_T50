@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/index.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+<div class="container">
+    <!-- Sidebar with icons -->
+    <div class="sidebar">
+        <div class="icon"><i class="fas fa-bars"></i></div>
+        <div class="icon"><i class="fas fa-cog"></i></div>
+        <div class="icon"><i class="fas fa-chart-pie"></i></div>
+        <div class="icon"><i class="fas fa-user"></i></div>
+        <div class="icon"><i class="fas fa-user"></i></div>
+    </div>
+
+    <!-- Main content area -->
+    <div class="main-content">
+        <!-- Header section with logo, navigation, search, and user icon -->
+        <div class="header">
+            <div class="logo">
+                <img alt="Logo" src="https://via.placeholder.com/50">
+            </div>
+            <div class="nav-container">
+                <div class="nav">
+                    <a href="map.html">Overview</a>
+                    <a href="6.html">Statistics</a>
+                    <a href="4.html">Dashboard</a>
+                    <a href="5.html">Support</a>
+                </div>
+            </div>
+            <div class="search-container">
+                <!-- Search input and button -->
+                <input type="text" id="searchQuery" placeholder="Enter search term...">
+                <button onclick="SearchWithQuery(document.getElementById('searchQuery').value)">Search</button>
+            </div>
+            <div class="user-icon">
+                <a href="logIn.html">
+                    <img alt="User Icon" src="https://via.placeholder.com/40">
+                </a>
+            </div>
+        </div>
+
+
+        <div class="content">
+            <!-- Main content area -->
+            <div class="scroll-container">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 将文字容器移到 DOM 的最后，确保它位于最顶层 -->
+<div class="text-overlay" id="text1">Text 1</div>
+<div class="text-overlay" id="text2">Text 2</div>
+<div class="text-overlay" id="text3">Text 3</div>
+
+<script src="../js/main.js"></script>
+<script src="../js/index.js"></script>
+</body>
+
+</html>
