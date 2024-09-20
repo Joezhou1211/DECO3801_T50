@@ -92,15 +92,15 @@
 
 .title {
     display: flex;
-    flex-direction: column;         /* 鍨傜洿鎺掑垪鍐呭 */
-    justify-content: center;        /* 鍨傜洿灞呬腑 */
-    align-items: flex-start;        /* 宸﹀榻愬唴瀹� */
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
     padding-top: 100px;
     margin: 0 auto;
-    font-size: 40px;                /* 璋冩暣瀛椾綋澶у皬 */
-    font-weight: bold;              /* 鍔犵矖瀛椾綋 */
+    font-size: 40px;
+    font-weight: bold;
     text-align: left;
-    color: #333;                    /* 瀛椾綋棰滆壊锛堝彲鏍规嵁闇€姹傛洿鏀癸級 */
+    color: #333;
 }
 
 .text-description {
