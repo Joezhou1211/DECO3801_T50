@@ -123,3 +123,57 @@ function setupInteraction(chart, jsonData) {
 
     setupBackButton();
 }
+
+// Function to parse CSV data
+function parseCSVData(allText) {
+    var allTextLines = allText.split(/\r\n|\n/);
+    var headers = allTextLines[0].split(',');
+    var lines = [];
+
+    for (var i=1; i<allTextLines.length; i++) {
+        var data = allTextLines[i].split(',');
+        if (data.length == headers.length) {
+            var tarr = {};
+            for (var j=0; j<headers.length; j++) {
+                tarr[headers[j]] = data[j];
+            }
+            lines.push(tarr);
+        }
+    }
+    return lines;
+}
+
+// Load CSV Data
+function loadCSVData() {
+    $.ajax({
+        type: "GET",
+        url: "../../data/single_location_time_tweet_count.csv",
+        dataType: "text",
+        success: function(data) {
+            var jsonData = parseCSVData(data);
+            setupSlider(jsonData);
+        }
+     });
+}
+
+// Setup Slider interaction
+function setupSlider(jsonData) {
+    var slider = document.getElementById('yearSlider');
+    slider.oninput = function() {
+        var yearIndex = parseInt(this.value); // Assuming slider value corresponds to an index in your data
+        updateDisplay(jsonData, yearIndex);
+    };
+}
+
+// Update display according to selected year
+function updateDisplay(jsonData, yearIndex) {
+    var filteredData = jsonData.filter(function(item) {
+        return item.Year == yearIndex; // Replace 'Year' with your actual data column if different
+    });
+    // Assume function to redraw or update your map or display
+    drawMap(filteredData);
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    loadCSVData(); // Call this function on page load to setup everything
+});

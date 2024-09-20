@@ -3,7 +3,7 @@ const topicSidebar = document.querySelector('.topic-sidebar');
 const contentWrapper = document.getElementById('content-wrapper');
 
 toggleBtn.addEventListener('click', () => {
-    console.log('Toggle button clicked'); // 调试信息
+    console.log('Toggle button clicked'); 
     topicSidebar.classList.toggle('open');
     contentWrapper.classList.toggle('shifted');
     toggleBtn.textContent = topicSidebar.classList.contains('open') ? '<' : '>';

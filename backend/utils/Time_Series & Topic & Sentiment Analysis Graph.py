@@ -3,8 +3,8 @@ from dash import Dash, dcc, html
 from dash.dependencies import Input, Output
 import pandas as pd
 
-df = pd.read_json('../../data/processed/final_data(filtered).json')
-df = df[['_id', 'created_at', 'sentiment', 'weighted_sentiment',   'main-topic', 'influence_tweet_factor']]
+df = pd.read_csv('../../data/processed/final_data(main_topic).csv')
+df = df[['_id', 'created_at', 'sentiment', 'weighted_sentiment',   'main_topic', 'influence_tweet_factor']]
 
 # to datetime and add day and hour columns
 df['created_at'] = pd.to_datetime(df['created_at'])
@@ -13,22 +13,22 @@ df['hour'] = df['created_at'].dt.hour
 df['day_hour'] = df['created_at'].dt.strftime('%Y-%m-%d %H:00')
 
 # group sentiment by day and hour
-daily_sentiment = df.groupby(['day', 'main-topic']).agg(
+daily_sentiment = df.groupby(['day', 'main_topic']).agg(
     daily_sentiment=('sentiment', 'sum'),
     daily_weighted_sentiment=('weighted_sentiment', 'sum')
 ).reset_index()
 
-hourly_sentiment = df.groupby(['day_hour', 'main-topic']).agg(
+hourly_sentiment = df.groupby(['day_hour', 'main_topic']).agg(
     hourly_sentiment=('sentiment', 'sum'),
     hourly_weighted_sentiment=('weighted_sentiment', 'sum')
 ).reset_index()
 
 # group tweet count by day and hour
-daily_counts = df.groupby(['day', 'main-topic']).agg(
+daily_counts = df.groupby(['day', 'main_topic']).agg(
     tweet_count=('sentiment', 'count')
 ).reset_index()
 
-hourly_counts = df.groupby(['day_hour', 'main-topic']).agg(
+hourly_counts = df.groupby(['day_hour', 'main_topic']).agg(
     tweet_count=('sentiment', 'count')
 ).reset_index()
 
@@ -83,7 +83,6 @@ app.layout = html.Div([
 ], style={'height': '100vh', 'backgroundColor': '#f9f9f9', 'padding': '0 0px'})
 
 
-
 @app.callback(
     Output('sentiment-tweet-time-series', 'figure'),
     [Input('time-frame', 'value'),
@@ -107,9 +106,9 @@ def update_graph(selected_time_frame, selected_sentiment_type):
     count_traces = []
 
     # generate traces
-    for topic in df_plot_sentiment['main-topic'].unique():
-        df_topic_sentiment = df_plot_sentiment[df_plot_sentiment['main-topic'] == topic]
-        df_topic_count = df_plot_count[df_plot_count['main-topic'] == topic]
+    for topic in df_plot_sentiment['main_topic'].unique():
+        df_topic_sentiment = df_plot_sentiment[df_plot_sentiment['main_topic'] == topic]
+        df_topic_count = df_plot_count[df_plot_count['main_topic'] == topic]
 
         # gennerate traces for sentiment
         sentiment_traces.append(go.Scatter(x=df_topic_sentiment[x_axis],

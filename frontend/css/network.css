@@ -34,7 +34,7 @@
 
 .circle .progress-circle {
     stroke: #4CAF50;
-    stroke-dasharray: 440;         /* 2 * PI * radius (2 * 3.14 * 70) */
+    stroke-dasharray: 440;
     stroke-dashoffset: 440;
     transition: stroke-dashoffset 1s ease-out;
 }

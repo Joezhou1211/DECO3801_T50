@@ -26,17 +26,17 @@ t50_project/
 │   ├── notebooks/                                    # ⬇ Execution Order (Smaller Number First)
 │   │   ├── LDA_modeling_main+sub.ipynb               # 3.2  LDA topic modeling for both main and subtopics
 │   │   ├── location.ipynb                            # 2.3  Analysis of tweet locations
+│   │   ├── location_json.ipynb                       # 2.4  JSON conversion of location data
 │   │   ├── NMF_modeling.ipynb                        # 2.2  Non-negative matrix factorization for topic modeling
 │   │   ├── pattern_regonisation & sampling.ipynb     # 3.1  Pattern recognition and sampling techniques
 │   │   ├── preprocess+pre_LDA.ipynb                  # 1.1  Preprocessing and preliminary LDA modeling
 │   │   ├── sentiment.ipynb                           # 2.1  Sentiment analysis of tweets
+│   │   ├── tweets_chain.ipynb                        # 2.5  Analysis of tweet chains
 │   ├── routes/
 │   │   ├── api_routes.py                             # API routes for backend services
 │   ├── services/
 │   │   ├── data_importer.py                          # Data import for Elasticsearch
 │   │   ├── elasticsearch_service.py                  # Service to interact with Elasticsearch for data storage and retrieval
-│   ├── static/
-│   │   ├── search.html                               # Static HTML page for search functionality (for Elasticsearch testing) 
 │   ├── utils/
 │   │   ├── CSV_to_Json.py                            # Utility script to convert CSV files to JSON format
 │   │   ├── LDA_wordcloud.png                         # Word cloud visualization for LDA topics
@@ -44,55 +44,62 @@ t50_project/
 │   │   ├── pre_LDA_visualization.html                # Preliminary visualization of LDA topics
 │   │   ├── Time_Series & Topic & Sentiment Analysis Graph.py  # Time series analysis of topics and sentiment
 │   │   ├── time_squence_analysis.py                  # Time sequence analysis for sentiment and topic changes
+│   │   ├── 生成flourish数据格式.ipynb                # Prepare data for Flourish visualization
 │   ├── main.py                                       # Main entry point for server
 ├── data/
-│   ├── processed/  (Some of the this part's files are excluded from uplaoding due to large file size)                                
+│   ├── processed/                                    # Processed datasets
 │   │   ├── daily_weighted_sentiment_vader.csv        # Daily aggregated sentiment scores from VADER
 │   │   ├── final_data(filtered).json                 # Final filtered dataset in JSON format
+│   │   ├── final_data(main_topic).csv                # Main topic data
 │   │   ├── final_data.csv                            # Final dataset in CSV format
 │   │   ├── final_data.json                           # Final dataset in JSON format
 │   │   ├── hourly_weighted_sentiment_vader.csv       # Hourly aggregated sentiment scores from VADER
 │   │   ├── location_counts.json                      # Counts of tweets by location
+│   │   ├── topic_timeline.csv                        # Topic timeline data
 │   │   ├── tweets_bushfire_related_keywords.csv      # Tweets related to bushfire keywords
 │   │   ├── tweets_with_final_nmf_topics_final.csv    # Tweets with final NMF topic assignments
 │   │   ├── tweets_with_topics.csv                    # Tweets with topic assignments
-│   ├── raw/   (This part is excluded from uplaoding due to large file size)
-│   │   ├── v_forest.bson                             # Raw BSON data file (Original)
-│   │   ├── v_forest.csv                              # Raw CSV data file (Original, for MongoDB only)
+│   ├── raw/                                          # Raw datasets
+│   │   ├── v_forest.bson                             # Raw BSON data (original)
+│   │   ├── v_forest.csv                              # Raw CSV data (original)
 ├── frontend/
-│   ├── assets/
-│   │   ├── user_icon.png                       
-│   │   ├── statistics.png
-│   │   ├── visible.png
-│   │   ├── search-file.png                  
-│   ├── css/
-│   │   ├── map.css                                   
-│   │   ├── network.css                               
-│   │   ├── search.css
-│   │   ├── Fstyle.css
-│   │   ├── topics.css
-│   ├── js/
+│   ├── assets/                                       # Static assets
+│   │   ├── search-file.png                           # Search icon
+│   │   ├── Single Newwork Analysis.jpg               # Network analysis image
+│   │   ├── statistics.png                            # Statistics icon
+│   │   ├── user_icon.png                             # User icon
+│   │   ├── visible.png                               # Visibility icon
+│   ├── css/                                          # Stylesheets
+│   │   ├── home_page.css                             # Stylesheet for homepage
+│   │   ├── map.css                                   # Stylesheet for map visualization
+│   │   ├── network.css                               # Stylesheet for network visualization
+│   │   ├── search.css                                # Stylesheet for search page
+│   │   ├── style.css                                 # Global stylesheet
+│   │   ├── topics.css                                # Stylesheet for topics visualization page
+│   ├── js/                                           # JavaScript files for interaction
+│   │   ├── index.js                              # JavaScript for homepage interactions
 │   │   ├── main.js                                   # Universal JavaScript for all pages
-│   │   ├── network.js                                # JavaScript for the network page
-│   │   ├── map.js                                    # JavaScript for the map page
-│   │   ├── search.js                                 # JavaScript for the search page
-│   │   ├── topics.js                                 # JavaScript for the topics page
-│   ├── pages/
-│   │   ├── logIn.html                                # Login page
-│   │   ├── map.html                                  # Map visualization page
-│   │   ├── network.html                              # Network visualization page
-│   │   ├── search.html                               # Search page
-│   │   ├── topics.html                               # Topics visualization page
-├── models/
-│   ├── main_topics/ (This part is excluded from uplaoding due to large file size)
+│   │   ├── map.js                                    # JavaScript for map page
+│   │   ├── network.js                                # JavaScript for network page
+│   │   ├── search.js                                 # JavaScript for search page
+│   │   ├── topics.js                                 # JavaScript for topics page
+│   ├── pages/                                        # Frontend HTML pages
+│   │   ├── home_page.html                            # Homepage HTML
+│   │   ├── logIn.html                                # Login page HTML
+│   │   ├── map.html                                  # Map visualization page HTML
+│   │   ├── network.html                              # Network visualization page HTML
+│   │   ├── search.html                               # Search page HTML
+│   │   ├── topics.html                               # Topics visualization page HTML
+├── models/                                           # Models and related files
+│   ├── main_topics/                                  # Main topics models and data
 │   │   ├── corpus_subtopics                          # Corpus data for subtopics
 │   │   ├── corpus_subtopics.index                    # Index file for subtopics corpus
-│   │   ├── dictionary_subtopics                      # Dictionary of subtopics
+│   │   ├── dictionary_subtopics                      # Dictionary for subtopics
 │   │   ├── lda_model_subtopics                       # LDA model file for subtopics
 │   │   ├── lda_model_subtopics.expElogbeta.npy       # Numpy array for LDA model beta values
 │   │   ├── lda_model_subtopics.id2word               # Word-to-ID mapping for subtopics LDA model
 │   │   ├── lda_model_subtopics.state                 # State file for subtopics LDA model
-│   ├── pre_topics/ (This part is excluded from uplaoding due to large file size
+│   ├── pre_topics/                                   # Pre-topic models and data (large files excluded from uploading)
 │   │   ├── corpus.mm                                 # Corpus data for pre-topics
 │   │   ├── corpus.mm.index                           # Index file for pre-topics corpus
 │   │   ├── dictionary.gensim                         # Gensim dictionary for pre-topics
@@ -101,30 +108,30 @@ t50_project/
 │   │   ├── lda_model.gensim.expElogbeta.npy          # Numpy array for Gensim LDA model beta values
 │   │   ├── lda_model.gensim.id2word                  # Word-to-ID mapping for Gensim LDA model
 │   │   ├── lda_model.gensim.state                    # State file for Gensim LDA model
-│   ├── scripts/
+│   ├── scripts/                                      # Additional scripts for machine learning
 │   │   ├── BERT.ipynb                                # Jupyter notebook for BERT model training and analysis
-│   ├── UI/
-│   │   ├── UI assets/                                # UI assets for the project
-│   │   │   ├── Network Side Bar In.png 
-│   │   │   ├── Network Side Bar Out.png
-│   │   │   ├── Topic Slider Bar In.png
-│   │   │   ├── Topic Slider Bar Out.png
-│   │   │   ├── Twitters.png
-│   │   │   ├── map.png
-│   │   │   ├── network.png
-│   │   │   ├── network full version.png
-│   │   │   ├── webframe 1.png
-│   │   │   ├── webframe 2.png
-│   │   │   ├── webframe 3.png
-│   │   ├── UX assets/  
-│   │   │   ├── Deeply analysis of user group.png
-│   │   │   ├── Further relational researchs.png
-│   │   │   ├── Research and design reason.png
-│   │   │   ├── Research of visualization.png
-│   │   │   ├── Target audience mindmap.png
-│   │   │   ├── Website Purpose& Fake news imapct.png
-│   │   │   ├── site map.jpg
-│   │   │   ├── first version of LFI.jpg
+├── UI/
+│   ├── UI assets/                                    # UI assets for the project
+│   │   ├── Network Side Bar In.png 
+│   │   ├── Network Side Bar Out.png
+│   │   ├── Topic Slider Bar In.png
+│   │   ├── Topic Slider Bar Out.png
+│   │   ├── Twitters.png
+│   │   ├── map.png
+│   │   ├── network.png
+│   │   ├── network full version.png
+│   │   ├── webframe 1.png
+│   │   ├── webframe 2.png
+│   │   ├── webframe 3.png
+│   ├── UX assets/  
+│   │   ├── Deeply analysis of user group.png
+│   │   ├── Further relational researchs.png
+│   │   ├── Research and design reason.png
+│   │   ├── Research of visualization.png
+│   │   ├── Target audience mindmap.png
+│   │   ├── Website Purpose& Fake news imapct.png
+│   │   ├── site map.jpg
+│   │   ├── first version of LFI.jpg
 ├── .gitattributes                                    # Git attributes configuration
 ├── .gitignore                                        # Git ignore file for excluding unnecessary files from version control
 └── README.md                                         # Project documentation (this file)
