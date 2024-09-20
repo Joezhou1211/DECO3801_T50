@@ -59,18 +59,17 @@ the curreent img to create parallax effect */
 
 /* text overlay fixed on the page */
 .text-overlay {
-    position: fixed; /* Text stays fixed on the page */
+    position: fixed;
     top: 10px;
     left: 10px;
     color: white;
     font-size: 2rem;
-    background: rgba(0, 0, 0, 0.5); /* Optional: add a semi-transparent background to make the text more readable */
+    background: rgba(0, 0, 0, 0.5);
     padding: 10px;
-    z-index: 9999;  /* Ensure text is above the images */
-    transition: transform 0.5s ease;  /* Smooth transition for the parallax effect */
+    z-index: 9999;
+    transition: transform 0.5s ease;
 }
 
-/* 需求：这是进入时的页面 处于视差滚动图的上方，从这个页面向下滑动进入视差滚动图 */
 .content {
     position: absolute;
     top: 0;
@@ -83,6 +82,6 @@ the curreent img to create parallax effect */
     background: #f0f0f0;
     color: #333;
     font-size: 2rem;
-    z-index: 2;  /* Ensure content is above the images */
-    transition: transform 0.5s ease;  /* Smooth transition for the parallax effect */
+    z-index: 2;
+    transition: transform 0.5s ease;
 }
