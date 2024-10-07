@@ -6,93 +6,215 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Interactive Diagram</title>
 
-    <link href="../css/style.css" rel="stylesheet">
-    <link href="../css/index.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/index.css" rel="stylesheet">
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+   <!-- Link to Google Maps JavaScript API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAw5BhOSRbXJbA4HC7OourMCccKpILkGU&callback=initMap" async defer></script>
 </head>
 
 <body>
-<div class="container">
 
-    <!-- Main content area -->
-    <div class="main-content">
-        <!-- Header section with logo, navigation, search, and user icon -->
-        <div class="header">
-            <div class="logo">
-                <img alt="Logo" src="../assets/logo.png">
-            </div>
-            <div class="nav-container">
-                <div class="nav">
-                    <a href="index.html">Home</a>
-                    <a href="topics.html">Topic Modeling</a>
-                    <a href="map.html">Map</a>
-                    <a href="network.html">Network</a>
-                </div>
-            </div>
-            <div class="search-container">
-                <!-- Search input and button -->
-                <input id="searchQuery" placeholder="Enter search term..." type="text">
-                <button onclick="SearchWithQuery(document.getElementById('searchQuery').value)">Search</button>
-            </div>
-        </div>
+<header class="header">
+    <!-- Team Logo -->
+    <div class="logo">
+        <img src="/assets/logo.png" alt="Website Logo">
     </div>
 
-    <div class="content-container">
-        <div class="title">
-            Bushfire website
+    <!-- Navigation bar -->
+    <nav class="nav">
+        <a href="/index.html">Home</a>
+        <a href="/topics.html">Topics</a>
+        <a href="/map.html">Map</a>
+        <a href="/fakeNews.html">Fake News Detection</a>
+        <a href="/search.html">Data</a>
+    </nav>
+
+    <!-- Setting -->
+    <div class="setting-container">
+        <div class="logo">
+            <img src="/assets/Setting.png" alt="Setting">
         </div>
-        <div class="title2">
-            On this page:
-        </div>
-        <!-- Text description -->
-        <div class="text-description">
-            <ul class="link-list">
-                <li><a href="topics.html">topics</a></li>
-                <li><a href="map.html">Map</a></li>
-                <li><a href="network.html">Network</a></li>
-                <li><a href="FakeNews.html">FakeNewsDetection</a></li>
-            </ul>
-        </div>
-        <div class="title2">
-            About the bushfire website
+        <button>Setting</button>
+    </div>
+</header>
+
+<!-- Welcome Section -->
+<div class="welcome-section">
+    <h2>Welcome to the Blaze Insight</h2>
+</div>
+
+<!-- Data Boxes -->
+<div class="data-boxes">
+    <div class="data-box">
+        <h3>Tweets Data</h3>
+        <p>3500</p>
+    </div>
+
+    <div class="data-box">
+        <h3>Fake News Tweets</h3>
+        <p>1000</p>
+    </div>
+
+    <!-- Clickable box for Review -->
+    <a href="map.html" class="data-box" style="text-decoration: none;">
+        <h3>Review</h3>
+        <p>Most fake news date:</p>
+    </a>
+
+    <!-- Clickable box for Sentiment -->
+    <a href="topics.html" class="data-box" style="text-decoration: none;">
+        <h3>Sentiment</h3>
+        <p>Topic modeling including Sentiment analysis.</p>
+    </a>
+</div>
+
+    <div class="carousel">
+        <!-- left arrow -->
+        <div class="carousel-arrow left-arrow" onclick="moveLeft()">&#10094;</div>
+
+        <!-- topics -->
+        <div class="carousel-images">
+            <div class="carousel-item">
+                <img src="https://via.placeholder.com/200x150" alt="Card Image 1">
+                <p>Emotional and Spiritual Revelations</p>
+            </div>
+            <div class="carousel-item">
+                <img src="https://via.placeholder.com/200x150" alt="Card Image 2">
+                <p>Climate Change Debate</p>
+            </div>
+            <div class="carousel-item">
+                <img src="https://via.placeholder.com/200x150" alt="Card Image 3">
+                <p>Wildlife and Environmental Impact</p>
+            </div>
+            <div class="carousel-item">
+                <img src="https://via.placeholder.com/200x150" alt="Card Image 4">
+                <p>Fire and Rescue Efforts</p>
+            </div>
+            <div class="carousel-item">
+                <img src="https://via.placeholder.com/200x150" alt="Card Image 5">
+                <p>Government Policies</p>
+            </div>
+            <div class="carousel-item">
+                <img src="https://via.placeholder.com/200x150" alt="Card Image 6">
+                <p>Public Reactions</p>
+            </div>
         </div>
 
-        <!-- Analysis text -->
-        <div class="text-description">
-            The Queensland Government Bushfire Website at www.qld.gov.au/bushfire acts as a source of truth and gateway
-            so that Queenslanders can easily find reliable information about bushfire. It has bushfire information
-            suitable for
-            the general public, and a dedicated section with information links for councils and disaster management
-            practitioners.</p>
-            The Queensland Government Bushfire Website is designed to present clear sections to assist users to:</p>
+        <!-- right arrow -->
+        <div class="carousel-arrow right-arrow" onclick="moveRight()">&#10095;</div>
+    </div>
 
-            be bushfire aware - know your bushfire risk, understand bushfire warnings and daily fire danger ratings, and
-            find current bushfire warnings and incidents</p>
-            prepare for bushfire – and make a Bushfire Survival Plan</p>
-            find bushfire recovery and assistance information</p>
-            understand bushfire health and safety</p>
-            learn about bushfire resilient homes and rebuilding</p>
-            check local disaster dashboards</p>
-            access the Queensland Fire Department website.</p>
-            The Queensland Government Bushfire Website uses the official Queensland Government website franchise model
-            and a network of state agency web and communication teams to ensure Queensland's bushfire related content
-            uses consistent messaging that is coordinated, current, and provides a consistent user experience with
-            easy-to-find information, and links to partner agency content.
 
-            For consistent messaging about bushfire, the Queensland Government encourages links from council and
-            organisational web pages as appropriate to the bushfire website.
 
-            View the bushfire website at:
-            </p>
-            </p>
-        </div>
+
+<div class="content-container">
+
+            <!-- First image -->
+            <div class="image-container">
+                <img src="\assets\map.png" alt="Graph Analysis">
+            </div>
+
+            <div class="text-description">
+                figure1: source from https://storymaps.arcgis.com/stories/9eb91298bd5d4760b19ace5940481d60
+            </div>
+
+    <div class="title">
+    Introduction of the website
+</div>
+    <div class="text-description">
+    <p>
+        This website shows the analysis result of large amount of data, which contains tweets about Australia Bush fire.
+        Our website has the Topic modeling page, Map page show the visualization of the result.
+    </p>
+</div>
+<div class="title">
+    The Impacts of the Bush Fires
+</div>
+
+<div class="text-description">
+    <p>
+        The 2019-2020 bushfire season has seen more than 18 million hectares burnt across the country,
+        destroyed with 5,900 buildings destroyed, including 2,800 homes and the deaths of 34 people
+        and approximately one billion animals. Whilst these are the 'headline statistics' considered
+        when assessing the extent of the damage caused by the fires, especially by the public,
+        on further analysis, the impacts are more far-reaching and severe than even the initially shocking figures would suggest.
+    </p>
+</div>
+
+<!-- Social Impacts Section -->
+<div class="title">
+    The Social Impacts (Source: UN Environment Programme)
+</div>
+
+<div class="text-description">
+    <ul>
+        <li>18 million hectares burned</li>
+        <li>5,900 buildings destroyed - 2,800 homes</li>
+        <li>1 billion Animals killed</li>
+        <li>34 people killed directly</li>
+        <li>Public health impacts: Poor air quality - Canberra measured the worst air quality index of any major city in the world.</li>
+        <li>Wildfires produce harmful smoke which can cause fatalities - asthma, bronchitis, etc.</li>
+        <li>Estimated 417 deaths due to poor air quality (Source: Medical Journal of Australia)</li>
+        <li>Mental health impacts: Trauma of evacuation, losing pets, homes, belongings.</li>
+        <li>Some communities found themselves unable to evacuate due to power loss or blocked roads, leading to lasting mental health effects.</li>
+    </ul>
+</div>
+
+<!-- Economic Impacts Section -->
+<div class="title">
+    Economic Impacts
+</div>
+
+<div class="text-description">
+    <ul>
+        <li>Infrastructure damage impacts industries such as farming and tourism.</li>
+        <li>Businesses and institutions closed during periods of excessive air pollution.</li>
+        <li>Economic costs expected to exceed the $4.4 billion cost of the 2009 'Black Saturday' fires (Source: Guardian).</li>
+    </ul>
+</div>
+
+<!-- Environmental Impacts Section -->
+<div class="title">
+    Environmental Impacts
+</div>
+
+<div class="text-description">
+    <ul>
+        <li>Ash from fires kills crops and pollutes water, leading to algal blooms in streams and rivers.</li>
+        <li>Loss of biodiversity due to habitat destruction.</li>
+        <li>Climate feedback loops: Forests previously absorbed carbon emissions, but due to scale, this is no longer achievable.</li>
+        <li>400 megatonnes of carbon dioxide emitted into the atmosphere during the 2019-2020 fires (Source: Copernicus monitoring programme).</li>
+    </ul>
+</div>
+
+<!-- Conclusion Section -->
+<div class="title">
+    Conclusions on Impact
+</div>
+
+<div class="text-description">
+    <p>
+        It is clear that the 2019-2020 bushfire season caused unprecedented devastation to the population of Australia and beyond.
+        However, the next section seeks to put this season in its historical context.
+    </p>
+</div>
+
+</div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>
+            <a href="#">Copyright to NULL POINT TEAM</a>
+        </p>
     </div>
 </div>
-<script src="../js/main.js"></script>
-<script src="../js/index.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/index.js"></script>
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>

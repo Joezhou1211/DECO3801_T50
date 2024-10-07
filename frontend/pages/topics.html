@@ -5,99 +5,136 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Interactive Diagram</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
-
-    <link href="../css/topics.css" rel="stylesheet">
-    <link href="../css/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/topics.css" rel="stylesheet">
 </head>
-
 <body>
-<div class="container">
-    <!-- main content -->
-    <div class="main-content">
-        <!-- Header section -->
-        <div class="header">
-            <!-- Logo section -->
-            <div class="logo">
-                <img alt="Logo" src="https://via.placeholder.com/50">
-            </div>
-            <!-- Navigation links -->
-            <div class="nav-container">
-                <div class="nav">
-                    <div class="nav">
-                        <a href="index.html">Home</a>
-                        <a href="topics.html">Topic Modeling</a>
-                        <a href="map.html">Map</a>
-                        <a href="network.html">Network</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Search bar -->
-            <div class="search-container">
-                <input id="searchQuery" placeholder="Enter search term..." type="text">
-                <button onclick="SearchWithQuery(document.getElementById('searchQuery').value)">Search</button>
-            </div>
-        </div>
+
+<header class="header">
+    <!-- Team Logo -->
+    <div class="logo">
+        <img src="/assets/logo.png" alt="Website Logo">
     </div>
 
-    <!-- Topic Modeling -->
-    <div id="content-wrapper">
-        <div class="topic-modeling-container">
-            <h1>Topic Modeling</h1>
-            <div class="circle-wrapper">
-                <div class="circle-container">
-                    <div class="outer-circle">
-                        <div class="inner-circle"></div>
-                    </div>
-                </div>
-                <!-- Bubble Chart -->
-                <!--<div id="bubble-container"></div>-->
-            </div>
-        </div>
+    <!-- Navigation bar -->
+    <nav class="nav">
+        <a href="/index.html">Home</a>
+        <a href="/topics.html">Topics</a>
+        <a href="/map.html">Map</a>
+        <a href="/fakeNews.html">Fake News Detection</a>
+        <a href="/search.html">Data</a>
+    </nav>
 
-
-        <!-- Statistics Section -->
-        <div class="statistics-container">
-            <div class="stat-item">
-                <img alt="Trend Icon" src="../assets/statistics.png">
-                <p>TREND GOODS</p>
-                <h2>204</h2>
-            </div>
-            <div class="stat-item">
-                <img alt="Detail Icon" src="../assets/search-file.png">
-                <p>DETAIL</p>
-                <h2>TOPIC</h2>
-            </div>
-            <div class="stat-item">
-                <img alt="View Icon" src="../assets/visible.png">
-                <p>VIEWS</p>
-                <h2>5.8k</h2>
-            </div>
+    <!-- Setting -->
+    <div class="setting-container">
+        <div class="logo">
+            <img src="/assets/Setting.png" alt="Setting">
         </div>
+        <button>Setting</button>
     </div>
+</header>
+    <!-- Topic Modeling Content -->
+<div class="topic-container">
+    <div class="topic-header">
+        <h1>Topic Modelling</h1>
+        <div class="button-group">
+            <button id="filterBtn" class="filter-button">
+                <i class="fas fa-sliders-h"></i> Filters
+            </button>
+            <div class="table-chart-buttons">
+                <button id="tableViewBtn" class="toggle-button">
+                    <i class="fas fa-table"></i> Table
+                </button>
+                <button id="chartViewBtn" class="toggle-button active">
+                    <i class="fas fa-chart-bar"></i> Chart
+                </button>
+            </div>
 
-    <!-- Topic Sidebar -->
-    <div class="topic-sidebar">
-        <div class="topic-header">
-            <span>Topic</span>
-            <span class="toggle-btn">&gt;</span>
-        </div>
-        <div class="topic-content">
-            <div>Australia - Climate</div>
-            <div>Australia - Wildlife</div>
-            <div>Australia - Politics</div>
-            <div>Australia - Economy</div>
-            <div>Australia - Culture</div>
-            <div>Australia - Sports</div>
-            <div>Australia - Technology</div>
-        </div>
     </div>
 </div>
 
-<script src="../js/topics.js"></script>
-<script src="../js/main.js"></script>
+
+            <div id="chartView" class="topic-content">
+                <h2>Top Engaged Topics, <span id="chartDate">1 Feb 2020</span></h2>
+                <p>The most discussed topics ranked by interaction, with dominant sentiment indicated by color bars.</p>
+                <canvas id="topicChart" width="350" height="130"></canvas>
+            </div>
+
+
+            <div id="tableView" class="topic-content" style="display: none;">
+    <h2>Detailed Topic Engagement, <span id="tableDate">1 Feb 2020</span></h2>
+    <p>A detailed table showing topic interactions, sentiment distribution, and geographic location.</p>
+    <table class="topic-table">
+        <thead>
+            <tr>
+                <th>Topic</th>
+                <th>Reply</th>
+                <th>Share</th>
+                <th>Like</th>
+                <th>Quote Count</th>
+                <th>Positive (%)</th>
+                <th>Neutral (%)</th>
+                <th>Negative (%)</th>
+                <th>Fake news tweets</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+
+            <div id="filterView" class="filter-section">
+                <button class="close-btn" id="closeFilter">Close</button>
+                <h2>Filter Options</h2>
+                <label for="sentiment">Sentiment Category</label>
+                <div>
+                    <input type="checkbox" id="positive" name="sentiment" value="positive" checked>
+                    <label for="positive">Positive</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="neutral" name="sentiment" value="neutral" checked>
+                    <label for="neutral">Neutral</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="negative" name="sentiment" value="negative" checked>
+                    <label for="negative">Negative</label>
+                </div>
+
+
+                <label for="date">Date Range</label>
+                <div>
+                    <input type="checkbox" id="useDateRange">
+                    <label for="useDateRange">Apply Date Range</label>
+                </div>
+                <input type="date" id="startDate" name="startDate" value="2020-01-01">
+                <input type="date" id="endDate" name="endDate" value="2020-01-30">
+
+
+                <button id="applyFilterBtn">Apply</button>
+            </div>
+
+
+            <div class="timeline-container">
+
+                <button id="playPauseBtn">
+                    <i id="playIcon" class="fas fa-play"></i>
+                </button>
+
+                <span id="startDateLabel">1 Nov 2019</span>
+                <input type="range" id="timeline" min="0" max="119" value="60">
+                <span id="currentDateLabel">1 Feb 2020</span>
+                <span id="endDateLabel">31 Jan 2020</span>
+            </div>
+
+<script src="/js/topics.js"></script>
+<script src="/js/main.js"></script>
+
+
+
 </body>
 
 </html>
