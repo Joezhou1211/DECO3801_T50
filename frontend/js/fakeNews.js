@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
             };
 
             // 发送请求到后端API
-            fetch('http://127.0.0.1:5000/check-news', {
+            fetch('http://127.0.0.1:5001/api/check-news', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -35,27 +35,20 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .then(response => response.json())
             .then(data => {
-                // 处理后端返回的数据
+                // 检查后端返回的结果
                 if (data.error) {
                     resultBox.innerHTML = `<p>Error: ${data.error}</p>`;
-                } else if (data.message) {
-                    resultBox.innerHTML = `<p>${data.message}</p>`;
-                } else {
+                } else if (data.evaluation) {
                     // 展示分析结果
                     resultBox.innerHTML = `<h3>Detection Results:</h3>`;
-                    data.forEach(item => {
-                        resultBox.innerHTML += `
-                            <div class="result-item">
-                                <h4>${item.title}</h4>
-                                <p>Source: ${item.source}</p>
-                                <p>Similarity Score: ${item.similarity_score}</p>
-                                <p>Source Trustworthiness: ${item.source_trustworthiness}</p>
-                                <p>Credibility Score: ${item.credibility_score}</p>
-                                <a href="${item.url}" target="_blank">Read more</a>
-                            </div>
-                            <hr>
-                        `;
-                    });
+                    resultBox.innerHTML += `
+                        <div class="result-item">
+                            <h4>Probability of Fake News: ${data.evaluation.probability}%</h4>
+                            <p>Reason: ${data.evaluation.reason}</p>
+                        </div>
+                    `;
+                } else {
+                    resultBox.innerHTML = `<p>Unexpected response format received.</p>`;
                 }
             })
             .catch(error => {
