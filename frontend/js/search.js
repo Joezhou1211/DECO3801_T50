@@ -29,7 +29,7 @@
             loadingSpinner.style.display = 'inline-block';
             resultsDiv.innerHTML = '';
 
-            fetch(`http://localhost:5001/api/search?query=${encodeURIComponent(query)}`)
+            fetch(`http://localhost:5001/search?query=${encodeURIComponent(query)}`)
                 .then(response => response.json())
                 .then(data => {
                     loadingSpinner.style.display = 'none';
