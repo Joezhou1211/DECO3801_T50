@@ -1,0 +1,146 @@
+
+
+/* Main Container */
+.main-container {
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    flex-grow: 1; /* 主容器占据多余空间 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden; /* 确保内容不会超出容器 */
+    padding: 20px;
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+/* Textarea for user input */
+textarea {
+    width: 100%;
+    height: 200px; /* 设置适当的高度 */
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    resize: none;
+}
+
+/* Button styling */
+.detect-btn {
+    background-color: #004d40;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.detect-btn:hover {
+    background-color: #004d40;
+}
+
+/* Result Container */
+.result-container {
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    padding: 20px;
+    font-weight: normal;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch; /* 确保两边容器高度一致 */
+    width: 100vw; /* 使用视窗宽度 */
+    margin-top: 100px;
+    padding: 20px;
+    gap: 20px; /* 容器间的间距 */
+    box-sizing: border-box; /* 确保padding不会影响总宽度 */
+}
+
+/* Main Container and Result Container styling */
+.main-container, .result-container {
+    width: 45%; /* 维持宽度占比 */
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 300px; /* 固定高度 */
+    min-height: 600px; /* 确保最小高度为600px，适应tweet模式的内容 */
+}
+
+/* Ensure both containers take the same minimum height */
+.main-container, .result-container {
+    min-height: 450px; /* 你可以调整这个高度以确保一致 */
+}
+
+/* Ensure textarea fills available space */
+textarea {
+    width: 100%;
+    flex-grow: 1; /* 使textarea占满容器可用空间 */
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    resize: none;
+    box-sizing: border-box; /* 保证padding不影响输入框尺寸 */
+}
+
+/* Filter Container */
+.filter-container {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+#filter-select {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+#upload-container {
+    margin-top: 20px;
+    text-align: left;
+}
+
+#text-input {
+    width: 100%; /* 输入框宽度90% */
+    max-width: none; /* 限制最大宽度 */
+    height: 150px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    resize: none;
+}
+
+.result-box {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    height: 500px; /* 设置固定高度 */
+    overflow-y: auto; /* 当内容超出时显示垂直滚动条 */
+    box-sizing: border-box;
+    white-space: pre-wrap; /* 保持换行 */
+    text-align: justify; /* 设置文本两端对齐 */
+    font-weight: normal; /* 确保文本不加粗 */
+}
+
+.result-box * {
+    font-weight: normal !important; /* 强制去掉所有嵌套元素的加粗 */
+}

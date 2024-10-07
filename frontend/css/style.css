@@ -3,9 +3,6 @@
     --secondary-color: #f5f5f5;
     --font-family: 'Nunito', sans-serif;
     --header-height: 50px;
-    --sidebar-width: 60px;
-    --icon-color: #ddd;
-    --icon-hover-color: #fff;
     --button-radius: 5px;
     --nav-link-color: #333;
     --nav-link-font-size: 16px;
@@ -16,13 +13,9 @@
 /* Global Styles */
 body, html {
     margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
     font-family: var(--font-family);
     background-color: var(--secondary-color);
-    display: flex;
-    flex-direction: column;
+    font-size: var(--nav-link-font-size);
 }
 
 /* Header Styles */
@@ -41,83 +34,71 @@ body, html {
     box-sizing: border-box;
 }
 
+/* Logo Styles */
+.header .logo img {
+    height: 40px;
+}
 
-
-/* Left Sidebar Style */
-.sidebar, .left-sidebar {
-    position: fixed;
-    top: var(--header-height);
-    left: 0;
-    width: var(--sidebar-width);
-    height: calc(100vh - var(--header-height));
-    background-color: #333;
+/* Navigation bar styles */
+.nav {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 20px;
-    z-index: 3;
-}
-
-.icon {
-    color: var(--icon-color);
-    font-size: 1.5rem;
-    cursor: pointer;
-    margin: 20px 0;
-    transition: color 0.3s;
-}
-
-.icon:hover {
-    color: var(--icon-hover-color);
-}
-
-
-
-
-
-
-/* Navigation and Search Container style */
-.nav-container, .search-container {
-    display: flex;
-    align-items: center;
-}
-
-.nav-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+    gap: 20px;
 }
 
 .nav a {
-    margin: 0 15px;
-    color: var(--nav-link-color);
     text-decoration: none;
-    font-weight: bold;
+    color: var(--nav-link-color);
     font-size: var(--nav-link-font-size);
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: var(--button-radius);
+    transition: background-color 0.3s, color 0.3s;
 }
 
-#searchQuery, button {
+.nav a:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Settings container */
+.setting-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.setting-container .logo img {
+    height: 30px;
+}
+
+.setting-container button {
     padding: 8px 15px;
     border-radius: var(--button-radius);
     font-size: 14px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-#searchQuery {
-    border: 1px solid #ccc;
+.setting-container button:hover {
+    background-color: var(--button-hover-color);
 }
 
+/* Button Styles */
 button {
+    padding: 8px 15px;
+    border-radius: var(--button-radius);
+    font-size: 14px;
     background-color: var(--primary-color);
     color: white;
     border: none;
     cursor: pointer;
     margin-left: 10px;
+    transition: background-color 0.3s;
 }
 
 button:hover {
     background-color: var(--button-hover-color);
-}
-
-.user-icon img {
-    height: 30px;
 }

@@ -1,43 +1,40 @@
-/* Search page styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
+
+
+/* Main Content Margin */
+.main-content {
+    margin-top: calc(var(--header-height) + 50px); /* Top margin to avoid overlapping with header */
+    padding: 20px;
 }
 
-/* Input and Button Styles */
-input[type="text"] {
-    width: 300px;
-    padding: 10px;
-    font-size: 16px;
+/* Search Section */
+.search-section h1 {
+    font-size: 2em;
+    color: var(--primary-color);
+    margin-bottom: 20px;
 }
 
-
-
-/* Search Results Styles */
+/* Results container for search output */
 .results {
     margin-top: 20px;
 }
 
+/* Individual result item */
 .result-item {
     border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: white;
+    border-radius: var(--button-radius);
+    box-shadow: var(--box-shadow);
 }
 
-
-/* Animation for the loading spinner */
+/* Loading spinner for search */
 .loading-spinner {
-    display: none;
+    display: none; /* Hide spinner by default */
     width: 24px;
     height: 24px;
     border: 4px solid rgba(0, 0, 0, 0.1);
-    border-left-color: #000;
+    border-left-color: var(--primary-color);
     border-radius: 50%;
     animation: spin 1s linear infinite;
-}
-
-@keyframes spin {  /* NOTE: Use a GIF instead of this spinner later */
-    to {
-        transform: rotate(360deg);
-    }
 }

@@ -1,3 +1,107 @@
+
+
+.welcome-section {
+    padding-top: 70px;
+    padding-bottom: 20px;  
+    background-color: #e0e0e0;
+    text-align: center;
+}
+.data-boxes {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+.data-box {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    width: 22%;
+    text-align: center;
+}
+.correlative-section {
+    padding: 20px;
+    text-align: center;
+}
+.correlative-cards {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.card {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    width: 22%;
+}
+.card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.footer {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+.footer a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.carousel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.carousel-images {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+}
+
+.carousel-item {
+    min-width: 33.33%; /* Display three images at a time */
+    text-align: center;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel img {
+    width: 80%;
+    border-radius: 10px;
+}
+
+.carousel p {
+    margin-top: 10px;
+    font-size: 1em;
+}
+
+.carousel-arrow {
+    cursor: pointer;
+    font-size: 24px;
+    user-select: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.left-arrow {
+    left: 0;
+}
+
+.right-arrow {
+    right: 0;
+}
+
+
 .content-container {
     display: flex;
     flex-direction: column;
@@ -5,46 +109,41 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 40%;
-    margin-left: 400px;
-}
+    width: 60%;
+    margin: 0 auto;
 
+}
 
 .title {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    padding-top: 50px;
-    padding-left: 20px;
-    font-size: 40px;
+    padding-top: 20px;
+    font-size: 30px;
     font-weight: bold;
-    text-align: left;
     color: #333;
+    margin-left: 160px;
 }
 
-.title2 {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding-top: 20px;
-    font-size: 25px;
-    font-weight: bold;
-    text-align: left;
-    color: #333;
-}
 
 .text-description {
-    font-size: 16px;
+    font-size: 20px;
     line-height: 1.6;
     color: #333;
     text-align: left;
+    margin: 0 auto;
+    max-width: 4000px;
+    padding: 10px;
+    width: 70%;
 }
 
 .image-container{
+
     padding-top: 20px;
     padding-bottom: 20px;
+    align-items: center;
+    margin-left: 160px;
 
 }
 
@@ -52,55 +151,7 @@
     color: white;
 }
 
-/* Style for the link list */
-.link-list {
-    list-style-type: disc;        /* Bullet points */
-    padding-left: 20px;           /* Adds space between bullet and text */
-}
-
-.link-list li {
-    margin-bottom: 10px;          /* Spacing between each list item */
-}
-
-.link-list a {
-    text-decoration: none;        /* Remove underline from links */
-    color: #005c99;               /* Link color (similar to the screenshot) */
-    font-size: 16px;              /* Adjust font size */
-}
-
-.link-list a:hover {
-    text-decoration: underline;   /* Underline on hover */
-}
-
-body {
-    background-image: url('../assets/home_background.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    min-height: 100vh;
-}
-
-
-.footer-container {
-    background-color: #333;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-}
-
-.footer-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.footer-text {
-    font-size: 14px;
-    line-height: 1.5;
+.data-box a {
+    color: inherit; /* Inherit the color from the parent element */
+    text-decoration: none; /* Remove underline */
 }

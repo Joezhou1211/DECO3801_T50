@@ -1,263 +1,337 @@
-.container {
-    display: flex;
-    height: 100vh;
+
+
+.user-icon img {
+    height: 30px;
 }
 
-.node {
-    position: absolute;
-    width: 60px;
-    height: 60px;
+/* Topic container styling */
+.topic-container {
+    padding: 20px;
     background-color: #fff;
-    border: 2px solid #ccc;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    color: #6c63ff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.node:hover {
-    transform: scale(1.1);
-}
-
-.line {
-    position: absolute;
-    background-color: #000;
-    height: 2px;
-    transform-origin: 0 0;
-    z-index: 2000;
-}
-
-
-
-.sidebar-header {
-    text-align: left;
-    padding-bottom: 10px;
-}
-
-.sidebar-header i {
-    font-size: 1.5rem;
-    color: #555;
-    cursor: pointer;
-}
-
-.sidebar-content {
-    flex-grow: 0.8;
-    background-color: #d8d8d8;
     border-radius: 10px;
-    margin-bottom: 10px;
-    padding: 10px;
-}
-
-.sidebar-stats {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-    height: 200px;
-}
-
-#content-wrapper {
-    transition: transform 0.3s ease, scale 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-}
-
-#content-wrapper.shifted {
-    transform: translateX(100px) scale(0.85);
-}
-
-/* Topic Modeling Section */
-.topic-modeling-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    text-align: center;
-}
-
-h1 {
-    font-size: 3.4em;
-    margin-top: 100px;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
-}
-
-.circle-container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    z-index: 1;
-}
-
-.outer-circle {
-    width: 730px;
-    height: 700px;
-    border: 13px solid #f3f3f3;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-}
-
-.inner-circle {
-    width: 660px;
-    height: 630px;
-    background-color: #ffffff;
-    border-radius: 50%;
-    z-index: 1;
-}
-
-/* Statistics Section */
-.statistics-container {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 20px 0;
-    background-color: transparent;
-    z-index: 3;
-}
-
-.stat-item {
-    text-align: center;
-}
-
-.stat-item img {
-    display: block;
-    margin: 0 auto;
-    width: 40px;
-    height: 40px;
-}
-
-.stat-item p {
-    margin: 5px 0 0 0;
-    font-size: 0.9em;
-    color: #333;
-    font-weight: bold;
-}
-
-.stat-item h2 {
-    margin: 0;
-    font-size: 1.5em;
-    color: #333;
-}
-
-/* Topic Sidebar Styles */
-.topic-sidebar {
-    position: fixed;
-    top: var(--header-height);
-    left: var(--sidebar-width);
-    width: 300px;
-    height: 100vh;
-    background-color: #fff;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-    transform: translateX(-80%);
-    z-index: 2;
-}
-
-.topic-sidebar.open {
-    transform: translateX(0);
+    box-shadow: var(--box-shadow);
+    margin: 80px 30px 30px 30px;
 }
 
 .topic-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    background-color: #f0f0f0;
-    border-bottom: 1px solid #ddd;
-    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.topic-header h1 {
+    color: #333;
+    margin: 0;
+}
+
+/* Buttons group */
+.button-group {
+    display: flex;
+    align-items: center;
+}
+
+/* Filters button */
+.filter-button {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    background-color: white;
+    border: 2px solid #a3a2a2;
+    border-radius: 30px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.filter-button i {
+    margin-right: 8px;
+}
+
+.filter-button:hover {
+    background-color: #8e8e8e;
+    border-color: #888;
+}
+
+/* Table and chart buttons group */
+.table-chart-buttons {
+    display: flex;
+    border: 2px solid #ccc;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.toggle-button {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    font-size: 14px;
+    color: #333;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.toggle-button i {
+    margin-right: 8px;
+}
+
+.toggle-button:hover {
+    background-color: #f5f5f5;
+}
+
+.toggle-button.active {
+    background-color: #eaeaea;
+    color: black;
     font-weight: bold;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
-.toggle-btn {
-    cursor: pointer;
-    font-size: 1.5em;
-}
-
+/* Topic content styling */
 .topic-content {
-    padding: 10px;
-    overflow-y: auto;
-    height: calc(100vh - 60px);
+    margin-top: 20px;
 }
 
-.topic-content div {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+/* Original button hover for other styles (if needed) */
+.topic-header button {
+    padding: 10px 20px;
+    background-color: #ffffff;
+    color: #090909;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
 }
 
-.topic-content div:hover {
-    background-color: #f0f0f0;
+.topic-header button:hover {
+    background-color: #e9f1f7;
 }
 
-/* Bubble Styles */
-#bubble-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+/* Chart styling */
+.chart {
+    background-color: #e9ecef;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+/* Topic table styling */
+.topic-table {
     width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.topic-table thead {
+    background-color: #007bff;
+    color: white;
+}
+
+.topic-table th, .topic-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.topic-table th {
+    font-weight: 700;
+}
+
+.topic-table tbody tr:hover {
+    background-color: #f4f4f4;
+}
+
+/* Filter section styling */
+.filter-section {
+    position: fixed;
+    top: var(--header-height);
+    right: 0;
+    width: 300px;
     height: 100%;
-    pointer-events: none;
-}
-
-.bubble {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: all;
-    cursor: pointer;
-    transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
-}
-
-.bubble.small {
-    width: 50px;
-    height: 50px;
-}
-
-.bubble.medium {
-    width: 80px;
-    height: 80px;
-}
-
-.bubble.large {
-    width: 120px;
-    height: 120px;
-}
-
-.bubble.red {
-    background-color: red;
-}
-
-.bubble.blue {
-    background-color: blue;
-}
-
-.bubble.green {
-    background-color: green;
-}
-
-.bubble.center {
-    transform: translate(-50%, -50%);
+    background-color: white;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
     z-index: 1000;
-    width: 150px;
-    height: 150px;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
 }
+
+.filter-section.open {
+    transform: translateX(0);
+}
+
+.filter-section label {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.filter-section input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.filter-section input[type="date"] {
+    margin-bottom: 15px;
+}
+
+.close-btn {
+    align-self: flex-end;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Timeline container styling */
+.timeline-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 0 20px;
+}
+
+#startDateLabel, #endDateLabel {
+    background-color: #b0c4de;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+#currentDateLabel {
+    position: absolute;
+    top: -45px;
+    background-color: #b0c4de;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    white-space: nowrap;
+    transform: translateX(120%);
+    display: none;
+}
+
+/* Range input styling */
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    background: #ddd;
+    border-radius: 5px;
+    outline: none;
+    margin: 0 15px;
+    position: relative;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #2d2d2d;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: -6px;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #2d2d2d;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: -6px;
+}
+
+input[type="range"]::-ms-thumb {
+    width: 20px;
+    height: 20px;
+    background: #2d2d2d;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: -6px;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    height: 8px;
+    background: #ddd;
+    border-radius: 5px;
+}
+
+/* Play and apply buttons */
+#playPauseBtn {
+    cursor: pointer;
+    font-size: 13px;
+    margin-right: 10px;
+}
+
+#playPauseBtn:focus {
+    outline: none;
+}
+
+#applyFilterBtn {
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#applyFilterBtn:hover {
+    background-color: var(--button-hover-color);
+}
+
+
+/* 加载指示器的样式 */
+/*.loading-overlay {*/
+/*    position: fixed;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    background-color: rgba(255, 255, 255, 0.8); !* 半透明背景 *!*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    z-index: 9999; !* 确保覆盖其他内容 *!*/
+/*}*/
+
+/*.spinner {*/
+/*    border: 8px solid #f3f3f3; !* 浅灰色 *!*/
+/*    border-top: 8px solid #3498db; !* 蓝色 *!*/
+/*    border-radius: 50%;*/
+/*    width: 60px;*/
+/*    height: 60px;*/
+/*    animation: spin 1s linear infinite;*/
+/*    margin-bottom: 10px;*/
+/*}*/
+
+/*@keyframes spin {*/
+/*    0% { transform: rotate(0deg); }*/
+/*    100% { transform: rotate(360deg); }*/
+/*}*/
+
+/*.loading-overlay p {*/
+/*    font-size: 16px;*/
+/*    color: #555;*/
+/*}*/
