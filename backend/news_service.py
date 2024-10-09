@@ -1,5 +1,5 @@
 import google.generativeai as genai
-from backend.services.model_service import evaluate_news
+from model_service import evaluate_news
 from eventregistry import *
 import requests
 
