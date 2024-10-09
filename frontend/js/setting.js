@@ -1,25 +1,42 @@
-// Handle password change
-document.getElementById('changePasswordForm').addEventListener('submit', function (event) {
+// Function to load current user details from localStorage
+function loadUserData() {
+    const storedUser = JSON.parse(localStorage.getItem('registeredUser'));
+    if (storedUser) {
+        document.getElementById('name').value = storedUser.username;
+    } else {
+        alert('No user is currently logged in.');
+        window.location.href = 'logIn.html'; // Redirect to login if no user is found
+    }
+}
+
+// Call the loadUserData function when the page loads
+window.onload = loadUserData;
+
+// Handle Save button click (updating user details)
+document.querySelector('form').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    const newPassword = document.getElementById('newPassword').value;
-    const confirmPassword = document.getElementById('confirmPassword').value;
+    const newUsername = document.getElementById('name').value;
+    const newPassword = document.getElementById('new-password').value;
+    const confirmPassword = document.getElementById('confirm-password').value;
 
     if (newPassword === confirmPassword) {
         // Retrieve stored user data
         const storedUser = JSON.parse(localStorage.getItem('registeredUser'));
 
         if (storedUser) {
-            // Update password
+            // Update the username and password in localStorage
+            storedUser.username = newUsername;
             storedUser.password = newPassword;
+
+            // Store updated data back into localStorage
             localStorage.setItem('registeredUser', JSON.stringify(storedUser));
 
-            // Show success message
-            document.getElementById('successMessage').style.display = 'block';
+            alert('Details updated successfully!');
 
-            // Clear the form fields
-            document.getElementById('newPassword').value = '';
-            document.getElementById('confirmPassword').value = '';
+            // Optionally clear the form fields after saving
+            document.getElementById('new-password').value = '';
+            document.getElementById('confirm-password').value = '';
         } else {
             alert('No user is currently logged in.');
         }
@@ -27,9 +44,3 @@ document.getElementById('changePasswordForm').addEventListener('submit', functio
         alert('Passwords do not match.');
     }
 });
-
-// Handle logout
-function logout() {
-    // Redirect to login page
-    window.location.href = 'login.html'; // Update the path if necessary
-}

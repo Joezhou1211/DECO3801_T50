@@ -1,15 +1,3 @@
-// Retrieve query parameter from URL
-function SearchWithQuery(query) {
-    if (query) {
-        window.location.href = `search.html?query=${encodeURIComponent(query)}`;
-    }
-    else {
-        alert('Please enter a search query.');
-    }
-}
-
-
-// Show/hide the drop-down menu when the user clicks the avatar
 document.getElementById('userAvatar').addEventListener('click', function() {
     const dropdownMenu = document.getElementById('dropdownMenu');
     if (dropdownMenu.style.display === 'block') {
@@ -19,10 +7,24 @@ document.getElementById('userAvatar').addEventListener('click', function() {
     }
 });
 
+function checkIfLoggedIn() {
+    const storedUser = JSON.parse(localStorage.getItem('registeredUser'));
+
+    if (!storedUser && window.location.href !== 'login.html') {
+        window.location.href = 'logIn.html';
+    }
+}
+window.onload = checkIfLoggedIn;
+
+
 //  Logout function
 document.getElementById('logout').addEventListener('click', function() {
-    // the logic when logout
-    window.location.href = 'login.html';
+    const confirmLogout = confirm("Are you sure you want to logout?");
+    if (confirmLogout) {
+
+
+        window.location.href = 'login.html';
+    }
 });
 
 // Close the drop-down menu when you click elsewhere on the page

@@ -90,20 +90,34 @@ def evaluate_news(original_query: str, news_articles: dict):
 
     # Calculate overall fake news probability
     overall_score = (
-            avg_similarity * 0.65 +
-            time_match_ratio * 0.15 +
-            location_match_ratio * 0.15 +
+            avg_similarity * 0.60 +
+            time_match_ratio * 0.20 +
+            location_match_ratio * 0.10 +
             numeric_match_ratio * 0.05
     )
     fake_news_probability = max(0, min((1 - overall_score) * 100, 100))
 
-    reason = f"The average semantic similarity is {avg_similarity:.2f}. " \
-             f"Time consistency is {'high' if time_match_ratio > 0.5 else 'low'}. " \
-             f"Location consistency is {'high' if location_match_ratio > 0.5 else 'low'}. " \
-             f"Numeric consistency is {'high' if numeric_match_ratio > 0.5 else 'low'}. " \
-             f"Based on these factors, the news is {'likely to be real' if fake_news_probability < 50 else 'likely to be fake'}."
+    # Define the label based on the score
+    def get_score_label(score):
+        if score <= 0.33:
+            return "low"
+        elif score <= 0.66:
+            return "moderate"
+        else:
+            return "high"
+
+    # Formatting the reason in a compact structure
+    reason = (
+        f"• The average semantic similarity is <strong>{avg_similarity:.2f}</strong> ({get_score_label(avg_similarity)}).<br>"
+        f"• Time consistency is <strong>{get_score_label(time_match_ratio)}</strong>, score {time_match_ratio:.2f}.<br>"
+        f"• Location consistency is <strong>{get_score_label(location_match_ratio)}</strong>, score {location_match_ratio:.2f}.<br>"
+        f"• Numeric consistency is <strong>{get_score_label(numeric_match_ratio)}</strong>, score {numeric_match_ratio:.2f}.<br>"
+        f"<br>Based on these factors, the input news has a probability of <strong>{round(fake_news_probability, 2)}%</strong> to be fake."
+    )
 
     return {
         "probability": round(fake_news_probability, 2),
         "reason": reason
     }
+
+

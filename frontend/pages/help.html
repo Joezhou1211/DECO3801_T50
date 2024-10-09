@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Interactive Diagram</title>
+
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/help.css" rel="stylesheet">
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+
+<!-- Header section -->
+<header class="header">
+    <!-- Team Logo -->
+    <div class="logo">
+        <img src="/assets/logo.png" alt="Website Logo">
+    </div>
+
+    <!-- Navigation bar -->
+    <nav class="nav">
+        <a href="/index.html">Home</a>
+        <a href="/topics.html">Topics</a>
+        <a href="/map.html">Map</a>
+        <a href="/fakeNews.html">Fake News Detector</a>
+        <a href="/search.html">Search/Download Data</a>
+    </nav>
+
+    <!-- Setting -->
+    <div class="user-icon">
+        <img id="userAvatar" src="https://via.placeholder.com/50" alt="User Icon">
+        <div class="dropdown-menu" id="dropdownMenu">
+            <a href="/setting.html" rel="stylesheet">Setting</a>
+            <a href="#" id="logout">Logout</a>
+        </div>
+    </div>
+</header>
+
+<div class="settings-container">
+    <div class="sidebar">
+        <ul>
+            <li><a href="/setting.html">My details</a></li>
+            <li><a href="/security.html">Security</a></li>
+            <li><a href="/help.html">Help and support</a></li>
+            <li><a href="/contact.html">Contact us</a></li>
+        </ul>
+    </div>
+
+    <div class="help-container">
+        <!-- Map Section -->
+        <div class="section">
+            <div class="image-container">
+                <img src="../assets/map.png" alt="Map Example">
+            </div>
+            <div class="text-container">
+                <h2>Map</h2>
+                <p>
+                    The map shows real-time data on geographical locations and hotspots for bushfires or other environmental concerns.
+                    Users can navigate through the map to see specific areas affected.
+                </p>
+                 <p>
+                    The bottom-left part of the map shows the unknown region of the data, which has the number of tweets, fake news, and
+                     fake news ratio, fake news topics.
+                </p>
+                <p>
+                    The Top-left part of the map has the Download Data button, which can download the whole dataset to user. Then user can
+                    see the whole dataset we use.
+                </p>
+            </div>
+        </div>
+
+        <!-- Topic Modeling Section -->
+        <div class="section">
+            <div class="image-container">
+                <img src="/assets/model1.png" alt="Topic Modeling Example">
+                <img src="/assets/model2.png" alt="Topic Modeling Example">
+            </div>
+            <div class="text-container">
+                <h2>Topic Modeling</h2>
+                <p>
+                    Topic Modeling allows users to analyze and extract key themes or topics from a set of data such as news articles or tweets.
+                    This helps in understanding patterns and trends in a dataset.
+                </p>
+                <p>
+                    Just as the picture shows, it can show whether the topic is positive or negative. What is more, it has the time line
+                    at the bottom. Which means it can show the data when the time change.
+                </p>
+                <p>
+                    Just as the picture shows, it can show whether the topic is positive or negative. What is more, it has the time line
+                    at the bottom. Which means it can show the data when the time change.
+                </p>
+                <p>
+                    For the table page, it can show the detailed information of the tweets, including the name of the topic, and the information
+                like: like, reply, share of the tweets, it also can change when the time change.
+            </div>
+        </div>
+
+        <!-- Fake News Section -->
+        <div class="section">
+            <div class="image-container">
+                <img src="/assets/fakenews.png" alt="Fake News Example">
+            </div>
+            <div class="text-container">
+                <h2>Fake News</h2>
+                <p>
+                    Fake News detection is essential in identifying misinformation.
+                    This tool helps users differentiate between reliable information and potential disinformation in the media.
+                </p>
+                <p>
+                    It has two section, one is to analyse the news, and one is to analyse the tweets. In news part, it is used to
+                    help detect whether the news is fake news, user can put the news in, and the result will show at right.
+                </p>
+                <p>
+                    It has two section, one is to analyse the news, and one is to analyse the tweets. In news part, it is used to
+                    help detect whether the news is fake news, user can put the news in, and the result will show at right.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+</script>
+<script src="/js/help.js"></script>
+<script src="/js/main.js"></script>
+</body>
+</html>
