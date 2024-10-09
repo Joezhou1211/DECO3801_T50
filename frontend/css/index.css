@@ -155,3 +155,37 @@
     color: inherit; /* Inherit the color from the parent element */
     text-decoration: none; /* Remove underline */
 }
+.user-icon {
+    position: relative;
+    display: inline-block;
+}
+
+#userAvatar {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: white;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 1;
+    min-width: 120px;
+}
+
+.dropdown-menu a {
+    color: black;
+    padding: 10px 20px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f1f1f1;
+}

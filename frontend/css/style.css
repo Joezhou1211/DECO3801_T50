@@ -1,4 +1,5 @@
 :root {
+    /* Root variables: Define primary colors, font settings, and common measurements for the application. */
     --primary-color: #004d40;
     --secondary-color: #f5f5f5;
     --font-family: 'Nunito', sans-serif;
@@ -10,7 +11,7 @@
     --button-hover-color: #00382e;
 }
 
-/* Global Styles */
+/* Global Style: Apply default styles for the entire document. */
 body, html {
     margin: 0;
     font-family: var(--font-family);
@@ -18,7 +19,7 @@ body, html {
     font-size: var(--nav-link-font-size);
 }
 
-/* Header Styles */
+/* Header Style: Define the appearance of the fixed header at the top of the page. */
 .header {
     display: flex;
     justify-content: space-between;
@@ -34,18 +35,19 @@ body, html {
     box-sizing: border-box;
 }
 
-/* Logo Styles */
+/* Logo Style: Customize the appearance of the logo within the header. */
 .header .logo img {
     height: 40px;
 }
 
-/* Navigation bar styles */
+/* Navigation bar style: Set the layout and styling of navigation links. */
 .nav {
     display: flex;
     gap: 20px;
 }
 
 .nav a {
+    position: relative;
     text-decoration: none;
     color: var(--nav-link-color);
     font-size: var(--nav-link-font-size);
@@ -55,12 +57,38 @@ body, html {
     transition: background-color 0.3s, color 0.3s;
 }
 
-.nav a:hover {
+.nav a::before,
+.nav a::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    width: 0;
+    height: 2px;
     background-color: var(--primary-color);
-    color: white;
+    transition: width 0.3s ease;
+    transform: translateX(-50%);
 }
 
-/* Settings container */
+.nav a::before {
+    top: 0;
+    color: var(--primary-color);
+}
+
+.nav a::after {
+    bottom: 0;
+    color: var(--primary-color);
+}
+
+.nav a:hover::before,
+.nav a:hover::after {
+    width: 100%;
+}
+
+.nav a:hover {
+    color: var(--primary-color);
+}
+
+/* Settings container: Style the area that contains user settings and icons. */
 .setting-container {
     display: flex;
     align-items: center;
@@ -86,7 +114,7 @@ body, html {
     background-color: var(--button-hover-color);
 }
 
-/* Button Styles */
+/* Button Style: General styling for all buttons across the application. */
 button {
     padding: 8px 15px;
     border-radius: var(--button-radius);
@@ -101,4 +129,49 @@ button {
 
 button:hover {
     background-color: var(--button-hover-color);
+}
+
+/* Data-box link style: Maintain link styling consistent with the rest of the page. */
+.data-box a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* User icon style: Position and layout settings for the user avatar icon. */
+.user-icon {
+    position: relative;
+    display: inline-block;
+}
+
+/* User avatar image style: Adjust the size and appearance of the user profile image. */
+#userAvatar {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+/* Dropdown menu style: Set the visibility and design of the user dropdown menu. */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 1;
+    min-width: 120px;
+}
+
+/* Dropdown menu links: Style the links within the dropdown menu for user options. */
+.dropdown-menu a {
+    color: black;
+    padding: 10px 20px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f1f1f1;
 }

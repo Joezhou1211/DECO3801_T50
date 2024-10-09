@@ -14,18 +14,17 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Analyze 按钮事件
+    // Analyze button event
     analyzeBtn.addEventListener('click', function () {
         const textInput = document.getElementById('text-input').value.trim();
-        resultBox.innerHTML = `<p>Detecting fake news...</p>`;
-
+        resultBox.innerHTML = `<p>Analysing...</p>`;
+        // check if the input is not empty
         if (textInput) {
-            // 创建请求体
             const requestData = {
                 query: textInput
             };
 
-            // 发送请求到后端API
+            // call the backend API
             fetch('http://127.0.0.1:5001/api/check-news', {
                 method: 'POST',
                 headers: {
@@ -35,17 +34,14 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .then(response => response.json())
             .then(data => {
-                // 检查后端返回的结果
+                resultBox.innerHTML = '';
+
+                // show the result
                 if (data.error) {
                     resultBox.innerHTML = `<p>Error: ${data.error}</p>`;
                 } else if (data.evaluation) {
-                    // 展示分析结果
-                    resultBox.innerHTML = `<h3>Detection Results:</h3>`;
-                    resultBox.innerHTML += `
-                        <div class="result-item">
-                            <h4>Probability of Fake News: ${data.evaluation.probability}%</h4>
-                            <p>Reason: ${data.evaluation.reason}</p>
-                        </div>
+                    resultBox.innerHTML = `
+                        <p>${data.evaluation.reason}</p>
                     `;
                 } else {
                     resultBox.innerHTML = `<p>Unexpected response format received.</p>`;
@@ -60,7 +56,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // 上传推文按钮事件
+
+    // upload button event
     uploadBtn.addEventListener('click', function () {
         const uploadFile = document.getElementById('tweet-upload').files[0];
         if (uploadFile) {

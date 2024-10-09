@@ -11,80 +11,97 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-<!-- Header section -->
-<header class="header">
-    <!-- Team Logo -->
-    <div class="logo">
-        <img src="/assets/logo.png" alt="Website Logo">
-    </div>
-
-    <!-- Navigation bar -->
-    <nav class="nav">
-        <a href="/index.html">Home</a>
-        <a href="/topics.html">Topics</a>
-        <a href="/map.html">Map</a>
-        <a href="/fakeNews.html">Fake News Detection</a>
-        <a href="/search.html">Data</a>
-    </nav>
-
-    <!-- Setting -->
-    <div class="setting-container">
+    <header class="header">
+        <!-- Team Logo -->
         <div class="logo">
-            <img src="/assets/Setting.png" alt="Setting">
+            <img src="/assets/logo.png" alt="Website Logo">
         </div>
-        <button>Setting</button>
-    </div>
-</header>
 
+        <!-- Navigation bar -->
+        <nav class="nav">
+            <a href="/index.html">Home</a>
+            <a href="/topics.html">Topics</a>
+            <a href="/map.html">Map</a>
+            <a href="/fakeNews.html">Fake News Detector</a>
+            <a href="/search.html">Search/Download Data</a>
+        </nav>
 
-<!-- Main content area -->
-<main>
-    <!-- Map and sidebars section -->
-    <div id="map-section">
-        <!-- Map rendering container -->
-        <div id="regions_div"></div>
-        <!-- Right sidebar for region details -->
-        <aside class="right-sidebar" id="regionDetailsContainer">
-            <div id="regionDetails"></div>
-            <!-- Back to World Map button -->
-            <button id="backButton" style="display:none;">Back to World Map</button>
-        </aside>
-    </div>
-
-    <!-- Timeline container -->
-    <div class="timeline-container">
-        <div class="timeline-wrapper">
-            <span id="start-day">1 Nov 2019</span>
-            <div class="slider-container">
-                <input id="timeline" max="120" min="0" type="range" value="0">
-                <div id="current-date-label" style="display:none;"></div>
+        <!-- Setting -->
+        <div class="user-icon">
+            <img id="userAvatar" src="https://via.placeholder.com/50" alt="User Icon">
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="/setting.html" rel="stylesheet">Setting</a>
+                <a href="#" id="logout">Logout</a>
             </div>
-            <span id="end-day">28 Feb 2020</span>
         </div>
-    </div>
+    </header>
 
-    <!-- Filter selector for continent selection -->
-    <aside class="continent">
-        <select id="continentSelector" onchange="zoomToContinent(this.value);">
-            <option value="000">Global View</option>
-            <option value="002">Africa</option>
-            <option value="019">Americas</option>
-            <option value="142">Asia</option>
-            <option value="150">Europe</option>
-            <option value="009">Oceania</option>
-        </select>
-    </aside>
+    <!-- Main content area -->
+    <main>
+        <!-- Map and sidebars section -->
+        <div id="map-section">
+            <!-- Map rendering container -->
+            <div id="regions_div"></div>
+            <!-- Right sidebar for region details -->
+            <aside class="right-sidebar" id="regionDetailsContainer">
+                <div id="regionDetails"></div>
+                <!-- Back to World Map button -->
+                <button id="backButton" style="display:none;">Back to World Map</button>
+            </aside>
+        </div>
 
-    <!-- Auto-play control -->
-    <div class="autoplay-container">
-        <button id="toggleAutoPlayBtn">&#x23F5;</button>
-    </div>
-</main>
+        <!-- Timeline container -->
+        <div class="timeline-container">
+            <div class="timeline-wrapper">
+                <span id="start-day">31 May 2019</span>
+                <div class="slider-container">
+                    <input id="timeline" max="120" min="0" type="range" value="0">
+                    <div id="current-date-label" style="display:none;"></div>
+                </div>
+                <span id="end-day">28 Feb 2020</span>
+                <!-- 将按钮移到外部 -->
+                <button id="playPauseBtn">
+                    <i class="fas fa-play" id="toggleAutoPlayBtn"></i>
+                </button>
+            </div>
+        </div>
 
-<!-- Scripts -->
-<script src="https://www.gstatic.com/charts/loader.js"></script>
-<script src="/js/main.js"></script>
-<script src="/js/map.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- Filter selector for continent selection -->
+        <aside class="continent">
+            <select id="continentSelector">
+                <option value="000">Global View</option>
+                <option value="002">Africa</option>
+                <option value="019">Americas</option>
+                <option value="142">Asia</option>
+                <option value="150">Europe</option>
+                <option value="009">Oceania</option>
+            </select>
+        </aside>
+
+        <!-- Popup Toggle Button（移到外部） -->
+        <button id="togglePopupBtn" class="toggle-popup-btn">
+            <i class="fas fa-chevron-left" id="popupArrowIcon"></i>
+        </button>
+                <a href="../../data/processed/fake_news_data.json" download="fake_news_data.json" class="download-button">Download Data</a>
+        <!-- Popup Container -->
+        <div id="popupContainer" class="popup-container">
+            <div class="popup-content" id="popupContent">
+                <h2>Unknown Region</h2>
+                <p><strong>Tweet Count:</strong> <span id="popupTweetCount">0</span></p>
+                <p><strong>Fake News Count:</strong> <span id="popupFakeNewsCount">0</span></p>
+                <p><strong>Fake News Ratio:</strong> <span id="popupFakeNewsRatio">0</span></p>
+                <p><strong>Fake News Topics:</strong></p>
+                <ul id="popupFakeNewsTopics">
+                    <!-- Topics will be populated here -->
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/map.js"></script>
 </body>
 </html>
