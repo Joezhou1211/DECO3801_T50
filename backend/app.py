@@ -2,8 +2,8 @@ from flask import Flask, request, jsonify, render_template, send_from_directory
 import os
 import logging
 from flask_cors import CORS
-from backend.services.elasticsearch_service import es_service
-from backend.services.news_service import analyze_event
+from elasticsearch_service import es_service
+from news_service import analyze_event
 
 # 设置 Flask 应用
 app = Flask(
