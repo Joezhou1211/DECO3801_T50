@@ -129,18 +129,38 @@ textarea {
 
 .result-box {
     width: 100%;
-    padding: 10px;
     font-size: 1rem;
     border: 1px solid #ddd;
     border-radius: 5px;
-    height: 500px; /* 设置固定高度 */
-    overflow-y: auto; /* 当内容超出时显示垂直滚动条 */
+    height: 500px;
+    overflow-y: auto;
     box-sizing: border-box;
-    white-space: pre-wrap; /* 保持换行 */
-    text-align: justify; /* 设置文本两端对齐 */
-    font-weight: normal; /* 确保文本不加粗 */
+    white-space: pre-wrap;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    text-align: justify;
+    font-weight: normal;
 }
 
-.result-box * {
-    font-weight: normal !important; /* 强制去掉所有嵌套元素的加粗 */
+.result-box p {
+    margin: 0;
+    padding: 5px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
 }
+
+.result-item {
+    margin-bottom: 10px;
+}
+
+button {
+    margin-left: 0;
+}
+
+
+
+

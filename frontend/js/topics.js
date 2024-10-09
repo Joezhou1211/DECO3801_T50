@@ -1,4 +1,38 @@
 let globalData = [];
+let filtered = [];
+let firstDate = null;
+let lastDate = null;
+
+let showTable = false;
+
+let filters = {
+    start_date: null,
+    end_date: null,
+    sentiments: {
+        positive: true,
+        neutral: true,
+        negative: true
+    }
+};
+
+function downloadCSV(str, data) {
+    for(let i = 0 ; i < data.length ; i++ ){
+        for(const key in data[i]){
+            str+=`${data[i][key] + '\t'},`;
+        }
+        str+='\n';
+    }
+    const blob = new Blob(['\ufeff' + str], {type: 'text/csv,charset=UTF-8'});
+    const csvUrl = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = csvUrl;
+    link.download =  "data.csv";
+    link.click();
+}
+
+document.getElementById("downloadBtn").addEventListener('click', () => {
+    downloadCSV("id,created_at,reply,retweet,favorate,quote,sentiment,topic\n", filtered);
+});
 
 document.addEventListener('DOMContentLoaded', function () {
     fetchData();
@@ -16,8 +50,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
 
                 if (globalData.length > 0) {
-                    dates = generateDateArrayFromData(globalData); // 初始化 dates
+                    filtered = globalData;
+                    dates = generateDateArrayFromData(globalData).sort((a, b) => a-b); // 初始化 dates
+                    timeline.max = dates.length - 1;
                     const initialDate = dates[0];
+                    firstDate = dates[0];
+                    lastDate = dates[dates.length - 1];
                     const chartData = processChartData(globalData, initialDate);
                     updateChart(chartData);
                     updateTable(globalData, initialDate);
@@ -63,15 +101,22 @@ function processChartData(data, selectedDate) {
         topicTweetCounts[key] = 0;
         topicSentiments[key] = { positive: 0, neutral: 0, negative: 0 };
     }
+    let filteredData = data.filter(item => {
+        const matchesSentiment = (filters.sentiments.positive && item.sentimentCode === 'positive') ||
+                                 (filters.sentiments.neutral && item.sentimentCode === 'neutral') ||
+                                 (filters.sentiments.negative && item.sentimentCode === 'negative');
 
-    const startDate = new Date(selectedDate);
-    const endDate = new Date(selectedDate);
-    endDate.setDate(endDate.getDate() + 1);
-
-    const filteredData = data.filter(item => {
-        const itemDate = new Date(item.created_at_dt);
-        return itemDate >= startDate && itemDate < endDate;
+        return matchesSentiment;
     });
+    if (selectedDate) {
+        const startDate = new Date(selectedDate);
+        const endDate = new Date(selectedDate);
+        endDate.setDate(endDate.getDate() + 1);
+        filteredData = filteredData.filter(item => {
+            const itemDate = new Date(item.created_at_dt);
+            return itemDate >= startDate && itemDate < endDate;
+        });
+    }
 
     filteredData.forEach(item => {
         const topicId = item.main_topic;
@@ -124,10 +169,20 @@ function getDominantSentiment(sentiment) {
 }
 
 function updateTable(data, selectedDate) {
-    const tableBody = document.querySelector('.topic-table tbody');
-    const filteredData = data.filter(item => {
-        return new Date(item.itemTimestamp).toLocaleDateString('en-GB') === selectedDate.toLocaleDateString('en-GB');
+    let filteredData = data.filter(item => {
+        const matchesSentiment = (filters.sentiments.positive && item.sentimentCode === 'positive') ||
+                                 (filters.sentiments.neutral && item.sentimentCode === 'neutral') ||
+                                 (filters.sentiments.negative && item.sentimentCode === 'negative');
+
+        return matchesSentiment;
     });
+    const topicSentiments = [];
+    const tableBody = document.querySelector('.topic-table tbody');
+    if (selectedDate) {
+        filteredData = data.filter(item => {
+            return new Date(item.itemTimestamp).toLocaleDateString('en-GB') === selectedDate.toLocaleDateString('en-GB');
+        });
+    }
 
     const topics = {
         1: "Wildlife and Environmental Impact",
@@ -141,23 +196,41 @@ function updateTable(data, selectedDate) {
         9: "Emergency Information and Public Safety",
         10: "Health and Mental Well-being"
     };
-
-    let rowsHtml = '';
+    for (let key in topics) {
+        topicSentiments[key] = { id: key, reply: 0, share: 0, like: 0, quote: 0, positive: 0, neutral: 0, negative: 0 };
+    }
     filteredData.forEach(item => {
-        const topicName = topics[item.main_topic] || `Topic ${item.main_topic}`;
-        const positivePercentage = (item.sentimentCode === 'positive') ? 100 : 0;
-        const neutralPercentage = (item.sentimentCode === 'neutral') ? 100 : 0;
-        const negativePercentage = (item.sentimentCode === 'negative') ? 100 : 0;
+        const topicId = item.main_topic;
+        const sentiment = item.sentiment;
+        topicSentiments[topicId].reply += item.reply_count;
+        topicSentiments[topicId].share += item.retweet_count;
+        topicSentiments[topicId].like += item.favourite_count;
+        topicSentiments[topicId].quote += item.quote_count;
+        if (sentiment === 'Positive') {
+            topicSentiments[topicId].positive += 1;
+        } else if (sentiment === 'Neutral') {
+            topicSentiments[topicId].neutral += 1;
+        } else if (sentiment === 'Negative') {
+            topicSentiments[topicId].negative += 1;
+        }
+    });
+    let rowsHtml = '';
+    topicSentiments.sort((a,b)=>((b.positive + b.neutral + b.negative) - (a.positive + a.neutral + a.negative))).forEach(item => {
+        const topicName = topics[item.id] || `Topic ${item.id}`;
+        const positivePercentage = (item.positive / (item.positive + item.neutral + item.negative) * 100).toFixed(2);
+        const neutralPercentage = (item.neutral / (item.positive + item.neutral + item.negative) * 100).toFixed(2);
+        const negativePercentage = (item.negative / (item.positive + item.neutral + item.negative) * 100).toFixed(2);
         rowsHtml += `
-            <tr>
+            <tr class="${isNaN(positivePercentage) ? "bg-gray" : ""}">
                 <td>${topicName}</td>
-                <td>${item.reply_count}</td>
-                <td>${item.retweet_count}</td>
-                <td>${item.favourite_count}</td>
-                <td>${item.quote_count}</td>
-                <td>${positivePercentage}%</td>
-                <td>${neutralPercentage}%</td>
-                <td>${negativePercentage}%</td>
+                <td>${item.positive + item.neutral + item.negative}</td>
+                <td>${item.reply}</td>
+                <td>${item.share}</td>
+                <td>${item.like}</td>
+                <td>${item.quote}</td>
+                <td>${isNaN(positivePercentage) ? '--' : positivePercentage}%</td>
+                <td>${isNaN(neutralPercentage) ? '--' : neutralPercentage}%</td>
+                <td>${isNaN(negativePercentage) ? '--' : negativePercentage}%</td>
                 <td>0</td>
             </tr>
         `;
@@ -171,7 +244,7 @@ function updateTable(data, selectedDate) {
 }
 
 function generateDateArrayFromData(data) {
-    const uniqueDates = [...new Set(data.map(item => new Date(item.created_at_dt).toLocaleDateString('en-GB')))];
+    const uniqueDates = [...new Set(data.map(item => new Date(item.created_at_dt).toDateString()))];
     return uniqueDates.map(dateString => new Date(dateString));
 }
 
@@ -227,8 +300,15 @@ chartViewBtn.addEventListener('click', function () {
     tableView.style.display = 'none';
     filterView.classList.remove('open');
     const selectedDate = dates[timeline.value];
+    const formattedDate = selectedDate.toLocaleDateString('en-GB', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+    });
+    chartDate.innerText = formattedDate;
     const chartData = processChartData(globalData, selectedDate);
     updateChart(chartData);
+
 });
 
 function updateChart(chartData) {
@@ -264,10 +344,12 @@ function updateChart(chartData) {
                         labels: {
                             generateLabels: function(chart) {
                                 return [
+                                    {text: 'Sentiment:   ', fillStyle: 'transparent', strokeStyle: 'transparent', borderWidth: 0},
                                     {text: 'Positive', fillStyle: '#6CCB77'},
                                     {text: 'Neutral', fillStyle: '#B0BEC5'},
                                     {text: 'Negative', fillStyle: '#E57373'}
                                 ];
+                                return [{text: 'Sentiment', fillStyle: 'transparent'}, ...originalLabels];
                             }
                         }
                     }
@@ -280,14 +362,16 @@ function updateChart(chartData) {
 tableViewBtn.addEventListener('click', function() {
     tableViewBtn.classList.add('active');
     chartViewBtn.classList.remove('active');
-
+    document.getElementById('checkboxes').classList.add("hidden");
+    showTable = true;
 });
 
 
 chartViewBtn.addEventListener('click', function() {
     chartViewBtn.classList.add('active');
     tableViewBtn.classList.remove('active');
-
+    document.getElementById('checkboxes').classList.remove("hidden");
+    showTable = false;
 });
 
 function SearchWithQuery(query) {
@@ -307,9 +391,7 @@ function generateDateArray(start, end) {
     return dateArray;
 }
 
-const dates = generateDateArray('2019-11-08', '2020-01-31');
-
-timeline.max = dates.length - 1;
+let dates = generateDateArray('2019-11-01', '2020-01-31');
 
 const initialIndex = parseInt(timeline.value);
 currentDateLabel.innerText = dates[initialIndex].toLocaleDateString('en-GB', {
@@ -334,9 +416,11 @@ function updateDatePosition() {
         day: 'numeric'
     });
     currentDateLabel.innerText = formattedDate;
-    chartDate.innerText = formattedDate;
-    const chartData = processChartData(globalData, selectedDate);
-    updateChart(chartData);
+    if (showTable) {
+        tableDate.innerText = formattedDate;
+    } else {
+        chartDate.innerText = formattedDate;
+    }
 }
 
 timeline.addEventListener('mousedown', function() {
@@ -350,9 +434,14 @@ timeline.addEventListener('mouseup', function() {
 timeline.addEventListener('input', function () {
     updateDatePosition();
     const selectedDate = dates[timeline.value];
-    const chartData = processChartData(globalData, selectedDate);
-    updateChart(chartData);
+    if (showTable) {
+        updateTable(globalData, selectedDate);
+    } else {
+        const chartData = processChartData(globalData, selectedDate);
+        updateChart(chartData);
+    }
 });
+
 
 updateDatePosition();
 currentDateLabel.style.display = 'none';
@@ -489,7 +578,7 @@ document.getElementById('applyFilterBtn').addEventListener('click', function () 
     const startDate = document.getElementById('startDate').value;
     const endDate = document.getElementById('endDate').value;
     const useDateRange = document.getElementById('useDateRange').checked;
-    const filters = {
+    filters = {
         start_date: startDate,
         end_date: endDate,
         sentiments: {
@@ -498,11 +587,42 @@ document.getElementById('applyFilterBtn').addEventListener('click', function () 
             negative
         }
     };
+    if (showTable) {
+        filters.sentiments.positive = true;
+        filters.sentiments.negative = true;
+        filters.sentiments.neutral = true;
+    }
     const filteredData = filterData(globalData, filters, useDateRange);
+    filtered = filteredData;
     const selectedDate = dates[timeline.value];
-    const chartData = processChartData(filteredData, selectedDate);
-    updateChart(chartData);
-    updateTable(filteredData, selectedDate);
+    if (useDateRange) {
+        const formattedStartDate = new Date(startDate).toLocaleDateString('en-GB', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+        });
+        const formattedEndDate = new Date(endDate).toLocaleDateString('en-GB', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+        });
+        if (showTable) {
+            tableDate.innerText = `from ${formattedStartDate} to ${formattedEndDate}`;
+            updateTable(filteredData, null);
+        }else{
+            chartDate.innerText = `from ${formattedStartDate} to ${formattedEndDate}`;
+            const chartData = processChartData(filteredData, null);
+            updateChart(chartData);
+        }
+    } else {
+        if (showTable) {
+            updateTable(filteredData, selectedDate);
+        }else{
+            const chartData = processChartData(filteredData, selectedDate);
+            updateChart(chartData);
+        }
+    }
+
     filterView.classList.remove('open');
 });
 
@@ -513,3 +633,40 @@ closeFilterBtn.addEventListener('click', function () {
 document.getElementById('filterBtn').addEventListener('click', function () {
     filterView.classList.toggle('open');
 });
+
+
+
+
+let lastVisibility = null;
+
+function checkTimelineVisibility() {
+    const timeline = document.querySelector('.timeline-container');
+    const rect = timeline.getBoundingClientRect();
+    const isVisible = rect.bottom <= window.innerHeight && rect.top >= 500;
+
+    if (isVisible !== lastVisibility) {
+        lastVisibility = isVisible;
+
+        if (!isVisible) {
+            timeline.style.position = 'fixed';
+            timeline.style.bottom = '10px';
+            timeline.style.left = '30px';
+            timeline.style.height = '18px';
+            timeline.style.width = 'calc(100% - 100px)';
+            timeline.style.backgroundColor = 'white';
+            timeline.style.borderRadius = '20px';
+            timeline.style.boxShadow = '0px 0px 3px 1px gray';
+        } else {
+            timeline.style.position = '';
+            timeline.style.bottom = '';
+            timeline.style.left = '';
+            timeline.style.width = '';
+            timeline.style.backgroundColor = '';
+            timeline.style.borderRadius = '';
+            timeline.style.boxShadow = '';
+        }
+    }
+}
+
+window.addEventListener('scroll', checkTimelineVisibility);
+window.addEventListener('resize', checkTimelineVisibility);

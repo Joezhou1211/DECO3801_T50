@@ -1,56 +1,123 @@
+
+.title {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+    margin-left: 160px;
+}
+
+
+.text-description {
+    font-size: 20px;
+    line-height: 1.6;
+    color: #333;
+    text-align: left;
+    margin: 0 auto;
+    max-width: 4000px;
+    padding: 10px;
+    width: 70%;
+}
+
 .settings-container {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    text-align: center;
-}
-
-h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    margin: 10px 0 5px;
-    font-size: 14px;
-}
-
-input {
+    display: flex;
+    margin: 50px auto;
+    max-width: 1710px;
     width: 100%;
-    padding: 8px;
+    padding-left: 200px;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #fff;
+    padding: 20px;
+    border-right: 1px solid #ccc;
+}
+
+.sidebar ul {
+    list-style-type: none;
+}
+
+.sidebar ul li {
     margin-bottom: 20px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.settings-content {
+    flex-grow: 1;
+
+    padding: 20px;
+    margin-left: 20px;
+
+}
+
+.settings-content h2 {
+    margin-bottom: 20px;
+}
+
+.settings-content form {
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-content form label {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.settings-content form input {
+    margin-bottom: 20px;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    width: 50%;
 }
 
-button {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    background-color: #4CAF50;
+.custom-button {
+    padding: 10px 10px;
+    background-color: #8bc34a;
     color: white;
+    border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    width: 10%;
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #7cb342;
 }
 
-.logout-btn {
-    background-color: #f44336;
+.help-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: 100px;
 }
 
-.logout-btn:hover {
-    background-color: #e53935;
-}
-
-.message {
-    color: green;
-    font-size: 14px;
+.image-container {
+    text-align: center;
     margin-bottom: 20px;
+    margin-right: 200px;
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.text-container {
+    text-align: left;
+    font-size: 18px;
 }

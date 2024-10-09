@@ -5,55 +5,30 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Login Page</title>
     <link href="/css/style.css" rel="stylesheet">
-    <link href="/css/logIn.css" rel="stylesheet">
+    <link href="/css/login.css" rel="stylesheet">
 </head>
 <body>
-<header class="header">
-    <!-- Team Logo -->
-    <div class="logo">
-        <img src="/assets/logo.png" alt="Website Logo">
-    </div>
+  <div class="login-container">
+        <h1>Login</h1>
+        <form id="loginForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
 
-    <!-- Navigation bar -->
-    <nav class="nav">
-        <a href="/index.html">Home</a>
-        <a href="/topics.html">Topics</a>
-        <a href="/map.html">Map</a>
-        <a href="/fakeNews.html">Fake News Detection</a>
-        <a href="/search.html">Data</a>
-    </nav>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
 
-    <!-- Setting -->
-    <div class="setting-container">
-        <div class="logo">
-            <img src="/assets/Setting.png" alt="Setting">
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+
+        <p id="error-message" style="color: red; display: none;">Incorrect username or password</p>
+
+        <div class="options">
+            <a href="/register.html">Register</a>
+            <a href="/forgetpassword.html">Forgot Password</a>
         </div>
-        <button>Setting</button>
     </div>
-</header>
 
-
-
-<div class="login-container">
-    <h1>Login</h1>
-    <form id="loginForm">
-        <label for="username">Username:</label>
-        <input id="username" name="username" required type="text">
-
-        <label for="password">Password:</label>
-        <input id="password" name="password" required type="password">
-
-        <button class="login-btn" type="submit">Login</button>
-    </form>
-
-    <p id="error-message" style="color: red; display: none;">Incorrect username or password</p>
-
-    <div class="options">
-        <a href="register.html">Register</a>
-        <a href="#">Forgot Password</a>
-    </div>
-</div>
 <script src="/js/main.js"></script>
-<script src="/js/logIn.js"></script>
+<script src="/js/login.js"></script>
 </body>
 </html>
