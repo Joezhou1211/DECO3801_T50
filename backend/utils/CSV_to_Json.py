@@ -1,7 +1,7 @@
 import pandas as pd
 
 # read the data
-file = '../../data/processed/final_data.csv'  # path to the CSV file
+file = '../../data/processed/final_data(old).csv'  # path to the CSV file
 df = pd.read_csv(file)
 
 # to JSON
