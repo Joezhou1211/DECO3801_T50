@@ -18,9 +18,6 @@ let dataTable;
 let defaultOptions;
 let viewMode = 'global';
 
-// File path to the JSON data file containing map data.
-const file_path = '../../data/processed/fake_news_data.json'
-
 /**
  * Maps continent codes to their respective continent names.
  * This mapping is used to convert standardized continent codes into more readable continent names.
@@ -89,7 +86,7 @@ const countryNames = {
     'CD': 'Congo, Democratic Republic',
     'CK': 'Cook Islands',
     'CR': 'Costa Rica',
-    'CI': "Côte d'Ivoire",
+    'CI': "C濠电偞鍨堕弻銊ヮ熆閸楋拷 d'Ivoire",
     'HR': 'Croatia',
     'CU': 'Cuba',
     'CY': 'Cyprus',
@@ -210,7 +207,7 @@ const countryNames = {
     'PT': 'Portugal',
     'PR': 'Puerto Rico',
     'QA': 'Qatar',
-    'RE': 'Réunion',
+    'RE': 'R闂備浇鍋愰崢褍鐣甸弨寤紀n',
     'RO': 'Romania',
     'RU': 'Russia',
     'RW': 'Rwanda',
@@ -404,7 +401,7 @@ google.charts.setOnLoadCallback(initializeChart);
  * Draws the map and sets up the interaction and sidebar for global view.
  */
 function initializeChart() {
-    $.getJSON(file_path, function (jsonData) {
+    $.getJSON('../../data/processed/fake_news_data.json', function (jsonData) {
         globalData = jsonData;
         initializeTimeline();
 
@@ -491,53 +488,20 @@ function updateMap(dateData) {
             const countryCode = location.region_code.substring(0, 2);  // Extract country code from region code
             return countryToContinent[countryCode] === currentRegion;
         });
-        console.log(`Filtered to continent: ${currentRegion}, Locations count: ${filteredLocations.length}`);
     } else if (isCountryCode(currentRegion)) {
-        // Handle country-specific data aggregation (e.g., Australia)
-        let countryLocations = dateData.locations.filter(location => location.region_code.startsWith(currentRegion + '-'));
-        let generalCountryLocation = dateData.locations.find(location => location.region_code === currentRegion);
-
-        let totalTweetCount = 0;
-        let totalFakeNewsCount = 0;
-        let allFakeNewsTopics = [];
-
-        // Sum up the tweet counts from all subregions (states) within the country
-        countryLocations.forEach(location => {
-            totalTweetCount += location.tweet_count;
-            totalFakeNewsCount += location.fake_news_count;
-            allFakeNewsTopics = allFakeNewsTopics.concat(location.fake_news_topics);
-        });
-
-        // Add the tweet count of the general country data (if present)
-        if (generalCountryLocation) {
-            totalTweetCount += generalCountryLocation.tweet_count;
-            totalFakeNewsCount += generalCountryLocation.fake_news_count;
-            allFakeNewsTopics = allFakeNewsTopics.concat(generalCountryLocation.fake_news_topics);
-        }
-
-        // Update tooltip for the country to include the aggregated data
-        let tooltip = `<div class="tooltip-content" style="padding:5px;"><strong>${generalCountryLocation ? generalCountryLocation.region_name : currentRegion}</strong><br/>Tweet Count: ${totalTweetCount}</div>`;
-
-        // Clear existing rows in the DataTable
-        dataTable.removeRows(0, dataTable.getNumberOfRows());
-
-        // Add the aggregated country data row to the map
-        if (generalCountryLocation) {
-            dataTable.addRow([generalCountryLocation.region_code, totalTweetCount, tooltip]);
-        }
-
-        console.log(`Country: ${currentRegion}, Total Tweet Count: ${totalTweetCount}`);
+        // Filter locations by country
+        filteredLocations = dateData.locations.filter(location => location.region_code.startsWith(currentRegion + '-'));
     } else {
-        // Global view, display all locations
-        console.log("Global view: displaying all locations.");
+        // Global view: Aggregate data by country for a uniform display
+        filteredLocations = aggregateDataByCountry(dateData.locations);
     }
 
-    // Update the DataTable with the filtered data
+    // Clear existing rows
+    dataTable.removeRows(0, dataTable.getNumberOfRows());
+
+    // Add new rows with tooltip
     const dataRows = filteredLocations.map(location => {
-        let tooltip = `<div style="padding:5px;"><strong>${location.region_name}</strong><br/>Tweet Count: ${location.tweet_count}</div>`;
-        if (selectedSubRegion && location.region_code === selectedSubRegion) {
-            tooltip = `<div style="padding:5px; background-color:#ffe1c1;"><strong>${location.region_name}</strong><br/>Tweet Count: ${location.tweet_count}</div>`;
-        }
+        let tooltip = generateTooltipContent(location, viewMode);
         return [location.region_code, location.tweet_count, tooltip];
     });
     dataTable.addRows(dataRows);
@@ -564,6 +528,51 @@ function updateMap(dateData) {
 
     // Redraw the Map
     chart.draw(dataTable, defaultOptions);
+}
+
+/**
+ * Aggregates tweet data by country for the global view to ensure consistency.
+ *
+ * @param {Array} locations - The array of location data for the selected date.
+ * @returns {Array} The aggregated data by country.
+ */
+function aggregateDataByCountry(locations) {
+    const countryData = {};
+
+    locations.forEach(location => {
+        const countryCode = location.region_code.split('-')[0];
+        if (!countryData[countryCode]) {
+            countryData[countryCode] = {
+                region_code: countryCode,
+                region_name: countryNames[countryCode] || 'Unknown',
+                tweet_count: 0
+            };
+        }
+        countryData[countryCode].tweet_count += location.tweet_count; // 绱姞 tweet 鏁版嵁
+    });
+
+    return Object.values(countryData);
+}
+
+/**
+ * Generates the HTML content for the tooltip to display detailed region information.
+ *
+ * @param {Object} location - The location data containing region details.
+ * @param {String} viewMode - The current view mode to determine the tooltip format.
+ * @returns {String} The HTML content for the tooltip.
+ */
+/**
+ * Generates the HTML content for the tooltip to display detailed region information.
+ *
+ * @param {Object} location - The location data containing region details.
+ * @returns {String} The HTML content for the tooltip.
+ */
+function generateTooltipContent(location) {
+    // Display only tweet count data regardless of view mode
+    return `<div style="padding:5px;">
+                <strong>${location.region_name}</strong><br/>
+                Tweet Count: ${location.tweet_count}
+            </div>`;
 }
 
 /**
@@ -595,6 +604,8 @@ function zoomRegion(region) {
     const dateData = globalData.data[dayIndex];
     const backButton = document.getElementById('backButton');
 
+    console.log(`Region clicked: ${region}`);
+
     if (isCountryCode(region)) {
         currentRegion = region;
         selectedSubRegion = null;
@@ -605,18 +616,15 @@ function zoomRegion(region) {
         updateMap(dateData);
         updateContinentFilterForCountry(region);
         updateSidebar(dateData);
-        updatePopupForCountry(region, dateData);
     } else if (isSubRegionCode(region)) {
-        // Sub-region click handling
         selectedSubRegion = region;
         viewMode = 'subregion';
         backButton.style.display = 'block';
-        backButton.innerText = 'Back to Country View';
+        backButton.innerText = `Back to World Map`;
 
         updateMap(dateData);
         setupSidebarForSubRegionView(selectedSubRegion, dateData);
     } else if (isContinentCode(region)) {
-        // Continent click handling
         currentRegion = region;
         selectedSubRegion = null;
         viewMode = 'continent';
@@ -627,29 +635,14 @@ function zoomRegion(region) {
         updateContinentFilterForContinent(region);
         updateSidebar(dateData);
     } else {
-        // Global view handling
         currentRegion = null;
         selectedSubRegion = null;
         viewMode = 'global';
         backButton.style.display = 'none';
-
         updateMap(dateData);
-        setupSidebarForGlobalView(dateData);
+        updateSidebar(dateData);
     }
 }
-
-function updatePopupForCountry(countryCode, dateData) {
-    let totalTweets = 0;
-    dateData.locations.forEach(location => {
-        if (location.region_code.startsWith(countryCode)) {
-            totalTweets += location.tweet_count;
-        }
-    });
-
-    const popupTweetCount = document.getElementById('popupTweetCount');
-    popupTweetCount.textContent = totalTweets;
-}
-
 
 function openUnknownPopup() {
     const popupContainer = document.getElementById('popupContainer');
@@ -772,31 +765,22 @@ function updateSidebar(dateData) {
     let locations = [];
 
     if (viewMode === 'global') {
+        // Global view
         regionName = 'Global View';
-        locations = dateData.locations;
+        locations = dateData.locations;  // Display all locations globally
     } else if (viewMode === 'continent') {
         setupSidebarForContinentView(currentRegion, dateData);
-        return;
+        return;  // Continent view handled by setupSidebarForContinentView
     } else if (viewMode === 'country') {
         regionName = getRegionName(currentRegion);
         locations = dateData.locations.filter(location => location.region_code.startsWith(currentRegion));
+        regionDetails.innerHTML = generateSidebarContent(locations, regionName); // display country-level data on sidebar
     } else if (viewMode === 'subregion') {
         regionName = getRegionName(selectedSubRegion);
         const locationData = dateData.locations.find(location => location.region_code === selectedSubRegion);
         if (locationData) {
-            locations = [locationData];
+            locations = [locationData];  // Display only the selected sub-region's data
         }
-    }
-
-    const countryDataContainer = document.getElementById('countryDataContainer');
-    const countryHeader = document.querySelector('#regionDetails h3');
-
-    if (locations.length === 0) {
-        if (countryHeader) countryHeader.style.display = 'none';
-        if (countryDataContainer) countryDataContainer.style.display = 'none';
-    } else {
-        if (countryHeader) countryHeader.style.display = 'block';
-        if (countryDataContainer) countryDataContainer.style.display = 'block';
     }
 
     regionDetails.innerHTML = generateSidebarContent(locations, regionName);
@@ -834,7 +818,7 @@ function generateSidebarContent(locations, regionName) {
         topicCounts[topic] = (topicCounts[topic] || 0) + 1;
     });
     const sortedTopics = Object.keys(topicCounts).sort((a, b) => topicCounts[b] - topicCounts[a]);
-    const topFakeNewsTopics = sortedTopics.slice(0, 5); // Only take the first five topics
+    const topFakeNewsTopics = sortedTopics.length > 0 ? sortedTopics.slice(0, 5) : ['No Topics Available']; // Show "No Topics Available" if no data
 
     return `
         <h2>${regionName}</h2>
@@ -927,32 +911,13 @@ function setupSidebarForContinentView(continentCode, dateData) {
 
     const fakeNewsRatio = totalTweetCount > 0 ? (totalFakeNewsCount / totalTweetCount).toFixed(4) : 0;
 
-    // Count the most popular fake news topics
+    // Count Most popular fake news topics
     const topicCounts = {};
     allFakeNewsTopics.forEach(topic => {
         topicCounts[topic] = (topicCounts[topic] || 0) + 1;
     });
     const sortedTopics = Object.keys(topicCounts).sort((a, b) => topicCounts[b] - topicCounts[a]);
-    const topFakeNewsTopics = sortedTopics.slice(0, 5); // Only take the first five topics
-
-    // Check if there are any top fake news topics, if not, display 'No data available'
-    const topicsContent = topFakeNewsTopics.length > 0
-        ? topFakeNewsTopics.map(topic => `<li>${topic}</li>`).join('')
-        : '<li>No data available</li>';
-
-    // Check if there are any countries data, if not, hide the countries section
-    const countriesContent = locationsInContinent.length > 0
-        ? locationsInContinent.map((location, index) => `
-            <div>
-                <strong>${index + 1}. ${location.region_name}</strong><br>
-                <strong>Total Tweet Count:</strong> ${location.tweet_count}<br>
-                <strong>Total Fake News Count:</strong> ${location.fake_news_count}<br>
-                <strong>Fake News Ratio:</strong> ${(location.fake_news_count / location.tweet_count).toFixed(4)}<br>
-                <strong>Top Fake News Topics:</strong>
-                <ul>${location.fake_news_topics.map(topic => `<li>${topic}</li>`).join('')}</ul>
-            </div>
-        `).join('')
-        : ''; // If no country data, leave it empty
+    const topFakeNewsTopics = sortedTopics.length > 0 ? sortedTopics.slice(0, 5) : ['No Topics Available']; // Show "No Topics Available" if no data
 
     // Structure the Sidebar Content
     let content = `
@@ -961,15 +926,28 @@ function setupSidebarForContinentView(continentCode, dateData) {
         <p><strong>Total Fake News Count:</strong> ${totalFakeNewsCount}</p>
         <p><strong>Fake News Ratio:</strong> ${fakeNewsRatio}</p>
         <p><strong>Top Fake News Topics:</strong></p>
-        <ul>${topicsContent}</ul>
+        <ul>
+            ${topFakeNewsTopics.map(topic => `<li>${topic}</li>`).join('')}
+        </ul>
     `;
 
-    // Only add the countries section if there is country data available
-    if (countriesContent) {
+    // Only add countries section if data exists
+    if (locationsInContinent.length > 0) {
         content += `
             <h3>Countries</h3>
             <div id="countryDataContainer">
-                ${countriesContent}
+                ${locationsInContinent.map((location, index) => `
+                    <div>
+                        <strong>${index + 1}. ${location.region_name}</strong><br>
+                        <strong>Total Tweet Count:</strong> ${location.tweet_count}<br>
+                        <strong>Total Fake News Count:</strong> ${location.fake_news_count}<br>
+                        <strong>Fake News Ratio:</strong> ${(location.fake_news_count / location.tweet_count).toFixed(4)}<br>
+                        <strong>Top Fake News Topics:</strong>
+                        <ul>
+                            ${location.fake_news_topics.length > 0 ? location.fake_news_topics.map(topic => `<li>${topic}</li>`).join('') : '<li>No Topics Available</li>'}
+                        </ul>
+                    </div>
+                `).join('')}
             </div>
         `;
     }
@@ -990,7 +968,7 @@ function setupSidebarForContinentView(continentCode, dateData) {
  */
 function setupSidebarForSubRegionView(subRegionCode, dateData) {
     const regionDetails = document.getElementById('regionDetails');
-    const regionName = subRegionNames[subRegionCode] || getRegionName(subRegionCode);  // 闂備礁鍚嬮崕鎶藉床閼艰翰浜归柛銉戝苯鏅犻梺璺ㄥ櫐閹凤拷/闂備焦妞挎禍娆戠矆娓氣偓楠炲啴寮撮悩鐢电厠闂佽法鍣﹂幏锟�
+    const regionName = subRegionNames[subRegionCode] || getRegionName(subRegionCode);
 
     // Get data for the state/province
     const locationData = dateData.locations.find(location => location.region_code === subRegionCode);
@@ -1192,20 +1170,31 @@ function zoomToContinent(continentCode) {
         currentRegion = null;
         viewMode = 'global';
         updateContinentFilter(viewMode);
+
         updateMap(dateData);
         setupSidebarForGlobalView(dateData);
 
         const backButton = document.getElementById('backButton');
         backButton.style.display = 'none';
+
+        const continentSelector = document.getElementById('continentSelector');
+        if (continentSelector) {
+            continentSelector.value = "000"; //
+        }
     } else {
         currentRegion = continentCode;
         viewMode = 'continent';
         updateMap(dateData);
-        setupSidebarForContinentView(currentRegion, dateData);
+        updateSidebar(dateData);
 
         const backButton = document.getElementById('backButton');
         backButton.style.display = 'block';
         backButton.innerText = 'Back to World Map';
+
+        const continentSelector = document.getElementById('continentSelector');
+        if (continentSelector) {
+            continentSelector.value = continentCode;
+        }
     }
 }
 
@@ -1254,6 +1243,10 @@ function initializePopup() {
     console.log('Initializing Popup');
 
     if (togglePopupBtn && popupContainer && popupArrowIcon) {
+        popupContainer.classList.add('open');
+        updatePopupData();
+        popupArrowIcon.style.transform = 'rotate(0deg)';
+
         togglePopupBtn.addEventListener('click', function () {
             console.log('Popup toggle button clicked');
             popupContainer.classList.toggle('open');
@@ -1261,43 +1254,45 @@ function initializePopup() {
             if (popupContainer.classList.contains('open')) {
                 console.log('Popup opened');
                 updatePopupData();
-                popupArrowIcon.style.transform = 'rotate(180deg)';
+                popupArrowIcon.style.transform = 'rotate(0deg)';
             } else {
                 console.log('Popup closed');
-                popupArrowIcon.style.transform = 'rotate(0deg)';
+                popupArrowIcon.style.transform = 'rotate(180deg)';
             }
         });
     } else {
-        console.error('No DOM Found');
+        console.error('Error initializing popup elements');
     }
 }
 
 /**
- * 更新弹窗中的数据
+ * Updates the popup data to display detailed information for regions with the code 'Unknown'.
+ * This function aggregates all 'Unknown' entries to ensure complete data representation.
  */
 function updatePopupData() {
     const dayIndex = parseInt(timelineSlider.value, 10);
     const dateData = globalData.data[dayIndex];
     console.log(`Updating popup data for day index: ${dayIndex}`);
 
-    const unknownData = dateData.locations.find(location => location.region_code === 'Unknown');
-    console.log('Unknown Data:', unknownData);
+    const unknownDataArray = dateData.locations.filter(location => location.region_code === 'Unknown');
+    console.log('Unknown Data Array:', unknownDataArray);
 
-    if (unknownData) {
-        document.getElementById('popupTweetCount').textContent = unknownData.tweet_count;
-        document.getElementById('popupFakeNewsCount').textContent = unknownData.fake_news_count;
-        document.getElementById('popupFakeNewsRatio').textContent = unknownData.fake_news_ratio.toFixed(4);
+    if (unknownDataArray.length > 0) {
+        const totalTweetCount = unknownDataArray.reduce((sum, location) => sum + location.tweet_count, 0);
+        const totalFakeNewsCount = unknownDataArray.reduce((sum, location) => sum + location.fake_news_count, 0);
+        const fakeNewsRatio = totalTweetCount > 0 ? (totalFakeNewsCount / totalTweetCount).toFixed(4) : 0;
 
+        document.getElementById('popupTweetCount').textContent = totalTweetCount;
+        document.getElementById('popupFakeNewsCount').textContent = totalFakeNewsCount;
+        document.getElementById('popupFakeNewsRatio').textContent = fakeNewsRatio;
+
+        const allFakeNewsTopics = unknownDataArray.flatMap(location => location.fake_news_topics);
         const topicsList = document.getElementById('popupFakeNewsTopics');
         topicsList.innerHTML = '';
 
-        unknownData.fake_news_topics.forEach(topic => {
+        allFakeNewsTopics.forEach(topic => {
             const li = document.createElement('li');
-            if (typeof topic === 'number') {
-                li.textContent = `Topic ${topic}`;
-            } else {
-                li.textContent = topic;
-            }
+            li.textContent = topic;
             topicsList.appendChild(li);
         });
     } else {
@@ -1307,3 +1302,15 @@ function updatePopupData() {
         document.getElementById('popupFakeNewsTopics').innerHTML = '<li>No data available</li>';
     }
 }
+
+document.getElementById('screenshotButton').addEventListener('click', function () {
+    const targetElement = document.getElementById('regions_div'); // 閺囨寧宕叉稉杞扮稑閹櫕鍩呴崶鍓ф畱閸忓啰绀岄惃鍑
+
+    html2canvas(document.body).then(canvas => {
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = 'full-page-screenshot.png';
+        link.click();
+    });
+});
+

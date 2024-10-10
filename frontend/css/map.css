@@ -13,13 +13,13 @@ body, html {
 
 /* Styling for the region details displayed in the right sidebar. */
 #regions_div {
-    margin-left: 23px;
+    margin-left: 0;
     position: relative;
     top: var(--header-height);
     transform: scaleX(1.08);
     background-color: rgb(187, 244, 250);
-    height: 74%;
-    width: 77%;
+    height: 95vh;
+    width: 155vh;
     overflow: hidden;
 }
 
@@ -30,14 +30,14 @@ body, html {
     justify-content: flex-start;
     height: calc(100vh - var(--header-height));
     background-color: #f8f9fa;
-    border-left: 1px solid #ffffff;
-    box-shadow: -3px 0 5px rgb(255, 255, 255);
+    border-left: 0 solid #ffffff;
+    box-shadow: -0.5vh 0 5px rgb(255, 255, 255);
     padding: 10px;
     overflow: hidden;
     top: var(--header-height);
     z-index: 5;
-    width: 250px;
-    position: absolute;
+    width: 17vw;
+    position: fixed;
     right: 0;
     text-align: center;
 }
@@ -49,6 +49,7 @@ body, html {
     display: flex;
     flex-direction: column;
     text-align: left;
+    /*line-height: 1.1;*/
 }
 
 /* Style for h2 headers in the regionDetails section */
@@ -63,11 +64,13 @@ body, html {
 #regionDetails p {
     font-weight: normal;
     margin: 5px 0;
+    line-height: 1.05;
 }
 
 /* Style for strong elements within paragraphs in the regionDetails section */
 #regionDetails p strong {
     font-weight: bold;
+    line-height: 1.05;
 }
 
 /* Style for h3 headers in the regionDetails section */
@@ -76,6 +79,7 @@ body, html {
     font-weight: bold;
     margin-bottom: 10px;
     text-align: center;
+    line-height: 1.05;
 }
 
 /* Style for unordered lists in the regionDetails section */
@@ -86,6 +90,7 @@ body, html {
     list-style-type: disc;
     margin-top: 0;
     margin-bottom: -10px;
+    line-height: 1.05;
 }
 
 /* Style for list items in the regionDetails section */
@@ -94,15 +99,16 @@ body, html {
     text-align: left;
     margin-top: 0;
     margin-bottom: 10px;
+    line-height: 1.05;
 }
 
 /* country Data Container style: Styling for the container that holds the country data list */
 #countryDataContainer {
     border: 1px solid #ccc;
-    padding: 10px;
-    margin-top: -5px;
+    padding: 1vh;
+    margin-top: -1vh;
     flex: 1;
-    max-height: 180px;
+    max-height: 20vh;
     overflow-y: auto;
 }
 
@@ -110,12 +116,12 @@ body, html {
 #countryDataContainer ul {
     list-style-type: disc;
     padding-left: 0;
-    margin-bottom: 15px;
+    margin-bottom: 3vh;
 }
 
 /* Styling for list items inside the country data container */
 #countryDataContainer li {
-    margin-bottom: 0;
+    margin-bottom: 1vh;
     text-align: left;
     font-weight: normal;
 }
@@ -123,24 +129,24 @@ body, html {
 /* Back button style: Positioned to allow the user to navigate back from detailed views. */
 #backButton {
     position: absolute;
-    bottom: 45px;
+    bottom: 5vh;
     left: 45%;
     transform: translateX(-50%);
     background-color: var(--primary-color);
-    padding: 12px 0;
+    padding: 1vh 0;
     border-radius: var(--button-radius);
     cursor: pointer;
     display: block;
     white-space: nowrap;
     font-size: 16px;
     text-align: center;
-    width: 250px;
+    width: 30vh;
 }
 
 /* Timeline container positioning: Centers the timeline on the page. */
 .timeline-container {
     position: relative;
-    left: calc((100vw - 300px) / 5);
+    left: calc((100vw - 30vh) / 5);
     width: 45%;
     z-index: 200;
     top: -5vh;
@@ -153,11 +159,11 @@ body, html {
     justify-content: space-between;
     background-color: #ffffff;
     border-radius: 15px;
-    padding: 10px 70px;
+    padding: 1vh 9vh;
     box-shadow: var(--box-shadow);
-    border: 1px solid #ddd;
+    border: 0 solid #ddd;
     width: 90%;
-    height: 15px;
+    height: 3vh;
     position: relative;
     margin: 0 auto;
 }
@@ -168,11 +174,11 @@ body, html {
     font-weight: bold;
     color: var(--nav-link-color);
     background-color: #e0e0e0;
-    padding: 5px 20px;
-    border-radius: 10px;
+    padding: 1vh 2vh;
+    border-radius: 3vh;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     pointer-events: none;
-    margin: -10px -20px;
+    margin: -1vh -1vh;
     text-align: left;
 }
 
@@ -181,20 +187,20 @@ body, html {
     position: relative;
     width: 65%;
     left: 0;
-    top: -3px;
+    top: -0.5vh;
 }
 
 /* Current date label on timeline: Displays the selected date above the slider thumb. */
 #current-date-label {
     position: absolute;
-    top: -33px;
+    top: -4vh;
     font-size: 11px;
     font-weight: bold;
     color: #ffffff;
     background-color: #00695c;
-    padding: 6px 10px;
+    padding: 1vh 1vh;
     border-radius: 20px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0.1vh 0.1vh 0.1vh rgba(0, 0, 0, 0.3);
     display: none;
     pointer-events: none;
     white-space: nowrap;
@@ -211,7 +217,7 @@ body, html {
 input[type="range"] {
     -webkit-appearance: none;
     width: 100%;
-    height: 5px;
+    height: 0.8vh;
     background: linear-gradient(to right, #4CAF50, #ddd);
     border-radius: 5px;
     outline: none;
@@ -284,9 +290,9 @@ input[type="range"]::-moz-range-thumb:hover {
 /* Continent select dropdown: Customizes the dropdown menu's appearance within the selector. */
 .continent select {
     position: absolute;
-    top: 70px;
-    width: 100px;
-    height: 25px;
+    top: 12vh;
+    width: 8vw;
+    height: 3vh;
     border-radius: 10px;
     text-align: center;
     border: black 0.15em solid;
@@ -312,8 +318,8 @@ input[type="range"]::-moz-range-thumb:hover {
 #playPauseBtn {
     font-size: 20px;
     position: absolute;
-    left: 3%;
-    top: 50%;
+    left: 2vw;
+    top: 1.3vw;
     transform: translate(-50%, -50%);
     background-color: transparent;
     padding: 0;
@@ -333,35 +339,38 @@ input[type="range"]::-moz-range-thumb:hover {
 /* Popup Container Style */
 .popup-container {
     position: fixed;
-    bottom: 20px;
-    left: 20px;
-    width: 230px;
-    max-height: 450px;
+    bottom: 3.5vh;
+    left: 1.5vw;
+    width: 17.5vw;
+    height: 50vh;
     background-color: #ffffff;
     border: 1px solid #ccc;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     transition: transform 0.3s ease-in-out;
-    transform: translateX(-100%); /* 初始状态隐藏 */
+    transform: translateX(0);
     z-index: 1000;
 }
 
 /* Popup Content Style */
 .popup-content {
-    padding: 10px;
+    padding-top: 0;
+    padding-bottom: 2vh;
+    padding-left: 1vw;
+    padding-right: 1vw;
     overflow-y: auto;
     height: 100%;
-    display: flex;  /* 使用 flex 布局 */
-    flex-direction: column;  /* 垂直排列 */
-    justify-content: flex-start;  /* 从顶部开始对齐 */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 /* Toggle Button Style */
 .toggle-popup-btn {
-    position: fixed; /* 改为 fixed 以便始终可见 */
-    bottom: 20px;
-    left: 20px;
+    position: fixed;
+    bottom: 2.7vh;
+    left: 1.5vw;
     background-color: #388e3c;
     border: none;
     color: #ffffff;
@@ -370,7 +379,9 @@ input[type="range"]::-moz-range-thumb:hover {
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease-in-out;
-    z-index: 1001; /* 高于 popup-container */
+    z-index: 1001;
+    width: 5vh;
+    height: 5vh;
 }
 
 /* Rotate the arrow icon when popup is open */
@@ -380,7 +391,7 @@ input[type="range"]::-moz-range-thumb:hover {
 
 /* Popup Open State */
 .popup-container.open {
-    transform: translateX(0); /* 显示弹窗 */
+    transform: translateX(0);
 }
 
 /* Arrow Icon Style */
@@ -388,15 +399,52 @@ input[type="range"]::-moz-range-thumb:hover {
     transition: transform 0.3s ease-in-out;
 }
 
-/* Popup Content Style: 减少上下间距 */
+/* Popup Content Style */
+.popup-content h2 {
+    margin: 2vh 0 1vh 0;
+    font-weight: bold;
+    font-size: 25px;
+}
+
 .popup-content p {
-    margin: 3px 0; /* 减少段落之间的间距 */
+    margin: 2px 0;
 }
 
 .popup-content ul {
-    margin: 3px 0; /* 减少列表的上下间距 */
+    margin: 2px 0;
 }
 
 .popup-content li {
-    margin: 2px 0; /* 减少列表项之间的间距 */
+    margin: 2px 0;
+}
+
+.download-button {
+    position: fixed;
+    top: 12vh;
+    right: 20vw;
+    padding: 1vh 1vw;
+    font-size: 16px;
+    color: white;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 1vh;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    z-index: 10000;
+}
+
+/* Popup Open State */
+.popup-container.open {
+    transform: translateX(0);
+}
+
+/* Popup Hidden State */
+.popup-container {
+    transform: translateX(-100%);
+}
+
+/* Rotate the arrow icon when popup is open */
+.popup-container.open .toggle-popup-btn #popupArrowIcon {
+    transform: rotate(180deg);
 }
