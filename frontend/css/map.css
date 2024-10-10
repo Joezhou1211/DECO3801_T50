@@ -49,6 +49,7 @@ body, html {
     display: flex;
     flex-direction: column;
     text-align: left;
+    /*line-height: 1.1;*/
 }
 
 /* Style for h2 headers in the regionDetails section */
@@ -63,11 +64,13 @@ body, html {
 #regionDetails p {
     font-weight: normal;
     margin: 5px 0;
+    line-height: 1.05;
 }
 
 /* Style for strong elements within paragraphs in the regionDetails section */
 #regionDetails p strong {
     font-weight: bold;
+    line-height: 1.05;
 }
 
 /* Style for h3 headers in the regionDetails section */
@@ -76,6 +79,7 @@ body, html {
     font-weight: bold;
     margin-bottom: 10px;
     text-align: center;
+    line-height: 1.05;
 }
 
 /* Style for unordered lists in the regionDetails section */
@@ -86,6 +90,7 @@ body, html {
     list-style-type: disc;
     margin-top: 0;
     margin-bottom: -10px;
+    line-height: 1.05;
 }
 
 /* Style for list items in the regionDetails section */
@@ -94,6 +99,7 @@ body, html {
     text-align: left;
     margin-top: 0;
     margin-bottom: 10px;
+    line-height: 1.05;
 }
 
 /* country Data Container style: Styling for the container that holds the country data list */
@@ -102,7 +108,7 @@ body, html {
     padding: 10px;
     margin-top: -5px;
     flex: 1;
-    max-height: 180px;
+    max-height: 120px;
     overflow-y: auto;
 }
 
@@ -336,30 +342,33 @@ input[type="range"]::-moz-range-thumb:hover {
     bottom: 20px;
     left: 20px;
     width: 230px;
-    max-height: 450px;
+    height: 360px;
     background-color: #ffffff;
     border: 1px solid #ccc;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     transition: transform 0.3s ease-in-out;
-    transform: translateX(-100%); /* 初始状态隐藏 */
+    transform: translateX(0);
     z-index: 1000;
 }
 
 /* Popup Content Style */
 .popup-content {
-    padding: 10px;
+    padding-top: 0;
+    padding-bottom: 25px;
+    padding-left: 10px;
+    padding-right: 10px;
     overflow-y: auto;
     height: 100%;
-    display: flex;  /* 使用 flex 布局 */
-    flex-direction: column;  /* 垂直排列 */
-    justify-content: flex-start;  /* 从顶部开始对齐 */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 /* Toggle Button Style */
 .toggle-popup-btn {
-    position: fixed; /* 改为 fixed 以便始终可见 */
+    position: fixed;
     bottom: 20px;
     left: 20px;
     background-color: #388e3c;
@@ -370,7 +379,9 @@ input[type="range"]::-moz-range-thumb:hover {
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease-in-out;
-    z-index: 1001; /* 高于 popup-container */
+    z-index: 1001; /* 濡ゅ倹眉缁拷 popup-container */
+    width: 40px; /* 閹稿鎸崇€硅棄瀹� */
+    height: 40px; /* 閹稿鎸虫妯哄 */
 }
 
 /* Rotate the arrow icon when popup is open */
@@ -380,7 +391,7 @@ input[type="range"]::-moz-range-thumb:hover {
 
 /* Popup Open State */
 .popup-container.open {
-    transform: translateX(0); /* 显示弹窗 */
+    transform: translateX(0); /* 闁哄嫬澧介妵姘嚕閸︻厾宕� */
 }
 
 /* Arrow Icon Style */
@@ -388,15 +399,38 @@ input[type="range"]::-moz-range-thumb:hover {
     transition: transform 0.3s ease-in-out;
 }
 
-/* Popup Content Style: 减少上下间距 */
 .popup-content p {
-    margin: 3px 0; /* 减少段落之间的间距 */
+    margin: 3px 0;
 }
 
 .popup-content ul {
-    margin: 3px 0; /* 减少列表的上下间距 */
+    margin: 3px 0;
 }
 
 .popup-content li {
-    margin: 2px 0; /* 减少列表项之间的间距 */
+    margin: 2px 0;
+}
+
+.download-button {
+    position: fixed;
+    top: 80px;
+    right: 300px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    z-index: 10000;
+}
+
+#popupContainer {
+    display: none;
+}
+
+#popupContainer.open {
+    display: block;
 }

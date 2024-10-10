@@ -3,6 +3,22 @@
 }
 
 /* Topic container styling */
+#editChartDateIcon, #editTableDateIcon{
+    font-size: 18px;
+    margin-left: 5px;
+    vertical-align: middle;
+    cursor: pointer;
+    color: #000000;
+    transition: color 0.3s ease;
+}
+
+
+#editChartDateIcon:hover {
+    color: #257029;
+}
+#editTableDateIcon:hover{
+    color: #257029;
+}
 .topic-container {
     padding: 20px;
     background-color: #fff;
