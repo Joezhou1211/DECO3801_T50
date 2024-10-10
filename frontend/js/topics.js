@@ -37,6 +37,92 @@ document.getElementById("downloadBtn").addEventListener('click', () => {
 document.addEventListener('DOMContentLoaded', function () {
     fetchData();
 
+    // 定义允许的日期范围
+    const minDate = new Date('2019-11-07');
+    const maxDate = new Date('2020-01-25');
+
+    let lastValidChartDate = minDate;
+    let lastValidTableDate = minDate;
+
+    // 当用户点击小笔图标时，让日期可以编辑
+document.getElementById('editChartDateIcon').addEventListener('click', function() {
+    const chartDate = document.getElementById('chartDate');
+    chartDate.setAttribute('contenteditable', true);
+    chartDate.focus(); // 自动聚焦到可编辑的日期字段
+});
+
+document.getElementById('editTableDateIcon').addEventListener('click', function() {
+    const tableDate = document.getElementById('tableDate');
+    tableDate.setAttribute('contenteditable', true);
+    tableDate.focus(); // 自动聚焦到可编辑的日期字段
+});
+
+// 监听 chartDate 修改后的动作，支持 Enter 键
+document.getElementById('chartDate').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+        e.preventDefault(); // 阻止默认换行行为
+        applyChartDateChange();
+    }
+});
+document.getElementById('chartDate').addEventListener('blur', applyChartDateChange);
+
+function applyChartDateChange() {
+    const chartDateInput = document.getElementById('chartDate').textContent.trim();
+    const newDate = new Date(chartDateInput);
+
+    // Check if the newDate is valid and within the allowed range
+    if (!isNaN(newDate.getTime()) && newDate >= minDate && newDate <= maxDate) {
+        lastValidChartDate = newDate; // Save the last valid date
+        const chartData = processChartData(globalData, newDate);
+        updateChart(chartData);
+
+        // Format the displayed date consistently
+        document.getElementById('chartDate').textContent = newDate.toLocaleDateString('en-GB', {
+            year: 'numeric',
+            month: 'short', // Ensure short month format (e.g., "Jan")
+            day: 'numeric'
+        });
+
+        document.getElementById('chartDate').setAttribute('contenteditable', false); // Disable editing
+    } else {
+        alert('Please enter a date between 8 Nov 2019 and 24 Jan 2020.');
+        document.getElementById('chartDate').textContent = lastValidChartDate.toLocaleDateString('en-GB', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+        });
+        document.getElementById('chartDate').setAttribute('contenteditable', false); // Disable editing
+    }
+}
+
+// 监听 tableDate 修改后的动作，支持 Enter 键
+document.getElementById('tableDate').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+        e.preventDefault(); // 阻止默认换行行为
+        applyTableDateChange();
+    }
+});
+document.getElementById('tableDate').addEventListener('blur', applyTableDateChange);
+
+function applyTableDateChange() {
+    const newDate = new Date(document.getElementById('tableDate').textContent);
+    if (!isNaN(newDate.getTime()) && newDate >= minDate && newDate <= maxDate) {
+        lastValidTableDate = newDate; // 保存上次有效的日期
+        updateTable(globalData, newDate);
+        document.getElementById('tableDate').setAttribute('contenteditable', false); // 禁止编辑
+    } else {
+        alert('Please enter a date between 8 Nov 2019 and 24 Jan 2020.');
+        document.getElementById('tableDate').textContent = lastValidTableDate.toLocaleDateString('en-GB', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+        });
+        document.getElementById('tableDate').setAttribute('contenteditable', false); // 禁止编辑
+    }
+}
+
+
+
     function fetchData() {
         fetch('../../data/processed/topic_data.json')
             .then(response => response.json())
@@ -168,19 +254,30 @@ function getDominantSentiment(sentiment) {
     }
 }
 
-function updateTable(data, selectedDate) {
+//===========================
+function updateTable(data, startDate, endDate = null) {
+    // 筛选符合情感过滤条件的数据
     let filteredData = data.filter(item => {
         const matchesSentiment = (filters.sentiments.positive && item.sentimentCode === 'positive') ||
                                  (filters.sentiments.neutral && item.sentimentCode === 'neutral') ||
                                  (filters.sentiments.negative && item.sentimentCode === 'negative');
-
         return matchesSentiment;
     });
+
     const topicSentiments = [];
     const tableBody = document.querySelector('.topic-table tbody');
-    if (selectedDate) {
-        filteredData = data.filter(item => {
-            return new Date(item.itemTimestamp).toLocaleDateString('en-GB') === selectedDate.toLocaleDateString('en-GB');
+
+    // 根据播放模式（累积数据）或选中的单一日期进行筛选
+    if (endDate) {
+        // 播放模式下，筛选从 startDate 到 endDate 的累积数据
+        filteredData = filteredData.filter(item => {
+            const itemDate = new Date(item.itemTimestamp);
+            return itemDate >= startDate && itemDate <= endDate;
+        });
+    } else if (startDate) {
+        // 仅显示选中日期的数据
+        filteredData = filteredData.filter(item => {
+            return new Date(item.itemTimestamp).toLocaleDateString('en-GB') === startDate.toLocaleDateString('en-GB');
         });
     }
 
@@ -196,9 +293,13 @@ function updateTable(data, selectedDate) {
         9: "Emergency Information and Public Safety",
         10: "Health and Mental Well-being"
     };
+
+    // 初始化话题数据
     for (let key in topics) {
         topicSentiments[key] = { id: key, reply: 0, share: 0, like: 0, quote: 0, positive: 0, neutral: 0, negative: 0 };
     }
+
+    // 统计话题的回复、转发、点赞和情感数据
     filteredData.forEach(item => {
         const topicId = item.main_topic;
         const sentiment = item.sentiment;
@@ -214,8 +315,11 @@ function updateTable(data, selectedDate) {
             topicSentiments[topicId].negative += 1;
         }
     });
+
+    // 构建表格内容
     let rowsHtml = '';
-    topicSentiments.sort((a,b)=>((b.positive + b.neutral + b.negative) - (a.positive + a.neutral + a.negative))).forEach(item => {
+    topicSentiments.sort((a,b) => ((b.positive + b.neutral + b.negative) - (a.positive + a.neutral + a.negative)))
+        .forEach(item => {
         const topicName = topics[item.id] || `Topic ${item.id}`;
         const positivePercentage = (item.positive / (item.positive + item.neutral + item.negative) * 100).toFixed(2);
         const neutralPercentage = (item.neutral / (item.positive + item.neutral + item.negative) * 100).toFixed(2);
@@ -243,6 +347,7 @@ function updateTable(data, selectedDate) {
     tableBody.innerHTML = rowsHtml;
 }
 
+//================
 function generateDateArrayFromData(data) {
     const uniqueDates = [...new Set(data.map(item => new Date(item.created_at_dt).toDateString()))];
     return uniqueDates.map(dateString => new Date(dateString));
@@ -283,33 +388,55 @@ const tableDate = document.getElementById('tableDate');
 
 let chartInstance = null;
 
+// 切换到 Table View 时
 tableViewBtn.addEventListener('click', function () {
     tableView.style.display = 'block';
     chartView.style.display = 'none';
     filterView.classList.remove('open');
+
+    // 销毁现有的图表实例（如果有的话）
     if (chartInstance !== null) {
         chartInstance.destroy();
         chartInstance = null;
     }
-    const canvasParent = document.getElementById('chartContainer');
-    canvasParent.innerHTML = '<canvas id="topicChart" width="400" height="200"></canvas>';
+
+    // 获取当前 timeline 的日期
+    const selectedDate = dates[timeline.value];
+
+    // 确保表格同步更新
+    updateTable(globalData, selectedDate);
+
+    // 确保日期显示一致
+    const formattedDate = selectedDate.toLocaleDateString('en-GB', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+    });
+    tableDate.innerText = formattedDate;
 });
 
+// 切换到 Chart View 时
 chartViewBtn.addEventListener('click', function () {
     chartView.style.display = 'block';
     tableView.style.display = 'none';
     filterView.classList.remove('open');
+
+    // 获取当前 timeline 的日期
     const selectedDate = dates[timeline.value];
+
+    // 更新图表数据
+    const chartData = processChartData(globalData, selectedDate);
+    updateChart(chartData);
+
+    // 确保日期显示一致
     const formattedDate = selectedDate.toLocaleDateString('en-GB', {
         year: 'numeric',
         month: 'short',
         day: 'numeric'
     });
     chartDate.innerText = formattedDate;
-    const chartData = processChartData(globalData, selectedDate);
-    updateChart(chartData);
-
 });
+
 
 function updateChart(chartData) {
     const ctx = document.getElementById('topicChart').getContext('2d');
@@ -349,7 +476,6 @@ function updateChart(chartData) {
                                     {text: 'Neutral', fillStyle: '#B0BEC5'},
                                     {text: 'Negative', fillStyle: '#E57373'}
                                 ];
-                                return [{text: 'Sentiment', fillStyle: 'transparent'}, ...originalLabels];
                             }
                         }
                     }
@@ -391,7 +517,7 @@ function generateDateArray(start, end) {
     return dateArray;
 }
 
-let dates = generateDateArray('2019-11-01', '2020-01-31');
+let dates = generateDateArray('2019-11-08', '2020-01-24');
 
 const initialIndex = parseInt(timeline.value);
 currentDateLabel.innerText = dates[initialIndex].toLocaleDateString('en-GB', {
@@ -430,24 +556,82 @@ timeline.addEventListener('mousedown', function() {
 timeline.addEventListener('mouseup', function() {
     currentDateLabel.style.display = 'none';
 });
+//---------
+// timeline.addEventListener('input', function () {
+//     updateDatePosition();
+//     const selectedDate = dates[timeline.value];
 
+//     if (isPlaying) {
+//         // 播放状态时显示 from ... to ... 的累积数据
+//         const chartData = processAccumulatedData(globalData, dates[0], selectedDate);
+//         updateChart(chartData); // 更新累积数据的图表
+//         updateTable(globalData, selectedDate); // 更新表格为累积数据
+//     } else {
+//         // 非播放状态时，显示单个日期的数据
+//         const chartData = processChartData(globalData, selectedDate);
+//         updateChart(chartData); // 更新单个日期的图表
+//         updateTable(globalData, selectedDate); // 更新单个日期的表格
+//     }
+// });
 timeline.addEventListener('input', function () {
     updateDatePosition();
     const selectedDate = dates[timeline.value];
-    if (showTable) {
-        updateTable(globalData, selectedDate);
+
+    if (isPlaying) {
+        // 播放模式时显示累积数据
+        const chartData = processAccumulatedData(globalData, dates[0], selectedDate);
+        updateChart(chartData); // 更新累积数据的图表
+        updateTable(globalData, dates[0], selectedDate); // 从起始日期到当前日期的累积数据
     } else {
+        // 非播放模式时显示选中日期的数据
         const chartData = processChartData(globalData, selectedDate);
         updateChart(chartData);
+        updateTable(globalData, selectedDate); // 单一日期数据
     }
 });
 
+//----------------------
+// 定义初始的日期
+let initialStartDate = new Date('2019-11-08'); // 8 Nov 2019
+let initialEndDate = new Date('2020-01-24'); // 24 Jan 2020
+let currentDate = initialStartDate; // 当前时间
 
-updateDatePosition();
-currentDateLabel.style.display = 'none';
+// 格式化日期为 'dd mmm yyyy'
+function formatDate(date) {
+    return date.toLocaleDateString('en-GB', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+    });
+}
 
-let isPlaying = false;
+// 更新 Chart 中的 h2 日期为单个日期
+function updateChartSingleDateLabel(selectedDate) {
+    const chartDateLabel = document.getElementById('chartDate');
+    chartDateLabel.textContent = formatDate(selectedDate);  // 显示单个日期
+}
+
+// 更新 Table 中的 h2 日期为单个日期
+function updateTableSingleDateLabel(selectedDate) {
+    const tableDateLabel = document.getElementById('tableDate');
+    tableDateLabel.textContent = formatDate(selectedDate);  // 显示单个日期
+}
+
+// 更新 Chart 中的 h2 日期为日期范围
+function updateChartDateRangeLabel(startDate, endDate) {
+    const chartDateLabel = document.getElementById('chartDate');
+    chartDateLabel.textContent = `from ${formatDate(startDate)} to ${formatDate(endDate)}`;  // 显示日期范围
+}
+
+// 更新 Table 中的 h2 日期为日期范围
+function updateTableDateRangeLabel(startDate, endDate) {
+    const tableDateLabel = document.getElementById('tableDate');
+    tableDateLabel.textContent = `from ${formatDate(startDate)} to ${formatDate(endDate)}`;  // 显示日期范围
+}
+let isPlaying = false;  // 标记是否在播放模式
 let playInterval;
+
+// 播放按钮逻辑
 const playPauseBtn = document.getElementById('playPauseBtn');
 const playIcon = document.getElementById('playIcon');
 
@@ -456,20 +640,32 @@ playPauseBtn.addEventListener('click', function () {
         clearInterval(playInterval);
         playIcon.classList.remove('fa-pause');
         playIcon.classList.add('fa-play');
+        isPlaying = false;
     } else {
         playIcon.classList.remove('fa-play');
         playIcon.classList.add('fa-pause');
+        isPlaying = true;
         startPlayingTimeline();
     }
-    isPlaying = !isPlaying;
 });
 
+// 播放时间轴逻辑
 function startPlayingTimeline() {
     let currentValue = parseInt(timeline.value);
+    let initialStartDate = dates[0]; // 初始开始日期
+
     playInterval = setInterval(function () {
         if (currentValue < timeline.max) {
             currentValue++;
             timeline.value = currentValue;
+
+            const selectedDate = dates[currentValue];
+
+            // 播放时显示 from...to...
+            updateChartDateRangeLabel(initialStartDate, selectedDate);  // 在 Chart 中显示 from...to...
+            updateTableDateRangeLabel(initialStartDate, selectedDate);  // 在 Table 中显示 from...to...
+
+            // 更新图表和表格数据
             updateTimelineAndChart(currentValue);
         } else {
             clearInterval(playInterval);
@@ -477,13 +673,36 @@ function startPlayingTimeline() {
             playIcon.classList.add('fa-play');
             isPlaying = false;
         }
-    }, 500);
+    }, 500);  // 播放速度
 }
 
+// 手动拖动时间轴时触发，停止播放
+timeline.addEventListener('input', function () {
+    // 手动拖动时停止播放
+    if (isPlaying) {
+        clearInterval(playInterval);
+        playIcon.classList.remove('fa-pause');
+        playIcon.classList.add('fa-play');
+        isPlaying = false;
+    }
+
+    const selectedDate = dates[timeline.value];
+
+    // 手动滑动时只显示单个日期
+    updateChartSingleDateLabel(selectedDate);  // 在 Chart 中只显示单个日期
+    updateTableSingleDateLabel(selectedDate);  // 在 Table 中只显示单个日期
+
+    // 更新图表和表格数据
+    const chartData = processChartData(globalData, selectedDate);  // 只显示选定日期的数据
+    updateChart(chartData);
+    updateTable(globalData, selectedDate);
+});
+//--------------
 function updateTimelineAndChart(value) {
     const selectedDate = dates[value];
-    const chartData = processAccumulatedData(globalData, dates[0], selectedDate);
+    const chartData = processAccumulatedData(globalData, dates[0], selectedDate); // 从开始日期累积到选中的日期
     updateChart(chartData);
+    updateTable(globalData, dates[0], selectedDate); // 更新表格为累积数据
 }
 
 function processAccumulatedData(data, startDate, endDate) {
@@ -507,6 +726,7 @@ function processAccumulatedData(data, startDate, endDate) {
         topicSentiments[key] = { positive: 0, neutral: 0, negative: 0 };
     }
 
+    // 累积从 startDate 到 endDate 的数据
     const filteredData = data.filter(item => {
         const itemDate = new Date(item.created_at_dt);
         return itemDate >= startDate && itemDate <= endDate;
@@ -550,6 +770,7 @@ function processAccumulatedData(data, startDate, endDate) {
 
     return { labels, tweetCounts, sentimentColors };
 }
+
 
 function filterData(data, filters, useDateRange) {
     let startTimestamp, endTimestamp;
@@ -670,3 +891,5 @@ function checkTimelineVisibility() {
 
 window.addEventListener('scroll', checkTimelineVisibility);
 window.addEventListener('resize', checkTimelineVisibility);
+
+

@@ -31,7 +31,7 @@
 
     <!-- Setting -->
     <div class="user-icon">
-        <img id="userAvatar" src="https://via.placeholder.com/50" alt="User Icon">
+        <img id="userAvatar" src="/assets/user.png" alt="User Icon">
         <div class="dropdown-menu" id="dropdownMenu">
             <a href="/setting.html" rel="stylesheet">Setting</a>
             <a href="#" id="logout">Logout</a>
@@ -64,14 +64,16 @@
 
 
             <div id="chartView" class="topic-content">
-                <h2>Top Engaged Topics, <span id="chartDate">1 Feb 2020</span></h2>
+                <h2>Top Engaged Topics, <span id="chartDate" contenteditable="true">8 Nov 2019</span>
+                    <i id="editChartDateIcon" class="fas fa-pencil-alt" style="cursor: pointer;"></i></h2>
                 <p>The most discussed topics ranked by interaction, with dominant sentiment indicated by color bars.</p>
-                <canvas id="topicChart" width="350" height="130"></canvas>
+                <canvas id="topicChart" width="350" height="110"></canvas>
             </div>
 
 
             <div id="tableView" class="topic-content" style="display: none;">
-                <h2>Detailed Topic Engagement, <span id="tableDate">1 Feb 2020</span></h2>
+                <h2>Detailed Topic Engagement, <span id="tableDate" contenteditable="true">8 Nov 2019</span>
+                    <i id="editTableDateIcon" class="fas fa-pencil-alt" style="cursor: pointer;"></i></h2>
                 <p>Detailed table showing topic interactions, sentiment distribution(in percentages), and fake news tweets.</p>
                 <table class="topic-table">
                     <thead>
@@ -118,10 +120,10 @@
                 <div>
                     <input type="checkbox" id="useDateRange">
                     <label for="useDateRange">Apply Date Range</label>
-                    <i class="fa-solid fa-circle-info tooltip"><span class="tooltiptext">From 1 Nov 2019 to 31 Jan 2020</span></i>
+                    <i class="fa-solid fa-circle-info tooltip"><span class="tooltiptext">From 8 Nov 2019 to 24 Jan 2020</span></i>
                 </div>
-                <input type="date" id="startDate" name="startDate" value="2020-01-01" min="2019-11-01" max="2020-01-31">
-                <input type="date" id="endDate" name="endDate" value="2020-01-30" min="2019-11-01" max="2020-01-31">
+                <input type="date" id="startDate" name="startDate" value="2020-01-01" min="2019-11-08" max="2020-01-24">
+                <input type="date" id="endDate" name="endDate" value="2020-01-30" min="2019-11-08" max="2020-01-24">
 
 
                 <button id="applyFilterBtn">Apply</button>
@@ -133,14 +135,14 @@
                     <i id="playIcon" class="fas fa-play"></i>
                 </button>
 
-                <span id="startDateLabel">1 Nov 2019</span>
+                <span id="startDateLabel">8 Nov 2019</span>
                 <div class="slider-container">
                     <input type="range" id="timeline" min="0" max="119" value="0">
                     <div id="currentDateLabel">1 Feb 2020</div>
                 </div>
                 <!-- <input type="range" id="timeline" min="0" max="119" value="0"> -->
                 <span id="currentDateLabel">1 Feb 2020</span>
-                <span id="endDateLabel">31 Jan 2020</span>
+                <span id="endDateLabel">24 Jan 2020</span>
             </div>
 
 
