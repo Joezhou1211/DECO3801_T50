@@ -13,7 +13,7 @@
 
             // Check if email ends with .gov
             if (!email.endsWith('.gov') || token !== storedToken) {
-                document.getElementById('error-message').style.display = 'block';
+                 alert('Invalid email or token. Please ensure your email ends with ".gov" and your token is correct.');
                 return;
             }
 
