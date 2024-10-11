@@ -38,6 +38,7 @@ body, html {
 /* Logo Style: Customize the appearance of the logo within the header. */
 .header .logo img {
     height: 40px;
+    width: auto;
 }
 
 /* Navigation bar style: Set the layout and styling of navigation links. */
@@ -141,6 +142,8 @@ button:hover {
 .user-icon {
     position: relative;
     display: inline-block;
+    width: 40px;
+    height: auto;
 }
 
 /* User avatar image style: Adjust the size and appearance of the user profile image. */

@@ -25,42 +25,43 @@
 
 .settings-container {
     display: flex;
-    margin: 50px auto;
-    max-width: 1710px;
-    width: 100%;
-    padding-left: 200px;
+    height: 100vh;
 }
 
-.sidebar {
-    width: 200px;
-    background-color: #fff;
+.sidebar1 {
+    margin-top: 50px;
+    width: 250px;
+    background-color: #f2f2f2;
     padding: 20px;
-    border-right: 1px solid #ccc;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    height: 100%;
+    overflow-y: auto;
 }
+
 
 .sidebar ul {
     list-style-type: none;
 }
 
-.sidebar ul li {
+.sidebar1 ul li {
     margin-bottom: 20px;
 }
 
-.sidebar ul li a {
+.sidebar1 ul li a {
     text-decoration: none;
     color: #333;
     font-weight: bold;
 }
 
 .settings-content {
-    flex-grow: 1;
-
-    padding: 20px;
-    margin-left: 20px;
-
+    margin-left: 300px;
+    padding: 50px;
+    flex: 1;
 }
 
 .settings-content h2 {
+    margin-top: 20px;
     margin-bottom: 20px;
 }
 
