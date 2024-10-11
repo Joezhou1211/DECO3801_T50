@@ -1333,16 +1333,3 @@ function updatePopupData() {
     }
 }
 
-/**
- * Adds functionality to take a screenshot of the map.
- */
-document.getElementById('screenshotButton').addEventListener('click', function () {
-    const targetElement = document.getElementById('regions_div'); // 指定需要截图的元素
-
-    html2canvas(targetElement).then(canvas => {
-        const link = document.createElement('a');
-        link.href = canvas.toDataURL('image/png');
-        link.download = 'map-screenshot.png';
-        link.click();
-    });
-});
