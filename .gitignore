@@ -11,3 +11,15 @@ data/processed/daily_weighted_sentiment_vader.csv
 data/processed/final_data(filtered).json
 data/processed/tweets_bushfire_related_keywords.csv
 data/processed/tweets_with_topics.csv
+data/processed/final_data(main_topic).csv
+data/processed/topic_data(parent&child).csv
+data/processed/location.json
+data/processed/topic_timeline.csv
+data/processed/final_data.csv
+data/processed/whole_data(parent&child).csv
+data/processed/tweet_chain_optimized.json
+data/processed/fake.csv
+data/processed/final_data_cleaned.csv
+data/processed/location_counts.json
+data/processed/fake.json
+data/processed/topic_data(old).json

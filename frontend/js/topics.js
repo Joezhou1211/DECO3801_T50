@@ -15,6 +15,19 @@ let filters = {
     }
 };
 
+const topics = {
+    1: "Wildlife and Environmental Impact",
+    2: "Fundraising and Community Support",
+    3: "Political Criticism and Government Response",
+    4: "Climate Change Debate",
+    5: "Emotional and Spiritual Reactions",
+    6: "Geographical and Location-Based Information",
+    7: "Regional Air Quality and Environmental Conditions",
+    8: "Wildlife Devastation",
+    9: "Emergency Information and Public Safety",
+    10: "Health and Mental Well-being"
+};
+
 function downloadCSV(str, data) {
     for(let i = 0 ; i < data.length ; i++ ){
         for(const key in data[i]){
@@ -42,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let lastValidChartDate = minDate;
     let lastValidTableDate = minDate;
+
 
 document.getElementById('editChartDateIcon').addEventListener('click', function() {
     const chartDate = document.getElementById('chartDate');
@@ -168,18 +182,6 @@ function bindTableViewBtn() {
 function processChartData(data, selectedDate) {
     const topicTweetCounts = {};
     const topicSentiments = {};
-    const topics = {
-        1: "Wildlife and Environmental Impact",
-        2: "Fundraising and Community Support",
-        3: "Political Criticism and Government Response",
-        4: "Climate Change Debate",
-        5: "Emotional and Spiritual Reactions",
-        6: "Geographical and Location-Based Information",
-        7: "Regional Air Quality and Environmental Conditions",
-        8: "Wildlife Devastation",
-        9: "Emergency Information and Public Safety",
-        10: "Health and Mental Well-being"
-    };
 
     for (let key in topics) {
         topicTweetCounts[key] = 0;
@@ -274,21 +276,8 @@ function updateTable(data, startDate, endDate = null) {
         });
     }
 
-    const topics = {
-        1: "Wildlife and Environmental Impact",
-        2: "Fundraising and Community Support",
-        3: "Political Criticism and Government Response",
-        4: "Climate Change Debate",
-        5: "Emotional and Spiritual Reactions",
-        6: "Geographical and Location-Based Information",
-        7: "Regional Air Quality and Environmental Conditions",
-        8: "Wildlife Devastation",
-        9: "Emergency Information and Public Safety",
-        10: "Health and Mental Well-being"
-    };
-
     for (let key in topics) {
-        topicSentiments[key] = { id: key, reply: 0, share: 0, like: 0, quote: 0, positive: 0, neutral: 0, negative: 0 };
+        topicSentiments[key] = { id: key, reply: 0, share: 0, like: 0, quote: 0, positive: 0, neutral: 0, negative: 0 , fake_news: 0};
     }
 
     filteredData.forEach(item => {
@@ -298,6 +287,7 @@ function updateTable(data, startDate, endDate = null) {
         topicSentiments[topicId].share += item.retweet_count;
         topicSentiments[topicId].like += item.favourite_count;
         topicSentiments[topicId].quote += item.quote_count;
+        topicSentiments[topicId].fake_news += item.fake_news;
         if (sentiment === 'Positive') {
             topicSentiments[topicId].positive += 1;
         } else if (sentiment === 'Neutral') {
@@ -325,13 +315,13 @@ function updateTable(data, startDate, endDate = null) {
                 <td>${isNaN(positivePercentage) ? '--' : positivePercentage}%</td>
                 <td>${isNaN(neutralPercentage) ? '--' : neutralPercentage}%</td>
                 <td>${isNaN(negativePercentage) ? '--' : negativePercentage}%</td>
-                <td>0</td>
+                <td>${item.fake_news}</td>
             </tr>
         `;
     });
 
     if (filteredData.length === 0) {
-        rowsHtml = `<tr><td colspan="9">No data available for this date.</td></tr>`;
+        rowsHtml = `<tr><td colspan="10">No data available for this date.</td></tr>`;
     }
 
     tableBody.innerHTML = rowsHtml;
@@ -669,18 +659,6 @@ function updateTimelineAndChart(value) {
 function processAccumulatedData(data, startDate, endDate) {
     const topicTweetCounts = {};
     const topicSentiments = {};
-    const topics = {
-        1: "Wildlife and Environmental Impact",
-        2: "Fundraising and Community Support",
-        3: "Political Criticism and Government Response",
-        4: "Climate Change Debate",
-        5: "Emotional and Spiritual Reactions",
-        6: "Geographical and Location-Based Information",
-        7: "Regional Air Quality and Environmental Conditions",
-        8: "Wildlife Devastation",
-        9: "Emergency Information and Public Safety",
-        10: "Health and Mental Well-being"
-    };
 
     for (let key in topics) {
         topicTweetCounts[key] = 0;
@@ -852,5 +830,3 @@ function checkTimelineVisibility() {
 
 window.addEventListener('scroll', checkTimelineVisibility);
 window.addEventListener('resize', checkTimelineVisibility);
-
-
