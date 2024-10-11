@@ -1,0 +1,125 @@
+
+.title {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+    margin-left: 160px;
+}
+
+
+.text-description {
+    font-size: 20px;
+    line-height: 1.6;
+    color: #333;
+    text-align: left;
+    margin: 0 auto;
+    max-width: 4000px;
+    width: 70%;
+}
+
+.settings-container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar1 {
+    margin-top: 50px;
+    width: 250px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    height: 100%;
+    overflow-y: auto;
+}
+
+
+.sidebar ul {
+    list-style-type: none;
+}
+
+.sidebar1 ul li {
+    margin-bottom: 20px;
+}
+
+.sidebar1 ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.settings-content {
+    margin-left: 300px;
+    padding: 50px;
+    flex: 1;
+}
+
+.settings-content h2 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.settings-content form {
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-content form label {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.settings-content form input {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 50%;
+}
+
+.custom-button {
+    padding: 10px 10px;
+    background-color: #8bc34a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 10%;
+}
+
+button:hover {
+    background-color: #7cb342;
+}
+
+.help-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: 100px;
+}
+
+.image-container {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 50px;
+    margin-left: 250px;
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.text-container {
+    text-align: left;
+    font-size: 18px;
+    padding-left: 200px;
+}
