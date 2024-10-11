@@ -1,4 +1,4 @@
-        const storedToken = "AB12CD34EF56GH78IJ90";
+        const storedToken = "123456";
         function generateUserId() {
             return 'user_' + Date.now() + Math.floor(Math.random() * 1000);
        }
