@@ -1,4 +1,4 @@
-        const storedToken = "AB12CD34EF56GH78IJ90";
+        const storedToken = "123456";
         function generateUserId() {
             return 'user_' + Date.now() + Math.floor(Math.random() * 1000);
        }
@@ -13,7 +13,7 @@
 
             // Check if email ends with .gov
             if (!email.endsWith('.gov') || token !== storedToken) {
-                document.getElementById('error-message').style.display = 'block';
+                 alert('Invalid email or token. Please ensure your email ends with ".gov" and your token is correct.');
                 return;
             }
 
