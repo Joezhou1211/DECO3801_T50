@@ -408,14 +408,6 @@ function initializeChart() {
         globalData = jsonData;
         initializeTimeline();
 
-        // 计算全局最小和最大 Tweet 数量
-        globalData.data.forEach(dateData => {
-            dateData.locations.forEach(location => {
-                globalMinTweetCount = Math.min(globalMinTweetCount, location.tweet_count);
-                globalMaxTweetCount = Math.max(globalMaxTweetCount, location.tweet_count);
-            });
-        });
-
         const dayIndex = parseInt(timelineSlider.value, 10);
         const dateData = globalData.data[dayIndex];
 
@@ -437,13 +429,17 @@ function initializeChart() {
 
         currentLabel.style.display = 'none';
 
-        // Initialize Color Axis using global min and max tweet count
+        // Initialize Color Axis
+        const tweetCounts = aggregatedData.map(location => location.tweet_count);
+        const minTweetCount = Math.min(...tweetCounts);
+        const maxTweetCount = Math.max(...tweetCounts);
+
         defaultOptions = {
             backgroundColor: { fill: 'transparent' },
             colorAxis: {
                 colors: [color_start, color_end],
-                minValue: globalMinTweetCount,
-                maxValue: globalMaxTweetCount
+                minValue: minTweetCount,
+                maxValue: maxTweetCount
             },
             legend: 'none',
             datalessRegionColor: '#f0f0f0',
@@ -515,9 +511,12 @@ function updateMap(dateData) {
     });
     dataTable.addRows(dataRows);
 
-    // Use global min and max Tweet count for the color axis
-    defaultOptions.colorAxis.minValue = globalMinTweetCount;
-    defaultOptions.colorAxis.maxValue = globalMaxTweetCount;
+    // Update Color Axis
+    const tweetCounts = filteredLocations.map(location => location.tweet_count);
+    const minTweetCount = Math.min(...tweetCounts);
+    const maxTweetCount = Math.max(...tweetCounts);
+    defaultOptions.colorAxis.minValue = minTweetCount;
+    defaultOptions.colorAxis.maxValue = maxTweetCount;
 
     // Set Map Region and Resolution Based on Current Selection
     if (isContinentCode(currentRegion)) {
@@ -656,6 +655,22 @@ function zoomRegion(region) {
         updateMap(dateData);
         setupSidebarForGlobalView(dateData);
     }
+}
+
+/**
+ * Opens the Unknown regions popup.
+ */
+function openUnknownPopup() {
+    const popupContainer = document.getElementById('popupContainer');
+    const togglePopupBtn = document.getElementById('togglePopupBtn');
+    const popupArrowIcon = document.getElementById('popupArrowIcon');
+
+    console.log('Opening Unknown Popup');
+
+    popupContainer.classList.add('open');
+    updatePopupData();
+
+    popupArrowIcon.style.transform = 'rotate(180deg)';
 }
 
 /**
@@ -1247,30 +1262,28 @@ function updateContinentFilterForContinent(continentCode) {
     }
 }
 
+// Duplicate DOMContentLoaded listener removed to prevent multiple initializations
+
 /**
  * Initializes the popup functionality.
  */
 function initializePopup() {
     const togglePopupBtn = document.getElementById('togglePopupBtn');
     const popupContainer = document.getElementById('popupContainer');
-    const popupArrowIcon = document.getElementById('popupArrowIcon'); // 获取箭头图标
 
     console.log('Initializing Popup');
 
     if (togglePopupBtn && popupContainer) {
-        // 初始状态为展开，箭头指向外
+        // 初始状态为展开
         popupContainer.classList.add('open');
-        popupArrowIcon.style.transform = 'rotate(0deg)'; // 初始状态为箭头向内
 
         togglePopupBtn.addEventListener('click', function () {
             console.log('Popup toggle button clicked');
             const isOpen = popupContainer.classList.toggle('open');
 
             if (isOpen) {
-                popupArrowIcon.style.transform = 'rotate(0deg)'; // 如果弹出窗口是打开的，箭头向内
                 console.log('Popup opened');
             } else {
-                popupArrowIcon.style.transform = 'rotate(180deg)'; // 如果弹出窗口是关闭的，箭头向外
                 console.log('Popup closed');
             }
         });

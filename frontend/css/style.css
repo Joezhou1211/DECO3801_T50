@@ -45,7 +45,10 @@ body, html {
 .nav {
     display: flex;
     gap: 20px;
+    justify-content: flex-start;
+   padding-right: 80px;
 }
+
 
 .nav a {
     position: relative;
@@ -142,16 +145,13 @@ button:hover {
 .user-icon {
     position: relative;
     display: inline-block;
-    width: 40px;
-    height: auto;
 }
 
-/* User avatar image style: Adjust the size and appearance of the user profile image. */
-#userAvatar {
-    width: 40px;
-    height: 40px;
+.user-icon img {
+    width: 45px; /* Adjust the size as needed */
+    height: 45px;
     cursor: pointer;
-    border-radius: 50%;
+    border-radius: 50%; /* Makes the icon round */
 }
 
 /* Dropdown menu style: Set the visibility and design of the user dropdown menu. */
@@ -177,4 +177,20 @@ button:hover {
 
 .dropdown-menu a:hover {
     background-color: #f1f1f1;
+}
+
+.sidebar1 ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+@media screen and (max-width: 1200px) {
+    .nav {
+        align-items: flex-start; /* Align links to the left */
+    }
+
+    .nav a {
+        font-size: 13px; /* Adjust font size for smaller screens */
+        padding: 2px;
+    }
 }
