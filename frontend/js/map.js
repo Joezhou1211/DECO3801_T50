@@ -3,6 +3,8 @@ let intervalId = null;
 let globalData = {};
 let currentRegion = null;
 let selectedSubRegion = null;
+let globalMinTweetCount = Infinity;
+let globalMaxTweetCount = -Infinity;
 
 // Color constants for chart configuration.
 const color_start = '#fbf8e9';
@@ -86,7 +88,7 @@ const countryNames = {
     'CD': 'Congo, Democratic Republic',
     'CK': 'Cook Islands',
     'CR': 'Costa Rica',
-    'CI': "C濠电偞鍨堕弻銊ヮ熆閸楋拷 d'Ivoire",
+    'CI': "Côte d'Ivoire",
     'HR': 'Croatia',
     'CU': 'Cuba',
     'CY': 'Cyprus',
@@ -207,7 +209,7 @@ const countryNames = {
     'PT': 'Portugal',
     'PR': 'Puerto Rico',
     'QA': 'Qatar',
-    'RE': 'R闂備浇鍋愰崢褍鐣甸弨寤紀n',
+    'RE': 'Réunion',
     'RO': 'Romania',
     'RU': 'Russia',
     'RW': 'Rwanda',
@@ -340,7 +342,7 @@ const countryToContinent = {
 document.addEventListener("DOMContentLoaded", function () {
     setupEventListeners();
     initializeChart();
-    initializePopup();
+    initializePopup(); // 初始化弹出窗口
 });
 
 /**
@@ -357,9 +359,10 @@ function setupEventListeners() {
         timelineSlider.addEventListener('input', function () {
             const dayIndex = parseInt(this.value, 10);
             updateDisplayForDay(dayIndex);
-            // updateCurrentLabelPosition();
+            // updateCurrentLabelPosition(); // 可选：如果需要同步标签位置
         });
         timelineSlider.addEventListener('mouseleave', function () {
+            // 可选：添加相关逻辑
         });
     }
 
@@ -386,7 +389,7 @@ function setupEventListeners() {
  */
 google.charts.load('current', {
     'packages': ['geochart'],
-    'mapsApiKey': 'YOUR_GOOGLE_MAPS_API_KEY'
+    'mapsApiKey': 'YOUR_GOOGLE_MAPS_API_KEY' // 请替换为您的实际 API 密钥
 });
 google.charts.setOnLoadCallback(initializeChart);
 
@@ -405,6 +408,14 @@ function initializeChart() {
         globalData = jsonData;
         initializeTimeline();
 
+        // 计算全局最小和最大 Tweet 数量
+        globalData.data.forEach(dateData => {
+            dateData.locations.forEach(location => {
+                globalMinTweetCount = Math.min(globalMinTweetCount, location.tweet_count);
+                globalMaxTweetCount = Math.max(globalMaxTweetCount, location.tweet_count);
+            });
+        });
+
         const dayIndex = parseInt(timelineSlider.value, 10);
         const dateData = globalData.data[dayIndex];
 
@@ -414,29 +425,25 @@ function initializeChart() {
         dataTable.addColumn('number', 'Tweet Count');
         dataTable.addColumn({ type: 'string', role: 'tooltip', 'p': { 'html': true } });
 
+        // Aggregate data by country for initial view
+        const aggregatedData = aggregateDataByCountry(dateData.locations);
+
         // Initialize Data Rows
-        const dataRows = dateData.locations.map(location => {
-            let tooltip = `<div class="tooltip-content" style="padding: 5px;"><strong>${location.region_name}</strong><br/>Tweet Count: ${location.tweet_count}</div>`;
-            if (selectedSubRegion && location.region_code === selectedSubRegion) {
-                tooltip = `<div style="padding:5px; background-color:#ffeb3b;"><strong>${location.region_name}</strong><br/>Tweet Count: ${location.tweet_count}</div>`;
-            }
+        const dataRows = aggregatedData.map(location => {
+            let tooltip = generateTooltipContent(location);
             return [location.region_code, location.tweet_count, tooltip];
         });
         dataTable.addRows(dataRows);
 
         currentLabel.style.display = 'none';
 
-        // Initialize Color Axis
-        const tweetCounts = dateData.locations.map(location => location.tweet_count);
-        const minTweetCount = Math.min(...tweetCounts);
-        const maxTweetCount = Math.max(...tweetCounts);
-
+        // Initialize Color Axis using global min and max tweet count
         defaultOptions = {
             backgroundColor: { fill: 'transparent' },
             colorAxis: {
                 colors: [color_start, color_end],
-                minValue: minTweetCount,
-                maxValue: maxTweetCount
+                minValue: globalMinTweetCount,
+                maxValue: globalMaxTweetCount
             },
             legend: 'none',
             datalessRegionColor: '#f0f0f0',
@@ -488,6 +495,8 @@ function updateMap(dateData) {
             const countryCode = location.region_code.substring(0, 2);  // Extract country code from region code
             return countryToContinent[countryCode] === currentRegion;
         });
+        // Aggregate data by country
+        filteredLocations = aggregateDataByCountry(filteredLocations);
     } else if (isCountryCode(currentRegion)) {
         // Filter locations by country
         filteredLocations = dateData.locations.filter(location => location.region_code.startsWith(currentRegion + '-'));
@@ -501,17 +510,14 @@ function updateMap(dateData) {
 
     // Add new rows with tooltip
     const dataRows = filteredLocations.map(location => {
-        let tooltip = generateTooltipContent(location, viewMode);
+        let tooltip = generateTooltipContent(location);
         return [location.region_code, location.tweet_count, tooltip];
     });
     dataTable.addRows(dataRows);
 
-    // Update Color Axis
-    const tweetCounts = filteredLocations.map(location => location.tweet_count);
-    const minTweetCount = Math.min(...tweetCounts);
-    const maxTweetCount = Math.max(...tweetCounts);
-    defaultOptions.colorAxis.minValue = minTweetCount;
-    defaultOptions.colorAxis.maxValue = maxTweetCount;
+    // Use global min and max Tweet count for the color axis
+    defaultOptions.colorAxis.minValue = globalMinTweetCount;
+    defaultOptions.colorAxis.maxValue = globalMaxTweetCount;
 
     // Set Map Region and Resolution Based on Current Selection
     if (isContinentCode(currentRegion)) {
@@ -540,15 +546,25 @@ function aggregateDataByCountry(locations) {
     const countryData = {};
 
     locations.forEach(location => {
-        const countryCode = location.region_code.split('-')[0];
+        const countryCode = location.region_code.split('-')[0]; // Extract country code
         if (!countryData[countryCode]) {
             countryData[countryCode] = {
                 region_code: countryCode,
                 region_name: countryNames[countryCode] || 'Unknown',
-                tweet_count: 0
+                tweet_count: 0,
+                fake_news_count: 0,
+                fake_news_ratio: 0,
+                fake_news_topics: []
             };
         }
-        countryData[countryCode].tweet_count += location.tweet_count; // 绱姞 tweet 鏁版嵁
+        countryData[countryCode].tweet_count += location.tweet_count;
+        countryData[countryCode].fake_news_count += location.fake_news_count;
+        countryData[countryCode].fake_news_topics = countryData[countryCode].fake_news_topics.concat(location.fake_news_topics);
+    });
+
+    // Calculate fake news ratio for each country
+    Object.values(countryData).forEach(country => {
+        country.fake_news_ratio = country.tweet_count > 0 ? (country.fake_news_count / country.tweet_count).toFixed(4) : 0;
     });
 
     return Object.values(countryData);
@@ -558,20 +574,14 @@ function aggregateDataByCountry(locations) {
  * Generates the HTML content for the tooltip to display detailed region information.
  *
  * @param {Object} location - The location data containing region details.
- * @param {String} viewMode - The current view mode to determine the tooltip format.
- * @returns {String} The HTML content for the tooltip.
- */
-/**
- * Generates the HTML content for the tooltip to display detailed region information.
- *
- * @param {Object} location - The location data containing region details.
  * @returns {String} The HTML content for the tooltip.
  */
 function generateTooltipContent(location) {
-    // Display only tweet count data regardless of view mode
     return `<div style="padding:5px;">
                 <strong>${location.region_name}</strong><br/>
-                Tweet Count: ${location.tweet_count}
+                Tweet Count: ${location.tweet_count}<br/>
+                Fake News Count: ${location.fake_news_count}<br/>
+                Fake News Ratio: ${location.fake_news_ratio}
             </div>`;
 }
 
@@ -595,7 +605,7 @@ function setupInteraction() {
  *
  * Functionality:
  * This function manages the behavior when a user clicks on a region on the map.
- * it adjusts the view and updates the map and sidebar accordingly depending on the type of region clicked.
+ * It adjusts the view and updates the map and sidebar accordingly depending on the type of region clicked.
  *
  * @param {String} region - The code of the region that was clicked by the user.
  */
@@ -607,54 +617,45 @@ function zoomRegion(region) {
     console.log(`Region clicked: ${region}`);
 
     if (isCountryCode(region)) {
+        // 点击国家
         currentRegion = region;
         selectedSubRegion = null;
         viewMode = 'country';
         backButton.style.display = 'block';
-        backButton.innerText = 'Back to World Map';
+        backButton.innerText = 'Back to the World Map';
 
         updateMap(dateData);
         updateContinentFilterForCountry(region);
         updateSidebar(dateData);
     } else if (isSubRegionCode(region)) {
+        // 点击子区域（州/省）
         selectedSubRegion = region;
         viewMode = 'subregion';
         backButton.style.display = 'block';
-        backButton.innerText = `Back to World Map`;
+        backButton.innerText = 'Back to the World Map';
 
         updateMap(dateData);
         setupSidebarForSubRegionView(selectedSubRegion, dateData);
     } else if (isContinentCode(region)) {
+        // 点击大洲
         currentRegion = region;
         selectedSubRegion = null;
         viewMode = 'continent';
         backButton.style.display = 'block';
-        backButton.innerText = 'Back to World Map';
+        backButton.innerText = 'Back to the World Map';
 
         updateMap(dateData);
         updateContinentFilterForContinent(region);
         updateSidebar(dateData);
     } else {
+        // 其他情况，返回全球视图
         currentRegion = null;
         selectedSubRegion = null;
         viewMode = 'global';
         backButton.style.display = 'none';
         updateMap(dateData);
-        updateSidebar(dateData);
+        setupSidebarForGlobalView(dateData);
     }
-}
-
-function openUnknownPopup() {
-    const popupContainer = document.getElementById('popupContainer');
-    const togglePopupBtn = document.getElementById('togglePopupBtn');
-    const popupArrowIcon = document.getElementById('popupArrowIcon');
-
-    console.log('Opening Unknown Popup');
-
-    popupContainer.classList.add('open');
-    updatePopupData();
-
-    popupArrowIcon.style.transform = 'rotate(180deg)';
 }
 
 /**
@@ -704,7 +705,7 @@ function initializeTimeline() {
     timelineSlider.value = 0;
     updateCurrentLabelPosition(); // Ensure the label starts at the right position
 
-    // Add event listener to update the label during slider input (no post-event centering)
+    // Add event listener to update the label during slider input
     timelineSlider.addEventListener('input', function () {
         const dayIndex = parseInt(this.value, 10);
         updateDisplayForDay(dayIndex);
@@ -743,6 +744,7 @@ function updateDisplayForDay(dayIndex) {
     updateSidebar(dateData);
     updateCurrentLabelPosition(); // Ensure the label position updates during sliding or autoplay
 
+    // 如果弹出窗口是打开的，更新弹出窗口数据
     const popupContainer = document.getElementById('popupContainer');
     if (popupContainer.classList.contains('open')) {
         updatePopupData();
@@ -765,25 +767,30 @@ function updateSidebar(dateData) {
     let locations = [];
 
     if (viewMode === 'global') {
-        // Global view
+        // Global view: 聚合所有国家级别的数据
         regionName = 'Global View';
-        locations = dateData.locations;  // Display all locations globally
+        locations = aggregateDataByCountry(dateData.locations);  // 按国家级别聚合数据
+        regionDetails.innerHTML = generateSidebarContent(locations, regionName);
     } else if (viewMode === 'continent') {
+        // Continent view: 由 setupSidebarForContinentView 处理
         setupSidebarForContinentView(currentRegion, dateData);
-        return;  // Continent view handled by setupSidebarForContinentView
     } else if (viewMode === 'country') {
+        // Country view: 按国家内的子区域聚合数据
         regionName = getRegionName(currentRegion);
-        locations = dateData.locations.filter(location => location.region_code.startsWith(currentRegion));
-        regionDetails.innerHTML = generateSidebarContent(locations, regionName); // display country-level data on sidebar
+        const locationsInCountry = dateData.locations.filter(location => location.region_code.startsWith(currentRegion + '-'));
+        const aggregatedCountryData = aggregateDataByCountry(locationsInCountry); // 按国家级别聚合数据
+        regionDetails.innerHTML = generateSidebarContent(aggregatedCountryData, regionName);
     } else if (viewMode === 'subregion') {
+        // Subregion view: 显示单个子区域的数据
         regionName = getRegionName(selectedSubRegion);
         const locationData = dateData.locations.find(location => location.region_code === selectedSubRegion);
         if (locationData) {
-            locations = [locationData];  // Display only the selected sub-region's data
+            locations = [locationData];  // 仅显示选定子区域的数据
+            regionDetails.innerHTML = generateSidebarContent(locations, regionName);
+        } else {
+            regionDetails.innerHTML = `<h2>${regionName}</h2><p>No data available for this state/province.</p>`;
         }
     }
-
-    regionDetails.innerHTML = generateSidebarContent(locations, regionName);
 }
 
 /**
@@ -812,13 +819,13 @@ function generateSidebarContent(locations, regionName) {
 
     const fakeNewsRatio = totalTweetCount > 0 ? (totalFakeNewsCount / totalTweetCount).toFixed(4) : 0;
 
-    // count the most common false news topics
+    // 统计最常见的假新闻主题
     const topicCounts = {};
     allFakeNewsTopics.forEach(topic => {
         topicCounts[topic] = (topicCounts[topic] || 0) + 1;
     });
     const sortedTopics = Object.keys(topicCounts).sort((a, b) => topicCounts[b] - topicCounts[a]);
-    const topFakeNewsTopics = sortedTopics.length > 0 ? sortedTopics.slice(0, 5) : ['No Topics Available']; // Show "No Topics Available" if no data
+    const topFakeNewsTopics = sortedTopics.length > 0 ? sortedTopics.slice(0, 5) : ['No Topics Available']; // 如果没有数据，则显示默认信息
 
     return `
         <h2>${regionName}</h2>
@@ -892,34 +899,37 @@ function setupSidebarForContinentView(continentCode, dateData) {
     const regionDetails = document.getElementById('regionDetails');
     const regionName = continentNames[continentCode] || continentCode;
 
-    // Get all countries in a continent
+    // 获取属于该大洲的所有国家代码
     const countriesInContinent = Object.keys(countryToContinent).filter(countryCode => countryToContinent[countryCode] === continentCode);
 
-    // Filter locations within a continent
-    const locationsInContinent = dateData.locations.filter(location => countriesInContinent.includes(location.region_code));
+    // 过滤出该大洲内的所有位置数据
+    const locationsInContinent = dateData.locations.filter(location => countriesInContinent.includes(location.region_code.split('-')[0]));
+
+    // 按国家级别聚合数据
+    const aggregatedCountries = aggregateDataByCountry(locationsInContinent);
 
     let totalTweetCount = 0;
     let totalFakeNewsCount = 0;
     let allFakeNewsTopics = [];
 
-    // Cumulative tweets and fake news statistics
-    locationsInContinent.forEach(location => {
-        totalTweetCount += location.tweet_count;
-        totalFakeNewsCount += location.fake_news_count;
-        allFakeNewsTopics = allFakeNewsTopics.concat(location.fake_news_topics);
+    // 计算总的推文数和假新闻数，并收集所有假新闻主题
+    aggregatedCountries.forEach(country => {
+        totalTweetCount += country.tweet_count;
+        totalFakeNewsCount += country.fake_news_count;
+        allFakeNewsTopics = allFakeNewsTopics.concat(country.fake_news_topics);
     });
 
     const fakeNewsRatio = totalTweetCount > 0 ? (totalFakeNewsCount / totalTweetCount).toFixed(4) : 0;
 
-    // Count Most popular fake news topics
+    // 计算最常见的假新闻主题
     const topicCounts = {};
     allFakeNewsTopics.forEach(topic => {
         topicCounts[topic] = (topicCounts[topic] || 0) + 1;
     });
     const sortedTopics = Object.keys(topicCounts).sort((a, b) => topicCounts[b] - topicCounts[a]);
-    const topFakeNewsTopics = sortedTopics.length > 0 ? sortedTopics.slice(0, 5) : ['No Topics Available']; // Show "No Topics Available" if no data
+    const topFakeNewsTopics = sortedTopics.length > 0 ? sortedTopics.slice(0, 5) : ['No Topics Available']; // 如果没有数据，则显示默认信息
 
-    // Structure the Sidebar Content
+    // 构建侧边栏内容
     let content = `
         <h2>${regionName}</h2>
         <p><strong>Total Tweet Count:</strong> ${totalTweetCount}</p>
@@ -931,20 +941,20 @@ function setupSidebarForContinentView(continentCode, dateData) {
         </ul>
     `;
 
-    // Only add countries section if data exists
-    if (locationsInContinent.length > 0) {
+    // 添加各国的详细数据
+    if (aggregatedCountries.length > 0) {
         content += `
             <h3>Countries</h3>
             <div id="countryDataContainer">
-                ${locationsInContinent.map((location, index) => `
+                ${aggregatedCountries.map((country, index) => `
                     <div>
-                        <strong>${index + 1}. ${location.region_name}</strong><br>
-                        <strong>Total Tweet Count:</strong> ${location.tweet_count}<br>
-                        <strong>Total Fake News Count:</strong> ${location.fake_news_count}<br>
-                        <strong>Fake News Ratio:</strong> ${(location.fake_news_count / location.tweet_count).toFixed(4)}<br>
+                        <strong>${index + 1}. ${country.region_name}</strong><br>
+                        <strong>Total Tweet Count:</strong> ${country.tweet_count}<br>
+                        <strong>Total Fake News Count:</strong> ${country.fake_news_count}<br>
+                        <strong>Fake News Ratio:</strong> ${country.fake_news_ratio}<br>
                         <strong>Top Fake News Topics:</strong>
                         <ul>
-                            ${location.fake_news_topics.length > 0 ? location.fake_news_topics.map(topic => `<li>${topic}</li>`).join('') : '<li>No Topics Available</li>'}
+                            ${country.fake_news_topics.length > 0 ? country.fake_news_topics.map(topic => `<li>${topic}</li>`).join('') : '<li>No Topics Available</li>'}
                         </ul>
                     </div>
                 `).join('')}
@@ -952,7 +962,7 @@ function setupSidebarForContinentView(continentCode, dateData) {
         `;
     }
 
-    // Update sidebar content
+    // 更新侧边栏内容
     regionDetails.innerHTML = content;
 }
 
@@ -968,7 +978,7 @@ function setupSidebarForContinentView(continentCode, dateData) {
  */
 function setupSidebarForSubRegionView(subRegionCode, dateData) {
     const regionDetails = document.getElementById('regionDetails');
-    const regionName = subRegionNames[subRegionCode] || getRegionName(subRegionCode);
+    const regionName = subRegionNames[subRegionCode] || getRegionName(subRegionCode);  // 获取子区域名称
 
     // Get data for the state/province
     const locationData = dateData.locations.find(location => location.region_code === subRegionCode);
@@ -977,7 +987,7 @@ function setupSidebarForSubRegionView(subRegionCode, dateData) {
     if (locationData) {
         const fakeNewsTopicsList = locationData.fake_news_topics
             .map(topic => `<li>${topic}</li>`)
-            .join('');  // Traverse the topic list
+            .join('');  // 遍历主题列表
 
         const content = `
             <h2>${locationData.region_name}</h2>
@@ -1112,12 +1122,14 @@ function setupBackButton() {
             const dateData = globalData.data[dayIndex];
 
             if (viewMode === 'subregion') {
+                // 从子区域视图返回到国家视图
                 selectedSubRegion = null;
                 viewMode = 'country';
-                backButton.innerText = 'Back to World Map';
+                backButton.innerText = 'Back to the World Map';
                 updateMap(dateData);
                 updateSidebar(dateData);
             } else if (viewMode === 'country' || viewMode === 'continent') {
+                // 从国家或大洲视图返回到全球视图
                 currentRegion = null;
                 selectedSubRegion = null;
                 viewMode = 'global';
@@ -1125,9 +1137,10 @@ function setupBackButton() {
                 updateMap(dateData);
                 setupSidebarForGlobalView(dateData);
 
+                // 重置大陆选择器为全球视图
                 const continentSelector = document.getElementById('continentSelector');
                 if (continentSelector) {
-                    continentSelector.value = "000";
+                    continentSelector.value = "000"; // 设置为 "000" 表示全球视图
                 }
             }
         });
@@ -1166,31 +1179,36 @@ function zoomToContinent(continentCode) {
     const dayIndex = parseInt(timelineSlider.value, 10);
     const dateData = globalData.data[dayIndex];
 
-    if (continentCode === "000") {
+    if (continentCode === "000") { // "000" 表示全球视图
+        // 回到全球视图
         currentRegion = null;
         viewMode = 'global';
-        updateContinentFilter(viewMode);
+        updateContinentFilter(viewMode);  // 更新大陆选择器为全球视图
 
         updateMap(dateData);
-        setupSidebarForGlobalView(dateData);
+        setupSidebarForGlobalView(dateData); // 设置全球视图的侧边栏
 
+        // 隐藏返回按钮
         const backButton = document.getElementById('backButton');
         backButton.style.display = 'none';
 
+        // 重置大陆选择器为 "000" 表示全球视图
         const continentSelector = document.getElementById('continentSelector');
         if (continentSelector) {
-            continentSelector.value = "000"; //
+            continentSelector.value = "000"; // 设置为 "000" 表示全球视图
         }
     } else {
+        // 进入特定大陆视图
         currentRegion = continentCode;
         viewMode = 'continent';
-        updateMap(dateData);
-        updateSidebar(dateData);
+        updateMap(dateData);  // 更新地图显示
+        updateSidebar(dateData);  // 更新侧边栏
 
         const backButton = document.getElementById('backButton');
-        backButton.style.display = 'block';
-        backButton.innerText = 'Back to World Map';
+        backButton.style.display = 'block';  // 显示返回按钮
+        backButton.innerText = 'Back to the World Map';
 
+        // 更新大陆选择器为选中的大陆
         const continentSelector = document.getElementById('continentSelector');
         if (continentSelector) {
             continentSelector.value = continentCode;
@@ -1229,35 +1247,31 @@ function updateContinentFilterForContinent(continentCode) {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    setupEventListeners();
-    initializeChart();
-    initializePopup();
-});
-
+/**
+ * Initializes the popup functionality.
+ */
 function initializePopup() {
     const togglePopupBtn = document.getElementById('togglePopupBtn');
     const popupContainer = document.getElementById('popupContainer');
-    const popupArrowIcon = document.getElementById('popupArrowIcon');
+    const popupArrowIcon = document.getElementById('popupArrowIcon'); // 获取箭头图标
 
     console.log('Initializing Popup');
 
-    if (togglePopupBtn && popupContainer && popupArrowIcon) {
+    if (togglePopupBtn && popupContainer) {
+        // 初始状态为展开，箭头指向外
         popupContainer.classList.add('open');
-        updatePopupData();
-        popupArrowIcon.style.transform = 'rotate(0deg)';
+        popupArrowIcon.style.transform = 'rotate(0deg)'; // 初始状态为箭头向内
 
         togglePopupBtn.addEventListener('click', function () {
             console.log('Popup toggle button clicked');
-            popupContainer.classList.toggle('open');
+            const isOpen = popupContainer.classList.toggle('open');
 
-            if (popupContainer.classList.contains('open')) {
+            if (isOpen) {
+                popupArrowIcon.style.transform = 'rotate(0deg)'; // 如果弹出窗口是打开的，箭头向内
                 console.log('Popup opened');
-                updatePopupData();
-                popupArrowIcon.style.transform = 'rotate(0deg)';
             } else {
+                popupArrowIcon.style.transform = 'rotate(180deg)'; // 如果弹出窗口是关闭的，箭头向外
                 console.log('Popup closed');
-                popupArrowIcon.style.transform = 'rotate(180deg)';
             }
         });
     } else {
@@ -1274,10 +1288,12 @@ function updatePopupData() {
     const dateData = globalData.data[dayIndex];
     console.log(`Updating popup data for day index: ${dayIndex}`);
 
+    // Filter regions with 'Unknown' region_code
     const unknownDataArray = dateData.locations.filter(location => location.region_code === 'Unknown');
     console.log('Unknown Data Array:', unknownDataArray);
 
     if (unknownDataArray.length > 0) {
+        // Aggregate tweet_count and fake_news_count for 'Unknown' regions
         const totalTweetCount = unknownDataArray.reduce((sum, location) => sum + location.tweet_count, 0);
         const totalFakeNewsCount = unknownDataArray.reduce((sum, location) => sum + location.fake_news_count, 0);
         const fakeNewsRatio = totalTweetCount > 0 ? (totalFakeNewsCount / totalTweetCount).toFixed(4) : 0;
@@ -1286,9 +1302,10 @@ function updatePopupData() {
         document.getElementById('popupFakeNewsCount').textContent = totalFakeNewsCount;
         document.getElementById('popupFakeNewsRatio').textContent = fakeNewsRatio;
 
+        // Aggregate fake_news_topics
         const allFakeNewsTopics = unknownDataArray.flatMap(location => location.fake_news_topics);
         const topicsList = document.getElementById('popupFakeNewsTopics');
-        topicsList.innerHTML = '';
+        topicsList.innerHTML = ''; // Clear existing topics
 
         allFakeNewsTopics.forEach(topic => {
             const li = document.createElement('li');
@@ -1303,14 +1320,16 @@ function updatePopupData() {
     }
 }
 
+/**
+ * Adds functionality to take a screenshot of the map.
+ */
 document.getElementById('screenshotButton').addEventListener('click', function () {
-    const targetElement = document.getElementById('regions_div'); // 閺囨寧宕叉稉杞扮稑閹櫕鍩呴崶鍓ф畱閸忓啰绀岄惃鍑
+    const targetElement = document.getElementById('regions_div'); // 指定需要截图的元素
 
-    html2canvas(document.body).then(canvas => {
+    html2canvas(targetElement).then(canvas => {
         const link = document.createElement('a');
         link.href = canvas.toDataURL('image/png');
-        link.download = 'full-page-screenshot.png';
+        link.download = 'map-screenshot.png';
         link.click();
     });
 });
-
