@@ -49,47 +49,49 @@ document.getElementById('editChartDateIcon').addEventListener('click', function(
     chartDate.focus();
 });
 
-document.getElementById('editTableDateIcon').addEventListener('click', function() {
-    const tableDate = document.getElementById('tableDate');
-    tableDate.setAttribute('contenteditable', true);
-    tableDate.focus();
-});
-
 document.getElementById('chartDate').addEventListener('keydown', function (e) {
     if (e.key === 'Enter') {
         e.preventDefault();
         applyChartDateChange();
     }
 });
+
 document.getElementById('chartDate').addEventListener('blur', applyChartDateChange);
 
 function applyChartDateChange() {
     const chartDateInput = document.getElementById('chartDate').textContent.trim();
-    const newDate = new Date(chartDateInput);
+    const dateRangePattern = /^from (\d{1,2} \w{3} \d{4}) to (\d{1,2} \w{3} \d{4})$/;
+    const singleDatePattern = /^(\d{1,2} \w{3} \d{4})$/;
 
-    // Check if the newDate is valid and within the allowed range
-    if (!isNaN(newDate.getTime()) && newDate >= minDate && newDate <= maxDate) {
-        lastValidChartDate = newDate; // Save the last valid date
-        const chartData = processChartData(globalData, newDate);
-        updateChart(chartData);
+    if (dateRangePattern.test(chartDateInput)) {
+        const [, startDateInput, endDateInput] = chartDateInput.match(dateRangePattern);
+        const startDate = new Date(startDateInput);
+        const endDate = new Date(endDateInput);
 
-        // Format the displayed date consistently
-        document.getElementById('chartDate').textContent = newDate.toLocaleDateString('en-GB', {
-            year: 'numeric',
-            month: 'short', // Ensure short month format (e.g., "Jan")
-            day: 'numeric'
-        });
+        // Validate if dates are within the allowed range
+        if (startDate >= new Date('2019-11-08') && endDate <= new Date('2020-01-24')) {
+            updateChartDateRangeLabel(startDate, endDate);
+            const chartData = processAccumulatedData(globalData, startDate, endDate);
+            updateChart(chartData);
+        } else {
+            alert('Please enter dates between 8 Nov 2019 and 24 Jan 2020.');
+        }
+    } else if (singleDatePattern.test(chartDateInput)) {
+        const newDate = new Date(chartDateInput);
 
-        document.getElementById('chartDate').setAttribute('contenteditable', false); // Disable editing
+        // Check if the newDate is valid and within the allowed range
+        if (!isNaN(newDate.getTime()) && newDate >= new Date('2019-11-08') && newDate <= new Date('2020-01-24')) {
+            updateChartSingleDateLabel(newDate);
+            const chartData = processChartData(globalData, newDate);
+            updateChart(chartData);
+        } else {
+            alert('Please enter a date between 8 Nov 2019 and 24 Jan 2020.');
+        }
     } else {
-        alert('Please enter a date between 8 Nov 2019 and 24 Jan 2020.');
-        document.getElementById('chartDate').textContent = lastValidChartDate.toLocaleDateString('en-GB', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric'
-        });
-        document.getElementById('chartDate').setAttribute('contenteditable', false); // Disable editing
+        alert('Please enter a valid date or date range (e.g., "from 1 Jan 2020 to 24 Jan 2020").');
     }
+
+    document.getElementById('chartDate').setAttribute('contenteditable', false); // Disable editing
 }
 
 document.getElementById('tableDate').addEventListener('keydown', function (e) {
@@ -437,10 +439,20 @@ function updateChart(chartData) {
                 }]
             },
             options: {
-                indexAxis: 'y',
+                indexAxis: 'y', // This makes the chart horizontal
                 scales: {
                     x: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Total Count', // Y-axis title
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Topics', // X-axis title
+                        }
                     }
                 },
                 plugins: {
@@ -463,6 +475,7 @@ function updateChart(chartData) {
         });
     }
 }
+
 
 tableViewBtn.addEventListener('click', function() {
     tableViewBtn.classList.add('active');
