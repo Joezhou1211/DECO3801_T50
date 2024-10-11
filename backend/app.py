@@ -1,9 +1,12 @@
-from flask import Flask, request, jsonify, render_template, send_from_directory
+from flask import Flask, request, jsonify, render_template, send_from_directory, send_file
 import os
 import logging
 from flask_cors import CORS
 from elasticsearch_service import es_service
 from news_service import analyze_event
+import pandas as pd
+import io
+
 
 # 设置 Flask 应用
 app = Flask(
@@ -70,27 +73,41 @@ def serve_data(filename):
 
 
 # API 路由 - 搜索
-@app.route('/api/search', methods=['GET'])
+@app.route('/api/search', methods=['POST'])
 def search():
-    query = request.args.get('query')
+    filters = request.json
+    page = int(request.args.get('page', 1))
+    page_size = int(request.args.get('page_size', 50))
     try:
-        results = es_service.search(query)
+        results = es_service.search(filters, page=page, page_size=page_size)
         return jsonify(results)
     except Exception as e:
-        logger.error(f"Error during search: {e}")
         return jsonify({"error": str(e)}), 500
 
 
-# API 路由 - 按天获取主题
-@app.route('/api/topics_by_day', methods=['GET'])
-def get_topics_by_day():
-    date = request.args.get('date')
+# API 路由 - 下载选定的数据
+@app.route('/api/download', methods=['POST'])
+def download():
+    selected_ids = request.json.get('selected_ids', [])
+    if not selected_ids:
+        return jsonify({"error": "No IDs provided"}), 400
+
     try:
-        results = es_service.get_top_topics_by_day(date)
-        return jsonify(results)
+        full_data = es_service.get_full_data(selected_ids)
+        df = pd.DataFrame(full_data)
+
+        # 将 DataFrame 转换为 CSV 格式
+        output = io.StringIO()
+        df.to_csv(output, index=False)
+        output.seek(0)
+
+        return send_file(io.BytesIO(output.getvalue().encode('utf-8')),
+                         mimetype='text/csv',
+                         as_attachment=True,
+                         attachment_filename='selected_data.csv')
     except Exception as e:
-        logger.error(f"Error during topic retrieval: {e}")
         return jsonify({"error": str(e)}), 500
+
 
 
 # API 路由 - 检查新闻真实性

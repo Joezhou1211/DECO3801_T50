@@ -5,12 +5,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const uploadBtn = document.getElementById('upload-btn');
     const resultBox = document.getElementById('result-box');
 
-    // 根据选择的类型展示或隐藏推文上传
     filterSelect.addEventListener('change', function () {
         if (this.value === 'tweet') {
-            uploadContainer.style.display = 'block'; // 显示上传推文部分
+            uploadContainer.style.display = 'block';
         } else {
-            uploadContainer.style.display = 'none'; // 隐藏上传推文部分
+            uploadContainer.style.display = 'none';
         }
     });
 
@@ -62,7 +61,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const uploadFile = document.getElementById('tweet-upload').files[0];
         if (uploadFile) {
             resultBox.innerHTML = `<p>Uploading tweet...</p>`;
-            // 模拟文件上传
             setTimeout(() => {
                 resultBox.innerHTML = `<p>Tweet uploaded successfully and detection is being processed...</p>`;
             }, 1000);
