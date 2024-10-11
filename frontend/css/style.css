@@ -45,8 +45,10 @@ body, html {
 .nav {
     display: flex;
     gap: 20px;
-    padding-right: 500px; /* Optional: Adds space from the left edge */
+    justify-content: flex-start;
+   padding-right: 80px;
 }
+
 
 .nav a {
     position: relative;
@@ -180,4 +182,15 @@ button:hover {
 .sidebar1 ul {
     list-style-type: none;
     padding: 0;
+}
+
+@media screen and (max-width: 1200px) {
+    .nav {
+        align-items: flex-start; /* Align links to the left */
+    }
+
+    .nav a {
+        font-size: 13px; /* Adjust font size for smaller screens */
+        padding: 2px;
+    }
 }
