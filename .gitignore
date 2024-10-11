@@ -22,3 +22,4 @@ data/processed/fake.csv
 data/processed/final_data_cleaned.csv
 data/processed/location_counts.json
 data/processed/fake.json
+data/processed/topic_data(old).json
