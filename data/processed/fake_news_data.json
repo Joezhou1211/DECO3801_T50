@@ -1,232 +1,22 @@
 {
     "metadata": {
-        "start_date": "2019-05-31",
-        "end_date": "2020-02-19"
+        "start_date": "2019-11-08",
+        "end_date": "2020-01-24"
     },
     "data": [
         {
-            "date": "2019-05-31",
+            "date": "2019-11-08",
             "locations": [
                 {
-                    "region_code": "AU-TAS",
-                    "region_name": "Tasmania, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Wildlife and Environmental Impact"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2019-08-19",
-            "locations": [
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Unknown",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2019-08-22",
-            "locations": [
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Unknown",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2019-08-24",
-            "locations": [
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Unknown",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emergency Information and Public Safety"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2019-09-06",
-            "locations": [
-                {
-                    "region_code": "Unknown",
+                    "region_code": "AU",
                     "region_name": "Australia",
                     "tweet_count": 1,
                     "fake_news_count": 0,
                     "fake_news_ratio": 0.0,
                     "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2019-09-07",
-            "locations": [
-                {
-                    "region_code": "AU-VIC",
-                    "region_name": "Victoria, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Wildlife Devastation"
+                        "Geographical and Location-Based Information"
                     ]
                 },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Unknown",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2019-09-14",
-            "locations": [
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Unknown",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2019-09-15",
-            "locations": [
-                {
-                    "region_code": "AU-NSW",
-                    "region_name": "New South Wales, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2019-09-19",
-            "locations": [
-                {
-                    "region_code": "US",
-                    "region_name": "United States",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2019-09-29",
-            "locations": [
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Unknown",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Wildlife Devastation"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2019-10-17",
-            "locations": [
-                {
-                    "region_code": "AU-NSW",
-                    "region_name": "New South Wales, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2019-10-23",
-            "locations": [
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Unknown",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Wildlife and Environmental Impact"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2019-10-27",
-            "locations": [
-                {
-                    "region_code": "AU-NSW",
-                    "region_name": "New South Wales, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Wildlife Devastation"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2019-11-01",
-            "locations": [
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Unknown",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emergency Information and Public Safety"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2019-11-08",
-            "locations": [
                 {
                     "region_code": "AU-ACT",
                     "region_name": "Australian Capital Territory, Australia",
@@ -246,22 +36,23 @@
                     "fake_news_topics": [
                         "Geographical and Location-Based Information"
                     ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information"
-                    ]
                 }
             ]
         },
         {
             "date": "2019-11-09",
             "locations": [
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 2,
+                    "fake_news_count": 0,
+                    "fake_news_ratio": 0.0,
+                    "fake_news_topics": [
+                        "Unknown topic",
+                        "Geographical and Location-Based Information"
+                    ]
+                },
                 {
                     "region_code": "AU-ACT",
                     "region_name": "Australian Capital Territory, Australia",
@@ -302,17 +93,6 @@
                     "fake_news_ratio": 0.0,
                     "fake_news_topics": [
                         "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Unknown topic",
-                        "Geographical and Location-Based Information"
                     ]
                 },
                 {
@@ -399,6 +179,16 @@
             "date": "2019-11-11",
             "locations": [
                 {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 1,
+                    "fake_news_count": 0,
+                    "fake_news_ratio": 0.0,
+                    "fake_news_topics": [
+                        "Geographical and Location-Based Information"
+                    ]
+                },
+                {
                     "region_code": "AU-ACT",
                     "region_name": "Australian Capital Territory, Australia",
                     "tweet_count": 2,
@@ -431,16 +221,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Russian Federation",
                     "tweet_count": 1,
                     "fake_news_count": 0,
@@ -465,6 +245,16 @@
         {
             "date": "2019-11-12",
             "locations": [
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 4,
+                    "fake_news_count": 0,
+                    "fake_news_ratio": 0.0,
+                    "fake_news_topics": [
+                        "Geographical and Location-Based Information"
+                    ]
+                },
                 {
                     "region_code": "AU-ACT",
                     "region_name": "Australian Capital Territory, Australia",
@@ -498,16 +288,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 4,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Unknown",
                     "tweet_count": 6,
                     "fake_news_count": 0,
@@ -526,6 +306,17 @@
             "date": "2019-11-13",
             "locations": [
                 {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 3,
+                    "fake_news_count": 0,
+                    "fake_news_ratio": 0.0,
+                    "fake_news_topics": [
+                        "Fundraising and Community Support",
+                        "Political Criticism and Government Response"
+                    ]
+                },
+                {
                     "region_code": "AU-QLD",
                     "region_name": "Queensland, Australia",
                     "tweet_count": 1,
@@ -543,17 +334,6 @@
                     "fake_news_ratio": 0.0,
                     "fake_news_topics": [
                         "Geographical and Location-Based Information"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 3,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support",
-                        "Political Criticism and Government Response"
                     ]
                 },
                 {
@@ -599,17 +379,7 @@
             "date": "2019-11-15",
             "locations": [
                 {
-                    "region_code": "AU-NSW",
-                    "region_name": "New South Wales, Australia",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
+                    "region_code": "AU",
                     "region_name": "Australia",
                     "tweet_count": 2,
                     "fake_news_count": 0,
@@ -617,6 +387,16 @@
                     "fake_news_topics": [
                         "Political Criticism and Government Response",
                         "Emotional and Spiritual Reactions"
+                    ]
+                },
+                {
+                    "region_code": "AU-NSW",
+                    "region_name": "New South Wales, Australia",
+                    "tweet_count": 2,
+                    "fake_news_count": 0,
+                    "fake_news_ratio": 0.0,
+                    "fake_news_topics": [
+                        "Geographical and Location-Based Information"
                     ]
                 },
                 {
@@ -710,6 +490,16 @@
             "date": "2019-11-20",
             "locations": [
                 {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 1,
+                    "fake_news_count": 0,
+                    "fake_news_ratio": 0.0,
+                    "fake_news_topics": [
+                        "Political Criticism and Government Response"
+                    ]
+                },
+                {
                     "region_code": "AU-ACT",
                     "region_name": "Australian Capital Territory, Australia",
                     "tweet_count": 2,
@@ -743,16 +533,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Unknown",
                     "tweet_count": 1,
                     "fake_news_count": 0,
@@ -766,6 +546,16 @@
         {
             "date": "2019-11-21",
             "locations": [
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 1,
+                    "fake_news_count": 0,
+                    "fake_news_ratio": 0.0,
+                    "fake_news_topics": [
+                        "Political Criticism and Government Response"
+                    ]
+                },
                 {
                     "region_code": "AU-ACT",
                     "region_name": "Australian Capital Territory, Australia",
@@ -804,16 +594,6 @@
                     "fake_news_ratio": 0.0,
                     "fake_news_topics": [
                         "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response"
                     ]
                 },
                 {
@@ -1069,6 +849,16 @@
             "date": "2019-12-04",
             "locations": [
                 {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 1,
+                    "fake_news_count": 0,
+                    "fake_news_ratio": 0.0,
+                    "fake_news_topics": [
+                        "Emotional and Spiritual Reactions"
+                    ]
+                },
+                {
                     "region_code": "GB",
                     "region_name": "United Kingdom",
                     "tweet_count": 1,
@@ -1076,16 +866,6 @@
                     "fake_news_ratio": 0.0,
                     "fake_news_topics": [
                         "Wildlife Devastation"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
                     ]
                 },
                 {
@@ -1144,6 +924,16 @@
             "date": "2019-12-06",
             "locations": [
                 {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 1,
+                    "fake_news_count": 0,
+                    "fake_news_ratio": 0.0,
+                    "fake_news_topics": [
+                        "Geographical and Location-Based Information"
+                    ]
+                },
+                {
                     "region_code": "AU-NSW",
                     "region_name": "New South Wales, Australia",
                     "tweet_count": 24,
@@ -1188,16 +978,6 @@
                 {
                     "region_code": "GB",
                     "region_name": "United Kingdom",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Australia",
                     "tweet_count": 1,
                     "fake_news_count": 0,
                     "fake_news_ratio": 0.0,
@@ -1411,6 +1191,16 @@
             "date": "2019-12-11",
             "locations": [
                 {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 1,
+                    "fake_news_count": 0,
+                    "fake_news_ratio": 0.0,
+                    "fake_news_topics": [
+                        "Geographical and Location-Based Information"
+                    ]
+                },
+                {
                     "region_code": "AU-ACT",
                     "region_name": "Australian Capital Territory, Australia",
                     "tweet_count": 1,
@@ -1433,16 +1223,6 @@
                 {
                     "region_code": "US",
                     "region_name": "United States",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Australia",
                     "tweet_count": 1,
                     "fake_news_count": 0,
                     "fake_news_ratio": 0.0,
@@ -1601,6 +1381,16 @@
             "date": "2019-12-16",
             "locations": [
                 {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 3,
+                    "fake_news_count": 0,
+                    "fake_news_ratio": 0.0,
+                    "fake_news_topics": [
+                        "Geographical and Location-Based Information"
+                    ]
+                },
+                {
                     "region_code": "AU-NSW",
                     "region_name": "New South Wales, Australia",
                     "tweet_count": 5,
@@ -1614,16 +1404,6 @@
                     "region_code": "US",
                     "region_name": "United States",
                     "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 3,
                     "fake_news_count": 0,
                     "fake_news_ratio": 0.0,
                     "fake_news_topics": [
@@ -1692,6 +1472,18 @@
             "date": "2019-12-18",
             "locations": [
                 {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 3,
+                    "fake_news_count": 0,
+                    "fake_news_ratio": 0.0,
+                    "fake_news_topics": [
+                        "Political Criticism and Government Response",
+                        "Emergency Information and Public Safety",
+                        "Wildlife and Environmental Impact"
+                    ]
+                },
+                {
                     "region_code": "AU-ACT",
                     "region_name": "Australian Capital Territory, Australia",
                     "tweet_count": 1,
@@ -1727,18 +1519,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 3,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response",
-                        "Emergency Information and Public Safety",
-                        "Wildlife and Environmental Impact"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Unknown",
                     "tweet_count": 4,
                     "fake_news_count": 0,
@@ -1755,6 +1535,17 @@
         {
             "date": "2019-12-19",
             "locations": [
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 2,
+                    "fake_news_count": 0,
+                    "fake_news_ratio": 0.0,
+                    "fake_news_topics": [
+                        "Wildlife and Environmental Impact",
+                        "Fundraising and Community Support"
+                    ]
+                },
                 {
                     "region_code": "AU-ACT",
                     "region_name": "Australian Capital Territory, Australia",
@@ -1821,17 +1612,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Wildlife and Environmental Impact",
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Unknown",
                     "tweet_count": 5,
                     "fake_news_count": 0,
@@ -1847,6 +1627,17 @@
         {
             "date": "2019-12-20",
             "locations": [
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 2,
+                    "fake_news_count": 0,
+                    "fake_news_ratio": 0.0,
+                    "fake_news_topics": [
+                        "Political Criticism and Government Response",
+                        "Geographical and Location-Based Information"
+                    ]
+                },
                 {
                     "region_code": "AU-NSW",
                     "region_name": "New South Wales, Australia",
@@ -1904,17 +1695,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response",
-                        "Geographical and Location-Based Information"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Unknown",
                     "tweet_count": 9,
                     "fake_news_count": 0,
@@ -1934,6 +1714,16 @@
         {
             "date": "2019-12-21",
             "locations": [
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 1,
+                    "fake_news_count": 0,
+                    "fake_news_ratio": 0.0,
+                    "fake_news_topics": [
+                        "Wildlife and Environmental Impact"
+                    ]
+                },
                 {
                     "region_code": "AU-ACT",
                     "region_name": "Australian Capital Territory, Australia",
@@ -2054,16 +1844,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Wildlife and Environmental Impact"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Unknown",
                     "tweet_count": 7,
                     "fake_news_count": 0,
@@ -2080,6 +1860,17 @@
         {
             "date": "2019-12-22",
             "locations": [
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 2,
+                    "fake_news_count": 0,
+                    "fake_news_ratio": 0.0,
+                    "fake_news_topics": [
+                        "Wildlife and Environmental Impact",
+                        "Political Criticism and Government Response"
+                    ]
+                },
                 {
                     "region_code": "AU-ACT",
                     "region_name": "Australian Capital Territory, Australia",
@@ -2190,17 +1981,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Wildlife and Environmental Impact",
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Unknown",
                     "tweet_count": 10,
                     "fake_news_count": 0,
@@ -2218,6 +1998,16 @@
         {
             "date": "2019-12-23",
             "locations": [
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 1,
+                    "fake_news_count": 0,
+                    "fake_news_ratio": 0.0,
+                    "fake_news_topics": [
+                        "Emergency Information and Public Safety"
+                    ]
+                },
                 {
                     "region_code": "AU-NSW",
                     "region_name": "New South Wales, Australia",
@@ -2304,16 +2094,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emergency Information and Public Safety"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Unknown",
                     "tweet_count": 10,
                     "fake_news_count": 0,
@@ -2332,6 +2112,16 @@
         {
             "date": "2019-12-24",
             "locations": [
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 1,
+                    "fake_news_count": 0,
+                    "fake_news_ratio": 0.0,
+                    "fake_news_topics": [
+                        "Emotional and Spiritual Reactions"
+                    ]
+                },
                 {
                     "region_code": "AU-ACT",
                     "region_name": "Australian Capital Territory, Australia",
@@ -2401,16 +2191,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Unknown",
                     "tweet_count": 10,
                     "fake_news_count": 0,
@@ -2427,6 +2207,16 @@
         {
             "date": "2019-12-25",
             "locations": [
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 1,
+                    "fake_news_count": 0,
+                    "fake_news_ratio": 0.0,
+                    "fake_news_topics": [
+                        "Emotional and Spiritual Reactions"
+                    ]
+                },
                 {
                     "region_code": "AU-NSW",
                     "region_name": "New South Wales, Australia",
@@ -2446,16 +2236,6 @@
                     "fake_news_ratio": 0.0,
                     "fake_news_topics": [
                         "Wildlife and Environmental Impact"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
                     ]
                 }
             ]
@@ -2512,6 +2292,16 @@
             "date": "2019-12-27",
             "locations": [
                 {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 1,
+                    "fake_news_count": 0,
+                    "fake_news_ratio": 0.0,
+                    "fake_news_topics": [
+                        "Geographical and Location-Based Information"
+                    ]
+                },
+                {
                     "region_code": "AU-NSW",
                     "region_name": "New South Wales, Australia",
                     "tweet_count": 4,
@@ -2531,16 +2321,6 @@
                     "fake_news_ratio": 0.0,
                     "fake_news_topics": [
                         "Wildlife and Environmental Impact"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information"
                     ]
                 },
                 {
@@ -2727,6 +2507,17 @@
             "date": "2019-12-30",
             "locations": [
                 {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 5,
+                    "fake_news_count": 0,
+                    "fake_news_ratio": 0.0,
+                    "fake_news_topics": [
+                        "Geographical and Location-Based Information",
+                        "Wildlife Devastation"
+                    ]
+                },
+                {
                     "region_code": "AU-ACT",
                     "region_name": "Australian Capital Territory, Australia",
                     "tweet_count": 3,
@@ -2842,17 +2633,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 5,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information",
-                        "Wildlife Devastation"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Unknown",
                     "tweet_count": 15,
                     "fake_news_count": 0,
@@ -2872,6 +2652,23 @@
         {
             "date": "2019-12-31",
             "locations": [
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 31,
+                    "fake_news_count": 0,
+                    "fake_news_ratio": 0.0,
+                    "fake_news_topics": [
+                        "Emotional and Spiritual Reactions",
+                        "Geographical and Location-Based Information",
+                        "Unknown topic",
+                        "Regional Air Quality and Environmental Conditions",
+                        "Political Criticism and Government Response",
+                        "Emergency Information and Public Safety",
+                        "Wildlife and Environmental Impact",
+                        "Wildlife Devastation"
+                    ]
+                },
                 {
                     "region_code": "AU-ACT",
                     "region_name": "Australian Capital Territory, Australia",
@@ -3074,23 +2871,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 31,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions",
-                        "Geographical and Location-Based Information",
-                        "Unknown topic",
-                        "Regional Air Quality and Environmental Conditions",
-                        "Political Criticism and Government Response",
-                        "Emergency Information and Public Safety",
-                        "Wildlife and Environmental Impact",
-                        "Wildlife Devastation"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Czechia",
                     "tweet_count": 1,
                     "fake_news_count": 0,
@@ -3122,6 +2902,23 @@
         {
             "date": "2020-01-01",
             "locations": [
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 15,
+                    "fake_news_count": 0,
+                    "fake_news_ratio": 0.0,
+                    "fake_news_topics": [
+                        "Emergency Information and Public Safety",
+                        "Unknown topic",
+                        "Regional Air Quality and Environmental Conditions",
+                        "Political Criticism and Government Response",
+                        "Wildlife Devastation",
+                        "Wildlife and Environmental Impact",
+                        "Geographical and Location-Based Information",
+                        "Fundraising and Community Support"
+                    ]
+                },
                 {
                     "region_code": "AU-ACT",
                     "region_name": "Australian Capital Territory, Australia",
@@ -3357,23 +3154,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 15,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emergency Information and Public Safety",
-                        "Unknown topic",
-                        "Regional Air Quality and Environmental Conditions",
-                        "Political Criticism and Government Response",
-                        "Wildlife Devastation",
-                        "Wildlife and Environmental Impact",
-                        "Geographical and Location-Based Information",
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Unknown",
                     "tweet_count": 57,
                     "fake_news_count": 2,
@@ -3395,6 +3175,24 @@
         {
             "date": "2020-01-02",
             "locations": [
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 100,
+                    "fake_news_count": 0,
+                    "fake_news_ratio": 0.0,
+                    "fake_news_topics": [
+                        "Unknown topic",
+                        "Emergency Information and Public Safety",
+                        "Wildlife and Environmental Impact",
+                        "Geographical and Location-Based Information",
+                        "Emotional and Spiritual Reactions",
+                        "Political Criticism and Government Response",
+                        "Wildlife Devastation",
+                        "Regional Air Quality and Environmental Conditions",
+                        "Fundraising and Community Support"
+                    ]
+                },
                 {
                     "region_code": "AU-ACT",
                     "region_name": "Australian Capital Territory, Australia",
@@ -3874,24 +3672,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 100,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Unknown topic",
-                        "Emergency Information and Public Safety",
-                        "Wildlife and Environmental Impact",
-                        "Geographical and Location-Based Information",
-                        "Emotional and Spiritual Reactions",
-                        "Political Criticism and Government Response",
-                        "Wildlife Devastation",
-                        "Regional Air Quality and Environmental Conditions",
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Korea, Republic of",
                     "tweet_count": 1,
                     "fake_news_count": 0,
@@ -3974,6 +3754,25 @@
                         "Fundraising and Community Support",
                         "Political Criticism and Government Response",
                         "Emergency Information and Public Safety"
+                    ]
+                },
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 202,
+                    "fake_news_count": 0,
+                    "fake_news_ratio": 0.0,
+                    "fake_news_topics": [
+                        "Political Criticism and Government Response",
+                        "Unknown topic",
+                        "Wildlife and Environmental Impact",
+                        "Emotional and Spiritual Reactions",
+                        "Fundraising and Community Support",
+                        "Wildlife Devastation",
+                        "Geographical and Location-Based Information",
+                        "Emergency Information and Public Safety",
+                        "Climate Change Debate",
+                        "Regional Air Quality and Environmental Conditions"
                     ]
                 },
                 {
@@ -4577,25 +4376,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 202,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response",
-                        "Unknown topic",
-                        "Wildlife and Environmental Impact",
-                        "Emotional and Spiritual Reactions",
-                        "Fundraising and Community Support",
-                        "Wildlife Devastation",
-                        "Geographical and Location-Based Information",
-                        "Emergency Information and Public Safety",
-                        "Climate Change Debate",
-                        "Regional Air Quality and Environmental Conditions"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Unknown",
                     "tweet_count": 791,
                     "fake_news_count": 0,
@@ -4710,6 +4490,25 @@
                         "Emotional and Spiritual Reactions",
                         "Wildlife Devastation",
                         "Geographical and Location-Based Information"
+                    ]
+                },
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 1743,
+                    "fake_news_count": 2,
+                    "fake_news_ratio": 0.1147,
+                    "fake_news_topics": [
+                        "Fundraising and Community Support",
+                        "Emotional and Spiritual Reactions",
+                        "Political Criticism and Government Response",
+                        "Wildlife and Environmental Impact",
+                        "Geographical and Location-Based Information",
+                        "Unknown topic",
+                        "Emergency Information and Public Safety",
+                        "Wildlife Devastation",
+                        "Regional Air Quality and Environmental Conditions",
+                        "Climate Change Debate"
                     ]
                 },
                 {
@@ -6147,25 +5946,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 1743,
-                    "fake_news_count": 2,
-                    "fake_news_ratio": 0.1147,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support",
-                        "Emotional and Spiritual Reactions",
-                        "Political Criticism and Government Response",
-                        "Wildlife and Environmental Impact",
-                        "Geographical and Location-Based Information",
-                        "Unknown topic",
-                        "Emergency Information and Public Safety",
-                        "Wildlife Devastation",
-                        "Regional Air Quality and Environmental Conditions",
-                        "Climate Change Debate"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Bolivia, Plurinational State of",
                     "tweet_count": 1,
                     "fake_news_count": 0,
@@ -6478,6 +6258,25 @@
                         "Wildlife Devastation",
                         "Emergency Information and Public Safety",
                         "Climate Change Debate"
+                    ]
+                },
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 2080,
+                    "fake_news_count": 3,
+                    "fake_news_ratio": 0.1442,
+                    "fake_news_topics": [
+                        "Fundraising and Community Support",
+                        "Wildlife and Environmental Impact",
+                        "Wildlife Devastation",
+                        "Emotional and Spiritual Reactions",
+                        "Political Criticism and Government Response",
+                        "Geographical and Location-Based Information",
+                        "Climate Change Debate",
+                        "Emergency Information and Public Safety",
+                        "Unknown topic",
+                        "Regional Air Quality and Environmental Conditions"
                     ]
                 },
                 {
@@ -8054,25 +7853,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 2080,
-                    "fake_news_count": 3,
-                    "fake_news_ratio": 0.1442,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support",
-                        "Wildlife and Environmental Impact",
-                        "Wildlife Devastation",
-                        "Emotional and Spiritual Reactions",
-                        "Political Criticism and Government Response",
-                        "Geographical and Location-Based Information",
-                        "Climate Change Debate",
-                        "Emergency Information and Public Safety",
-                        "Unknown topic",
-                        "Regional Air Quality and Environmental Conditions"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Bolivia, Plurinational State of",
                     "tweet_count": 2,
                     "fake_news_count": 0,
@@ -8401,6 +8181,25 @@
                         "Fundraising and Community Support",
                         "Climate Change Debate",
                         "Emergency Information and Public Safety"
+                    ]
+                },
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 1499,
+                    "fake_news_count": 2,
+                    "fake_news_ratio": 0.1334,
+                    "fake_news_topics": [
+                        "Fundraising and Community Support",
+                        "Unknown topic",
+                        "Geographical and Location-Based Information",
+                        "Wildlife and Environmental Impact",
+                        "Wildlife Devastation",
+                        "Political Criticism and Government Response",
+                        "Emotional and Spiritual Reactions",
+                        "Emergency Information and Public Safety",
+                        "Regional Air Quality and Environmental Conditions",
+                        "Climate Change Debate"
                     ]
                 },
                 {
@@ -9781,25 +9580,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 1499,
-                    "fake_news_count": 2,
-                    "fake_news_ratio": 0.1334,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support",
-                        "Unknown topic",
-                        "Geographical and Location-Based Information",
-                        "Wildlife and Environmental Impact",
-                        "Wildlife Devastation",
-                        "Political Criticism and Government Response",
-                        "Emotional and Spiritual Reactions",
-                        "Emergency Information and Public Safety",
-                        "Regional Air Quality and Environmental Conditions",
-                        "Climate Change Debate"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Congo, The Democratic Republic of the",
                     "tweet_count": 19,
                     "fake_news_count": 0,
@@ -10084,6 +9864,25 @@
                         "Emotional and Spiritual Reactions",
                         "Wildlife Devastation",
                         "Emergency Information and Public Safety"
+                    ]
+                },
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 859,
+                    "fake_news_count": 12,
+                    "fake_news_ratio": 1.397,
+                    "fake_news_topics": [
+                        "Political Criticism and Government Response",
+                        "Emotional and Spiritual Reactions",
+                        "Geographical and Location-Based Information",
+                        "Emergency Information and Public Safety",
+                        "Unknown topic",
+                        "Fundraising and Community Support",
+                        "Wildlife and Environmental Impact",
+                        "Regional Air Quality and Environmental Conditions",
+                        "Wildlife Devastation",
+                        "Climate Change Debate"
                     ]
                 },
                 {
@@ -11282,25 +11081,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 859,
-                    "fake_news_count": 12,
-                    "fake_news_ratio": 1.397,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response",
-                        "Emotional and Spiritual Reactions",
-                        "Geographical and Location-Based Information",
-                        "Emergency Information and Public Safety",
-                        "Unknown topic",
-                        "Fundraising and Community Support",
-                        "Wildlife and Environmental Impact",
-                        "Regional Air Quality and Environmental Conditions",
-                        "Wildlife Devastation",
-                        "Climate Change Debate"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Iran, Islamic Republic of",
                     "tweet_count": 8,
                     "fake_news_count": 0,
@@ -11523,6 +11303,25 @@
                         "Emergency Information and Public Safety",
                         "Political Criticism and Government Response",
                         "Emotional and Spiritual Reactions",
+                        "Climate Change Debate"
+                    ]
+                },
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 823,
+                    "fake_news_count": 16,
+                    "fake_news_ratio": 1.9441,
+                    "fake_news_topics": [
+                        "Unknown topic",
+                        "Geographical and Location-Based Information",
+                        "Wildlife and Environmental Impact",
+                        "Political Criticism and Government Response",
+                        "Emotional and Spiritual Reactions",
+                        "Fundraising and Community Support",
+                        "Wildlife Devastation",
+                        "Emergency Information and Public Safety",
+                        "Regional Air Quality and Environmental Conditions",
                         "Climate Change Debate"
                     ]
                 },
@@ -12745,25 +12544,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 823,
-                    "fake_news_count": 16,
-                    "fake_news_ratio": 1.9441,
-                    "fake_news_topics": [
-                        "Unknown topic",
-                        "Geographical and Location-Based Information",
-                        "Wildlife and Environmental Impact",
-                        "Political Criticism and Government Response",
-                        "Emotional and Spiritual Reactions",
-                        "Fundraising and Community Support",
-                        "Wildlife Devastation",
-                        "Emergency Information and Public Safety",
-                        "Regional Air Quality and Environmental Conditions",
-                        "Climate Change Debate"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Congo, The Democratic Republic of the",
                     "tweet_count": 1,
                     "fake_news_count": 0,
@@ -12952,6 +12732,25 @@
                     "fake_news_topics": [
                         "Political Criticism and Government Response",
                         "Emotional and Spiritual Reactions"
+                    ]
+                },
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 875,
+                    "fake_news_count": 7,
+                    "fake_news_ratio": 0.8,
+                    "fake_news_topics": [
+                        "Political Criticism and Government Response",
+                        "Wildlife and Environmental Impact",
+                        "Emotional and Spiritual Reactions",
+                        "Fundraising and Community Support",
+                        "Geographical and Location-Based Information",
+                        "Unknown topic",
+                        "Emergency Information and Public Safety",
+                        "Wildlife Devastation",
+                        "Climate Change Debate",
+                        "Regional Air Quality and Environmental Conditions"
                     ]
                 },
                 {
@@ -14114,25 +13913,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 875,
-                    "fake_news_count": 7,
-                    "fake_news_ratio": 0.8,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response",
-                        "Wildlife and Environmental Impact",
-                        "Emotional and Spiritual Reactions",
-                        "Fundraising and Community Support",
-                        "Geographical and Location-Based Information",
-                        "Unknown topic",
-                        "Emergency Information and Public Safety",
-                        "Wildlife Devastation",
-                        "Climate Change Debate",
-                        "Regional Air Quality and Environmental Conditions"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Bolivia, Plurinational State of",
                     "tweet_count": 1,
                     "fake_news_count": 0,
@@ -14333,6 +14113,25 @@
                         "Political Criticism and Government Response",
                         "Fundraising and Community Support",
                         "Geographical and Location-Based Information"
+                    ]
+                },
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 1068,
+                    "fake_news_count": 16,
+                    "fake_news_ratio": 1.4981,
+                    "fake_news_topics": [
+                        "Wildlife and Environmental Impact",
+                        "Political Criticism and Government Response",
+                        "Emotional and Spiritual Reactions",
+                        "Wildlife Devastation",
+                        "Geographical and Location-Based Information",
+                        "Emergency Information and Public Safety",
+                        "Unknown topic",
+                        "Fundraising and Community Support",
+                        "Climate Change Debate",
+                        "Regional Air Quality and Environmental Conditions"
                     ]
                 },
                 {
@@ -15450,25 +15249,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 1068,
-                    "fake_news_count": 16,
-                    "fake_news_ratio": 1.4981,
-                    "fake_news_topics": [
-                        "Wildlife and Environmental Impact",
-                        "Political Criticism and Government Response",
-                        "Emotional and Spiritual Reactions",
-                        "Wildlife Devastation",
-                        "Geographical and Location-Based Information",
-                        "Emergency Information and Public Safety",
-                        "Unknown topic",
-                        "Fundraising and Community Support",
-                        "Climate Change Debate",
-                        "Regional Air Quality and Environmental Conditions"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Czechia",
                     "tweet_count": 7,
                     "fake_news_count": 0,
@@ -15662,6 +15442,24 @@
                         "Emotional and Spiritual Reactions",
                         "Wildlife Devastation",
                         "Fundraising and Community Support"
+                    ]
+                },
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 623,
+                    "fake_news_count": 7,
+                    "fake_news_ratio": 1.1236,
+                    "fake_news_topics": [
+                        "Fundraising and Community Support",
+                        "Geographical and Location-Based Information",
+                        "Emergency Information and Public Safety",
+                        "Emotional and Spiritual Reactions",
+                        "Political Criticism and Government Response",
+                        "Wildlife and Environmental Impact",
+                        "Wildlife Devastation",
+                        "Unknown topic",
+                        "Regional Air Quality and Environmental Conditions"
                     ]
                 },
                 {
@@ -16619,24 +16417,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 623,
-                    "fake_news_count": 7,
-                    "fake_news_ratio": 1.1236,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support",
-                        "Geographical and Location-Based Information",
-                        "Emergency Information and Public Safety",
-                        "Emotional and Spiritual Reactions",
-                        "Political Criticism and Government Response",
-                        "Wildlife and Environmental Impact",
-                        "Wildlife Devastation",
-                        "Unknown topic",
-                        "Regional Air Quality and Environmental Conditions"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Czechia",
                     "tweet_count": 1,
                     "fake_news_count": 0,
@@ -16762,6 +16542,24 @@
                     "fake_news_ratio": 0.0,
                     "fake_news_topics": [
                         "Wildlife Devastation"
+                    ]
+                },
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 605,
+                    "fake_news_count": 14,
+                    "fake_news_ratio": 2.314,
+                    "fake_news_topics": [
+                        "Wildlife and Environmental Impact",
+                        "Political Criticism and Government Response",
+                        "Emergency Information and Public Safety",
+                        "Unknown topic",
+                        "Wildlife Devastation",
+                        "Geographical and Location-Based Information",
+                        "Fundraising and Community Support",
+                        "Emotional and Spiritual Reactions",
+                        "Regional Air Quality and Environmental Conditions"
                     ]
                 },
                 {
@@ -17664,24 +17462,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 605,
-                    "fake_news_count": 14,
-                    "fake_news_ratio": 2.314,
-                    "fake_news_topics": [
-                        "Wildlife and Environmental Impact",
-                        "Political Criticism and Government Response",
-                        "Emergency Information and Public Safety",
-                        "Unknown topic",
-                        "Wildlife Devastation",
-                        "Geographical and Location-Based Information",
-                        "Fundraising and Community Support",
-                        "Emotional and Spiritual Reactions",
-                        "Regional Air Quality and Environmental Conditions"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Czechia",
                     "tweet_count": 1,
                     "fake_news_count": 0,
@@ -17826,6 +17606,25 @@
                     "fake_news_ratio": 0.0,
                     "fake_news_topics": [
                         "Political Criticism and Government Response"
+                    ]
+                },
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 456,
+                    "fake_news_count": 2,
+                    "fake_news_ratio": 0.4386,
+                    "fake_news_topics": [
+                        "Emergency Information and Public Safety",
+                        "Fundraising and Community Support",
+                        "Emotional and Spiritual Reactions",
+                        "Geographical and Location-Based Information",
+                        "Political Criticism and Government Response",
+                        "Wildlife and Environmental Impact",
+                        "Unknown topic",
+                        "Wildlife Devastation",
+                        "Climate Change Debate",
+                        "Regional Air Quality and Environmental Conditions"
                     ]
                 },
                 {
@@ -18790,25 +18589,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 456,
-                    "fake_news_count": 2,
-                    "fake_news_ratio": 0.4386,
-                    "fake_news_topics": [
-                        "Emergency Information and Public Safety",
-                        "Fundraising and Community Support",
-                        "Emotional and Spiritual Reactions",
-                        "Geographical and Location-Based Information",
-                        "Political Criticism and Government Response",
-                        "Wildlife and Environmental Impact",
-                        "Unknown topic",
-                        "Wildlife Devastation",
-                        "Climate Change Debate",
-                        "Regional Air Quality and Environmental Conditions"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Czechia",
                     "tweet_count": 1,
                     "fake_news_count": 0,
@@ -18955,6 +18735,25 @@
                     "fake_news_topics": [
                         "Fundraising and Community Support",
                         "Emotional and Spiritual Reactions"
+                    ]
+                },
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 472,
+                    "fake_news_count": 0,
+                    "fake_news_ratio": 0.0,
+                    "fake_news_topics": [
+                        "Fundraising and Community Support",
+                        "Emotional and Spiritual Reactions",
+                        "Political Criticism and Government Response",
+                        "Unknown topic",
+                        "Geographical and Location-Based Information",
+                        "Emergency Information and Public Safety",
+                        "Wildlife and Environmental Impact",
+                        "Wildlife Devastation",
+                        "Climate Change Debate",
+                        "Regional Air Quality and Environmental Conditions"
                     ]
                 },
                 {
@@ -19793,25 +19592,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 472,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support",
-                        "Emotional and Spiritual Reactions",
-                        "Political Criticism and Government Response",
-                        "Unknown topic",
-                        "Geographical and Location-Based Information",
-                        "Emergency Information and Public Safety",
-                        "Wildlife and Environmental Impact",
-                        "Wildlife Devastation",
-                        "Climate Change Debate",
-                        "Regional Air Quality and Environmental Conditions"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Falkland Islands (Malvinas)",
                     "tweet_count": 3,
                     "fake_news_count": 0,
@@ -19928,6 +19708,25 @@
                         "Political Criticism and Government Response",
                         "Unknown topic",
                         "Wildlife Devastation"
+                    ]
+                },
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 559,
+                    "fake_news_count": 103,
+                    "fake_news_ratio": 18.4258,
+                    "fake_news_topics": [
+                        "Political Criticism and Government Response",
+                        "Emotional and Spiritual Reactions",
+                        "Emergency Information and Public Safety",
+                        "Geographical and Location-Based Information",
+                        "Wildlife and Environmental Impact",
+                        "Wildlife Devastation",
+                        "Unknown topic",
+                        "Fundraising and Community Support",
+                        "Climate Change Debate",
+                        "Regional Air Quality and Environmental Conditions"
                     ]
                 },
                 {
@@ -20668,25 +20467,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 559,
-                    "fake_news_count": 103,
-                    "fake_news_ratio": 18.4258,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response",
-                        "Emotional and Spiritual Reactions",
-                        "Emergency Information and Public Safety",
-                        "Geographical and Location-Based Information",
-                        "Wildlife and Environmental Impact",
-                        "Wildlife Devastation",
-                        "Unknown topic",
-                        "Fundraising and Community Support",
-                        "Climate Change Debate",
-                        "Regional Air Quality and Environmental Conditions"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Bolivia, Plurinational State of",
                     "tweet_count": 1,
                     "fake_news_count": 0,
@@ -20813,6 +20593,25 @@
                     "fake_news_ratio": 0.0,
                     "fake_news_topics": [
                         "Emotional and Spiritual Reactions"
+                    ]
+                },
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 322,
+                    "fake_news_count": 2,
+                    "fake_news_ratio": 0.6211,
+                    "fake_news_topics": [
+                        "Emotional and Spiritual Reactions",
+                        "Climate Change Debate",
+                        "Emergency Information and Public Safety",
+                        "Wildlife and Environmental Impact",
+                        "Fundraising and Community Support",
+                        "Political Criticism and Government Response",
+                        "Geographical and Location-Based Information",
+                        "Wildlife Devastation",
+                        "Regional Air Quality and Environmental Conditions",
+                        "Unknown topic"
                     ]
                 },
                 {
@@ -21699,25 +21498,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 322,
-                    "fake_news_count": 2,
-                    "fake_news_ratio": 0.6211,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions",
-                        "Climate Change Debate",
-                        "Emergency Information and Public Safety",
-                        "Wildlife and Environmental Impact",
-                        "Fundraising and Community Support",
-                        "Political Criticism and Government Response",
-                        "Geographical and Location-Based Information",
-                        "Wildlife Devastation",
-                        "Regional Air Quality and Environmental Conditions",
-                        "Unknown topic"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Czechia",
                     "tweet_count": 1,
                     "fake_news_count": 0,
@@ -21834,6 +21614,25 @@
                     "fake_news_topics": [
                         "Fundraising and Community Support",
                         "Emotional and Spiritual Reactions"
+                    ]
+                },
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 510,
+                    "fake_news_count": 2,
+                    "fake_news_ratio": 0.3922,
+                    "fake_news_topics": [
+                        "Emotional and Spiritual Reactions",
+                        "Geographical and Location-Based Information",
+                        "Unknown topic",
+                        "Regional Air Quality and Environmental Conditions",
+                        "Fundraising and Community Support",
+                        "Wildlife Devastation",
+                        "Wildlife and Environmental Impact",
+                        "Political Criticism and Government Response",
+                        "Emergency Information and Public Safety",
+                        "Climate Change Debate"
                     ]
                 },
                 {
@@ -22691,25 +22490,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 510,
-                    "fake_news_count": 2,
-                    "fake_news_ratio": 0.3922,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions",
-                        "Geographical and Location-Based Information",
-                        "Unknown topic",
-                        "Regional Air Quality and Environmental Conditions",
-                        "Fundraising and Community Support",
-                        "Wildlife Devastation",
-                        "Wildlife and Environmental Impact",
-                        "Political Criticism and Government Response",
-                        "Emergency Information and Public Safety",
-                        "Climate Change Debate"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Czechia",
                     "tweet_count": 2,
                     "fake_news_count": 0,
@@ -22837,6 +22617,25 @@
                     "fake_news_ratio": 0.0,
                     "fake_news_topics": [
                         "Emotional and Spiritual Reactions"
+                    ]
+                },
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 611,
+                    "fake_news_count": 0,
+                    "fake_news_ratio": 0.0,
+                    "fake_news_topics": [
+                        "Emotional and Spiritual Reactions",
+                        "Fundraising and Community Support",
+                        "Political Criticism and Government Response",
+                        "Geographical and Location-Based Information",
+                        "Emergency Information and Public Safety",
+                        "Unknown topic",
+                        "Wildlife and Environmental Impact",
+                        "Wildlife Devastation",
+                        "Regional Air Quality and Environmental Conditions",
+                        "Climate Change Debate"
                     ]
                 },
                 {
@@ -23558,25 +23357,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 611,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions",
-                        "Fundraising and Community Support",
-                        "Political Criticism and Government Response",
-                        "Geographical and Location-Based Information",
-                        "Emergency Information and Public Safety",
-                        "Unknown topic",
-                        "Wildlife and Environmental Impact",
-                        "Wildlife Devastation",
-                        "Regional Air Quality and Environmental Conditions",
-                        "Climate Change Debate"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Iran, Islamic Republic of",
                     "tweet_count": 2,
                     "fake_news_count": 0,
@@ -23652,6 +23432,23 @@
                     "fake_news_topics": [
                         "Emotional and Spiritual Reactions",
                         "Unknown topic"
+                    ]
+                },
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 324,
+                    "fake_news_count": 0,
+                    "fake_news_ratio": 0.0,
+                    "fake_news_topics": [
+                        "Emergency Information and Public Safety",
+                        "Emotional and Spiritual Reactions",
+                        "Political Criticism and Government Response",
+                        "Wildlife and Environmental Impact",
+                        "Unknown topic",
+                        "Wildlife Devastation",
+                        "Fundraising and Community Support",
+                        "Geographical and Location-Based Information"
                     ]
                 },
                 {
@@ -24319,23 +24116,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 324,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emergency Information and Public Safety",
-                        "Emotional and Spiritual Reactions",
-                        "Political Criticism and Government Response",
-                        "Wildlife and Environmental Impact",
-                        "Unknown topic",
-                        "Wildlife Devastation",
-                        "Fundraising and Community Support",
-                        "Geographical and Location-Based Information"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Korea, Republic of",
                     "tweet_count": 1,
                     "fake_news_count": 0,
@@ -24399,6 +24179,25 @@
                     "fake_news_topics": [
                         "Emotional and Spiritual Reactions",
                         "Political Criticism and Government Response"
+                    ]
+                },
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 224,
+                    "fake_news_count": 0,
+                    "fake_news_ratio": 0.0,
+                    "fake_news_topics": [
+                        "Emotional and Spiritual Reactions",
+                        "Geographical and Location-Based Information",
+                        "Political Criticism and Government Response",
+                        "Emergency Information and Public Safety",
+                        "Wildlife and Environmental Impact",
+                        "Unknown topic",
+                        "Wildlife Devastation",
+                        "Fundraising and Community Support",
+                        "Regional Air Quality and Environmental Conditions",
+                        "Climate Change Debate"
                     ]
                 },
                 {
@@ -25047,25 +24846,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 224,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions",
-                        "Geographical and Location-Based Information",
-                        "Political Criticism and Government Response",
-                        "Emergency Information and Public Safety",
-                        "Wildlife and Environmental Impact",
-                        "Unknown topic",
-                        "Wildlife Devastation",
-                        "Fundraising and Community Support",
-                        "Regional Air Quality and Environmental Conditions",
-                        "Climate Change Debate"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Czechia",
                     "tweet_count": 1,
                     "fake_news_count": 0,
@@ -25150,6 +24930,24 @@
                     "fake_news_ratio": 0.0,
                     "fake_news_topics": [
                         "Fundraising and Community Support"
+                    ]
+                },
+                {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 182,
+                    "fake_news_count": 4,
+                    "fake_news_ratio": 2.1978,
+                    "fake_news_topics": [
+                        "Emotional and Spiritual Reactions",
+                        "Political Criticism and Government Response",
+                        "Geographical and Location-Based Information",
+                        "Unknown topic",
+                        "Fundraising and Community Support",
+                        "Wildlife and Environmental Impact",
+                        "Wildlife Devastation",
+                        "Regional Air Quality and Environmental Conditions",
+                        "Emergency Information and Public Safety"
                     ]
                 },
                 {
@@ -25729,24 +25527,6 @@
                 },
                 {
                     "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 182,
-                    "fake_news_count": 4,
-                    "fake_news_ratio": 2.1978,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions",
-                        "Political Criticism and Government Response",
-                        "Geographical and Location-Based Information",
-                        "Unknown topic",
-                        "Fundraising and Community Support",
-                        "Wildlife and Environmental Impact",
-                        "Wildlife Devastation",
-                        "Regional Air Quality and Environmental Conditions",
-                        "Emergency Information and Public Safety"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
                     "region_name": "Czechia",
                     "tweet_count": 1,
                     "fake_news_count": 0,
@@ -25811,6 +25591,16 @@
             "date": "2020-01-22",
             "locations": [
                 {
+                    "region_code": "AU",
+                    "region_name": "Australia",
+                    "tweet_count": 1,
+                    "fake_news_count": 0,
+                    "fake_news_ratio": 0.0,
+                    "fake_news_topics": [
+                        "Political Criticism and Government Response"
+                    ]
+                },
+                {
                     "region_code": "AU-VIC",
                     "region_name": "Victoria, Australia",
                     "tweet_count": 1,
@@ -25818,16 +25608,6 @@
                     "fake_news_ratio": 0.0,
                     "fake_news_topics": [
                         "Geographical and Location-Based Information"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response"
                     ]
                 },
                 {
@@ -25915,2298 +25695,6 @@
                     "fake_news_topics": [
                         "Geographical and Location-Based Information",
                         "Regional Air Quality and Environmental Conditions"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2020-01-25",
-            "locations": [
-                {
-                    "region_code": "AU-ACT",
-                    "region_name": "Australian Capital Territory, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "AU-NSW",
-                    "region_name": "New South Wales, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2020-01-27",
-            "locations": [
-                {
-                    "region_code": "NL",
-                    "region_name": "Netherlands",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Unknown",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Wildlife and Environmental Impact"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2020-01-28",
-            "locations": [
-                {
-                    "region_code": "AU-ACT",
-                    "region_name": "Australian Capital Territory, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Unknown topic"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Unknown",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Wildlife Devastation",
-                        "Fundraising and Community Support"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2020-01-29",
-            "locations": [
-                {
-                    "region_code": "AU-NSW",
-                    "region_name": "New South Wales, Australia",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emergency Information and Public Safety",
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Unknown",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Wildlife Devastation",
-                        "Emotional and Spiritual Reactions"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2020-01-30",
-            "locations": [
-                {
-                    "region_code": "AU-NSW",
-                    "region_name": "New South Wales, Australia",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information",
-                        "Wildlife and Environmental Impact"
-                    ]
-                },
-                {
-                    "region_code": "GB",
-                    "region_name": "United Kingdom",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Regional Air Quality and Environmental Conditions"
-                    ]
-                },
-                {
-                    "region_code": "IN",
-                    "region_name": "India",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Unknown",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2020-01-31",
-            "locations": [
-                {
-                    "region_code": "AU-VIC",
-                    "region_name": "Victoria, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Unknown",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emergency Information and Public Safety",
-                        "Emotional and Spiritual Reactions"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2020-02-01",
-            "locations": [
-                {
-                    "region_code": "AU-NSW",
-                    "region_name": "New South Wales, Australia",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information",
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions",
-                        "Wildlife Devastation"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Unknown",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emergency Information and Public Safety"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2020-02-02",
-            "locations": [
-                {
-                    "region_code": "AU-NSW",
-                    "region_name": "New South Wales, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "AU-VIC",
-                    "region_name": "Victoria, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Unknown",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2020-02-03",
-            "locations": [
-                {
-                    "region_code": "AU-ACT",
-                    "region_name": "Australian Capital Territory, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emergency Information and Public Safety"
-                    ]
-                },
-                {
-                    "region_code": "AU-NSW",
-                    "region_name": "New South Wales, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "GB",
-                    "region_name": "United Kingdom",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Unknown",
-                    "tweet_count": 3,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Wildlife and Environmental Impact",
-                        "Emotional and Spiritual Reactions",
-                        "Political Criticism and Government Response"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2020-02-04",
-            "locations": [
-                {
-                    "region_code": "AU-VIC",
-                    "region_name": "Victoria, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information"
-                    ]
-                },
-                {
-                    "region_code": "US",
-                    "region_name": "United States",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Unknown",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information",
-                        "Emergency Information and Public Safety"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2020-02-05",
-            "locations": [
-                {
-                    "region_code": "AU-ACT",
-                    "region_name": "Australian Capital Territory, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emergency Information and Public Safety"
-                    ]
-                },
-                {
-                    "region_code": "AU-NSW",
-                    "region_name": "New South Wales, Australia",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions",
-                        "Wildlife Devastation"
-                    ]
-                },
-                {
-                    "region_code": "AU-SA",
-                    "region_name": "South Australia, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "US",
-                    "region_name": "United States",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Unknown",
-                    "tweet_count": 5,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions",
-                        "Wildlife and Environmental Impact",
-                        "Wildlife Devastation",
-                        "Political Criticism and Government Response"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2020-02-06",
-            "locations": [
-                {
-                    "region_code": "AU-SA",
-                    "region_name": "South Australia, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "DE",
-                    "region_name": "Germany",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "US",
-                    "region_name": "United States",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support",
-                        "Wildlife Devastation"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support",
-                        "Emergency Information and Public Safety"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Unknown",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2020-02-07",
-            "locations": [
-                {
-                    "region_code": "US",
-                    "region_name": "United States",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Regional Air Quality and Environmental Conditions"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2020-02-08",
-            "locations": [
-                {
-                    "region_code": "AU-NSW",
-                    "region_name": "New South Wales, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information"
-                    ]
-                },
-                {
-                    "region_code": "GB",
-                    "region_name": "United Kingdom",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2020-02-09",
-            "locations": [
-                {
-                    "region_code": "AU-NSW",
-                    "region_name": "New South Wales, Australia",
-                    "tweet_count": 3,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Unknown topic",
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "AU-VIC",
-                    "region_name": "Victoria, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "US",
-                    "region_name": "United States",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Unknown",
-                    "tweet_count": 4,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information",
-                        "Wildlife and Environmental Impact",
-                        "Wildlife Devastation"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2020-02-10",
-            "locations": [
-                {
-                    "region_code": "AU-ACT",
-                    "region_name": "Australian Capital Territory, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "AU-NSW",
-                    "region_name": "New South Wales, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information"
-                    ]
-                },
-                {
-                    "region_code": "AU-VIC",
-                    "region_name": "Victoria, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Regional Air Quality and Environmental Conditions"
-                    ]
-                },
-                {
-                    "region_code": "IN",
-                    "region_name": "India",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Wildlife Devastation"
-                    ]
-                },
-                {
-                    "region_code": "US",
-                    "region_name": "United States",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Unknown",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2020-02-11",
-            "locations": [
-                {
-                    "region_code": "AU-NSW",
-                    "region_name": "New South Wales, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "AU-VIC",
-                    "region_name": "Victoria, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Wildlife Devastation"
-                    ]
-                },
-                {
-                    "region_code": "LU",
-                    "region_name": "Luxembourg",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "NL",
-                    "region_name": "Netherlands",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "US",
-                    "region_name": "United States",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions",
-                        "Emergency Information and Public Safety"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Unknown",
-                    "tweet_count": 4,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions",
-                        "Unknown topic",
-                        "Wildlife Devastation",
-                        "Political Criticism and Government Response"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2020-02-12",
-            "locations": [
-                {
-                    "region_code": "AU-NSW",
-                    "region_name": "New South Wales, Australia",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information",
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "AU-VIC",
-                    "region_name": "Victoria, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "DE",
-                    "region_name": "Germany",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Unknown topic"
-                    ]
-                },
-                {
-                    "region_code": "GB",
-                    "region_name": "United Kingdom",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emergency Information and Public Safety"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions",
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Unknown",
-                    "tweet_count": 4,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response",
-                        "Regional Air Quality and Environmental Conditions",
-                        "Emotional and Spiritual Reactions",
-                        "Fundraising and Community Support"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2020-02-13",
-            "locations": [
-                {
-                    "region_code": "AU-ACT",
-                    "region_name": "Australian Capital Territory, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "AU-NSW",
-                    "region_name": "New South Wales, Australia",
-                    "tweet_count": 3,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Unknown topic",
-                        "Geographical and Location-Based Information"
-                    ]
-                },
-                {
-                    "region_code": "AU-VIC",
-                    "region_name": "Victoria, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Wildlife and Environmental Impact"
-                    ]
-                },
-                {
-                    "region_code": "AU-WA",
-                    "region_name": "Western Australia, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Wildlife and Environmental Impact"
-                    ]
-                },
-                {
-                    "region_code": "GB",
-                    "region_name": "United Kingdom",
-                    "tweet_count": 4,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emergency Information and Public Safety",
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "US",
-                    "region_name": "United States",
-                    "tweet_count": 4,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Unknown topic",
-                        "Wildlife Devastation",
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions",
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Unknown",
-                    "tweet_count": 8,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Wildlife Devastation",
-                        "Emotional and Spiritual Reactions",
-                        "Fundraising and Community Support",
-                        "Emergency Information and Public Safety"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2020-02-14",
-            "locations": [
-                {
-                    "region_code": "AU-ACT",
-                    "region_name": "Australian Capital Territory, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information"
-                    ]
-                },
-                {
-                    "region_code": "AU-NSW",
-                    "region_name": "New South Wales, Australia",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response",
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "AU-VIC",
-                    "region_name": "Victoria, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emergency Information and Public Safety"
-                    ]
-                },
-                {
-                    "region_code": "CA",
-                    "region_name": "Canada",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "GB",
-                    "region_name": "United Kingdom",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information"
-                    ]
-                },
-                {
-                    "region_code": "IN",
-                    "region_name": "India",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response",
-                        "Emergency Information and Public Safety"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Unknown",
-                    "tweet_count": 6,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Wildlife Devastation",
-                        "Political Criticism and Government Response",
-                        "Regional Air Quality and Environmental Conditions",
-                        "Emergency Information and Public Safety"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2020-02-15",
-            "locations": [
-                {
-                    "region_code": "AU-NSW",
-                    "region_name": "New South Wales, Australia",
-                    "tweet_count": 6,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information",
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "AU-QLD",
-                    "region_name": "Queensland, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "AU-VIC",
-                    "region_name": "Victoria, Australia",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions",
-                        "Geographical and Location-Based Information"
-                    ]
-                },
-                {
-                    "region_code": "AU-WA",
-                    "region_name": "Western Australia, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Wildlife and Environmental Impact"
-                    ]
-                },
-                {
-                    "region_code": "CO",
-                    "region_name": "Colombia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "GB",
-                    "region_name": "United Kingdom",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "NL",
-                    "region_name": "Netherlands",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "US",
-                    "region_name": "United States",
-                    "tweet_count": 4,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information",
-                        "Emergency Information and Public Safety",
-                        "Wildlife Devastation",
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions",
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Unknown",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2020-02-16",
-            "locations": [
-                {
-                    "region_code": "AU-ACT",
-                    "region_name": "Australian Capital Territory, Australia",
-                    "tweet_count": 3,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support",
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "AU-NSW",
-                    "region_name": "New South Wales, Australia",
-                    "tweet_count": 14,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions",
-                        "Geographical and Location-Based Information",
-                        "Wildlife and Environmental Impact",
-                        "Wildlife Devastation"
-                    ]
-                },
-                {
-                    "region_code": "AU-QLD",
-                    "region_name": "Queensland, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Wildlife and Environmental Impact"
-                    ]
-                },
-                {
-                    "region_code": "AU-VIC",
-                    "region_name": "Victoria, Australia",
-                    "tweet_count": 6,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions",
-                        "Emergency Information and Public Safety",
-                        "Wildlife Devastation",
-                        "Unknown topic",
-                        "Wildlife and Environmental Impact"
-                    ]
-                },
-                {
-                    "region_code": "CN",
-                    "region_name": "China",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "DE",
-                    "region_name": "Germany",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "FR",
-                    "region_name": "France",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "GB",
-                    "region_name": "United Kingdom",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions",
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "IN",
-                    "region_name": "India",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "US",
-                    "region_name": "United States",
-                    "tweet_count": 3,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information",
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 6,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response",
-                        "Fundraising and Community Support",
-                        "Wildlife and Environmental Impact"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Unknown",
-                    "tweet_count": 20,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support",
-                        "Emergency Information and Public Safety",
-                        "Emotional and Spiritual Reactions",
-                        "Wildlife Devastation",
-                        "Wildlife and Environmental Impact",
-                        "Political Criticism and Government Response",
-                        "Geographical and Location-Based Information",
-                        "Unknown topic"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2020-02-17",
-            "locations": [
-                {
-                    "region_code": "AU-ACT",
-                    "region_name": "Australian Capital Territory, Australia",
-                    "tweet_count": 11,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response",
-                        "Unknown topic",
-                        "Wildlife and Environmental Impact"
-                    ]
-                },
-                {
-                    "region_code": "AU-NSW",
-                    "region_name": "New South Wales, Australia",
-                    "tweet_count": 30,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information",
-                        "Wildlife and Environmental Impact",
-                        "Emotional and Spiritual Reactions",
-                        "Political Criticism and Government Response",
-                        "Wildlife Devastation",
-                        "Emergency Information and Public Safety",
-                        "Unknown topic",
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "AU-QLD",
-                    "region_name": "Queensland, Australia",
-                    "tweet_count": 7,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Wildlife Devastation",
-                        "Wildlife and Environmental Impact",
-                        "Political Criticism and Government Response",
-                        "Unknown topic",
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "AU-SA",
-                    "region_name": "South Australia, Australia",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "AU-VIC",
-                    "region_name": "Victoria, Australia",
-                    "tweet_count": 28,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information",
-                        "Emotional and Spiritual Reactions",
-                        "Wildlife Devastation",
-                        "Wildlife and Environmental Impact",
-                        "Regional Air Quality and Environmental Conditions",
-                        "Political Criticism and Government Response",
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "BE",
-                    "region_name": "Belgium",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "CA",
-                    "region_name": "Canada",
-                    "tweet_count": 8,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Wildlife Devastation",
-                        "Fundraising and Community Support",
-                        "Emotional and Spiritual Reactions",
-                        "Political Criticism and Government Response",
-                        "Geographical and Location-Based Information",
-                        "Unknown topic"
-                    ]
-                },
-                {
-                    "region_code": "CH",
-                    "region_name": "Switzerland",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Wildlife Devastation"
-                    ]
-                },
-                {
-                    "region_code": "ES",
-                    "region_name": "Spain",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "FR",
-                    "region_name": "France",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "GB",
-                    "region_name": "United Kingdom",
-                    "tweet_count": 29,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support",
-                        "Emotional and Spiritual Reactions",
-                        "Political Criticism and Government Response",
-                        "Wildlife Devastation",
-                        "Emergency Information and Public Safety"
-                    ]
-                },
-                {
-                    "region_code": "GN",
-                    "region_name": "Guinea",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information"
-                    ]
-                },
-                {
-                    "region_code": "IE",
-                    "region_name": "Ireland",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Unknown topic"
-                    ]
-                },
-                {
-                    "region_code": "IN",
-                    "region_name": "India",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "MX",
-                    "region_name": "Mexico",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emergency Information and Public Safety"
-                    ]
-                },
-                {
-                    "region_code": "NL",
-                    "region_name": "Netherlands",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information"
-                    ]
-                },
-                {
-                    "region_code": "NZ",
-                    "region_name": "New Zealand",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response",
-                        "Unknown topic"
-                    ]
-                },
-                {
-                    "region_code": "US",
-                    "region_name": "United States",
-                    "tweet_count": 25,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emergency Information and Public Safety",
-                        "Political Criticism and Government Response",
-                        "Wildlife Devastation",
-                        "Emotional and Spiritual Reactions",
-                        "Unknown topic",
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 23,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions",
-                        "Fundraising and Community Support",
-                        "Geographical and Location-Based Information",
-                        "Political Criticism and Government Response",
-                        "Emergency Information and Public Safety",
-                        "Wildlife and Environmental Impact",
-                        "Wildlife Devastation",
-                        "Regional Air Quality and Environmental Conditions"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Russian Federation",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emergency Information and Public Safety"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Unknown",
-                    "tweet_count": 81,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support",
-                        "Wildlife and Environmental Impact",
-                        "Emotional and Spiritual Reactions",
-                        "Regional Air Quality and Environmental Conditions",
-                        "Geographical and Location-Based Information",
-                        "Wildlife Devastation",
-                        "Political Criticism and Government Response",
-                        "Emergency Information and Public Safety",
-                        "Climate Change Debate",
-                        "Unknown topic"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2020-02-18",
-            "locations": [
-                {
-                    "region_code": "AR",
-                    "region_name": "Argentina",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "AU-ACT",
-                    "region_name": "Australian Capital Territory, Australia",
-                    "tweet_count": 16,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions",
-                        "Wildlife Devastation",
-                        "Wildlife and Environmental Impact",
-                        "Fundraising and Community Support",
-                        "Political Criticism and Government Response",
-                        "Geographical and Location-Based Information"
-                    ]
-                },
-                {
-                    "region_code": "AU-NSW",
-                    "region_name": "New South Wales, Australia",
-                    "tweet_count": 52,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Wildlife Devastation",
-                        "Emotional and Spiritual Reactions",
-                        "Fundraising and Community Support",
-                        "Political Criticism and Government Response",
-                        "Emergency Information and Public Safety",
-                        "Geographical and Location-Based Information",
-                        "Unknown topic",
-                        "Wildlife and Environmental Impact"
-                    ]
-                },
-                {
-                    "region_code": "AU-NT",
-                    "region_name": "Northern Territory, Australia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "AU-QLD",
-                    "region_name": "Queensland, Australia",
-                    "tweet_count": 12,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Wildlife and Environmental Impact",
-                        "Political Criticism and Government Response",
-                        "Emotional and Spiritual Reactions",
-                        "Wildlife Devastation",
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "AU-SA",
-                    "region_name": "South Australia, Australia",
-                    "tweet_count": 12,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emergency Information and Public Safety",
-                        "Geographical and Location-Based Information",
-                        "Emotional and Spiritual Reactions",
-                        "Wildlife and Environmental Impact",
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "AU-TAS",
-                    "region_name": "Tasmania, Australia",
-                    "tweet_count": 3,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions",
-                        "Wildlife and Environmental Impact"
-                    ]
-                },
-                {
-                    "region_code": "AU-VIC",
-                    "region_name": "Victoria, Australia",
-                    "tweet_count": 104,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response",
-                        "Geographical and Location-Based Information",
-                        "Emotional and Spiritual Reactions",
-                        "Fundraising and Community Support",
-                        "Climate Change Debate",
-                        "Wildlife and Environmental Impact",
-                        "Unknown topic",
-                        "Wildlife Devastation"
-                    ]
-                },
-                {
-                    "region_code": "AU-WA",
-                    "region_name": "Western Australia, Australia",
-                    "tweet_count": 6,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information",
-                        "Wildlife Devastation",
-                        "Emotional and Spiritual Reactions",
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "BR",
-                    "region_name": "Brazil",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Unknown topic"
-                    ]
-                },
-                {
-                    "region_code": "BT",
-                    "region_name": "Bhutan",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "CA",
-                    "region_name": "Canada",
-                    "tweet_count": 8,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Unknown topic",
-                        "Geographical and Location-Based Information",
-                        "Political Criticism and Government Response",
-                        "Emergency Information and Public Safety",
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "CH",
-                    "region_name": "Switzerland",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "DE",
-                    "region_name": "Germany",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "FR",
-                    "region_name": "France",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emergency Information and Public Safety",
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "GB",
-                    "region_name": "United Kingdom",
-                    "tweet_count": 32,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Wildlife Devastation",
-                        "Fundraising and Community Support",
-                        "Emergency Information and Public Safety",
-                        "Political Criticism and Government Response",
-                        "Emotional and Spiritual Reactions",
-                        "Climate Change Debate"
-                    ]
-                },
-                {
-                    "region_code": "ID",
-                    "region_name": "Indonesia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "IE",
-                    "region_name": "Ireland",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "IN",
-                    "region_name": "India",
-                    "tweet_count": 6,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response",
-                        "Fundraising and Community Support",
-                        "Unknown topic",
-                        "Emergency Information and Public Safety",
-                        "Wildlife Devastation"
-                    ]
-                },
-                {
-                    "region_code": "IT",
-                    "region_name": "Italy",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "JM",
-                    "region_name": "Jamaica",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "MX",
-                    "region_name": "Mexico",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "NG",
-                    "region_name": "Nigeria",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emergency Information and Public Safety"
-                    ]
-                },
-                {
-                    "region_code": "NO",
-                    "region_name": "Norway",
-                    "tweet_count": 7,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "NP",
-                    "region_name": "Nepal",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "NZ",
-                    "region_name": "New Zealand",
-                    "tweet_count": 5,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support",
-                        "Political Criticism and Government Response",
-                        "Emotional and Spiritual Reactions",
-                        "Regional Air Quality and Environmental Conditions"
-                    ]
-                },
-                {
-                    "region_code": "PK",
-                    "region_name": "Pakistan",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "PT",
-                    "region_name": "Portugal",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "SE",
-                    "region_name": "Sweden",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "TH",
-                    "region_name": "Thailand",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emergency Information and Public Safety"
-                    ]
-                },
-                {
-                    "region_code": "US",
-                    "region_name": "United States",
-                    "tweet_count": 34,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions",
-                        "Political Criticism and Government Response",
-                        "Fundraising and Community Support",
-                        "Unknown topic",
-                        "Wildlife Devastation",
-                        "Emergency Information and Public Safety",
-                        "Wildlife and Environmental Impact"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 52,
-                    "fake_news_count": 1,
-                    "fake_news_ratio": 1.9231,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response",
-                        "Emotional and Spiritual Reactions",
-                        "Wildlife and Environmental Impact",
-                        "Unknown topic",
-                        "Geographical and Location-Based Information",
-                        "Emergency Information and Public Safety",
-                        "Fundraising and Community Support",
-                        "Wildlife Devastation"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Russian Federation",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emergency Information and Public Safety",
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Unknown",
-                    "tweet_count": 286,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Unknown topic",
-                        "Political Criticism and Government Response",
-                        "Fundraising and Community Support",
-                        "Geographical and Location-Based Information",
-                        "Wildlife and Environmental Impact",
-                        "Wildlife Devastation",
-                        "Emotional and Spiritual Reactions",
-                        "Emergency Information and Public Safety",
-                        "Climate Change Debate",
-                        "Regional Air Quality and Environmental Conditions"
-                    ]
-                }
-            ]
-        },
-        {
-            "date": "2020-02-19",
-            "locations": [
-                {
-                    "region_code": "AU-ACT",
-                    "region_name": "Australian Capital Territory, Australia",
-                    "tweet_count": 11,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Unknown topic",
-                        "Wildlife Devastation",
-                        "Political Criticism and Government Response",
-                        "Emotional and Spiritual Reactions",
-                        "Wildlife and Environmental Impact",
-                        "Geographical and Location-Based Information"
-                    ]
-                },
-                {
-                    "region_code": "AU-NSW",
-                    "region_name": "New South Wales, Australia",
-                    "tweet_count": 59,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Wildlife and Environmental Impact",
-                        "Geographical and Location-Based Information",
-                        "Unknown topic",
-                        "Emotional and Spiritual Reactions",
-                        "Wildlife Devastation",
-                        "Political Criticism and Government Response",
-                        "Fundraising and Community Support",
-                        "Emergency Information and Public Safety"
-                    ]
-                },
-                {
-                    "region_code": "AU-QLD",
-                    "region_name": "Queensland, Australia",
-                    "tweet_count": 5,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Unknown topic",
-                        "Emotional and Spiritual Reactions",
-                        "Wildlife and Environmental Impact"
-                    ]
-                },
-                {
-                    "region_code": "AU-SA",
-                    "region_name": "South Australia, Australia",
-                    "tweet_count": 17,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions",
-                        "Wildlife and Environmental Impact",
-                        "Geographical and Location-Based Information",
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "AU-TAS",
-                    "region_name": "Tasmania, Australia",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emergency Information and Public Safety",
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "AU-VIC",
-                    "region_name": "Victoria, Australia",
-                    "tweet_count": 62,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information",
-                        "Climate Change Debate",
-                        "Unknown topic",
-                        "Emotional and Spiritual Reactions",
-                        "Political Criticism and Government Response",
-                        "Regional Air Quality and Environmental Conditions",
-                        "Fundraising and Community Support",
-                        "Emergency Information and Public Safety",
-                        "Wildlife and Environmental Impact"
-                    ]
-                },
-                {
-                    "region_code": "AU-WA",
-                    "region_name": "Western Australia, Australia",
-                    "tweet_count": 3,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Wildlife and Environmental Impact",
-                        "Wildlife Devastation"
-                    ]
-                },
-                {
-                    "region_code": "BE",
-                    "region_name": "Belgium",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response",
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "CA",
-                    "region_name": "Canada",
-                    "tweet_count": 4,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Wildlife Devastation",
-                        "Emotional and Spiritual Reactions",
-                        "Emergency Information and Public Safety"
-                    ]
-                },
-                {
-                    "region_code": "DE",
-                    "region_name": "Germany",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions",
-                        "Climate Change Debate"
-                    ]
-                },
-                {
-                    "region_code": "FI",
-                    "region_name": "Finland",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "FR",
-                    "region_name": "France",
-                    "tweet_count": 4,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Geographical and Location-Based Information",
-                        "Wildlife Devastation",
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "GB",
-                    "region_name": "United Kingdom",
-                    "tweet_count": 13,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Wildlife and Environmental Impact",
-                        "Political Criticism and Government Response",
-                        "Emotional and Spiritual Reactions",
-                        "Fundraising and Community Support",
-                        "Geographical and Location-Based Information"
-                    ]
-                },
-                {
-                    "region_code": "GE",
-                    "region_name": "Georgia",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emergency Information and Public Safety"
-                    ]
-                },
-                {
-                    "region_code": "IL",
-                    "region_name": "Israel",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "IN",
-                    "region_name": "India",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "LB",
-                    "region_name": "Lebanon",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "LU",
-                    "region_name": "Luxembourg",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "MX",
-                    "region_name": "Mexico",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "NG",
-                    "region_name": "Nigeria",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "NO",
-                    "region_name": "Norway",
-                    "tweet_count": 7,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "NZ",
-                    "region_name": "New Zealand",
-                    "tweet_count": 2,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emergency Information and Public Safety",
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "PA",
-                    "region_name": "Panama",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "PL",
-                    "region_name": "Poland",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "RW",
-                    "region_name": "Rwanda",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "SE",
-                    "region_name": "Sweden",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "SG",
-                    "region_name": "Singapore",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Wildlife and Environmental Impact"
-                    ]
-                },
-                {
-                    "region_code": "TH",
-                    "region_name": "Thailand",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Fundraising and Community Support"
-                    ]
-                },
-                {
-                    "region_code": "UG",
-                    "region_name": "Uganda",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response"
-                    ]
-                },
-                {
-                    "region_code": "US",
-                    "region_name": "United States",
-                    "tweet_count": 34,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions",
-                        "Wildlife and Environmental Impact",
-                        "Fundraising and Community Support",
-                        "Political Criticism and Government Response",
-                        "Emergency Information and Public Safety",
-                        "Wildlife Devastation",
-                        "Geographical and Location-Based Information",
-                        "Regional Air Quality and Environmental Conditions"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Australia",
-                    "tweet_count": 45,
-                    "fake_news_count": 1,
-                    "fake_news_ratio": 2.2222,
-                    "fake_news_topics": [
-                        "Political Criticism and Government Response",
-                        "Fundraising and Community Support",
-                        "Geographical and Location-Based Information",
-                        "Emotional and Spiritual Reactions",
-                        "Wildlife Devastation",
-                        "Emergency Information and Public Safety",
-                        "Unknown topic",
-                        "Wildlife and Environmental Impact"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Korea, Republic of",
-                    "tweet_count": 1,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emotional and Spiritual Reactions"
-                    ]
-                },
-                {
-                    "region_code": "Unknown",
-                    "region_name": "Unknown",
-                    "tweet_count": 243,
-                    "fake_news_count": 0,
-                    "fake_news_ratio": 0.0,
-                    "fake_news_topics": [
-                        "Emergency Information and Public Safety",
-                        "Political Criticism and Government Response",
-                        "Geographical and Location-Based Information",
-                        "Climate Change Debate",
-                        "Unknown topic",
-                        "Emotional and Spiritual Reactions",
-                        "Wildlife Devastation",
-                        "Fundraising and Community Support",
-                        "Wildlife and Environmental Impact"
                     ]
                 }
             ]
