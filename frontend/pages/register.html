@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Register Page</title>
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/logIn.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="center-container">
+    <div class="login-container">
+    <h1>Register</h1>
+    <form id="registerForm">
+        <label for="token">Token:</label>
+        <input id="token" name="token" placeholder="Enter your token" required type="text">
+
+        <label for="email">Email:</label>
+        <input id="email" name="email" placeholder="Enter your .gov email" required type="email">
+
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required placeholder="Enter username">
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required placeholder="Enter password">
+
+        <button type="submit" class="register-btn">Register</button>
+    </form>
+    </div>
+
+<!--    <div class="options">-->
+<!--        <a href="/login.html">Back to Login</a>-->
+<!--    </div>-->
+
+    <!-- Error message for validation -->
+     <p id="error-message" style="color: red; display: none;">Email must end with '.gov' and token must be valid</p>
+</div>
+
+<script src="/js/main.js"></script>
+<script src="/js/register.js"></script>
+</body>
+</html>

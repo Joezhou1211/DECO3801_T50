@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Interactive Diagram</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/topics.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Header section -->
+<header class="header">
+    <!-- Team Logo -->
+    <div class="logo">
+        <img src="/assets/logo.png" alt="Website Logo">
+    </div>
+
+    <!-- Navigation bar -->
+    <nav class="nav">
+        <a href="/index.html">Home</a>
+        <a href="/topics.html">Topics</a>
+        <a href="/map.html">Map</a>
+        <a href="/fakeNews.html">Fake News Detector</a>
+        <a href="/search.html">Search/Download Data</a>
+    </nav>
+
+    <!-- Setting -->
+    <div class="user-icon">
+        <img id="userAvatar" src="/assets/user.png" alt="User Icon">
+        <div class="dropdown-menu" id="dropdownMenu">
+            <a href="/setting.html" rel="stylesheet">Setting</a>
+            <a href="#" id="logout">Logout</a>
+        </div>
+    </div>
+</header>
+
+    <!-- Topic Modeling Content -->
+<div class="topic-container">
+    <div class="topic-header">
+        <h1>Topic Modelling</h1>
+        <div class="button-group">
+            <button id="downloadBtn" class="filter-button" title="Download">
+                <i class="fa-solid fa-download"></i>
+            </button>
+            <button id="filterBtn" class="filter-button" title="Filter">
+                <i class="fas fa-sliders-h"></i>
+            </button>
+            <div class="table-chart-buttons">
+                <button id="tableViewBtn" class="toggle-button">
+                    <i class="fas fa-table"></i> Table
+                </button>
+                <button id="chartViewBtn" class="toggle-button active">
+                    <i class="fas fa-chart-bar"></i> Chart
+                </button>
+            </div>
+
+    </div>
+</div>
+
+
+            <div id="chartView" class="topic-content">
+                <h2>Top Engaged Topics, <span id="chartDate" contenteditable="true">8 Nov 2019</span>
+                    <i id="editChartDateIcon" class="fas fa-pencil-alt" style="cursor: pointer;"></i></h2>
+                <p>The most discussed topics ranked by interaction, with dominant sentiment indicated by color bars.</p>
+                <canvas id="topicChart" width="350" height="110"></canvas>
+            </div>
+
+
+            <div id="tableView" class="topic-content" style="display: none;">
+                <h2>Detailed Topic Engagement, <span id="tableDate" contenteditable="true">8 Nov 2019</span>
+                    <i id="editTableDateIcon" class="fas fa-pencil-alt" style="cursor: pointer;"></i></h2>
+                <p>Detailed table showing topic interactions, sentiment distribution(in percentages), and fake news tweets.</p>
+                <table class="topic-table">
+                    <thead>
+                        <tr>
+                            <th>Topic</th>
+                            <th>Total tweets</th>
+                            <th>Reply</th>
+                            <th>Share</th>
+                            <th>Like</th>
+                            <th>Quote Count</th>
+                            <th>Positive (%)</th>
+                            <th>Neutral (%)</th>
+                            <th>Negative (%)</th>
+                            <th>Fake news tweets</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div id="filterView" class="filter-section">
+                <button class="close-btn" id="closeFilter">Close</button>
+                <h2>Filter Options</h2>
+                <div id="checkboxes">
+                    <label for="sentiment">Sentiment Category</label>
+                    <div>
+                        <input type="checkbox" id="positive" name="sentiment" value="positive" checked>
+                        <label for="positive">Positive</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="neutral" name="sentiment" value="neutral" checked>
+                        <label for="neutral">Neutral</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="negative" name="sentiment" value="negative" checked>
+                        <label for="negative">Negative</label>
+                    </div>
+                </div>
+
+
+                <label for="date">Date Range</label>
+                <div>
+                    <input type="checkbox" id="useDateRange">
+                    <label for="useDateRange">Apply Date Range</label>
+                    <i class="fa-solid fa-circle-info tooltip"><span class="tooltiptext">From 8 Nov 2019 to 24 Jan 2020</span></i>
+                </div>
+                <input type="date" id="startDate" name="startDate" value="2020-01-01" min="2019-11-08" max="2020-01-24">
+                <input type="date" id="endDate" name="endDate" value="2020-01-30" min="2019-11-08" max="2020-01-24">
+
+
+                <button id="applyFilterBtn">Apply</button>
+            </div>
+
+            <!-- Timeline container -->
+            <div class="timeline-container">
+                <button id="playPauseBtn">
+                    <i id="playIcon" class="fas fa-play"></i>
+                </button>
+
+                <span id="startDateLabel">8 Nov 2019</span>
+                <div class="slider-container">
+                    <input type="range" id="timeline" min="0" max="119" value="0">
+                    <div id="currentDateLabel">1 Feb 2020</div>
+                </div>
+                <!-- <input type="range" id="timeline" min="0" max="119" value="0"> -->
+                <span id="currentDateLabel">1 Feb 2020</span>
+                <span id="endDateLabel">24 Jan 2020</span>
+            </div>
+
+
+<script src="/js/topics.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>

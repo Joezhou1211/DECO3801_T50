@@ -1,0 +1,144 @@
+
+
+.welcome-section {
+    padding-top: 70px;
+    padding-bottom: 20px;  
+    background-color: #e0e0e0;
+    text-align: center;
+}
+.data-boxes {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+.data-box {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    width: 22%;
+    text-align: center;
+}
+.correlative-section {
+    padding: 20px;
+    text-align: center;
+}
+.correlative-cards {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.card {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    width: 22%;
+}
+.card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.footer {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+.footer a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 60%;
+    margin: 0 auto;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+    margin-left: 160px;
+}
+
+
+.text-description {
+    font-size: 20px;
+    line-height: 1.6;
+    color: #333;
+    text-align: left;
+    margin: 0 auto;
+    max-width: 4000px;
+    padding: 10px;
+    width: 70%;
+}
+
+.image-container{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    align-items: center;
+    margin-left: 160px;
+}
+
+.image-container img {
+    width: 80%;
+    max-width: 100%;
+    height: auto;
+}
+
+.icon i {
+    color: white;
+}
+
+.data-box a {
+    color: inherit; /* Inherit the color from the parent element */
+    text-decoration: none; /* Remove underline */
+}
+.user-icon {
+    position: relative;
+    display: inline-block;
+}
+
+#userAvatar {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: white;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 1;
+    min-width: 120px;
+}
+
+.dropdown-menu a {
+    color: black;
+    padding: 10px 20px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f1f1f1;
+}

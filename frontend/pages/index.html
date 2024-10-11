@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Interactive Diagram</title>
+
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/index.css" rel="stylesheet">
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+   <!-- Link to Google Maps JavaScript API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAw5BhOSRbXJbA4HC7OourMCccKpILkGU&callback=initMap" async defer></script>
+</head>
+
+<body>
+
+<!-- Header section -->
+<header class="header">
+    <!-- Team Logo -->
+    <div class="logo">
+        <img src="/assets/logo.png" alt="Website Logo">
+    </div>
+
+    <!-- Navigation bar -->
+    <nav class="nav">
+        <a href="/index.html">Home</a>
+        <a href="/topics.html">Topics</a>
+        <a href="/map.html">Map</a>
+        <a href="/fakeNews.html">Fake News Detector</a>
+        <a href="/search.html">Search/Download Data</a>
+    </nav>
+    <!-- Setting -->
+    <div class="user-icon">
+        <img id="userAvatar" src="/assets/user.png" alt="User Icon">
+        <div class="dropdown-menu" id="dropdownMenu">
+            <a href="/setting.html" rel="stylesheet">Setting</a>
+            <a href="#" id="logout">Logout</a>
+        </div>
+    </div>
+</header>
+
+<!-- Welcome Section -->
+<div class="welcome-section">
+    <h2>Welcome to the Blaze Insight</h2>
+</div>
+
+<!-- Data Boxes -->
+<div class="data-boxes">
+    <div class="data-box">
+        <h3>Tweets Data</h3>
+        <p>1506800</p>
+    </div>
+
+    <div class="data-box">
+        <h3>Fake News Tweets</h3>
+        <p>15000</p>
+    </div>
+
+    <!-- Clickable box for Review -->
+    <a href="map.html" class="data-box" style="text-decoration: none;">
+        <h3>Review</h3>
+        <p>Most fake news date:</p>
+    </a>
+
+    <!-- Clickable box for Sentiment -->
+    <a href="topics.html" class="data-box" style="text-decoration: none;">
+        <h3>Sentiment</h3>
+        <p>Topic modeling including Sentiment analysis.</p>
+    </a>
+</div>
+
+
+<div class="content-container">
+
+            <!-- First image -->
+            <div class="image-container">
+                <img src="\assets\index map1.png" alt="Graph Analysis">
+            </div>
+
+            <div class="text-description">
+                figure1: source from https://storymaps.arcgis.com/stories/9eb91298bd5d4760b19ace5940481d60
+            </div>
+
+    <div class="title">
+    Introduction of the website
+</div>
+    <div class="text-description">
+    <p>
+        This website shows the analysis result of large amount of data, which contains tweets about Australia Bush fire.
+        Our website has the Topic modeling page, Map page show the visualization of the result.
+    </p>
+</div>
+<div class="title">
+    The Impacts of the Bush Fires
+</div>
+
+<div class="text-description">
+    <p>
+        The 2019-2020 bushfire season has seen more than 18 million hectares burnt across the country,
+        destroyed with 5,900 buildings destroyed, including 2,800 homes and the deaths of 34 people
+        and approximately one billion animals. Whilst these are the 'headline statistics' considered
+        when assessing the extent of the damage caused by the fires, especially by the public,
+        on further analysis, the impacts are more far-reaching and severe than even the initially shocking figures would suggest.
+    </p>
+</div>
+
+<!-- Social Impacts Section -->
+<div class="title">
+    The Social Impacts (Source: UN Environment Programme)
+</div>
+
+<div class="text-description">
+    <ul>
+        <li>18 million hectares burned</li>
+        <li>5,900 buildings destroyed - 2,800 homes</li>
+        <li>1 billion Animals killed</li>
+        <li>34 people killed directly</li>
+        <li>Public health impacts: Poor air quality - Canberra measured the worst air quality index of any major city in the world.</li>
+        <li>Wildfires produce harmful smoke which can cause fatalities - asthma, bronchitis, etc.</li>
+        <li>Estimated 417 deaths due to poor air quality (Source: Medical Journal of Australia)</li>
+        <li>Mental health impacts: Trauma of evacuation, losing pets, homes, belongings.</li>
+        <li>Some communities found themselves unable to evacuate due to power loss or blocked roads, leading to lasting mental health effects.</li>
+    </ul>
+</div>
+
+<!-- Economic Impacts Section -->
+<div class="title">
+    Economic Impacts
+</div>
+
+<div class="text-description">
+    <ul>
+        <li>Infrastructure damage impacts industries such as farming and tourism.</li>
+        <li>Businesses and institutions closed during periods of excessive air pollution.</li>
+        <li>Economic costs expected to exceed the $4.4 billion cost of the 2009 'Black Saturday' fires (Source: Guardian).</li>
+    </ul>
+</div>
+
+<!-- Environmental Impacts Section -->
+<div class="title">
+    Environmental Impacts
+</div>
+
+<div class="text-description">
+    <ul>
+        <li>Ash from fires kills crops and pollutes water, leading to algal blooms in streams and rivers.</li>
+        <li>Loss of biodiversity due to habitat destruction.</li>
+        <li>Climate feedback loops: Forests previously absorbed carbon emissions, but due to scale, this is no longer achievable.</li>
+        <li>400 megatonnes of carbon dioxide emitted into the atmosphere during the 2019-2020 fires (Source: Copernicus monitoring programme).</li>
+    </ul>
+</div>
+
+<div class="title">
+Misleading maps and information going viral
+</div>
+
+<div class="image-container">
+    <img src="../assets/misleading1.png" alt="Map Example">
+</div>
+
+<div class="text-description">
+<p>
+    Some celebrities used social media as a tool for raising awareness about the fires to raise funds, one of the most viral tweets linked to this was from singer Rhianna who posted an image of Australia covered in lava like markings meant to show where active fires were. This was revealed however to be an inaccurate visualisation of the crisis, despite using NASA data to make the map. The artist of the map is Anthony Hearsay, who used a months worth of fire data overlaid over each other to create a compilation of the blazes, this process made it seem like more of Australia was on fire at one time. The map was shared and retweeted by thousands,  fear mongering large groups of people and possibly pushing more people to donate to the cause than normal. It questions the morals of humanitarian appeals and fundraising if they are set on false data despite ultimately helping those in need.
+</p>
+</div>
+<div class="title">
+    Conclusion
+</div>
+
+    <div class="text-description">
+    <p>
+        This project has aimed to explore matters of causation and impact, historical context, humanitarian response and the impact of social media on the most recent bush fire season in Australia, which appeared to be notable more catastrophic and present in global public consciousness than ever before.
+    </p>
+        <p>
+            The fires were caused by a combination of long term climatic causes that fostered the appropriate conditions, notably an arid environment , that allowed the potential for lightning strikes to ignite these areas. The Impacts of this event were noticeably severe and extensive, even in comparison to prior examples of damaging fires such as 2009's 'Black Saturday' blazes. Therefore it is evident that the 2019-2020 bush fire season represented a disaster on an unrivalled scale.
+        </p>
+        <p>
+            This historical perspective shows us that the bush fires in Australia have always been a part of the landscape that has shaped the culture of this ancient land. Even before the first European colonisers began to arrive towards the end of the eighteenth century, for many generations, indigenous peoples have continued to face devastation that bush fires have caused. As we sit here to witness the horrors of the bush fires that affect human lives and wildlife, how should we be representing our modern generation? As evidence highlights, so long as the Australian population continues to rise and local authorities continue to disregard necessary funding, bush fires will continue to become more uncontrollable. The 1851 fires are a prime example of when systematic burning was reduced by Europeans and fires spread quickly when settlements were more densely populated. Therefore, as a more advanced society, in the future we must make sure that humanitarian response is effective enough for stopping the spread of the fires as fast as possible. At the same time, the rest of us must understand that the ecosystems that continue to burn across our planet our affecting our future generations; as these are the very ‘lungs’ of our world.
+        </p>
+        <p>
+            The Humanitarian response to the bush fires will always have to change and adapt , however through the kindness of companies, celebrities and the general public, NGO’s are able to effectively help those left displaced by the fires. Fake news and the impact of social media is only going to grow therefore we need to be more cautious about what is fact and fiction in a crisis.
+        </p>
+</div>
+
+    <div class="title">
+    References
+</div>
+
+    <div class="text-description">
+    <p>
+        some pictures and information about Australia bush fire is from https://storymaps.arcgis.com/stories/9eb91298bd5d4760b19ace5940481d60
+    </p>
+        <p>
+            Wikipedia, “2019–20 Australian bushfire season”, Accessed April 17 2020,  https://en.wikipedia.org/wiki/2019%E2%80%9320_Australian_bushfire_season .
+        </p>
+</div>
+
+</div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>
+            <a href="#">Copyright to NULL POINT TEAM</a>
+        </p>
+    </div>
+</div>
+<script src="/js/main.js"></script>
+<script src="/js/index.js"></script>
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+</html>
