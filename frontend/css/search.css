@@ -1,4 +1,5 @@
 /* Specific styles for search page only */
+
 .main-content {
     margin-top: 0;
     padding: 40px;
@@ -28,7 +29,7 @@
     flex: 1;
     padding: 15px;
     font-size: 1.2em;
-    border: 1px solid #ddd;
+    border: 1px solid;
     border-radius: var(--button-radius);
     max-width: 600px;
 }
@@ -48,155 +49,79 @@
     background-color: var(--button-hover-color);
 }
 
-.filters-toggle {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.filters-toggle button {
-    background: none;
-    border: none;
-    font-size: 1.5em;
-    cursor: pointer;
-    color: var(--primary-color);
-    padding: 10px;
-}
-
-.filters-toggle button:hover {
-    color: var(--button-hover-color);
-}
-
 .filters-section {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     background-color: #fff;
-    padding: 20px;
-    width: 70vw;
-    max-width: 800px;
-    height: 80vh;
-    overflow-y: auto;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    z-index: 1000;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: var(--box-shadow);
+    margin-bottom: 30px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    display: none; 
 }
 
-.filters-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
+.filters-section.show {
+    display: grid;
 }
 
 .filter-item {
-    flex: 1 1 calc(50% - 20px);
-    background-color: #f9f9f9;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: var(--button-radius);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s;
-    margin-bottom: 15px;
-    font-size: 0.9em;
+    margin-bottom: 20px;
 }
 
 .filter-item label {
-    font-weight: bold;
     display: block;
-    margin-bottom: 5px;
-    font-size: 0.9em;
-    color: var(--primary-color);
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--nav-link-color);
+}
+
+.filter-item input[type="range"],
+.filter-item select,
+.filter-item input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: var(--button-radius);
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.filter-item input[type="range"]:focus,
+.filter-item select:focus,
+.filter-item input[type="date"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
 }
 
 .filter-item input[type="range"] {
-    width: 100%;
+    -webkit-appearance: none;
+    height: 8px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity 0.3s;
 }
 
-.filter-item select {
-    width: 100%;
-    padding: 8px;
-    border-radius: var(--button-radius);
-    border: 1px solid #ddd;
-    font-size: 0.9em;
+.filter-item input[type="range"]:hover {
+    opacity: 1;
 }
 
-.results {
-    margin-top: 40px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: var(--button-radius);
-    box-shadow: var(--box-shadow);
-}
-
-.result-item {
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: var(--button-radius);
-    margin-bottom: 20px;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s;
-}
-
-.result-item:hover {
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-}
-
-.result-item h3 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-    color: var(--primary-color);
-}
-
-.result-item p {
-    font-size: 1em;
-    line-height: 1.6;
-    color: #333;
-}
-
-.loading-spinner {
-    display: none;
-    width: 60px;
-    height: 60px;
-    border: 6px solid rgba(0, 0, 0, 0.1);
-    border-left-color: var(--primary-color);
+.filter-item input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--primary-color);
+    cursor: pointer;
     border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin: 30px auto;
 }
 
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-.filter-modal-close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 1.2em;
+.filter-item input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: var(--primary-color);
     cursor: pointer;
-    color: var(--primary-color);
-}
-
-/* Beautify the filter select with a custom chip-like design */
-#location, #topic {
-    width: calc(100% - 10px);
-    padding: 5px;
-    border: 1px solid #ddd;
-    border-radius: var(--button-radius);
-    margin-top: 10px;
-    font-size: 0.9em;
-    cursor: pointer;
-}
-
-#location option, #topic option {
-    padding: 8px;
+    border-radius: 50%;
 }
 
 #selected-topics, #selected-locations {
@@ -216,13 +141,82 @@
     cursor: default;
 }
 
-.chip i {
-    margin-left: 8px;
+.results {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.result-item {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: var(--box-shadow);
+    transition: box-shadow 0.3s;
+}
+
+.result-item:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.loading-spinner {
+    display: none;
+    width: 50px;
+    height: 50px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.download-section {
+    margin-top: 30px;
+    text-align: center;
+}
+
+#downloadButton {
+    padding: 12px 24px;
+    font-size: 1em;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: var(--button-radius);
     cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#downloadButton:hover {
+    background-color: var(--button-hover-color);
+}
+
+.filter-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.4em;
+    cursor: pointer;
+    color: var(--nav-link-color);
+    transition: color 0.3s;
+}
+
+.filter-modal-close:hover {
+    color: var(--primary-color);
+}
+
+@media (max-width: 1200px) {
+    .filters-section {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 768px) {
-    .filter-item {
-        flex: 1 1 100%;
+    .filters-section {
+        grid-template-columns: 1fr;
     }
 }

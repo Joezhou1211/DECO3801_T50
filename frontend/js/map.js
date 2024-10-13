@@ -404,7 +404,7 @@ google.charts.setOnLoadCallback(initializeChart);
  * Draws the map and sets up the interaction and sidebar for global view.
  */
 function initializeChart() {
-    $.getJSON('../../data/processed/fake_news_data.json', function (jsonData) {
+    $.getJSON('../../data/processed/map_data.json', function (jsonData) {
         globalData = jsonData;
         initializeTimeline();
 

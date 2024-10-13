@@ -9,11 +9,8 @@ import io
 
 
 # 设置 Flask 应用
-app = Flask(
-    __name__,
-    static_folder='../frontend/assets',  # 提供其他静态文件（如图片等）
-    template_folder='../frontend/pages'  # HTML 页面路径
-)
+app = Flask(__name__, static_folder='../frontend/assets', template_folder='../frontend/pages')
+
 
 # 启用 CORS，允许所有来源和请求方法
 CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
@@ -82,6 +79,7 @@ def search():
         results = es_service.search(filters, page=page, page_size=page_size)
         return jsonify(results)
     except Exception as e:
+        logger.error(f"Search error: {str(e)}")
         return jsonify({"error": str(e)}), 500
 
 
@@ -96,16 +94,16 @@ def download():
         full_data = es_service.get_full_data(selected_ids)
         df = pd.DataFrame(full_data)
 
-        # 将 DataFrame 转换为 CSV 格式
         output = io.StringIO()
         df.to_csv(output, index=False)
         output.seek(0)
 
         return send_file(io.BytesIO(output.getvalue().encode('utf-8')),
-                         mimetype='text/csv',
-                         as_attachment=True,
-                         attachment_filename='selected_data.csv')
+                     mimetype='text/csv',
+                     as_attachment=True,
+                     download_name='selected_data.csv')
     except Exception as e:
+        logger.error(f"Download error: {str(e)}")
         return jsonify({"error": str(e)}), 500
 
 

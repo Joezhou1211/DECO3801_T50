@@ -4,7 +4,7 @@ let selectedIds = new Set(); // Track selected item IDs for download
 // Function to toggle filters visibility
 function toggleFilters() {
     const filtersSection = document.getElementById('filtersSection');
-    filtersSection.style.display = (filtersSection.style.display === 'none' || filtersSection.style.display === '') ? 'block' : 'none';
+    filtersSection.classList.toggle('show');
 }
 
 // Debounced search function to limit the number of search requests
@@ -24,36 +24,34 @@ function getSearchFilters() {
     const selectedLocations = Array.from(locationSelect.selectedOptions).map(option => option.value);
     const topicSelect = document.getElementById('topic');
     const selectedTopics = Array.from(topicSelect.selectedOptions).map(option => option.value);
-    const sentiment = document.getElementById('sentiment').value;
-    const retweetCount = document.getElementById('retweetCount').value;
-    const replyCount = document.getElementById('replyCount').value;
-    const quoteCount = document.getElementById('quoteCount').value;
-    const favouriteCount = document.getElementById('favouriteCount').value;
-    const influenceTweetFactor = document.getElementById('influenceTweetFactor').value;
-    const influenceUser = document.getElementById('influenceUser').value;
     const verifiedAccount = document.getElementById('verifiedAccount').value;
     const nodeType = document.getElementById('nodeType').value;
     const authorKeynode = document.getElementById('authorKeynode').value;
     const hashtagKeynode = document.getElementById('hashtagKeynode').value;
 
-    return {
+    let filters = {
         query,
         timeRangeStart,
         timeRangeEnd,
         selectedLocations,
         selectedTopics,
-        sentiment,
-        retweetCount,
-        replyCount,
-        quoteCount,
-        favouriteCount,
-        influenceTweetFactor,
-        influenceUser,
         verifiedAccount,
         nodeType,
         authorKeynode,
         hashtagKeynode
     };
+
+    // 处理数值型过滤器
+    const numericFilters = ['sentiment', 'retweetCount', 'replyCount', 'quoteCount', 'favouriteCount', 'influenceTweetFactor', 'influenceUser', 'extendedEntities'];
+    
+    numericFilters.forEach(filter => {
+        const value = document.getElementById(filter).value;
+        if (value !== '') {
+            filters[filter] = {min: parseFloat(value)};
+        }
+    });
+
+    return filters;
 }
 
 // Perform search and send filters to backend
@@ -62,8 +60,10 @@ function performSearchWithFilters() {
     const resultsDiv = document.getElementById('results');
     const loadingSpinner = document.getElementById('loadingSpinner');
 
+    console.log('Sending filters to backend:', filters);
+
     loadingSpinner.style.display = 'inline-block';
-    resultsDiv.innerHTML = '';  // Clear previous results
+    resultsDiv.innerHTML = '';
 
     fetch('http://localhost:5001/api/search', {
         method: 'POST',
@@ -79,122 +79,193 @@ function performSearchWithFilters() {
         return response.json();
     })
     .then(data => {
-        console.log('Search results:', data);  // Log for debugging
-
+        console.log('Search results:', data);
         loadingSpinner.style.display = 'none';
-        resultsDiv.innerHTML = '';
-
-        let resultsArray = Array.isArray(data) ? data : (data.hits || data.results || []);
-
-        if (resultsArray.length === 0) {
-            resultsDiv.innerHTML = '<p>No results found.</p>';
-            return;
-        }
-
-        resultsArray.forEach(item => {
-            const resultItem = document.createElement('div');
-            resultItem.className = 'result-item';
-            resultItem.innerHTML = `
-                <input type="checkbox" onchange="toggleSelection('${item._id}')" />
-                <p><strong>Deidentified Name:</strong> ${item.deidentname}</p>
-                <p><strong>Text:</strong> ${item.text}</p>
-                <p><strong>Location:</strong> ${item.location}</p>
-                <p><strong>Topic:</strong> ${item.dominant_topic}</p>
-                <p><strong>Sentiment:</strong> ${item.sentiment}</p>
-                <p><strong>Retweet Count:</strong> ${item.retweet_count}</p>
-                <p><strong>Reply Count:</strong> ${item.reply_count}</p>
-            `;
-            resultsDiv.appendChild(resultItem);
-        });
+        displayResults(data);
     })
     .catch(error => {
+        console.error('Error:', error);
         loadingSpinner.style.display = 'none';
-        console.error('Error fetching search results:', error);
-        resultsDiv.innerHTML = `<p>An error occurred while searching: ${error.message}</p>`;
+        resultsDiv.innerHTML = `<p>Error: ${error.message}. Please try again later.</p>`;
+        alert('An error occurred while searching. Please try again.');
     });
 }
 
-// Toggle selection of a result item
+function displayResults(results) {
+    const resultsDiv = document.getElementById('results');
+    resultsDiv.innerHTML = '';
+
+    if (results.length === 0) {
+        resultsDiv.innerHTML = '<p>No results found.</p>';
+        return;
+    }
+
+    results.forEach(result => {
+        const resultItem = document.createElement('div');
+        resultItem.className = 'result-item';
+        resultItem.innerHTML = `
+            <h3>${result.deidentname}</h3>
+            <p>${result.text}</p>
+            <p>Created at: ${result.created_at_dt}</p>
+            <p>Location: ${result.location}</p>
+            <p>Dominant Topic: ${result.dominant_topic}</p>
+            <p>Sentiment: ${result.sentiment}</p>
+            <p>Retweet Count: ${result.retweet_count}</p>
+            <p>Reply Count: ${result.reply_count}</p>
+            <p>Quote Count: ${result.quote_count}</p>
+            <p>Favourite Count: ${result.favourite_count}</p>
+            <p>Node Type: ${result.node_type}</p>
+            <p>Author Keynode: ${result.author_keynode ? 'Yes' : 'No'}</p>
+            <p>Hashtag Keynode: ${result.hashtag_keynode ? 'Yes' : 'No'}</p>
+            <label>
+                <input type="checkbox" onchange="toggleSelection('${result._id}')">
+                Select for download
+            </label>
+        `;
+        resultsDiv.appendChild(resultItem);
+    });
+}
+
+
 function toggleSelection(id) {
     if (selectedIds.has(id)) {
         selectedIds.delete(id);
     } else {
         selectedIds.add(id);
     }
+    updateDownloadButtonState();
 }
 
-// Download selected items
+function updateDownloadButtonState() {
+    const downloadButton = document.getElementById('downloadButton');
+    downloadButton.disabled = selectedIds.size === 0;
+}
+
 function downloadSelected() {
     if (selectedIds.size === 0) {
         alert('Please select at least one item to download.');
         return;
     }
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    loadingSpinner.style.display = 'inline-block';
 
-    const selectedArray = Array.from(selectedIds);
     fetch('http://localhost:5001/api/download', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ selected_ids: selectedArray }),
+        body: JSON.stringify({selected_ids: Array.from(selectedIds)}),
     })
-    .then(response => response.blob())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.blob();
+    })
     .then(blob => {
+        loadingSpinner.style.display = 'none';
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
+        a.style.display = 'none';
         a.href = url;
         a.download = 'selected_data.csv';
         document.body.appendChild(a);
         a.click();
-        a.remove();
+        window.URL.revokeObjectURL(url);
     })
     .catch(error => {
-        console.error('Error downloading data:', error);
-        alert('An error occurred while downloading the data.');
+        console.error('Error:', error);
+        loadingSpinner.style.display = 'none';
+        alert(`Error downloading data: ${error.message}`);
     });
 }
 
-// Update slider display values
+
+function initializeFilters() {
+    initializeLocationFilter();
+    
+    updateSentimentDisplay();
+    updateRetweetCountDisplay();
+    updateReplyCountDisplay();
+    updateQuoteCountDisplay();
+    updateFavouriteCountDisplay();
+    updateInfluenceTweetFactorDisplay();
+    updateInfluenceUserDisplay();
+    updateExtendedEntitiesDisplay();
+}
+
+function initializeLocationFilter() {
+    const locationSelect = document.getElementById('location');
+    locationSelect.innerHTML = ''; 
+    
+    // 添加 "All" 选项
+    const allOption = document.createElement('option');
+    allOption.value = 'all';
+    allOption.textContent = 'All';
+    locationSelect.appendChild(allOption);
+    
+    // 使用 map.js 中定义的 countryNames
+    for (const [code, name] of Object.entries(countryNames)) {
+        const option = document.createElement('option');
+        option.value = code;
+        option.textContent = name;
+        locationSelect.appendChild(option);
+    }
+}
+
 function updateSentimentDisplay() {
     const sentiment = document.getElementById('sentiment').value;
     document.getElementById('sentimentDisplay').innerText = `Sentiment Value: ${sentiment}`;
+    debouncedSearch();
 }
 
 function updateRetweetCountDisplay() {
     const count = document.getElementById('retweetCount').value;
     document.getElementById('retweetCountDisplay').innerText = count;
+    debouncedSearch();
 }
 
 function updateReplyCountDisplay() {
     const count = document.getElementById('replyCount').value;
     document.getElementById('replyCountDisplay').innerText = count;
+    debouncedSearch();
 }
 
 function updateQuoteCountDisplay() {
     const count = document.getElementById('quoteCount').value;
     document.getElementById('quoteCountDisplay').innerText = count;
+    debouncedSearch();
 }
 
 function updateFavouriteCountDisplay() {
     const count = document.getElementById('favouriteCount').value;
     document.getElementById('favouriteCountDisplay').innerText = count;
+    debouncedSearch();
 }
 
 function updateInfluenceTweetFactorDisplay() {
     const value = document.getElementById('influenceTweetFactor').value;
     document.getElementById('influenceTweetFactorDisplay').innerText = value;
+    debouncedSearch();
 }
 
 function updateInfluenceUserDisplay() {
     const value = document.getElementById('influenceUser').value;
     document.getElementById('influenceUserDisplay').innerText = value;
+    debouncedSearch();
+}
+
+function updateExtendedEntitiesDisplay() {
+    const count = document.getElementById('extendedEntities').value;
+    document.getElementById('extendedEntitiesDisplay').innerText = count;
+    debouncedSearch();
 }
 
 // Update selected locations and topics
 function updateLocationFilter() {
     const locationSelect = document.getElementById('location');
     const selectedLocationsDiv = document.getElementById('selected-locations');
-    selectedLocationsDiv.innerHTML = '';  // Clear previous selections
+    selectedLocationsDiv.innerHTML = '';  
 
     Array.from(locationSelect.selectedOptions).forEach(option => {
         const chip = document.createElement('div');
@@ -203,13 +274,13 @@ function updateLocationFilter() {
         selectedLocationsDiv.appendChild(chip);
     });
 
-    debouncedSearch();  // Trigger search after updating
+    debouncedSearch();  
 }
 
 function updateTopicFilter() {
     const topicSelect = document.getElementById('topic');
     const selectedTopicsDiv = document.getElementById('selected-topics');
-    selectedTopicsDiv.innerHTML = '';  // Clear previous selections
+    selectedTopicsDiv.innerHTML = ''; 
 
     Array.from(topicSelect.selectedOptions).forEach(option => {
         const chip = document.createElement('div');
@@ -218,5 +289,9 @@ function updateTopicFilter() {
         selectedTopicsDiv.appendChild(chip);
     });
 
-    debouncedSearch();  // Trigger search after updating
+    debouncedSearch();  
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    initializeFilters();
+});
