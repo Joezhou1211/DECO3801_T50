@@ -27,94 +27,130 @@
         <a href="/topics.html">Topics</a>
         <a href="/map.html">Map</a>
         <a href="/fakeNews.html">Fake News Detector</a>
-        <a href="/search.html">Search/Download Data</a>
-        <a href="/help.html">Suggestion</a>
+        <a href="/search.html">Data</a>
     </nav>
 
-    <!-- Setting -->
-    <div class="user-icon">
-        <img id="userAvatar" src="/assets/user.png" alt="User Icon">
-        <div class="dropdown-menu" id="dropdownMenu">
-            <a href="/setting.html" rel="stylesheet">Setting</a>
-            <a href="#" id="logout">Logout</a>
+    <!-- Setting and Help -->
+    <div class="setting-container">
+        <!-- Help Icon -->
+        <div class="help-icon">
+            <a href="/help.html">
+                <img src="/assets/help-icon.png" alt="Help Icon" title="Help and support">
+            </a>
+        </div>
+
+        <!-- User Icon -->
+        <div class="user-icon">
+            <img id="userAvatar" src="/assets/user.png" alt="User Icon">
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="/setting.html" rel="stylesheet">Setting</a>
+                <a href="#" id="logout">Logout</a>
+            </div>
         </div>
     </div>
 </header>
 
-<div class="content-container">
-        <!-- Map Section -->
-        <div class="section">
-            <div class="image-container">
-                <img src="../assets/map.png" alt="Map Example">
-            </div>
-            <div class="text-container">
-                <h2>Map</h2>
-                <p>
-                    The map shows real-time data on geographical locations and hotspots for bushfires or other environmental concerns.
-                    Users can navigate through the map to see specific areas affected.
-                </p>
-                 <p>
-                    The bottom-left part of the map shows the unknown region of the data, which has the number of tweets, fake news, and
-                     fake news ratio, fake news topics.
-                </p>
-                <p>
-                    The Top-left part of the map has the Download Data button, which can download the whole dataset to user. Then user can
-                    see the whole dataset we use.
-                </p>
-            </div>
-        </div>
-
-        <!-- Topic Modeling Section -->
-        <div class="section">
-            <div class="image-container">
-                <img src="/assets/model1.png" alt="Topic Modeling Example">
-            </div>
-            <div class="text-container">
-                <h2>Topic Modeling</h2>
-                <p>
-                    Topic Modeling allows users to analyze and extract key themes or topics from a set of data such as news articles or tweets.
-                    This helps in understanding patterns and trends in a dataset.
-                </p>
-                <p>
-                    Just as the picture shows, it can show whether the topic is positive or negative. What is more, it has the time line
-                    at the bottom. Which means it can show the data when the time change.
-                </p>
-                <p>
-                    Just as the picture shows, it can show whether the topic is positive or negative. What is more, it has the time line
-                    at the bottom. Which means it can show the data when the time change.
-                </p>
-                <p>
-                    For the table page, it can show the detailed information of the tweets, including the name of the topic, and the information
-                like: like, reply, share of the tweets, it also can change when the time change.
-            </div>
-        </div>
-
-        <!-- Fake News Section -->
-        <div class="section">
-            <div class="image-container">
-                <img src="/assets/fakenews.png" alt="Fake News Example">
-            </div>
-            <div class="text-container">
-                <h2>Fake News</h2>
-                <p>
-                    Fake News detection is essential in identifying misinformation.
-                    This tool helps users differentiate between reliable information and potential disinformation in the media.
-                </p>
-                <p>
-                    It has two section, one is to analyse the news, and one is to analyse the tweets. In news part, it is used to
-                    help detect whether the news is fake news, user can put the news in, and the result will show at right.
-                </p>
-                <p>
-                    It has two section, one is to analyse the news, and one is to analyse the tweets. In news part, it is used to
-                    help detect whether the news is fake news, user can put the news in, and the result will show at right.
-                </p>
-            </div>
-</div>
+<div class="help-container">
+    <!-- Title Section -->
+    <div class="help-title">
+        <h1>Help and Support</h1>
+        <p>How do I use Blaze Insight? This page helps you understand how to use it effectively.</p>
     </div>
+</div>
+    <div class="help-content">
+        <!-- Left Sidebar Navigation -->
+        <div class="sidebar-nav">
+            <ul>
+                <li><a href="#manage-account">Manage Your Account</a></li>
+                <li><a href="#publishing-data">Publishing Data</a></li>
+                <li><a href="#searching-data">Searching for Data</a></li>
+                <li><a href="#using-map">Using Map</a></li>
+                <li><a href="#using-topic">Using Topic</a></li>
+                <li><a href="#using-fake-news">Using Fake News Detector</a></li>
+                <li><a href="#support">Support</a></li>
+            </ul>
+        </div>
 
-<script>
+        <!-- Right Content Area -->
+        <div class="content-area">
+            <!-- Manage Your Account Section -->
+            <div class="section" id="manage-account">
+                <h2>Manage Your Account</h2>
+                <p>Details about managing your account, such as updating profile information, resetting passwords, and account preferences.</p>
+            </div>
 
-</script>
+            <!-- Publishing Data Section -->
+            <div class="section" id="publishing-data">
+                <h2>Publishing Data</h2>
+                <p>Learn how to publish datasets in Blaze Insight, including formatting requirements and sharing options.</p>
+            </div>
+
+            <!-- Searching for Data Section -->
+            <div class="section" id="searching-data">
+                <h2>Searching for Data</h2>
+                <p>Blaze Insight provides a“data” for viewing and exploring all datasets uploaded to the website. You can easily access the data by navigating to the "Data" section found in the navigation bar on every page. From there, you can browse through various datasets relevant to your interests, making it simple to discover information that meets your research or analytical needs.</p>
+
+                <p>The "Data" section is designed to be intuitive, allowing users to efficiently filter and sort datasets based on different criteria, such as topic, date, or data source. Once you've located a dataset that interests you, you can view detailed metadata about the dataset, including its description, source, and any associated documentation that helps in understanding the data.</p>
+            </div>
+
+            <!-- Map Section -->
+            <div class="section" id="using-map">
+                <h2>Using the Map</h2>
+                <div class="image-container">
+                    <img src="../assets/map.png" alt="Map Example">
+                </div>
+                <div class="text-container">
+                    <p>
+                        The map shows real-time data on geographical locations and hotspots for bushfires or other environmental concerns. Users can navigate through the map to see specific areas affected.
+                    </p>
+                    <p>
+                        The bottom-left part of the map shows unknown regions of the data, including tweets, fake news, and their ratio.
+                    </p>
+                    <p>
+                        The top-left part of the map has a "Download Data" button that allows you to download the whole dataset.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Topic Modeling Section -->
+            <div class="section" id="using-topic">
+                <h2>Using Topic</h2>
+                <div class="image-container">
+                    <img src="/assets/model1.png" alt="Topic Modeling Example">
+                </div>
+                <div class="text-container">
+                    <p>
+                        Topic Modeling allows users to analyze and extract key themes or topics from a set of data such as news articles or tweets. This helps in understanding patterns and trends in a dataset.
+                    </p>
+                    <p>
+                        The example shows whether a topic is positive or negative, and includes a timeline to filter data by time.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Fake News Section -->
+            <div class="section" id="using-fake-news">
+                <h2>Using the Fake News Detector</h2>
+                <div class="image-container">
+                    <img src="/assets/fakenews.png" alt="Fake News Example">
+                </div>
+                <div class="text-container">
+                    <p>
+                        Fake News detection helps identify misinformation. This tool allows users to analyze news and tweets to determine their reliability.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Support Section -->
+            <div class="section" id="support">
+                <h2>Support</h2>
+                <p>If you need further help, contact our support team or visit the FAQ section for more detailed guidance.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script src="/js/help.js"></script>
 <script src="/js/main.js"></script>
 </body>
