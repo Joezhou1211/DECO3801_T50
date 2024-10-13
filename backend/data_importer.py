@@ -22,7 +22,7 @@ es.indices.create(index=index_name)
 print(f"New index '{index_name}' created.")
 
 # Read the CSV file into a DataFrame
-df = pd.read_csv('../data/processed/final_data.csv')
+df = pd.read_csv('../data/processed/final_data(old).csv')
 
 # Replace NaN values with None
 df = df.replace({np.nan: None})

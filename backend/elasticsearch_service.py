@@ -17,7 +17,11 @@ Expand data frame interfaces based on frontend requirements.
 """
 
 from elasticsearch import Elasticsearch
+import logging
 
+# 配置日志
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 class ElasticSearchService:
     def __init__(self, index_name):
@@ -26,8 +30,10 @@ class ElasticSearchService:
 
     def search(self, filters, page=1, page_size=50):
         """
-        Search with filters and return paginated results.
+        Perform a search with filters and return paginated results.
         """
+        logger.info(f"Received filters: {filters}")
+
         es_query = {
             "query": {
                 "bool": {
@@ -43,13 +49,13 @@ class ElasticSearchService:
             "from": (page - 1) * page_size
         }
 
-        # 搜索文本内容
+        # Text search
         if filters.get('query'):
             es_query["query"]["bool"]["must"].append({
                 "match": {"text": filters['query']}
             })
 
-        # 按照时间范围过滤
+        # Date range filter
         if filters.get('timeRangeStart') and filters.get('timeRangeEnd'):
             es_query["query"]["bool"]["filter"].append({
                 "range": {
@@ -60,7 +66,7 @@ class ElasticSearchService:
                 }
             })
 
-        # 按照地点过滤
+        # Location filter
         if filters.get('selectedLocations'):
             es_query["query"]["bool"]["filter"].append({
                 "terms": {
@@ -68,7 +74,7 @@ class ElasticSearchService:
                 }
             })
 
-        # 按照主题过滤
+        # Topic filter
         if filters.get('selectedTopics'):
             es_query["query"]["bool"]["filter"].append({
                 "terms": {
@@ -76,15 +82,7 @@ class ElasticSearchService:
                 }
             })
 
-        # 按照情绪过滤
-        if filters.get('sentiment'):
-            es_query["query"]["bool"]["filter"].append({
-                "range": {
-                    "sentiment": {"gte": filters['sentiment']}
-                }
-            })
-
-        # 其他数值过滤器
+        # Numeric filters
         numeric_filters = {
             'retweet_count': 'retweet_count',
             'reply_count': 'reply_count',
@@ -92,18 +90,29 @@ class ElasticSearchService:
             'favourite_count': 'favourite_count',
             'influence_tweet_factor': 'influence_tweet_factor',
             'influence_user': 'influence_user',
-            'extended_entities_count': 'extended_entities_count'
+            'extended_entities_count': 'extended_entities_count',
+            'sentiment': 'sentiment'
         }
 
         for filter_key, es_field in numeric_filters.items():
             if filters.get(filter_key):
-                es_query["query"]["bool"]["filter"].append({
-                    "range": {
-                        es_field: {"gte": filters[filter_key]}
-                    }
-                })
+                filter_value = filters[filter_key]
+                if isinstance(filter_value, dict):
+                    range_query = {}
+                    if 'min' in filter_value and isinstance(filter_value['min'], (int, float)):
+                        range_query['gte'] = filter_value['min']
+                    if 'max' in filter_value and isinstance(filter_value['max'], (int, float)):
+                        range_query['lte'] = filter_value['max']
+                    if range_query:
+                        es_query["query"]["bool"]["filter"].append({
+                            "range": {es_field: range_query}
+                        })
+                elif isinstance(filter_value, (int, float)):
+                    es_query["query"]["bool"]["filter"].append({
+                        "range": {es_field: {"gte": filter_value}}
+                    })
 
-        # 按照是否认证用户过滤
+        # Verified account filter
         if filters.get('verifiedAccount') and filters['verifiedAccount'] != 'all':
             es_query["query"]["bool"]["filter"].append({
                 "term": {
@@ -111,7 +120,7 @@ class ElasticSearchService:
                 }
             })
 
-        # 按照节点类型过滤
+        # Node type filter
         if filters.get('nodeType') and filters['nodeType'] != 'all':
             es_query["query"]["bool"]["filter"].append({
                 "term": {
@@ -119,7 +128,7 @@ class ElasticSearchService:
                 }
             })
 
-        # 按照作者为关键节点过滤
+        # Author keynode filter
         if filters.get('authorKeynode') and filters['authorKeynode'] != 'all':
             es_query["query"]["bool"]["filter"].append({
                 "term": {
@@ -127,7 +136,7 @@ class ElasticSearchService:
                 }
             })
 
-        # 按照 hashtag 为关键节点过滤
+        # Hashtag keynode filter
         if filters.get('hashtagKeynode') and filters['hashtagKeynode'] != 'all':
             es_query["query"]["bool"]["filter"].append({
                 "term": {
@@ -135,19 +144,29 @@ class ElasticSearchService:
                 }
             })
 
-        # 执行搜索查询
-        response = self.es.search(index=self.index_name, body=es_query)
-        results = []
-        for hit in response['hits']['hits']:
-            source = hit["_source"]
-            source["_id"] = hit["_id"]  # Include _id for internal use (indexing)
-            results.append(source)
-        return results
+
+        logger.info(f"Constructed ES query: {es_query}")
+
+        try:
+            response = self.es.search(index=self.index_name, body=es_query)
+            results = []
+            for hit in response['hits']['hits']:
+                source = hit["_source"]
+                source["_id"] = hit["_id"]
+                results.append(source)
+            return results
+        except Exception as e:
+            logger.error(f"Error executing ElasticSearch query: {str(e)}")
+            raise
 
     def get_full_data(self, selected_ids):
         """
-        Get full data for download based on selected IDs.
+        Retrieve full data for download based on selected IDs.
         """
+        if not selected_ids:
+            logger.warning("No IDs provided for full data retrieval")
+            return []
+
         es_query = {
             "query": {
                 "terms": {
@@ -155,11 +174,14 @@ class ElasticSearchService:
                 }
             }
         }
-        response = self.es.search(index=self.index_name, body=es_query, _source=True, size=len(selected_ids))
-        full_data = [hit["_source"] for hit in response['hits']['hits']]
-        return full_data
+
+        try:
+            response = self.es.search(index=self.index_name, body=es_query, _source=True, size=len(selected_ids))
+            full_data = [hit["_source"] for hit in response['hits']['hits']]
+            return full_data
+        except Exception as e:
+            logger.error(f"Error retrieving full data: {str(e)}")
+            raise
 
 
 es_service = ElasticSearchService('final_data_index')
-
-
