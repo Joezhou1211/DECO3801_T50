@@ -16,11 +16,12 @@
 <!-- Header section -->
 <header class="header">
     <!-- Team Logo -->
-     <div class="logo">
+    <div class="logo">
         <a href="/index.html">
             <img src="/assets/logo.png" alt="Website Logo">
         </a>
     </div>
+
     <!-- Navigation bar -->
     <nav class="nav">
         <a href="/index.html">Home</a>
@@ -28,15 +29,24 @@
         <a href="/map.html">Map</a>
         <a href="/fakeNews.html">Fake News Detector</a>
         <a href="/search.html">Data</a>
-        <a href="/help.html">Suggestion</a>
     </nav>
 
-    <!-- Setting -->
-    <div class="user-icon">
-        <img id="userAvatar" src="/assets/user.png" alt="User Icon">
-        <div class="dropdown-menu" id="dropdownMenu">
-            <a href="/setting.html" rel="stylesheet">Setting</a>
-            <a href="#" id="logout">Logout</a>
+    <!-- Setting and Help -->
+    <div class="setting-container">
+        <!-- Help Icon -->
+        <div class="help-icon">
+            <a href="/help.html">
+                <img src="/assets/help-icon.png" alt="Help Icon" title="Help and support">
+            </a>
+        </div>
+
+        <!-- User Icon -->
+        <div class="user-icon">
+            <img id="userAvatar" src="/assets/user.png" alt="User Icon">
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="/setting.html" rel="stylesheet">Setting</a>
+                <a href="#" id="logout">Logout</a>
+            </div>
         </div>
     </div>
 </header>

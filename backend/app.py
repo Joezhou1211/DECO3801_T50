@@ -8,15 +8,12 @@ import pandas as pd
 import io
 
 
-# 设置 Flask 应用
 app = Flask(__name__, static_folder='../frontend/assets', template_folder='../frontend/pages')
 
 
-# 启用 CORS，允许所有来源和请求方法
 CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
 
-# Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -30,46 +27,39 @@ def apply_cors_headers(response):
     return response
 
 
-# 首页路由
 @app.route('/')
 def index():
     return render_template('index.html')
 
 
-# 提供所有 HTML 页面路由，支持 /index.html、/map.html 等
 @app.route('/<page>.html')
 def render_page(page):
     return render_template(f'{page}.html')
 
 
-# 提供 js 文件
 @app.route('/js/<path:filename>')
 def serve_js(filename):
     js_dir = os.path.join(os.path.dirname(__file__), '../frontend/js')
     return send_from_directory(js_dir, filename)
 
 
-# 提供 css 文件
 @app.route('/css/<path:filename>')
 def serve_css(filename):
     css_dir = os.path.join(os.path.dirname(__file__), '../frontend/css')
     return send_from_directory(css_dir, filename)
 
 
-# 提供 assets 文件（如图片等）
 @app.route('/static/<path:path>')
 def serve_static(path):
     return send_from_directory(app.static_folder, path)
 
 
-# 提供 data/processed 路径的文件
 @app.route('/data/processed/<path:filename>')
 def serve_data(filename):
     data_dir = os.path.join(os.path.dirname(__file__), '../data/processed')
     return send_from_directory(data_dir, filename)
 
 
-# API 路由 - 搜索
 @app.route('/api/search', methods=['POST'])
 def search():
     filters = request.json
@@ -83,7 +73,6 @@ def search():
         return jsonify({"error": str(e)}), 500
 
 
-# API 路由 - 下载选定的数据
 @app.route('/api/download', methods=['POST'])
 def download():
     selected_ids = request.json.get('selected_ids', [])
@@ -107,8 +96,6 @@ def download():
         return jsonify({"error": str(e)}), 500
 
 
-
-# API 路由 - 检查新闻真实性
 @app.route('/api/check-news', methods=['POST', 'OPTIONS'])
 def analyze_news():
     # 处理 OPTIONS 预检请求
