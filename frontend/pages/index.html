@@ -58,60 +58,117 @@
 
 <!-- Welcome Section -->
 <div class="welcome-section">
-    <h2>Welcome to the Blaze Insight</h2>
+    <div class="welcome-image-container">
+        <img src="/assets/bushfire.jpeg" alt="Bushfire Image" class="welcome-image">
+        <div class="welcome-text">
+            <h1>Welcome to Blaze Insight</h1>
+            <p>Explore real-time insights on Australian bushfires with interactive maps and topic modeling analysis.</p>
+            <a href="/map.html" class="welcome-button">Go to Map -></a>
+            <a href="/topics.html" class="welcome-button">Explore Topics -></a>
+        </div>
+    </div>
 </div>
 
 <!-- Data Boxes -->
-<div class="data-boxes">
-    <div class="data-box">
-        <h3>Tweets Data(1/11/2019-28/2/2020)</h3>
-        <p>1576700</p>
+<!-- Feature Section with Two Per Row Layout -->
+<div class="feature-section-horizontal">
+    <div class="feature-row">
+        <div class="feature-box-horizontal">
+            <div class="feature-icon">
+                <i class="fas fa-comment-dots"></i> <!-- Use appropriate icon here -->
+            </div>
+            <div class="vertical-line"></div>
+            <div class="feature-content">
+                <h3>Tweets Data</h3>
+                <p>1,576,700 Tweets Collected</p>
+                <p>Our platform has analyzed over 1.5 million tweets related to the Australian bushfires, offering valuable insights.</p>
+            </div>
+        </div>
+
+        <div class="feature-box-horizontal">
+            <div class="feature-icon">
+                <i class="fas fa-exclamation-triangle"></i> <!-- Use appropriate icon here -->
+            </div>
+            <div class="vertical-line"></div>
+            <div class="feature-content">
+                <h3>Fake News Detected</h3>
+                <p>557 Fake News Articles Identified</p>
+                <p>With our fake news detection tool, we've identified over 500 instances of misinformation during the bushfire season.</p>
+            </div>
+        </div>
     </div>
 
-    <div class="data-box">
-        <h3>Fake News detected</h3>
-        <p>557</p>
-    </div>
+<!--    <div class="feature-row">-->
+<!--        <div class="feature-box-horizontal">-->
+<!--            <div class="feature-icon">-->
+<!--                <i class="fas fa-smile"></i> &lt;!&ndash; Use appropriate icon here &ndash;&gt;-->
+<!--            </div>-->
+<!--            <div class="vertical-line"></div>-->
+<!--            <div class="feature-content">-->
+<!--                <h3>Sentiment Analysis</h3>-->
+<!--                <p>Track Emotions Across Tweets</p>-->
+<!--                <p>Analyze how people feel about the bushfires. Identify positive, neutral, and negative sentiments in the dataset.</p>-->
+<!--            </div>-->
+<!--        </div>-->
 
-    <!-- Clickable box for Review -->
-    <a href="map.html" class="data-box" style="text-decoration: none;">
-        <h3>Fake news map</h3>
-        <p>Explore Fake News Distribution</p>
-    </a>
+<!--        <div class="feature-box-horizontal">-->
+<!--            <div class="feature-icon">-->
+<!--                <i class="fas fa-map-marker-alt"></i> &lt;!&ndash; Use appropriate icon here &ndash;&gt;-->
+<!--            </div>-->
+<!--            <div class="vertical-line"></div>-->
+<!--            <div class="feature-content">-->
+<!--                <h3>Geospatial Mapping</h3>-->
+<!--                <p>Visualize Data on the Map</p>-->
+<!--                <p>Our geospatial analysis tool lets you see where key events, tweets, and topics are concentrated across Australia.</p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        </div>-->
+<!--   <div class="feature-row">-->
+<!--        <div class="feature-box-horizontal">-->
+<!--            <div class="feature-icon">-->
+<!--                <i class="fas fa-search"></i> &lt;!&ndash; Use appropriate icon here &ndash;&gt;-->
+<!--            </div>-->
+<!--            <div class="vertical-line"></div>-->
+<!--            <div class="feature-content">-->
+<!--                <h3>Fake News Detector</h3>-->
+<!--                <p>Identify Misinformation in Real Time</p>-->
+<!--                <p>Analyze news articles and tweets for accuracy, and get a breakdown of how likely content is to be fake.</p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="feature-box-horizontal">-->
+<!--            <div class="feature-icon">-->
+<!--                <i class="fas fa-download"></i> &lt;!&ndash; Use appropriate icon here &ndash;&gt;-->
+<!--            </div>-->
+<!--            <div class="vertical-line"></div>-->
+<!--            <div class="feature-content">-->
+<!--                <h3>Search / Download Data</h3>-->
+<!--                <p>Search through our database and download results for further research or reporting.</p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 
-    <!-- Clickable box for Sentiment -->
-    <a href="topics.html" class="data-box" style="text-decoration: none;">
-        <h3>Topic Insights</h3>
-        <p>Detailed Topic Analysis/Sentiment.</p>
-    </a>
-</div>
 
 
-<div class="content-container">
 
-            <!-- First image -->
-            <div class="image-container">
+<!-- Redesigned Content Section -->
+<div class="content-section">
+    <!-- Introduction Section -->
+    <section class="section-intro">
+        <h2>Explore the Insights</h2>
+        <p>
+            Explore powerful insights from data related to the Australian Bushfires. Dive into our interactive tools to discover key trends, analyze sentiment, and visualize the impact of one of Australia’s most significant environmental events.
+        </p>
+        <div class="image-container">
                 <img src="\assets\index map1.png" alt="Graph Analysis">
             </div>
-
-            <div class="text-description">
+        <div class="resource">
                from https://storymaps.arcgis.com/stories/9eb91298bd5d4760b19ace5940481d60
             </div>
+    </section>
 
-    <div class="title">
-    Introduction of the website
-</div>
-    <div class="text-description">
-    <p>
-        This website shows the analysis result of large amount of data, which contains tweets about Australia Bush fire.
-        Our website has the Topic modeling page, Map page show the visualization of the result.
-    </p>
-</div>
-<div class="title">
-    The Impacts of the Bush Fires
-</div>
-
-<div class="text-description">
+    <!-- Impacts Section -->
+    <section class="section-impacts">
+        <h2>The Impacts of the Bush Fires</h2>
     <p>
         The 2019-2020 bushfire season has seen more than 18 million hectares burnt across the country,
         destroyed with 5,900 buildings destroyed, including 2,800 homes and the deaths of 34 people
@@ -119,91 +176,98 @@
         when assessing the extent of the damage caused by the fires, especially by the public,
         on further analysis, the impacts are more far-reaching and severe than even the initially shocking figures would suggest.
     </p>
-</div>
 
-<!-- Social Impacts Section -->
-<div class="title">
-    The Social Impacts (Source: UN Environment Programme)
-</div>
+        <div class="impact-cards">
+            <div class="impact-card">
+                <i class="fas fa-fire"></i>
+                <h3>18 Million Hectares Burned</h3>
 
-<div class="text-description">
-    <ul>
-        <li>18 million hectares burned</li>
-        <li>5,900 buildings destroyed - 2,800 homes</li>
-        <li>1 billion Animals killed</li>
-        <li>34 people killed directly</li>
-        <li>Public health impacts: Poor air quality - Canberra measured the worst air quality index of any major city in the world.</li>
-        <li>Wildfires produce harmful smoke which can cause fatalities - asthma, bronchitis, etc.</li>
-        <li>Estimated 417 deaths due to poor air quality (Source: Medical Journal of Australia)</li>
-        <li>Mental health impacts: Trauma of evacuation, losing pets, homes, belongings.</li>
-        <li>Some communities found themselves unable to evacuate due to power loss or blocked roads, leading to lasting mental health effects.</li>
-    </ul>
-</div>
+                <p>
+                    The bushfires scorched vast areas of land across Australia, leaving destruction in their wake.
+                </p>
+            </div>
+            <div class="impact-card">
+                <i class="fas fa-home"></i>
+                <h3>5,900 Buildings Destroyed</h3>
+                <p>
+                    Thousands of homes and buildings were destroyed, causing billions in damages.
+                </p>
+            </div>
+            <div class="impact-card">
+                <i class="fas fa-leaf"></i>
+                <h3>1 Billion Animals Lost</h3>
+                <p>
+                    The fires devastated local wildlife, causing significant losses to biodiversity.
+                </p>
+            </div>
+        </div>
+    </section>
 
-<!-- Economic Impacts Section -->
-<div class="title">
-    Economic Impacts
-</div>
+    <!-- Social Impacts -->
+    <section class="section-social">
+        <h2>Social Impacts (Source: UN Environment Programme)</h2>
+        <p>Explore the far-reaching social impacts of the bushfires:</p>
 
-<div class="text-description">
-    <ul>
-        <li>Infrastructure damage impacts industries such as farming and tourism.</li>
-        <li>Businesses and institutions closed during periods of excessive air pollution.</li>
-        <li>Economic costs expected to exceed the $4.4 billion cost of the 2009 'Black Saturday' fires (Source: Guardian).</li>
-    </ul>
-</div>
+        <ul class="social-list">
+            <li>18 million hectares burned</li>
+            <li>5,900 buildings destroyed, 2,800 homes</li>
+            <li>1 billion animals killed</li>
+            <li>34 people killed directly</li>
+            <li>Public health impacts: Poor air quality - Canberra measured the worst air quality index of any major city in the world.</li>
+            <li>Wildfires produce harmful smoke which can cause fatalities - asthma, bronchitis, etc.</li>
+            <li>Estimated 417 deaths due to poor air quality (Source: Medical Journal of Australia)</li>
+            <li>Mental health impacts: Trauma of evacuation, losing pets, homes, belongings.</li>
+            <li>Some communities found themselves unable to evacuate due to power loss or blocked roads, leading to lasting mental health effects.</li>
+        </ul>
+    </section>
 
-<!-- Environmental Impacts Section -->
-<div class="title">
-    Environmental Impacts
-</div>
+    <section class="section-economic">
+        <h2>Economic Impacts</h2>
+        <ul class="environment-list">
+            <li>Infrastructure damage impacts industries such as farming and tourism.</li>
+            <li>Businesses and institutions closed during periods of excessive air pollution.</li>
+            <li>Economic costs expected to exceed the $4.4 billion cost of the 2009 'Black Saturday' fires (Source: Guardian).</li>
+            </ul>
+    </section>
 
-<div class="text-description">
-    <ul>
-        <li>Ash from fires kills crops and pollutes water, leading to algal blooms in streams and rivers.</li>
-        <li>Loss of biodiversity due to habitat destruction.</li>
-        <li>Climate feedback loops: Forests previously absorbed carbon emissions, but due to scale, this is no longer achievable.</li>
-        <li>400 megatonnes of carbon dioxide emitted into the atmosphere during the 2019-2020 fires (Source: Copernicus monitoring programme).</li>
-    </ul>
-</div>
+    <!-- Environmental Impacts -->
+    <section class="section-environment">
+        <h2>Environmental Impacts</h2>
+        <p>Here are some key environmental consequences of the 2019-2020 bushfires:</p>
+        <ul class="environment-list">
+            <li>Ash from fires kills crops and pollutes water, leading to algal blooms in streams and rivers.</li>
+            <li>Loss of biodiversity due to habitat destruction.</li>
+            <li>Climate feedback loops: Forests previously absorbed carbon emissions, but due to scale, this is no longer achievable.</li>
+            <li>400 megatonnes of carbon dioxide emitted into the atmosphere during the 2019-2020 fires (Source: Copernicus monitoring programme).</li>
+        </ul>
+    </section>
 
-<div class="title">
-Misleading maps and information going viral
-</div>
+    <!-- Misleading Information Section -->
+    <section class="section-misleading">
+        <h2>Misleading Maps and Information Going Viral</h2>
+        <div class="image-container">
+            <img src="../assets/misleading1.png" alt="Misleading Maps">
+        </div>
+        <p>Some celebrities used social media as a tool for raising awareness about the fires to raise funds, one of the most viral tweets linked to this was from singer Rhianna who posted an image of Australia covered in lava like markings meant to show where active fires were. This was revealed however to be an inaccurate visualisation of the crisis, despite using NASA data to make the map. The artist of the map is Anthony Hearsay, who used a months worth of fire data overlaid over each other to create a compilation of the blazes, this process made it seem like more of Australia was on fire at one time. The map was shared and retweeted by thousands, fear mongering large groups of people and possibly pushing more people to donate to the cause than normal. It questions the morals of humanitarian appeals and fundraising if they are set on false data despite ultimately helping those in need.</p>
+    </section>
 
-<div class="image-container">
-    <img src="../assets/misleading1.png" alt="Map Example">
-</div>
+    <!-- Conclusion Section -->
+    <section class="section-conclusion">
+        <h2>Final Insights</h2>
+        <p>
+            This project has aimed to explore matters of causation and impact, historical context, humanitarian response and the impact of social media on the most recent bush fire season in Australia, which appeared to be notable more catastrophic and present in global public consciousness than ever before.
 
-<div class="text-description">
-<p>
-    Some celebrities used social media as a tool for raising awareness about the fires to raise funds, one of the most viral tweets linked to this was from singer Rhianna who posted an image of Australia covered in lava like markings meant to show where active fires were. This was revealed however to be an inaccurate visualisation of the crisis, despite using NASA data to make the map. The artist of the map is Anthony Hearsay, who used a months worth of fire data overlaid over each other to create a compilation of the blazes, this process made it seem like more of Australia was on fire at one time. The map was shared and retweeted by thousands,  fear mongering large groups of people and possibly pushing more people to donate to the cause than normal. It questions the morals of humanitarian appeals and fundraising if they are set on false data despite ultimately helping those in need.
-</p>
-</div>
-<div class="title">
-    Conclusion
-</div>
-
-    <div class="text-description">
-    <p>
-        This project has aimed to explore matters of causation and impact, historical context, humanitarian response and the impact of social media on the most recent bush fire season in Australia, which appeared to be notable more catastrophic and present in global public consciousness than ever before.
-    </p>
+        </p>
         <p>
             The fires were caused by a combination of long term climatic causes that fostered the appropriate conditions, notably an arid environment , that allowed the potential for lightning strikes to ignite these areas. The Impacts of this event were noticeably severe and extensive, even in comparison to prior examples of damaging fires such as 2009's 'Black Saturday' blazes. Therefore it is evident that the 2019-2020 bush fire season represented a disaster on an unrivalled scale.
         </p>
-        <p>
-            This historical perspective shows us that the bush fires in Australia have always been a part of the landscape that has shaped the culture of this ancient land. Even before the first European colonisers began to arrive towards the end of the eighteenth century, for many generations, indigenous peoples have continued to face devastation that bush fires have caused. As we sit here to witness the horrors of the bush fires that affect human lives and wildlife, how should we be representing our modern generation? As evidence highlights, so long as the Australian population continues to rise and local authorities continue to disregard necessary funding, bush fires will continue to become more uncontrollable. The 1851 fires are a prime example of when systematic burning was reduced by Europeans and fires spread quickly when settlements were more densely populated. Therefore, as a more advanced society, in the future we must make sure that humanitarian response is effective enough for stopping the spread of the fires as fast as possible. At the same time, the rest of us must understand that the ecosystems that continue to burn across our planet our affecting our future generations; as these are the very ‘lungs’ of our world.
-        </p>
-        <p>
-            The Humanitarian response to the bush fires will always have to change and adapt , however through the kindness of companies, celebrities and the general public, NGO’s are able to effectively help those left displaced by the fires. Fake news and the impact of social media is only going to grow therefore we need to be more cautious about what is fact and fiction in a crisis.
-        </p>
-</div>
+        <p>This historical perspective shows us that the bush fires in Australia have always been a part of the landscape that has shaped the culture of this ancient land. Even before the first European colonisers began to arrive towards the end of the eighteenth century, for many generations, indigenous peoples have continued to face devastation that bush fires have caused. As we sit here to witness the horrors of the bush fires that affect human lives and wildlife, how should we be representing our modern generation? As evidence highlights, so long as the Australian population continues to rise and local authorities continue to disregard necessary funding, bush fires will continue to become more uncontrollable. The 1851 fires are a prime example of when systematic burning was reduced by Europeans and fires spread quickly when settlements were more densely populated. Therefore, as a more advanced society, in the future we must make sure that humanitarian response is effective enough for stopping the spread of the fires as fast as possible. At the same time, the rest of us must understand that the ecosystems that continue to burn across our plan</p>
+    </section>
 
-    <div class="title">
-    References
-</div>
 
-    <div class="text-description">
+
+    <h2>References</h2>
+
     <p>
         some pictures and information about Australia bush fire is from
     </p>
@@ -217,7 +281,6 @@ Misleading maps and information going viral
             https://en.wikipedia.org/wiki/2019%E2%80%9320_Australian_bushfire_season
         </p>
 </div>
-
 </div>
 
     <!-- Footer -->
@@ -226,7 +289,7 @@ Misleading maps and information going viral
             <a href="#">Back to top</a>
         </p>
     </div>
-</div>
+
 <button onclick="topFunction()" id="scrollToTopBtn" title="Go to top">Top</button>
 <script src="/js/main.js"></script>
 <script src="/js/index.js"></script>
