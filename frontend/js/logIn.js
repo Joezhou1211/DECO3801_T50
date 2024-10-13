@@ -17,3 +17,20 @@
             document.getElementById('error-message').style.display = 'block';
         }
     });
+
+
+window.onload = function() {
+            setTimeout(function() {
+                document.getElementById('background-screen').style.display = 'none';
+                var mainContent = document.getElementById('main-content');
+                mainContent.style.display = 'block';
+                setTimeout(function() {
+                    mainContent.style.opacity = 1;
+                }, 50);
+            }, 3000);
+        };
+
+document.querySelector('.contact-us').addEventListener('click', function() {
+    const contactBox = document.getElementById('contactInfoBox');
+    contactBox.classList.toggle('show');
+});
