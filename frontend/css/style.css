@@ -22,7 +22,7 @@ body, html {
 /* Header Style: Define the appearance of the fixed header at the top of the page. */
 .header {
     display: flex;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
     align-items: center;
     padding: 0 20px;
     background-color: #fff;
@@ -45,8 +45,7 @@ body, html {
 .nav {
     display: flex;
     gap: 20px;
-    justify-content: flex-start;
-   padding-right: 80px;
+    padding-left: 40px;
 }
 
 
@@ -93,12 +92,19 @@ body, html {
 }
 
 /* Settings container: Style the area that contains user settings and icons. */
+/*.setting-container {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    gap: 10px;*/
+/*}*/
 .setting-container {
-    display: flex;
+display: flex;
     align-items: center;
     gap: 10px;
+    position: fixed;
+    top: 10px;
+    right: 20px;
 }
-
 .setting-container .logo img {
     height: 30px;
 }
@@ -148,11 +154,36 @@ button:hover {
 }
 
 .user-icon img {
-    width: 45px; /* Adjust the size as needed */
-    height: 45px;
+    width: 28px; /* Same size as help icon */
+    height: 28px;
     cursor: pointer;
-    border-radius: 50%; /* Makes the icon round */
+    transition: all 0.3s ease; /* Smooth transition */
 }
+.user-icon:hover img {
+    content: url('../assets/user-hover.png'); /* Change to green help icon on hover */
+}
+
+/* Help Icon Container */
+/* Help Icon */
+.help-icon {
+    margin-right: 10px;
+}
+
+.help-icon img {
+    width: 25px; /* Adjust size if needed */
+    height: 25px;
+    cursor: pointer;
+    border-radius: 50%; /* Optional: makes it circular */
+}
+
+.help-icon a:hover img {
+    filter: brightness(0.9); /* Slight hover effect */
+}
+
+.help-icon:hover img {
+    content: url('../assets/help-icon-hover.png'); /* Change to green help icon on hover */
+}
+
 
 /* Dropdown menu style: Set the visibility and design of the user dropdown menu. */
 .dropdown-menu {
