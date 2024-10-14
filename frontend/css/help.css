@@ -34,13 +34,43 @@
 }
 
 /* Sidebar Navigation */
+/*.sidebar-nav {*/
+/*    width: 20%;*/
+/*    background-color: #f9f9f9;*/
+/*    padding: 20px;*/
+/*    border-right: 1px solid #ddd;*/
+/*    position: sticky;*/
+/*    top: calc(var(--header-height) + 20px); !* Stick the sidebar below the header *!*/
+/*}*/
+
+/*.sidebar-nav ul {*/
+/*    list-style-type: none;*/
+/*    padding: 0;*/
+/*}*/
+
+/*.sidebar-nav ul li {*/
+/*    margin-bottom: 15px;*/
+/*}*/
+
+/*.sidebar-nav ul li a {*/
+/*    text-decoration: none;*/
+/*    color: #333;*/
+/*    font-size: 16px;*/
+/*    transition: color 0.3s ease;*/
+/*}*/
+
+/*.sidebar-nav ul li a:hover {*/
+/*    color: #004d40;*/
+/*}*/
+
 .sidebar-nav {
     width: 20%;
     background-color: #f9f9f9;
     padding: 20px;
     border-right: 1px solid #ddd;
     position: sticky;
-    top: calc(var(--header-height) + 20px); /* Stick the sidebar below the header */
+    top: calc(var(--header-height) + 10px); /* Adjust the top value to make space for the header */
+    height: fit-content; /* Ensures the sidebar fits its content */
 }
 
 .sidebar-nav ul {
@@ -62,6 +92,7 @@
 .sidebar-nav ul li a:hover {
     color: #004d40;
 }
+
 
 /* Right Content Area */
 .content-area {
@@ -91,6 +122,33 @@
     width: 100%;
     height: auto;
     margin-bottom: 10px;
+}
+.image-small-container img {
+    width: 20%;
+    height: auto;
+    margin-bottom: 10px;
+}
+.image-medium-container img {
+    width: 60%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+
+
+.goto-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #004d40; /* Button background color */
+    color: white; /* Text color */
+    text-decoration: none;
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s ease;
+}
+
+.goto-button:hover {
+    background-color: #00382e; /* Darker color on hover */
 }
 
 /* Smooth scroll behavior */
