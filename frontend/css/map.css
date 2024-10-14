@@ -2,7 +2,6 @@ body, html {
     overflow: hidden;
 }
 
-/* Main container style: Manages the layout for the main section of the application. */
 #main-container {
     display: flex;
     flex-direction: row;
@@ -11,7 +10,6 @@ body, html {
     overflow-x: auto;
 }
 
-/* Styling for the region details displayed in the right sidebar. */
 #regions_div {
     margin-left: 0;
     position: relative;
@@ -23,7 +21,6 @@ body, html {
     overflow: hidden;
 }
 
-/* Right sidebar style: Defines the appearance of the sidebar on the right-hand side. */
 .right-sidebar {
     display: flex;
     flex-direction: column;
@@ -42,17 +39,14 @@ body, html {
     text-align: center;
 }
 
-/* region Details style: Styling for the region details displayed in the right sidebar. */
 #regionDetails {
     flex: 1;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     text-align: left;
-    /*line-height: 1.1;*/
 }
 
-/* Style for h2 headers in the regionDetails section */
 #regionDetails h2 {
     text-align: center;
     margin: 5px 0;
@@ -60,20 +54,17 @@ body, html {
     font-size: 30px;
 }
 
-/* Style for paragraphs in the regionDetails section */
 #regionDetails p {
     font-weight: normal;
     margin: 5px 0;
     line-height: 1.05;
 }
 
-/* Style for strong elements within paragraphs in the regionDetails section */
 #regionDetails p strong {
     font-weight: bold;
     line-height: 1.05;
 }
 
-/* Style for h3 headers in the regionDetails section */
 #regionDetails h3 {
     font-size: 24px;
     font-weight: bold;
@@ -82,7 +73,6 @@ body, html {
     line-height: 1.05;
 }
 
-/* Style for unordered lists in the regionDetails section */
 #regionDetails ul {
     list-style-position: inside;
     padding-left: 20px;
@@ -93,7 +83,6 @@ body, html {
     line-height: 1.05;
 }
 
-/* Style for list items in the regionDetails section */
 #regionDetails li {
     font-weight: normal;
     text-align: left;
@@ -102,7 +91,6 @@ body, html {
     line-height: 1.05;
 }
 
-/* country Data Container style: Styling for the container that holds the country data list */
 #countryDataContainer {
     border: 1px solid #ccc;
     padding: 1vh;
@@ -112,21 +100,18 @@ body, html {
     overflow-y: auto;
 }
 
-/* Styling for unordered lists within the country data container */
 #countryDataContainer ul {
     list-style-type: disc;
     padding-left: 0;
     margin-bottom: 3vh;
 }
 
-/* Styling for list items inside the country data container */
 #countryDataContainer li {
     margin-bottom: 1vh;
     text-align: left;
     font-weight: normal;
 }
 
-/* Back button style: Positioned to allow the user to navigate back from detailed views. */
 #backButton {
     position: absolute;
     bottom: 5vh;
@@ -143,7 +128,6 @@ body, html {
     width: 30vh;
 }
 
-/* Timeline container positioning: Centers the timeline on the page. */
 .timeline-container {
     position: relative;
     left: calc((100vw - 30vh) / 5);
@@ -152,7 +136,6 @@ body, html {
     top: -5vh;
 }
 
-/* Timeline wrapper style: Adds styling to the timeline's background and layout. */
 .timeline-wrapper {
     display: flex;
     align-items: center;
@@ -168,7 +151,6 @@ body, html {
     margin: 0 auto;
 }
 
-/* Start and end date labels */
 #start-day, #end-day {
     font-size: 12px;
     font-weight: bold;
@@ -182,7 +164,6 @@ body, html {
     text-align: left;
 }
 
-/* Slider container style */
 .slider-container {
     position: relative;
     width: 65%;
@@ -190,7 +171,6 @@ body, html {
     top: -0.5vh;
 }
 
-/* Current date label on timeline: Displays the selected date above the slider thumb. */
 #current-date-label {
     position: absolute;
     top: -4vh;
@@ -207,13 +187,11 @@ body, html {
     text-overflow: ellipsis;
 }
 
-/* Show date label on slider hover or focus */
 .slider-container:hover #current-date-label,
 #timeline:focus + #current-date-label {
     display: block;
 }
 
-/* Range slider style: Customizes the appearance of the slider track and thumb. */
 input[type="range"] {
     -webkit-appearance: none;
     width: 100%;
@@ -227,7 +205,6 @@ input[type="range"] {
     position: relative;
 }
 
-/* Pseudo-elements for the range input slider */
 input[type="range"]::before,
 input[type="range"]::after {
     content: '';
@@ -239,7 +216,6 @@ input[type="range"]::after {
     top: -10px;
 }
 
-/* Style for slider thumb - webkit browsers: Customizes the thumb appearance for interactions. */
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
@@ -253,18 +229,15 @@ input[type="range"]::-webkit-slider-thumb {
     z-index: 10000;
 }
 
-/* Pseudo-elements for the slider thumb in WebKit-based browsers */
 input[type="range"]::-webkit-slider-thumb::before,
 input[type="range"]::-webkit-slider-thumb::after {
     display: none;
 }
 
-/* Slider thumb hover effect - webkit browsers */
 input[type="range"]::-webkit-slider-thumb:hover {
     background: #257029;
 }
 
-/* Styling for the slider thumb in Firefox browsers */
 input[type="range"]::-moz-range-thumb {
     width: 15px;
     height: 15px;
@@ -275,19 +248,10 @@ input[type="range"]::-moz-range-thumb {
     transition: background 0.3s ease;
 }
 
-/* Slider thumb hover effect - Firefox */
 input[type="range"]::-moz-range-thumb:hover {
     background: #257029;
 }
 
-/* Timeline legend container responsive design: Adjusts the timeline's appearance on smaller screens. */
-@media (max-width: 768px) {
-    #timeline-legend-container {
-        width: 100%;
-    }
-}
-
-/* Continent select dropdown: Customizes the dropdown menu's appearance within the selector. */
 .continent select {
     position: absolute;
     top: 12vh;
@@ -300,7 +264,6 @@ input[type="range"]::-moz-range-thumb:hover {
     left: 40px;
 }
 
-/* Autoplay container style: Positions the autoplay controls on the page. */
 .autoplay-container {
     position: relative;
     top: -20vh;
@@ -309,12 +272,10 @@ input[type="range"]::-moz-range-thumb:hover {
     z-index: 10;
 }
 
-/* Hover effect for the autoplay button style: Changes color when the user hovers over it. */
 #toggleAutoPlayBtn:hover {
     color: #1b5e20;
 }
 
-/* Play/pause button styling: Defines the position and visual style of the button within the autoplay container. */
 #playPauseBtn {
     font-size: 20px;
     position: absolute;
@@ -326,17 +287,15 @@ input[type="range"]::-moz-range-thumb:hover {
     color: #257029;
 }
 
-/* State for the play/pause button style: Removes the outline to keep the design clean. */
+
 #playPauseBtn:focus {
     outline: none;
 }
 
-/* Tooltip content styling: Centers the content inside tooltip elements for a uniform appearance. */
 .tooltip-content {
     text-align: center;
 }
 
-/* Popup Container Style */
 .popup-container {
     position: fixed;
     bottom: 3.5vh;
@@ -349,11 +308,10 @@ input[type="range"]::-moz-range-thumb:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     transition: transform 0.3s ease-in-out;
-    transform: translateX(0);
+    transform: translateX(-100%);
     z-index: 1000;
 }
 
-/* Popup Content Style */
 .popup-content {
     padding-top: 0;
     padding-bottom: 2vh;
@@ -366,7 +324,6 @@ input[type="range"]::-moz-range-thumb:hover {
     justify-content: flex-start;
 }
 
-/* Toggle Button Style */
 .toggle-popup-btn {
     position: fixed;
     bottom: 2.7vh;
@@ -384,22 +341,18 @@ input[type="range"]::-moz-range-thumb:hover {
     height: 5vh;
 }
 
-/* Rotate the arrow icon when popup is open */
 .popup-container.open .toggle-popup-btn #popupArrowIcon {
     transform: rotate(180deg);
 }
 
-/* Popup Open State */
 .popup-container.open {
     transform: translateX(0);
 }
 
-/* Arrow Icon Style */
 #popupArrowIcon {
     transition: transform 0.3s ease-in-out;
 }
 
-/* Popup Content Style */
 .popup-content h2 {
     margin: 2vh 0 1vh 0;
     font-weight: bold;
@@ -434,17 +387,35 @@ input[type="range"]::-moz-range-thumb:hover {
     z-index: 10000;
 }
 
-/* Popup Open State */
 .popup-container.open {
     transform: translateX(0);
 }
 
-/* Popup Hidden State */
-.popup-container {
-    transform: translateX(-100%);
-}
-
-/* Rotate the arrow icon when popup is open */
 .popup-container.open .toggle-popup-btn #popupArrowIcon {
     transform: rotate(180deg);
+}
+
+.color-bar-container {
+    text-align: center;
+    margin-top: -50px;
+    z-index: 10000;
+}
+
+.color-bar-labels {
+    display: flex;
+    justify-content: space-between;
+    z-index: 10000;
+}
+
+.color-bar-labels span {
+    font-size: 14px;
+    color: #333;
+    z-index: 10000;
+}
+
+canvas#colorBarCanvas {
+    width: 400px;
+    height: 30px;
+    background-color: black;
+    z-index: 500;
 }

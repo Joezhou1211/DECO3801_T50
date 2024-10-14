@@ -9,6 +9,7 @@
     <link href="/css/search.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 
@@ -57,143 +58,181 @@
             <h1>Search and Filters</h1>
             <div class="search-container">
                 <input type="text" id="searchQuery" placeholder="Enter search term..." oninput="debouncedSearch()">
-                <button onclick="SearchWithQuery()">Search</button>
+                <button onclick="performSearchWithFilters()">Search</button>
                 <button onclick="toggleFilters()" class="filters-button"><i class="fas fa-sliders-h"></i></button>
+                <button onclick="toggleSort()" class="sort-button"><i class="fas fa-sort"></i></button>
+            </div>
+
+            <div id="sortModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="toggleSort()">&times;</span>
+                    <h2>Sort Options</h2>
+                    <div class="sort-section">
+                        <label for="sortField">Sort by:</label>
+                        <select id="sortField" onchange="updateSort()">
+                            <option value="">None</option>
+                            <option value="retweet_count">Retweet Count</option>
+                            <option value="reply_count">Reply Count</option>
+                            <option value="quote_count">Quote Count</option>
+                            <option value="favourite_count">Favourite Count</option>
+                            <option value="influence_tweet_factor">Influence Tweet Factor</option>
+                            <option value="influence_user">Influence User</option>
+                            <option value="extended_entities_count">Extended Entities Count</option>
+                        </select>
+                        <select id="sortOrder" onchange="updateSort()">
+                            <option value="desc">Descending</option>
+                            <option value="asc">Ascending</option>
+                        </select>
+                    </div>
+                </div>
             </div>
 
             <!-- Filters section (in a modal window) -->
             <div class="filters-section" id="filtersSection">
+                <button class="reset-button" onclick="resetFilters()">Reset</button>
                 <span class="filter-modal-close" onclick="toggleFilters()">&times;</span>
+                
+                <div class="filters-container">
+                    <div class="filters-left">
+                        <div class="filter-item">
+                            <label for="topic">
+                                Topic 
+                                <span class="multi-select-hint">(Multiple)</span>
+                                <i class="fas fa-info-circle tooltip">
+                                    <span class="tooltiptext">
+                                        <span class="key">Ctrl</span> + <i class="fas fa-mouse-pointer"></i> for multiple selection
+                                    </span>
+                                </i>
+                            </label>
 
-                <!-- Time Filter -->
-                <div class="filter-item">
-                    <label for="timeRangeStart">Time Range:</label>
-                    <input type="date" id="timeRangeStart" onchange="debouncedSearch()">
-                    <input type="date" id="timeRangeEnd" onchange="debouncedSearch()">
-                </div>
+                            <select id="topic" multiple onchange="updateTopicFilter()">
+                                <option value="1">Wildlife and Environmental Impact</option>
+                                <option value="2">Fundraising and Community Support</option>
+                                <option value="3">Political Criticism and Government Response</option>
+                                <option value="4">Climate Change Debate</option>
+                                <option value="5">Emotional and Spiritual Reactions</option>
+                                <option value="6">Geographical and Location-Based Information</option>
+                                <option value="7">Regional Air Quality and Environmental Conditions</option>
+                                <option value="8">Wildlife Devastation</option>
+                                <option value="9">Emergency Information and Public Safety</option>
+                                <option value="10">Health and Mental Well-being</option>
+                            </select>
+                            <div id="selected-topics" class="selected-chips"></div>
+                        </div>
 
-                <!-- Location Filter -->
-                <div class="filter-item">
-                    <label for="location">Location:</label>
-                    <select id="location" multiple onchange="updateLocationFilter()">
-                        <option value="usa">USA</option>
-                        <option value="uk">UK</option>
-                        <option value="australia">Australia</option>
-                        <option value="canada">Canada</option>
-                    </select>
-                    <div id="selected-locations"></div>
-                    <span id="locationCount">News count: 0</span>
+                        <div class="filter-item">
+                            <label for="location">
+                                Location
+                                <span class="multi-select-hint">(Multiple)</span>
+                                <i class="fas fa-info-circle tooltip">
+                                    <span class="tooltiptext">
+                                        <span class="key">Ctrl</span> + <i class="fas fa-mouse-pointer"></i> for multiple selection
+                                    </span>
+                                </i>
+                            </label>
+                            <select id="location" multiple onchange="updateLocationFilter()"></select>
+                            <div id="selected-locations" class="selected-chips"></div>
+                        </div>
+                    </div>
+                    <div class="filters-right">
+                        <div class="filter-item">
+                            <label for="timeRangeStart">Time Range</label>
+                            <div class="time-range-inputs">
+                                <input type="date" id="timeRangeStart" onchange="debouncedSearch()" placeholder="From">
+                                <input type="date" id="timeRangeEnd" onchange="debouncedSearch()" placeholder="To">
+                            </div>
+                        </div>
+                        <div class="filter-item">
+                            <label for="sentiment">
+                                Sentiment
+                                <span class="multi-select-hint">(Multiple)</span>
+                                <i class="fas fa-info-circle tooltip">
+                                    <span class="tooltiptext">
+                                        <span class="key">Ctrl</span> + <i class="fas fa-mouse-pointer"></i> for multiple selection
+                                    </span>
+                                </i>
+                            </label>
+                            <select id="sentiment" multiple onchange="updateSentimentFilter()">
+                                <option value="Positive">Positive</option>
+                                <option value="Neutral">Neutral</option>
+                                <option value="Negative">Negative</option>
+                            </select>
+                            <div id="selected-sentiments" class="selected-chips"></div>
+                        </div>
+                        <div class="filter-item">
+                            <label for="influenceTweetFactor">Influence Tweet Factor: <span id="influenceTweetFactorDisplay">0</span></label>
+                            <input type="range" id="influenceTweetFactor" min="0" max="5.77" value="0" step="0.01" oninput="updateDisplay('influenceTweetFactor')">
+                        </div>
+                        <div class="filter-item">
+                            <label for="influenceUser">Influence User: <span id="influenceUserDisplay">0</span></label>
+                            <input type="range" id="influenceUser" min="0" max="180175800" value="0" step="100" oninput="updateDisplay('influenceUser')">
+                        </div>
+                        <div class="filter-item">
+                            <label for="verifiedAccount">Verified Account:</label>
+                            <select id="verifiedAccount" onchange="debouncedSearch()">
+                                <option value="all">All</option>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                        <div class="filter-item">
+                            <label for="retweetCount">Retweet Count: <span id="retweetCountDisplay">0</span></label>
+                            <input type="range" id="retweetCount" min="0" max="461387" value="0" step="10" oninput="updateDisplay('retweetCount')">
+                        </div>
+                        <div class="filter-item">
+                            <label for="replyCount">Reply Count: <span id="replyCountDisplay">0</span></label>
+                            <input type="range" id="replyCount" min="0" max="2606" value="0" step="10" oninput="updateDisplay('replyCount')">
+                        </div>
+                        <div class="filter-item">
+                            <label for="quoteCount">Quote Count: <span id="quoteCountDisplay">0</span></label>
+                            <input type="range" id="quoteCount" min="0" max="7034" value="0" step="10" oninput="updateDisplay('quoteCount')">
+                        </div>
+                        <div class="filter-item">
+                            <label for="favouriteCount">Favourite Count: <span id="favouriteCountDisplay">0</span></label>
+                            <input type="range" id="favouriteCount" min="0" max="882850" value="0" step="100" oninput="updateDisplay('favouriteCount')">
+                        </div>
+                        <div class="filter-item">
+                            <label for="extendedEntities">Extended Entities (Images Count): <span id="extendedEntitiesDisplay">0</span></label>
+                            <input type="range" id="extendedEntities" min="0" max="4" value="0" step="1" oninput="updateDisplay('extendedEntities')">
+                        </div>
+                        <div class="filter-item">
+                            <label for="nodeType">Node Type:</label>
+                            <select id="nodeType" onchange="debouncedSearch()">
+                                <option value="all">All</option>
+                                <option value="parent">Parent</option>
+                                <option value="child">Child</option>
+                            </select>
+                        </div>
+                        <div class="filter-item">
+                            <label for="authorKeynode">Author Keynode:</label>
+                            <select id="authorKeynode" onchange="debouncedSearch()">
+                                <option value="all">All</option>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                        <div class="filter-item">
+                            <label for="hashtagKeynode">Hashtag Keynode:</label>
+                            <select id="hashtagKeynode" onchange="debouncedSearch()">
+                                <option value="all">All</option>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
+            </div>
 
-                <!-- Topic Filter -->
-                <div class="filter-item">
-                    <label for="topic">Topic:</label>
-                    <select id="topic" multiple onchange="updateTopicFilter()">
-                        <option value="1">Wildlife and Environmental Impact</option>
-                        <option value="2">Fundraising and Community Support</option>
-                        <option value="3">Political Criticism and Government Response</option>
-                        <option value="4">Climate Change Debate</option>
-                        <option value="5">Emotional and Spiritual Reactions</option>
-                        <option value="6">Geographical and Location-Based Information</option>
-                        <option value="7">Regional Air Quality and Environmental Conditions</option>
-                        <option value="8">Wildlife Devastation</option>
-                        <option value="9">Emergency Information and Public Safety</option>
-                        <option value="10">Health and Mental Well-being</option>
-                    </select>
-                    <div id="selected-topics"></div>
-                </div>
 
-                <!-- Sentiment Filter -->
-                <div class="filter-item">
-                    <label for="sentiment">Sentiment:</label>
-                    <input type="range" id="sentiment" min="-100" max="100" step="1" oninput="updateSentimentDisplay()">
-                    <span id="sentimentDisplay">Sentiment Value: 0</span>
+            <!-- Download section -->
+            <div class="download-section" id="downloadSection" style="display: none;">
+                <div class="results-count">
+                    <span id="resultsCountDisplay">0</span>
                 </div>
-
-                <!-- Influence Tweet Factor Filter -->
-                <div class="filter-item">
-                    <label for="influenceTweetFactor">Influence Tweet Factor:</label>
-                    <input type="range" id="influenceTweetFactor" min="0" max="100" oninput="updateInfluenceTweetFactorDisplay()">
-                    <span id="influenceTweetFactorDisplay">0</span>
-                </div>
-
-                <!-- Influence User Filter -->
-                <div class="filter-item">
-                    <label for="influenceUser">Influence User:</label>
-                    <input type="range" id="influenceUser" min="0" max="100" oninput="updateInfluenceUserDisplay()">
-                    <span id="influenceUserDisplay">0</span>
-                </div>
-
-                <!-- Verified Account Filter -->
-                <div class="filter-item">
-                    <label for="verifiedAccount">Verified Account:</label>
-                    <select id="verifiedAccount" onchange="debouncedSearch()">
-                        <option value="all">All</option>
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                    </select>
-                </div>
-
-                <!-- Additional Filters -->
-                <div class="filter-item">
-                    <label for="retweetCount">Retweet Count:</label>
-                    <input type="range" id="retweetCount" min="0" max="500" oninput="updateRetweetCountDisplay()">
-                    <span id="retweetCountDisplay">0</span>
-                </div>
-
-                <div class="filter-item">
-                    <label for="replyCount">Reply Count:</label>
-                    <input type="range" id="replyCount" min="0" max="500" oninput="updateReplyCountDisplay()">
-                    <span id="replyCountDisplay">0</span>
-                </div>
-
-                <div class="filter-item">
-                    <label for="quoteCount">Quote Count:</label>
-                    <input type="range" id="quoteCount" min="0" max="500" oninput="updateQuoteCountDisplay()">
-                    <span id="quoteCountDisplay">0</span>
-                </div>
-
-                <div class="filter-item">
-                    <label for="favouriteCount">Favourite Count:</label>
-                    <input type="range" id="favouriteCount" min="0" max="500" oninput="updateFavouriteCountDisplay()">
-                    <span id="favouriteCountDisplay">0</span>
-                </div>
-
-                <div class="filter-item">
-                    <label for="extendedEntities">Extended Entities (Images Count):</label>
-                    <input type="range" id="extendedEntities" min="0" max="4" oninput="updateExtendedEntitiesDisplay()">
-                    <span id="extendedEntitiesDisplay">0</span>
-                </div>
-
-                <!-- Node Type Filter -->
-                <div class="filter-item">
-                    <label for="nodeType">Node Type:</label>
-                    <select id="nodeType" onchange="debouncedSearch()">
-                        <option value="all">All</option>
-                        <option value="parent">Parent</option>
-                        <option value="child">Child</option>
-                    </select>
-                </div>
-
-                <!-- Author Keynode Filter -->
-                <div class="filter-item">
-                    <label for="authorKeynode">Author Keynode:</label>
-                    <select id="authorKeynode" onchange="debouncedSearch()">
-                        <option value="all">All</option>
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                    </select>
-                </div>
-
-                <!-- Hashtag Keynode Filter -->
-                <div class="filter-item">
-                    <label for="hashtagKeynode">Hashtag Keynode:</label>
-                    <select id="hashtagKeynode" onchange="debouncedSearch()">
-                        <option value="all">All</option>
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                    </select>
-                </div>
+                <span id="selectedCountDisplay"></span> 
+                <button id="selectAllButton" onclick="toggleSelectAll()"><i class="fas fa-square"></i> Select All</button>
+                <button id="downloadButton" onclick="downloadSelected()" disabled><i class="fa-solid fa-download"></i> Download Selected</button>
+                <button id="downloadAllButton" onclick="downloadAllData()"><i class="fa-solid fa-download"></i> Download All Data</button>
             </div>
 
             <!-- Loading spinner -->
@@ -202,9 +241,8 @@
             <!-- Search results -->
             <div class="results" id="results"></div>
 
-            <!-- Download button for selected items -->
-            <div class="download-section">
-                <button id="downloadButton" onclick="downloadSelected()">Download Selected</button>
+            <div class="pagination-container">
+                <div id="pagination"></div>
             </div>
         </div>
     </div>

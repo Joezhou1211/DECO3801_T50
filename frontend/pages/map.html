@@ -5,20 +5,22 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Interactive Website</title>
 
-    <!-- CSS files -->
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/map.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
-<body>
-    <header class="header">
-        <!-- Team Logo -->
-        <div class="logo">
-            <img src="/assets/logo.png" alt="Website Logo">
-        </div>
 
-        <!-- Navigation bar -->
-        <nav class="nav">
+<body>
+<header class="header">
+    <!-- Team Logo -->
+    <div class="logo">
+        <a href="/index.html">
+            <img src="/assets/logo.png" alt="Website Logo">
+        </a>
+    </div>
+
+    <!-- Navigation bar -->
+    <nav class="nav">
         <a href="/index.html">Home</a>
         <a href="/topics.html">Topics</a>
         <a href="/map.html">Map</a>
@@ -44,39 +46,31 @@
             </div>
         </div>
     </div>
-    </header>
+</header>
 
-    <!-- Main content area -->
-    <main>
-        <!-- Map and sidebars section -->
-        <div id="map-section">
-            <!-- Map rendering container -->
-            <div id="regions_div"></div>
-            <!-- Right sidebar for region details -->
-            <aside class="right-sidebar" id="regionDetailsContainer">
-                <div id="regionDetails"></div>
-                <!-- Back to World Map button -->
-                <button id="backButton" style="display:none;">Back to World Map</button>
-            </aside>
-        </div>
+<main>
+    <div id="map-section">
+        <div id="regions_div"></div>
+        <aside class="right-sidebar" id="regionDetailsContainer">
+            <div id="regionDetails"></div>
+            <button id="backButton" style="display:none;">Back to World Map</button>
+        </aside>
+    </div>
 
-<!-- Timeline container -->
     <div class="timeline-container">
         <div class="timeline-wrapper">
-            <span id="start-day">31 May 2019</span>
+            <span id="start-day">08 Nov 2019</span>
             <div class="slider-container">
                 <input id="timeline" max="120" min="0" type="range" value="0">
                 <div id="current-date-label" style="display:none;"></div>
             </div>
             <span id="end-day">28 Feb 2020</span>
-            <!-- 鐏忓棙瀵滈柦顔拘╅崚鏉款樆闁拷 -->
             <button id="playPauseBtn">
                 <i class="fas fa-play" id="toggleAutoPlayBtn"></i>
             </button>
         </div>
     </div>
 
-    <!-- Filter selector for continent selection -->
     <aside class="continent">
         <select id="continentSelector">
             <option value="000">Global View</option>
@@ -88,30 +82,38 @@
         </select>
     </aside>
 
-        <!-- Popup Toggle Button（移到外部） -->
-        <button id="togglePopupBtn" class="toggle-popup-btn">
-            <i class="fas fa-chevron-left" id="popupArrowIcon"></i>
-        </button>
-                <a href="../../../../DECO/data/processed/fake_news_data.json" download="fake_news_data.json" class="download-button">Download Data</a>
-        <!-- Popup Container -->
-        <div id="popupContainer" class="popup-container">
-            <div class="popup-content" id="popupContent">
-                <h2>Unknown Region</h2>
-                <p><strong>Tweet Count:</strong> <span id="popupTweetCount">0</span></p>
-                <p><strong>Fake News Count:</strong> <span id="popupFakeNewsCount">0</span></p>
-                <p><strong>Fake News Ratio:</strong> <span id="popupFakeNewsRatio">0</span></p>
-                <p><strong>Fake News Topics:</strong></p>
-                <ul id="popupFakeNewsTopics">
-                    <!-- Topics will be populated here -->
-                </ul>
-            </div>
-        </div>
-    </main>
+    <div id="colorBarContainer" class="color-bar-container">
+    <canvas id="colorBarCanvas" width="300" height="20"></canvas>
+    <div id="colorBarLabels" class="color-bar-labels">
+        <span id="minValueLabel">Min</span>
+        <span id="maxValueLabel">Max</span>
+    </div>
+    </div>
 
-    <!-- Scripts -->
-    <script src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/js/main.js"></script>
-    <script src="/js/map.js"></script>
+    <button id="togglePopupBtn" class="toggle-popup-btn">
+        <i class="fas fa-chevron-left" id="popupArrowIcon"></i>
+    </button>
+    <button id="screenshotButton" class="download-button">
+        <i class="fa fa-download" aria-hidden="true"></i> Download Data
+    </button>
+
+    <div id="popupContainer" class="popup-container">
+        <div class="popup-content" id="popupContent">
+            <h2>Unknown Region</h2>
+            <p><strong>Tweet Count:</strong> <span id="popupTweetCount">0</span></p>
+            <p><strong>Fake News Count:</strong> <span id="popupFakeNewsCount">0</span></p>
+            <p><strong>Fake News Ratio:</strong> <span id="popupFakeNewsRatio">0</span></p>
+            <p><strong>Fake News Topics:</strong></p>
+            <ul id="popupFakeNewsTopics">
+            </ul>
+        </div>
+    </div>
+</main>
+
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/map.js"></script>
 </body>
 </html>

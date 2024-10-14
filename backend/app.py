@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template, send_from_directory, send_file
+from flask import Flask, request, jsonify, render_template, send_from_directory, send_file, Response
 import os
 import logging
 from flask_cors import CORS
@@ -6,6 +6,8 @@ from elasticsearch_service import es_service
 from news_service import analyze_event
 import pandas as pd
 import io
+import csv
+
 
 
 app = Flask(__name__, static_folder='../frontend/assets', template_folder='../frontend/pages')
@@ -65,11 +67,16 @@ def search():
     filters = request.json
     page = int(request.args.get('page', 1))
     page_size = int(request.args.get('page_size', 50))
+    
+    logger.info(f"Received search request. Page: {page}, Page Size: {page_size}, Filters: {filters}")
+    
     try:
         results = es_service.search(filters, page=page, page_size=page_size)
+        logger.info(f"Search completed. Total results: {results['total']}")
         return jsonify(results)
     except Exception as e:
         logger.error(f"Search error: {str(e)}")
+        logger.exception("Full traceback:")
         return jsonify({"error": str(e)}), 500
 
 
@@ -80,7 +87,7 @@ def download():
         return jsonify({"error": "No IDs provided"}), 400
 
     try:
-        full_data = es_service.get_full_data(selected_ids)
+        full_data = es_service.get_data(selected_ids)
         df = pd.DataFrame(full_data)
 
         output = io.StringIO()
@@ -95,10 +102,35 @@ def download():
         logger.error(f"Download error: {str(e)}")
         return jsonify({"error": str(e)}), 500
 
+@app.route('/api/download-all', methods=['GET'])
+def download_all():
+    try:
+        full_data = es_service.get_all_data()
+
+        def generate():
+            data = io.StringIO()
+            writer = csv.writer(data)
+            
+            if full_data:
+                writer.writerow(full_data[0].keys())
+            
+            for row in full_data:
+                writer.writerow(row.values())
+                data.seek(0)
+                yield data.read()
+                data.seek(0)
+                data.truncate(0)
+
+        response = Response(generate(), mimetype='text/csv')
+        response.headers.set("Content-Disposition", "attachment", filename="all_data.csv")
+        return response
+    except Exception as e:
+        logger.error(f"Download all error: {str(e)}")
+        return jsonify({"error": str(e)}), 500
+    
 
 @app.route('/api/check-news', methods=['POST', 'OPTIONS'])
 def analyze_news():
-    # 处理 OPTIONS 预检请求
     if request.method == 'OPTIONS':
         response = jsonify({"message": "Preflight CORS check"})
         response.headers.add("Access-Control-Allow-Origin", "*")

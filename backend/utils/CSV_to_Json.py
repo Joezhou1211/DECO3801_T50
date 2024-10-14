@@ -8,6 +8,6 @@ df = pd.read_csv(file)
 json_records = df.to_dict(orient='records')
 
 # save the JSON data
-with open('../../data/processed/final_data.json', 'w') as f:  # path to the JSON file
+with open('../../data/processed/final_data(full).json', 'w') as f:  # path to the JSON file
     import json
     json.dump(json_records, f)

@@ -1,165 +1,329 @@
+// Global variables
 let debounceTimeout;
-let selectedIds = new Set(); // Track selected item IDs for download
+let selectedIds = new Set();
+let previousFilters = {};
+let allSelected = false;
+let totalResultsCount = 0;
+let currentPage = 1;
+let totalPages = 1;
+let countryNames = {};
 
-// Function to toggle filters visibility
-function toggleFilters() {
-    const filtersSection = document.getElementById('filtersSection');
-    filtersSection.classList.toggle('show');
-}
+// Utility functions
+const debounce = (func, delay) => {
+    return (...args) => {
+        clearTimeout(debounceTimeout);
+        debounceTimeout = setTimeout(() => func(...args), delay);
+    };
+};
 
-// Debounced search function to limit the number of search requests
-function debouncedSearch() {
-    clearTimeout(debounceTimeout);
-    debounceTimeout = setTimeout(() => {
-        performSearchWithFilters();
-    }, 300);  // 300ms debounce time
-}
+const getElement = id => document.getElementById(id);
 
-// Collect the filters and search query into a single object
-function getSearchFilters() {
-    const query = document.getElementById('searchQuery').value;
-    const timeRangeStart = document.getElementById('timeRangeStart').value;
-    const timeRangeEnd = document.getElementById('timeRangeEnd').value;
-    const locationSelect = document.getElementById('location');
-    const selectedLocations = Array.from(locationSelect.selectedOptions).map(option => option.value);
-    const topicSelect = document.getElementById('topic');
-    const selectedTopics = Array.from(topicSelect.selectedOptions).map(option => option.value);
-    const verifiedAccount = document.getElementById('verifiedAccount').value;
-    const nodeType = document.getElementById('nodeType').value;
-    const authorKeynode = document.getElementById('authorKeynode').value;
-    const hashtagKeynode = document.getElementById('hashtagKeynode').value;
+// Filter related functions
+const toggleFilters = () => {
+    getElement('filtersSection').classList.toggle('show');
+};
 
-    let filters = {
-        query,
-        timeRangeStart,
-        timeRangeEnd,
-        selectedLocations,
-        selectedTopics,
-        verifiedAccount,
-        nodeType,
-        authorKeynode,
-        hashtagKeynode
+const getSearchFilters = () => {
+    const filters = {
+        query: getElement('searchQuery').value,
+        timeRangeStart: getElement('timeRangeStart').value,
+        timeRangeEnd: getElement('timeRangeEnd').value,
+        selectedTopics: Array.from(getElement('topic').selectedOptions).map(option => option.value),
+        selectedSentiments: Array.from(getElement('sentiment').selectedOptions).map(option => option.value),
+        selectedLocations: Array.from(getElement('location').selectedOptions).map(option => option.value),
+        verifiedAccount: getElement('verifiedAccount').value,
+        nodeType: getElement('nodeType').value,
+        authorKeynode: getElement('authorKeynode').value,
+        hashtagKeynode: getElement('hashtagKeynode').value
     };
 
-    // 处理数值型过滤器
-    const numericFilters = ['sentiment', 'retweetCount', 'replyCount', 'quoteCount', 'favouriteCount', 'influenceTweetFactor', 'influenceUser', 'extendedEntities'];
+    const rangeFilters = ['retweetCount', 'replyCount', 'quoteCount', 'favouriteCount', 'influenceTweetFactor', 'influenceUser', 'extendedEntities'];
     
-    numericFilters.forEach(filter => {
-        const value = document.getElementById(filter).value;
-        if (value !== '') {
-            filters[filter] = {min: parseFloat(value)};
+    rangeFilters.forEach(filter => {
+        const value = parseInt(getElement(filter).value);
+        if (value > 0) {  
+            filters[filter] = { min: value };
+        }
+    });
+
+    Object.keys(filters).forEach(key => {
+        if (filters[key] === '' || filters[key] === null || filters[key] === undefined || 
+            (Array.isArray(filters[key]) && filters[key].length === 0)) {
+            delete filters[key];
         }
     });
 
     return filters;
-}
+};
 
-// Perform search and send filters to backend
-function performSearchWithFilters() {
+const saveCurrentFilters = () => {
+    previousFilters = getSearchFilters();
+};
+
+// Search related functions
+const performSearchWithFilters = (page = 1) => { 
+    saveCurrentFilters();
     const filters = getSearchFilters();
-    const resultsDiv = document.getElementById('results');
-    const loadingSpinner = document.getElementById('loadingSpinner');
+    const resultsDiv = getElement('results');
+    const loadingSpinner = getElement('loadingSpinner');
+    const downloadSection = getElement('downloadSection');
+
+    filters.sort_field = currentSortField;
+    filters.sort_order = currentSortOrder;
 
     console.log('Sending filters to backend:', filters);
 
     loadingSpinner.style.display = 'inline-block';
     resultsDiv.innerHTML = '';
+    downloadSection.style.display = 'none';
 
-    fetch('http://localhost:5001/api/search', {
+    fetch(`http://localhost:5001/api/search?page=${page}&page_size=50`, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(filters),
     })
     .then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         return response.json();
     })
     .then(data => {
         console.log('Search results:', data);
         loadingSpinner.style.display = 'none';
-        displayResults(data);
+        totalResultsCount = data.total;
+        currentPage = data.page;
+        totalPages = Math.ceil(data.total / data.page_size);
+        updateResultsCount();
+        displayResults(data.results);
+        displayPagination();
+        if (data.total > 0) downloadSection.style.display = 'flex';
     })
     .catch(error => {
         console.error('Error:', error);
         loadingSpinner.style.display = 'none';
         resultsDiv.innerHTML = `<p>Error: ${error.message}. Please try again later.</p>`;
-        alert('An error occurred while searching. Please try again.');
+        alert('An error occurred during the search. Please try again later.');
     });
-}
+};
 
-function displayResults(results) {
-    const resultsDiv = document.getElementById('results');
-    resultsDiv.innerHTML = '';
+const displayPagination = () => {
+    const paginationDiv = getElement('pagination');
+    paginationDiv.innerHTML = '';
 
-    if (results.length === 0) {
-        resultsDiv.innerHTML = '<p>No results found.</p>';
-        return;
+    if (totalPages > 1) {
+        const nav = document.createElement('nav');
+        nav.className = 'pagination is-rounded';
+        nav.setAttribute('role', 'navigation');
+        nav.setAttribute('aria-label', 'pagination');
+
+        const prevLink = document.createElement('a');
+        prevLink.className = `pagination-previous ${currentPage === 1 ? 'is-disabled' : ''}`;
+        prevLink.innerHTML = 'Previous';
+        prevLink.onclick = () => currentPage > 1 && performSearchWithFilters(currentPage - 1);
+
+        const nextLink = document.createElement('a');
+        nextLink.className = `pagination-next ${currentPage === totalPages ? 'is-disabled' : ''}`;
+        nextLink.innerHTML = 'Next page';
+        nextLink.onclick = () => currentPage < totalPages && performSearchWithFilters(currentPage + 1);
+
+        const pageList = document.createElement('ul');
+        pageList.className = 'pagination-list';
+
+        // Add first page
+        pageList.appendChild(createPageItem(1));
+
+        // Add ellipsis if needed
+        if (currentPage > 3) {
+            pageList.appendChild(createEllipsis());
+        }
+
+        // Add pages around current page
+        for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
+            pageList.appendChild(createPageItem(i));
+        }
+
+        // Add ellipsis if needed
+        if (currentPage < totalPages - 2) {
+            pageList.appendChild(createEllipsis());
+        }
+
+        // Add last page
+        if (totalPages > 1) {
+            pageList.appendChild(createPageItem(totalPages));
+        }
+
+        nav.appendChild(prevLink);
+        nav.appendChild(nextLink);
+        nav.appendChild(pageList);
+        paginationDiv.appendChild(nav);
     }
+};
 
-    results.forEach(result => {
-        const resultItem = document.createElement('div');
-        resultItem.className = 'result-item';
-        resultItem.innerHTML = `
-            <h3>${result.deidentname}</h3>
-            <p>${result.text}</p>
-            <p>Created at: ${result.created_at_dt}</p>
-            <p>Location: ${result.location}</p>
-            <p>Dominant Topic: ${result.dominant_topic}</p>
-            <p>Sentiment: ${result.sentiment}</p>
-            <p>Retweet Count: ${result.retweet_count}</p>
-            <p>Reply Count: ${result.reply_count}</p>
-            <p>Quote Count: ${result.quote_count}</p>
-            <p>Favourite Count: ${result.favourite_count}</p>
-            <p>Node Type: ${result.node_type}</p>
-            <p>Author Keynode: ${result.author_keynode ? 'Yes' : 'No'}</p>
-            <p>Hashtag Keynode: ${result.hashtag_keynode ? 'Yes' : 'No'}</p>
-            <label>
-                <input type="checkbox" onchange="toggleSelection('${result._id}')">
-                Select for download
-            </label>
+const createPageItem = (pageNum) => {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.className = `pagination-link ${pageNum === currentPage ? 'is-current' : ''}`;
+    a.setAttribute('aria-label', `Goto page ${pageNum}`);
+    a.innerHTML = pageNum;
+    a.onclick = () => performSearchWithFilters(pageNum);
+    li.appendChild(a);
+    return li;
+};
+
+const createEllipsis = () => {
+    const li = document.createElement('li');
+    const span = document.createElement('span');
+    span.className = 'pagination-ellipsis';
+    span.innerHTML = '&hellip;';
+    li.appendChild(span);
+    return li;
+};
+
+
+const debouncedSearch = debounce(performSearchWithFilters, 300);
+
+
+const updateResultsCount = () => {
+    const countDisplay = getElement('resultsCountDisplay');
+    countDisplay.textContent = `${selectedIds.size} out of ${totalResultsCount} items selected (Page ${currentPage} of ${totalPages})`;
+};
+
+
+
+// Result display related functions
+    const displayResults = results => {
+        const resultsDiv = getElement('results');
+        const downloadSection = getElement('downloadSection');
+        resultsDiv.innerHTML = '';
+
+        if (results.length === 0) {
+            resultsDiv.innerHTML = '<p>No results found.</p>';
+            downloadSection.style.display = 'none';
+            return;
+        }
+
+        results.forEach(result => {
+            const resultItem = document.createElement('div');
+            resultItem.className = 'result-item';
+            if (selectedIds.has(result._id)) {
+                resultItem.classList.add('selected');
+            }
+
+            const createdAt = new Date(result.created_at_dt).toLocaleString();
+
+            const contentWithSpans = result.text.replace(/(@\w+)/g, '<span class="mention">$1</span>')
+                                                .replace(/(https?:\/\/\S+)/g, '<span class="link">$1</span>')
+                                                .replace(/(#\w+)/g, '<span class="hashtag">$1</span>');
+
+            resultItem.innerHTML = `
+            <input type="checkbox" class="select-checkbox" id="select-${result._id}" ${selectedIds.has(result._id) ? 'checked' : ''} onchange="toggleSelection('${result._id}')">
+            <div class="tweet-card">
+                <h3>${result.deidentname}</h3>
+                <div class="content">${contentWithSpans}</div> <!-- 使用 contentWithSpans -->
+                <div class="meta">
+                    <p>Created at: ${createdAt}</p>
+                    <p>Location: ${result.location}</p>
+                </div>
+                <div class="actions">
+                    <span><i class="fas fa-heart icon"></i>${result.favourite_count}</span>
+                    <span><i class="fas fa-retweet icon"></i>${result.retweet_count}</span>
+                    <span><i class="fas fa-reply icon"></i>${result.reply_count}</span>
+                    <span><i class="fas fa-quote-right icon"></i>${result.quote_count}</span>
+                </div>
+            </div>
+            <div class="stats">
+                <div class="stat-item">Influence User: ${result.influence_user}</div>
+                <div class="stat-item">Extended Entities: ${result.extended_entities_count}</div>
+                <div class="stat-item">Dominant Topic: ${result.dominant_topic}</div>
+                <div class="stat-item">Sentiment: ${result.sentiment}</div>
+                <div class="stat-item">Verified: ${result.verified}</div>
+                <div class="stat-item">Node Type: ${result.node_type}</div>
+                <div class="stat-item">Author Keynode: ${result.author_keynode}</div>
+                <div class="stat-item">Hashtag Keynode: ${result.hashtag_keynode}</div>
+                <div class="stat-item">Influence Tweet Factor: ${result.influence_tweet_factor}</div>
+            </div>
         `;
+
+        resultItem.addEventListener('click', (event) => {
+            if (event.target.tagName !== 'INPUT') {
+                const checkbox = resultItem.querySelector('.select-checkbox');
+                checkbox.checked = !checkbox.checked;
+                toggleSelection(result._id);
+            }
+        });
+
         resultsDiv.appendChild(resultItem);
     });
-}
 
+    
+    totalResultsCount = results.length;
+    selectedIds.clear();
+    updateResultsCount();
+    updateSelectAllButtonText();
+    updateDownloadButtonState();
+};
 
-function toggleSelection(id) {
+const toggleSelection = id => {
+    const checkbox = document.getElementById(`select-${id}`);
+    const resultItem = checkbox.closest('.result-item');
+
     if (selectedIds.has(id)) {
         selectedIds.delete(id);
+        resultItem.classList.remove('selected');
     } else {
         selectedIds.add(id);
+        resultItem.classList.add('selected');
     }
+
+    updateSelectAllButtonText();
     updateDownloadButtonState();
-}
+    updateResultsCount();
+};
 
-function updateDownloadButtonState() {
-    const downloadButton = document.getElementById('downloadButton');
+const toggleSelectAll = () => {
+    const checkboxes = document.querySelectorAll('.result-item input[type="checkbox"]');
+    allSelected = !allSelected;
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = allSelected;
+        const id = checkbox.id.replace('select-', '');
+        if (allSelected) {
+            selectedIds.add(id);
+        } else {
+            selectedIds.delete(id);
+        }
+    });
+    updateSelectAllButtonText();
+    updateDownloadButtonState();
+    updateResultsCount(); 
+};
+
+
+const updateSelectAllButtonText = () => {
+    const selectAllButton = getElement('selectAllButton');
+    selectAllButton.innerHTML = allSelected ? 
+        '<i class="fas fa-check-square"></i> Select All' : 
+        '<i class="fas fa-square"></i> Select All';
+};
+
+const updateDownloadButtonState = () => {
+    const downloadButton = getElement('downloadButton');
     downloadButton.disabled = selectedIds.size === 0;
-}
+};
 
-function downloadSelected() {
+const downloadSelected = () => {
     if (selectedIds.size === 0) {
         alert('Please select at least one item to download.');
         return;
     }
-    const loadingSpinner = document.getElementById('loadingSpinner');
+    const loadingSpinner = getElement('loadingSpinner');
     loadingSpinner.style.display = 'inline-block';
 
     fetch('http://localhost:5001/api/download', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({selected_ids: Array.from(selectedIds)}),
     })
     .then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         return response.blob();
     })
     .then(blob => {
@@ -178,108 +342,19 @@ function downloadSelected() {
         loadingSpinner.style.display = 'none';
         alert(`Error downloading data: ${error.message}`);
     });
-}
+};
+
+// Initialize and update filter functions
+const initializeFilters = () => {
+    updateAllDisplays();
+    updateSentimentFilter();
+};
 
 
-function initializeFilters() {
-    initializeLocationFilter();
-    
-    updateSentimentDisplay();
-    updateRetweetCountDisplay();
-    updateReplyCountDisplay();
-    updateQuoteCountDisplay();
-    updateFavouriteCountDisplay();
-    updateInfluenceTweetFactorDisplay();
-    updateInfluenceUserDisplay();
-    updateExtendedEntitiesDisplay();
-}
 
-function initializeLocationFilter() {
-    const locationSelect = document.getElementById('location');
-    locationSelect.innerHTML = ''; 
-    
-    // 添加 "All" 选项
-    const allOption = document.createElement('option');
-    allOption.value = 'all';
-    allOption.textContent = 'All';
-    locationSelect.appendChild(allOption);
-    
-    // 使用 map.js 中定义的 countryNames
-    for (const [code, name] of Object.entries(countryNames)) {
-        const option = document.createElement('option');
-        option.value = code;
-        option.textContent = name;
-        locationSelect.appendChild(option);
-    }
-}
-
-function updateSentimentDisplay() {
-    const sentiment = document.getElementById('sentiment').value;
-    document.getElementById('sentimentDisplay').innerText = `Sentiment Value: ${sentiment}`;
-    debouncedSearch();
-}
-
-function updateRetweetCountDisplay() {
-    const count = document.getElementById('retweetCount').value;
-    document.getElementById('retweetCountDisplay').innerText = count;
-    debouncedSearch();
-}
-
-function updateReplyCountDisplay() {
-    const count = document.getElementById('replyCount').value;
-    document.getElementById('replyCountDisplay').innerText = count;
-    debouncedSearch();
-}
-
-function updateQuoteCountDisplay() {
-    const count = document.getElementById('quoteCount').value;
-    document.getElementById('quoteCountDisplay').innerText = count;
-    debouncedSearch();
-}
-
-function updateFavouriteCountDisplay() {
-    const count = document.getElementById('favouriteCount').value;
-    document.getElementById('favouriteCountDisplay').innerText = count;
-    debouncedSearch();
-}
-
-function updateInfluenceTweetFactorDisplay() {
-    const value = document.getElementById('influenceTweetFactor').value;
-    document.getElementById('influenceTweetFactorDisplay').innerText = value;
-    debouncedSearch();
-}
-
-function updateInfluenceUserDisplay() {
-    const value = document.getElementById('influenceUser').value;
-    document.getElementById('influenceUserDisplay').innerText = value;
-    debouncedSearch();
-}
-
-function updateExtendedEntitiesDisplay() {
-    const count = document.getElementById('extendedEntities').value;
-    document.getElementById('extendedEntitiesDisplay').innerText = count;
-    debouncedSearch();
-}
-
-// Update selected locations and topics
-function updateLocationFilter() {
-    const locationSelect = document.getElementById('location');
-    const selectedLocationsDiv = document.getElementById('selected-locations');
-    selectedLocationsDiv.innerHTML = '';  
-
-    Array.from(locationSelect.selectedOptions).forEach(option => {
-        const chip = document.createElement('div');
-        chip.className = 'chip';
-        chip.innerText = option.text;
-        selectedLocationsDiv.appendChild(chip);
-    });
-
-    debouncedSearch();  
-}
-
-function updateTopicFilter() {
-    const topicSelect = document.getElementById('topic');
-    const selectedTopicsDiv = document.getElementById('selected-topics');
+const updateTopicFilter = () => {
+    const topicSelect = getElement('topic');
+    const selectedTopicsDiv = getElement('selected-topics');
     selectedTopicsDiv.innerHTML = ''; 
 
     Array.from(topicSelect.selectedOptions).forEach(option => {
@@ -290,8 +365,136 @@ function updateTopicFilter() {
     });
 
     debouncedSearch();  
+};
+
+const updateSentimentFilter = () => {
+    const sentimentSelect = getElement('sentiment');
+    const selectedSentimentsDiv = getElement('selected-sentiments');
+    selectedSentimentsDiv.innerHTML = '';  
+
+    Array.from(sentimentSelect.selectedOptions).forEach(option => {
+        const chip = document.createElement('div');
+        chip.className = 'chip';
+        chip.innerText = option.text;
+        selectedSentimentsDiv.appendChild(chip);
+    });
+
+    debouncedSearch();  
+};
+
+const updateLocationFilter = () => {
+    const locationSelect = getElement('location');
+    const selectedLocations = Array.from(locationSelect.selectedOptions).map(option => option.value);
+    
+    const selectedLocationsDiv = getElement('selected-locations');
+    selectedLocationsDiv.innerHTML = selectedLocations.map(name => `<span class="chip">${name}</span>`).join('');
+    
+    debouncedSearch();
+};
+
+
+const updateAllDisplays = () => {
+    ['retweetCount', 'replyCount', 'quoteCount', 'favouriteCount', 'influenceTweetFactor', 'influenceUser', 'extendedEntities'].forEach(updateDisplay);
+};
+
+const updateDisplay = (id) => {
+    const value = getElement(id).value;
+    getElement(`${id}Display`).innerText = value;
+    debouncedSearch();
+};
+
+const resetFilters = () => {
+    ['searchQuery', 'timeRangeStart', 'timeRangeEnd', 'location', 'topic', 'sentiment', 'influenceTweetFactor', 'influenceUser', 'verifiedAccount', 'retweetCount', 'replyCount', 'quoteCount', 'favouriteCount', 'extendedEntities', 'nodeType', 'authorKeynode', 'hashtagKeynode'].forEach(id => {
+        const element = getElement(id);
+        if (element.type === 'select-multiple') {
+            element.selectedIndex = -1;
+        } else if (element.type === 'range') {
+            element.value = 0;
+        } else {
+            element.value = '';
+        }
+    });
+
+
+    selectedIds.clear();
+    updateResultsCount();
+
+    updateTopicFilter();
+    updateAllDisplays();
+    updateSentimentFilter();
+
+    getElement('results').innerHTML = '';
+    getElement('downloadSection').style.display = 'none';
+};
+
+const downloadAllData = () => {
+    const loadingSpinner = getElement('loadingSpinner');
+    loadingSpinner.style.display = 'inline-block';
+
+    fetch('http://localhost:5001/api/download-all', {
+        method: 'GET',
+    })
+    .then(response => {
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        return response.blob();
+    })
+    .then(blob => {
+        loadingSpinner.style.display = 'none';
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = 'all_data.csv';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        loadingSpinner.style.display = 'none';
+        alert(`Error downloading all data: ${error.message}`);
+    });
+};
+
+let currentSortField = '';
+let currentSortOrder = 'desc';
+
+const toggleSort = () => {
+    const modal = document.getElementById('sortModal');
+    modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+};
+
+const updateSort = () => {
+    const sortField = getElement('sortField').value;
+    const sortOrder = getElement('sortOrder').value;
+    
+    if (sortField !== currentSortField || sortOrder !== currentSortOrder) {
+        currentSortField = sortField;
+        currentSortOrder = sortOrder;
+        performSearchWithFilters();
+    }
+};
+
+window.onclick = function(event) {
+    const modal = document.getElementById('sortModal');
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    initializeFilters();
-});
+
+document.addEventListener('DOMContentLoaded', initializeFilters);
+
+window.toggleFilters = toggleFilters;
+window.performSearchWithFilters = performSearchWithFilters;
+window.debouncedSearch = debouncedSearch;
+window.toggleSelection = toggleSelection;
+window.toggleSelectAll = toggleSelectAll;
+window.downloadSelected = downloadSelected;
+window.updateTopicFilter = updateTopicFilter;
+window.updateDisplay = updateDisplay;
+window.resetFilters = resetFilters;
+window.updateSentimentFilter = updateSentimentFilter;
+window.downloadAllData = downloadAllData;
+window.toggleSort = toggleSort;
+window.updateSort = updateSort;
