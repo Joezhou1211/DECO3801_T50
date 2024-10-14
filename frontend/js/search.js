@@ -6,7 +6,44 @@ let allSelected = false;
 let totalResultsCount = 0;
 let currentPage = 1;
 let totalPages = 1;
-let countryNames = {};
+let locations = [];
+let totalTweetsCount = 0; 
+const countryList = [
+    'Afghanistan', 'Albania', 'Algeria', 'American Samoa', 'Andorra', 'Angola', 'Anguilla', 
+    'Antarctica', 'Antigua and Barbuda', 'Argentina', 'Armenia', 'Aruba', 'Australia', 'New South Wales, Australia', 'Victoria, Australia', 'Queensland, Australia', 
+    'South Australia, Australia', 'Western Australia, Australia', 'Tasmania, Australia', 
+    'Northern Territory, Australia', 'Australian Capital Territory, Australia', 'Austria', 'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 
+    'Belgium', 'Belize', 'Benin', 'Bermuda', 'Bhutan', 'Bolivia', 'Bosnia and Herzegovina', 
+    'Botswana', 'Brazil', 'British Indian Ocean Territory', 'Brunei Darussalam', 'Bulgaria', 
+    'Burkina Faso', 'Burundi', 'Cambodia', 'Cameroon', 'Canada', 'Cape Verde', 'Cayman Islands', 
+    'Central African Republic', 'Chad', 'Chile', 'China', 'Christmas Island', 
+    'Cocos (Keeling) Islands', 'Colombia', 'Comoros', 'Congo', 'Congo, Democratic Republic', 
+    'Cook Islands', 'Costa Rica', "Côte d'Ivoire", 'Croatia', 'Cuba', 'Cyprus', 'Czech Republic', 
+    'Denmark', 'Djibouti', 'Dominica', 'Dominican Republic', 'Ecuador', 'Egypt', 'El Salvador', 
+    'Equatorial Guinea', 'Eritrea', 'Estonia', 'Ethiopia', 'Falkland Islands', 'Faroe Islands', 
+    'Fiji', 'Finland', 'France', 'French Guiana', 'French Polynesia', 'Gabon', 'Gambia', 'Georgia', 
+    'Germany', 'Ghana', 'Gibraltar', 'Greece', 'Greenland', 'Grenada', 'Guadeloupe', 'Guam', 
+    'Guatemala', 'Guernsey', 'Guinea', 'Guinea-Bissau', 'Guyana', 'Haiti', 'Holy See (Vatican City State)', 
+    'Honduras', 'Hong Kong', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland', 
+    'Isle of Man', 'Israel', 'Italy', 'Jamaica', 'Japan', 'Jersey', 'Jordan', 'Kazakhstan', 'Kenya', 
+    'Kiribati', 'South Korea', 'Kuwait', 'Kyrgyzstan', 'Laos', 'Latvia', 'Lebanon', 'Lesotho', 'Liberia', 
+    'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Macao', 'North Macedonia', 'Madagascar', 
+    'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta', 'Marshall Islands', 'Martinique', 'Mauritania', 
+    'Mauritius', 'Mayotte', 'Mexico', 'Micronesia', 'Moldova', 'Monaco', 'Mongolia', 'Montenegro', 
+    'Montserrat', 'Morocco', 'Mozambique', 'Myanmar', 'Namibia', 'Nauru', 'Nepal', 'Netherlands', 
+    'New Caledonia', 'New Zealand', 'Nicaragua', 'Niger', 'Nigeria', 'Niue', 'Norfolk Island', 
+    'Northern Mariana Islands', 'Norway', 'Oman', 'Pakistan', 'Palau', 'Palestine', 'Panama', 
+    'Papua New Guinea', 'Paraguay', 'Peru', 'Philippines', 'Poland', 'Portugal', 'Puerto Rico', 'Qatar', 
+    'Réunion', 'Romania', 'Russia', 'Rwanda', 'Samoa', 'San Marino', 'Sao Tome and Principe', 
+    'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia', 
+    'Slovenia', 'Solomon Islands', 'Somalia', 'South Africa', 'Spain', 'Sri Lanka', 'Sudan', 'Suriname', 
+    'Sweden', 'Switzerland', 'Syria', 'Taiwan', 'Tajikistan', 'Tanzania', 'Thailand', 'Timor-Leste', 
+    'Togo', 'Tokelau', 'Tonga', 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 
+    'Turks and Caicos Islands', 'Tuvalu', 'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 
+    'United States', 'Uruguay', 'Uzbekistan', 'Vanuatu', 'Venezuela', 'Vietnam', 'Wallis and Futuna', 
+    'Western Sahara', 'Yemen', 'Zambia', 'Zimbabwe', 'Unknown'
+];
+    
 
 // Utility functions
 const debounce = (func, delay) => {
@@ -32,7 +69,6 @@ const getSearchFilters = () => {
         selectedSentiments: Array.from(getElement('sentiment').selectedOptions).map(option => option.value),
         selectedLocations: Array.from(getElement('location').selectedOptions).map(option => option.value),
         verifiedAccount: getElement('verifiedAccount').value,
-        nodeType: getElement('nodeType').value,
         authorKeynode: getElement('authorKeynode').value,
         hashtagKeynode: getElement('hashtagKeynode').value
     };
@@ -90,10 +126,11 @@ const performSearchWithFilters = (page = 1) => {
         console.log('Search results:', data);
         loadingSpinner.style.display = 'none';
         totalResultsCount = data.total;
+        totalTweetsCount = data.total;
         currentPage = data.page;
         totalPages = Math.ceil(data.total / data.page_size);
-        updateResultsCount();
         displayResults(data.results);
+        updateResultsCount();  
         displayPagination();
         if (data.total > 0) downloadSection.style.display = 'flex';
     })
@@ -111,7 +148,7 @@ const displayPagination = () => {
 
     if (totalPages > 1) {
         const nav = document.createElement('nav');
-        nav.className = 'pagination is-rounded';
+        nav.className = 'pagination is-centered is-rounded';
         nav.setAttribute('role', 'navigation');
         nav.setAttribute('aria-label', 'pagination');
 
@@ -128,26 +165,21 @@ const displayPagination = () => {
         const pageList = document.createElement('ul');
         pageList.className = 'pagination-list';
 
-        // Add first page
-        pageList.appendChild(createPageItem(1));
-
-        // Add ellipsis if needed
-        if (currentPage > 3) {
-            pageList.appendChild(createEllipsis());
+        if (currentPage > 2) {
+            pageList.appendChild(createPageItem(1));
+            if (currentPage > 3) {
+                pageList.appendChild(createEllipsis());
+            }
         }
 
-        // Add pages around current page
-        for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
+        for (let i = Math.max(1, currentPage - 1); i <= Math.min(totalPages, currentPage + 1); i++) {
             pageList.appendChild(createPageItem(i));
         }
 
-        // Add ellipsis if needed
-        if (currentPage < totalPages - 2) {
-            pageList.appendChild(createEllipsis());
-        }
-
-        // Add last page
-        if (totalPages > 1) {
+        if (currentPage < totalPages - 1) {
+            if (currentPage < totalPages - 2) {
+                pageList.appendChild(createEllipsis());
+            }
             pageList.appendChild(createPageItem(totalPages));
         }
 
@@ -184,64 +216,66 @@ const debouncedSearch = debounce(performSearchWithFilters, 300);
 
 const updateResultsCount = () => {
     const countDisplay = getElement('resultsCountDisplay');
-    countDisplay.textContent = `${selectedIds.size} out of ${totalResultsCount} items selected (Page ${currentPage} of ${totalPages})`;
+    countDisplay.textContent = `${selectedIds.size} out of ${totalResultsCount} items selected (Page ${currentPage} of ${totalPages}, Total Tweets: ${totalTweetsCount})`;
+    
+    const filterTotalCount = getElement('filterTotalCount');
+    filterTotalCount.textContent = `Total Tweets: ${totalTweetsCount}`;
 };
 
 
 
 // Result display related functions
-    const displayResults = results => {
-        const resultsDiv = getElement('results');
-        const downloadSection = getElement('downloadSection');
-        resultsDiv.innerHTML = '';
+const displayResults = results => {
+    const resultsDiv = getElement('results');
+    const downloadSection = getElement('downloadSection');
+    resultsDiv.innerHTML = '';
 
-        if (results.length === 0) {
-            resultsDiv.innerHTML = '<p>No results found.</p>';
-            downloadSection.style.display = 'none';
-            return;
+    if (results.length === 0) {
+        resultsDiv.innerHTML = '<p>No results found.</p>';
+        downloadSection.style.display = 'none';
+        return;
+    }
+
+    results.forEach(result => {
+        const resultItem = document.createElement('div');
+        resultItem.className = 'result-item';
+        if (selectedIds.has(result._id)) {
+            resultItem.classList.add('selected');
         }
 
-        results.forEach(result => {
-            const resultItem = document.createElement('div');
-            resultItem.className = 'result-item';
-            if (selectedIds.has(result._id)) {
-                resultItem.classList.add('selected');
-            }
+        const createdAt = new Date(result.created_at_dt).toLocaleString();
 
-            const createdAt = new Date(result.created_at_dt).toLocaleString();
+        const contentWithSpans = result.text.replace(/(@\w+)/g, '<span class="mention">$1</span>')
+                                            .replace(/(https?:\/\/\S+)/g, '<span class="link">$1</span>')
+                                            .replace(/(#\w+)/g, '<span class="hashtag">$1</span>');
 
-            const contentWithSpans = result.text.replace(/(@\w+)/g, '<span class="mention">$1</span>')
-                                                .replace(/(https?:\/\/\S+)/g, '<span class="link">$1</span>')
-                                                .replace(/(#\w+)/g, '<span class="hashtag">$1</span>');
-
-            resultItem.innerHTML = `
-            <input type="checkbox" class="select-checkbox" id="select-${result._id}" ${selectedIds.has(result._id) ? 'checked' : ''} onchange="toggleSelection('${result._id}')">
-            <div class="tweet-card">
-                <h3>${result.deidentname}</h3>
-                <div class="content">${contentWithSpans}</div> <!-- 使用 contentWithSpans -->
-                <div class="meta">
-                    <p>Created at: ${createdAt}</p>
-                    <p>Location: ${result.location}</p>
-                </div>
-                <div class="actions">
-                    <span><i class="fas fa-heart icon"></i>${result.favourite_count}</span>
-                    <span><i class="fas fa-retweet icon"></i>${result.retweet_count}</span>
-                    <span><i class="fas fa-reply icon"></i>${result.reply_count}</span>
-                    <span><i class="fas fa-quote-right icon"></i>${result.quote_count}</span>
-                </div>
+        resultItem.innerHTML = `
+        <input type="checkbox" class="select-checkbox" id="select-${result._id}" ${selectedIds.has(result._id) ? 'checked' : ''} onchange="toggleSelection('${result._id}')">
+        <div class="tweet-card">
+            <h3>${result.deidentname}</h3>
+            <div class="content">${contentWithSpans}</div> <!-- 使用 contentWithSpans -->
+            <div class="meta">
+                <p>Created at: ${createdAt}</p>
+                <p>Location: ${result.location}</p>
             </div>
-            <div class="stats">
-                <div class="stat-item">Influence User: ${result.influence_user}</div>
-                <div class="stat-item">Extended Entities: ${result.extended_entities_count}</div>
-                <div class="stat-item">Dominant Topic: ${result.dominant_topic}</div>
-                <div class="stat-item">Sentiment: ${result.sentiment}</div>
-                <div class="stat-item">Verified: ${result.verified}</div>
-                <div class="stat-item">Node Type: ${result.node_type}</div>
-                <div class="stat-item">Author Keynode: ${result.author_keynode}</div>
-                <div class="stat-item">Hashtag Keynode: ${result.hashtag_keynode}</div>
-                <div class="stat-item">Influence Tweet Factor: ${result.influence_tweet_factor}</div>
+            <div class="actions">
+                <span><i class="fas fa-heart icon"></i>${result.favourite_count}</span>
+                <span><i class="fas fa-retweet icon"></i>${result.retweet_count}</span>
+                <span><i class="fas fa-reply icon"></i>${result.reply_count}</span>
+                <span><i class="fas fa-quote-right icon"></i>${result.quote_count}</span>
             </div>
-        `;
+        </div>
+        <div class="stats">
+            <div class="stat-item">Influence User: ${result.influence_user}</div>
+            <div class="stat-item">Extended Entities: ${result.extended_entities_count}</div>
+            <div class="stat-item">Dominant Topic: ${result.dominant_topic}</div>
+            <div class="stat-item">Sentiment: ${result.sentiment}</div>
+            <div class="stat-item">Verified: ${result.verified}</div>
+            <div class="stat-item">Author Keynode: ${result.author_keynode}</div>
+            <div class="stat-item">Hashtag Keynode: ${result.hashtag_keynode}</div>
+            <div class="stat-item">Influence Tweet Factor: ${result.influence_tweet_factor}</div>
+        </div>
+    `;
 
         resultItem.addEventListener('click', (event) => {
             if (event.target.tagName !== 'INPUT') {
@@ -252,7 +286,7 @@ const updateResultsCount = () => {
         });
 
         resultsDiv.appendChild(resultItem);
-    });
+        });
 
     
     totalResultsCount = results.length;
@@ -281,16 +315,21 @@ const toggleSelection = id => {
 
 const toggleSelectAll = () => {
     const checkboxes = document.querySelectorAll('.result-item input[type="checkbox"]');
+    const resultItems = document.querySelectorAll('.result-item');
     allSelected = !allSelected;
-    checkboxes.forEach(checkbox => {
+    
+    checkboxes.forEach((checkbox, index) => {
         checkbox.checked = allSelected;
         const id = checkbox.id.replace('select-', '');
         if (allSelected) {
             selectedIds.add(id);
+            resultItems[index].classList.add('selected');
         } else {
             selectedIds.delete(id);
+            resultItems[index].classList.remove('selected');
         }
     });
+    
     updateSelectAllButtonText();
     updateDownloadButtonState();
     updateResultsCount(); 
@@ -348,9 +387,21 @@ const downloadSelected = () => {
 const initializeFilters = () => {
     updateAllDisplays();
     updateSentimentFilter();
+    populateLocationFilter(); 
 };
 
 
+const populateLocationFilter = () => {
+    const locationSelect = getElement('location');
+    locationSelect.innerHTML = '';
+    countryList.forEach(location => {
+        const option = document.createElement('option');
+        option.value = location;
+        option.textContent = location;
+        locationSelect.appendChild(option);
+    });
+    console.log("Location filter populated, options count:", locationSelect.options.length);
+};
 
 const updateTopicFilter = () => {
     const topicSelect = getElement('topic');
@@ -387,10 +438,11 @@ const updateLocationFilter = () => {
     const selectedLocations = Array.from(locationSelect.selectedOptions).map(option => option.value);
     
     const selectedLocationsDiv = getElement('selected-locations');
-    selectedLocationsDiv.innerHTML = selectedLocations.map(name => `<span class="chip">${name}</span>`).join('');
+    selectedLocationsDiv.innerHTML = selectedLocations.map(location => `<span class="chip">${location}</span>`).join('');
     
     debouncedSearch();
 };
+
 
 
 const updateAllDisplays = () => {
@@ -398,13 +450,12 @@ const updateAllDisplays = () => {
 };
 
 const updateDisplay = (id) => {
-    const value = getElement(id).value;
-    getElement(`${id}Display`).innerText = value;
+    getElement(`${id}Display`).innerText = getElement(id).value;
     debouncedSearch();
 };
 
 const resetFilters = () => {
-    ['searchQuery', 'timeRangeStart', 'timeRangeEnd', 'location', 'topic', 'sentiment', 'influenceTweetFactor', 'influenceUser', 'verifiedAccount', 'retweetCount', 'replyCount', 'quoteCount', 'favouriteCount', 'extendedEntities', 'nodeType', 'authorKeynode', 'hashtagKeynode'].forEach(id => {
+    ['searchQuery', 'timeRangeStart', 'timeRangeEnd', 'location', 'topic', 'sentiment', 'influenceTweetFactor', 'influenceUser', 'verifiedAccount', 'retweetCount', 'replyCount', 'quoteCount', 'favouriteCount', 'extendedEntities', 'authorKeynode', 'hashtagKeynode'].forEach(id => {
         const element = getElement(id);
         if (element.type === 'select-multiple') {
             element.selectedIndex = -1;
@@ -498,3 +549,4 @@ window.updateSentimentFilter = updateSentimentFilter;
 window.downloadAllData = downloadAllData;
 window.toggleSort = toggleSort;
 window.updateSort = updateSort;
+window.updateLocationFilter = updateLocationFilter;

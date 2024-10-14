@@ -1,53 +1,19 @@
-"""
-*** Instruction for Frontend team mates ***
-
-Page Design Doc. Download ElasticSearch from https://www.elastic.co/downloads/elasticsearch.
-2. Locate the downloaded file and open /config/elasticsearch.yml. Disable ElasticSearch authentication by setting xpack.security.enabled: true to xpack.security.enabled: false.
-3. In terminal, '''cd to the elasticsearch-xx.xx.x file''', run '''./bin/elasticsearch''' in the terminal to start ElasticSearch (Port 9200).
-   Check if it started successfully by opening http://localhost:9200/.
-4. Install the ElasticSearch module by running pip install elasticsearch.
-5. Import data into ElasticSearch by running data_importer.py. First, obtain final_data(old).csv from sentiment.ipynb and convert it to final_data.json using CSV_to_Json.py.
-6. Run app.py to start the server. Access http://localhost:5001 to view and interact with the search page.
-
-
-Next phase backend update plan:
-Containerize ElasticSearch deployment using Docker.
-Use Nginx for interface mapping.
-Expand data frame interfaces based on frontend requirements.
-"""
-
 from elasticsearch import Elasticsearch
 import logging
 
-# 配置日志
+CLOUD_ID = "500471660de245d89d7b444aee7b06b3:dXMtY2VudHJhbDEuZ2NwLmNsb3VkLmVzLmlvJDBkM2I2YjQ1MTZlNjQ1NDE4MGM2OTA1YjJhNTE5MjczJGE4YTI4M2UwYmU2NjQ4NzFiMzY0YjcxNTM1YjhkNzFj"
+API_KEY = "MjEydmlwSUJxRDFPeEJTNEFHYXc6RkdqaEl1QUJTNDJzR0E1S2ZfTTNsZw=="
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 class ElasticSearchService:
     def __init__(self, index_name):
-        self.es = Elasticsearch(hosts=["http://localhost:9200"])
+        self.es = Elasticsearch(
+            cloud_id=CLOUD_ID,
+            api_key=API_KEY
+        )
         self.index_name = index_name
-        self.locations = self.get_unique_locations()
-
-    def get_unique_locations(self):
-        try:
-            query = {
-                "size": 0,
-                "aggs": {
-                    "unique_locations": {
-                        "terms": {
-                            "field": "location.keyword",
-                            "size": 10000  # 调整这个值以适应您的数据集
-                        }
-                    }
-                }
-            }
-            response = self.es.search(index=self.index_name, body=query)
-            locations = [bucket['key'] for bucket in response['aggregations']['unique_locations']['buckets']]
-            return sorted(locations)
-        except Exception as e:
-            logger.error(f"Error retrieving unique locations: {str(e)}")
-            return []
         
     def search(self, filters, page=1, page_size=50):
         """
@@ -90,7 +56,6 @@ class ElasticSearchService:
                     }
                 }
             })
-
         # Location filter
         if filters.get('selectedLocations'):
             es_query["query"]["bool"]["must"].append({
@@ -149,14 +114,6 @@ class ElasticSearchService:
             es_query["query"]["bool"]["filter"].append({
                 "term": {
                     "verified": filters['verifiedAccount'] == 'yes'
-                }
-            })
-
-        # Node type filter
-        if filters.get('nodeType') and filters['nodeType'] != 'all':
-            es_query["query"]["bool"]["filter"].append({
-                "term": {
-                    "node_type": filters['nodeType']
                 }
             })
 
@@ -257,4 +214,25 @@ class ElasticSearchService:
             logger.error(f"Error retrieving all data: {str(e)}")
             raise
         
+    def get_unique_locations(self):
+        try:
+            aggs_query = {
+                "aggs": {
+                    "unique_locations": {
+                        "terms": {
+                            "field": "location.keyword",
+                            "size": 1000
+                        }
+                    }
+                },
+                "size": 0
+            }
+
+            response = self.es.search(index=self.index_name, body=aggs_query)
+            locations = [bucket['key'] for bucket in response['aggregations']['unique_locations']['buckets']]
+            return locations
+        except Exception as e:
+            print("Error in get_unique_locations:", str(e))  
+            raise
+    
 es_service = ElasticSearchService('final_data_index')

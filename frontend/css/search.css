@@ -31,6 +31,14 @@
     box-shadow: 0 0 0 3px rgba(0, 77, 64, 0.3);
 }
 
+.filter-total-count {
+    position: fixed;
+    font-weight: bold;
+    color: #333;
+    margin-top: -10px;
+    margin-left: 80px;
+}
+
 .search-container button,
 .filters-button {
     padding: 12px 20px;
