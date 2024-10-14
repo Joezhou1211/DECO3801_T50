@@ -1,4 +1,3 @@
-// Global Variables and Constants
 let intervalId = null;
 let globalData = {};
 let currentRegion = null;
@@ -6,24 +5,17 @@ let selectedSubRegion = null;
 let globalMinTweetCount = Infinity;
 let globalMaxTweetCount = -Infinity;
 
-// Color constants for chart configuration.
 const color_start = '#fbf8e9';
 const color_end = '#ff2200';
 
-// HTML elements needed for interactivity.
 const timelineSlider = document.getElementById('timeline');
 const currentLabel = document.getElementById('current-date-label');
 
-// Variables for handling the visualization.
 let chart;
 let dataTable;
 let defaultOptions;
 let viewMode = 'global';
 
-/**
- * Maps continent codes to their respective continent names.
- * This mapping is used to convert standardized continent codes into more readable continent names.
- */
 const continentNames = {
     '002': 'Africa',
     '019': 'Americas',
@@ -32,10 +24,6 @@ const continentNames = {
     '009': 'Oceania'
 };
 
-/**
- * Maps country codes (ISO Alpha-2 codes) to their respective country names.
- * This mapping is used to convert country codes into human-readable country names for display purposes.
- */
 const countryNames = {
     'AF': 'Afghanistan',
     'AL': 'Albania',
@@ -88,7 +76,7 @@ const countryNames = {
     'CD': 'Congo, Democratic Republic',
     'CK': 'Cook Islands',
     'CR': 'Costa Rica',
-    'CI': "Côte d'Ivoire",
+    'CI': "C涔坱e d'Ivoire",
     'HR': 'Croatia',
     'CU': 'Cuba',
     'CY': 'Cyprus',
@@ -209,7 +197,7 @@ const countryNames = {
     'PT': 'Portugal',
     'PR': 'Puerto Rico',
     'QA': 'Qatar',
-    'RE': 'Réunion',
+    'RE': 'R鑼卽nion',
     'RO': 'Romania',
     'RU': 'Russia',
     'RW': 'Rwanda',
@@ -266,12 +254,7 @@ const countryNames = {
     'Unknown': 'Unknown'
 };
 
-/**
- * Maps state or province codes to their respective names.
- * This mapping is used to display detailed data at a regional level within countries.
- */
 const subRegionNames = {
-    // Australia States and Territories
     'AU-NSW': 'New South Wales, Australia',
     'AU-VIC': 'Victoria, Australia',
     'AU-QLD': 'Queensland, Australia',
@@ -282,10 +265,6 @@ const subRegionNames = {
     'AU-ACT': 'Australian Capital Territory, Australia',
 };
 
-/**
- * Maps country codes to their corresponding continent codes.
- * This mapping is used to determine the continent of a given country, facilitating continent-level data filtering.
- */
 const countryToContinent = {
     // Africa
     'DZ': '002', 'AO': '002', 'BJ': '002', 'BW': '002', 'BF': '002', 'BI': '002',
@@ -335,44 +314,28 @@ const countryToContinent = {
     'WF': '009',
 };
 
-/**
- * This event listener waits for the entire HTML document to be fully loaded and parsed before executing the specified
- * callback function.
- */
 document.addEventListener("DOMContentLoaded", function () {
     setupEventListeners();
     initializeChart();
-    initializePopup(); // 初始化弹出窗口
+    initializePopup();
 });
 
-/**
- * Initializes event listeners for different UI components.
- *
- * Functionality:
- * Sets up interactive behavior for various UI elements, including the timeline slider, autoplay button,
- * continent selector, and back button.
- * Ensures that user actions are handled correctly to update the chart or interface accordingly.
- */
 function setupEventListeners() {
-    // Timeline Slider Input Event
     if (timelineSlider) {
         timelineSlider.addEventListener('input', function () {
             const dayIndex = parseInt(this.value, 10);
             updateDisplayForDay(dayIndex);
-            // updateCurrentLabelPosition(); // 可选：如果需要同步标签位置
         });
         timelineSlider.addEventListener('mouseleave', function () {
-            // 可选：添加相关逻辑
         });
     }
 
-    // Autoplay Button Click Event
+
     const toggleAutoPlayBtn = document.getElementById('toggleAutoPlayBtn');
     if (toggleAutoPlayBtn) {
         toggleAutoPlayBtn.addEventListener('click', toggleAutoPlay);
     }
 
-    // Continent Selector Change Event
     const continentSelector = document.getElementById('continentSelector');
     if (continentSelector) {
         continentSelector.addEventListener('change', function () {
@@ -380,47 +343,39 @@ function setupEventListeners() {
         });
     }
 
-    // Back Button Click Event
     setupBackButton();
 }
 
-/**
- * Initializes the Google Charts environment and sets up the GeoChart once the required data is loaded.
- */
 google.charts.load('current', {
     'packages': ['geochart'],
-    'mapsApiKey': 'YOUR_GOOGLE_MAPS_API_KEY' // 请替换为您的实际 API 密钥
+    'mapsApiKey': 'YOUR_GOOGLE_MAPS_API_KEY'
 });
 google.charts.setOnLoadCallback(initializeChart);
 
-/**
- * Fetches data and sets up the chart to visualize information on the map.
- *
- * Functionality:
- * Loads the JSON data containing tweet and fake news information for various locations.
- * Initializes the Google GeoChart and configures its visual settings.
- * Sets up tooltips for the data points to display additional information.
- * Prepares the map with the appropriate color axis settings based on tweet counts.
- * Draws the map and sets up the interaction and sidebar for global view.
- */
 function initializeChart() {
     $.getJSON('../../data/processed/map_data.json', function (jsonData) {
         globalData = jsonData;
         initializeTimeline();
 
+        globalData.data.forEach(dateData => {
+            dateData.locations.forEach(location => {
+                globalMinTweetCount = Math.min(globalMinTweetCount, location.tweet_count);
+                globalMaxTweetCount = Math.max(globalMaxTweetCount, location.tweet_count);
+            });
+        });
+
+        drawColorBar(globalMinTweetCount, globalMaxTweetCount);
+
         const dayIndex = parseInt(timelineSlider.value, 10);
         const dateData = globalData.data[dayIndex];
 
-        // Initialize DataTable with 'tooltip' column
         dataTable = new google.visualization.DataTable();
         dataTable.addColumn('string', 'Region');
         dataTable.addColumn('number', 'Tweet Count');
         dataTable.addColumn({ type: 'string', role: 'tooltip', 'p': { 'html': true } });
 
-        // Aggregate data by country for initial view
         const aggregatedData = aggregateDataByCountry(dateData.locations);
 
-        // Initialize Data Rows
         const dataRows = aggregatedData.map(location => {
             let tooltip = generateTooltipContent(location);
             return [location.region_code, location.tweet_count, tooltip];
@@ -429,17 +384,12 @@ function initializeChart() {
 
         currentLabel.style.display = 'none';
 
-        // Initialize Color Axis
-        const tweetCounts = aggregatedData.map(location => location.tweet_count);
-        const minTweetCount = Math.min(...tweetCounts);
-        const maxTweetCount = Math.max(...tweetCounts);
-
         defaultOptions = {
             backgroundColor: { fill: 'transparent' },
             colorAxis: {
                 colors: [color_start, color_end],
-                minValue: minTweetCount,
-                maxValue: maxTweetCount
+                minValue: globalMinTweetCount,
+                maxValue: globalMaxTweetCount
             },
             legend: 'none',
             datalessRegionColor: '#f0f0f0',
@@ -453,72 +403,47 @@ function initializeChart() {
             enableRegionInteractivity: true
         };
 
-        // Initialize GeoChart
         chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
 
-        // Draw Initial Map
         chart.draw(dataTable, defaultOptions);
 
-        // Setup Sidebar for Global View
         setupSidebarForGlobalView(dateData);
 
-        // Setup Chart Interaction
         setupInteraction();
 
-        // Initialize Popup
         initializePopup();
     }).fail(function () {
         console.error("Failed to load data. Please check the JSON file path and format.");
     });
 }
 
-/**
- * Updates the map with new data filtered by the selected region or date.
- *
- * Functionality:
- * Filters and updates the map data based on the user's selection of continent, country, or global view.
- * Dynamically adjusts the displayed regions on the map and updates the tooltips with relevant information.
- * Modifies the color axis of the map according to the tweet count data.
- *
- * @param {Object} dateData - The data for the selected date that will be used to update the map.
- */
 function updateMap(dateData) {
-    let filteredLocations = dateData.locations;
+    let filteredLocations;
 
     if (isContinentCode(currentRegion)) {
-        // Filter locations by continent
         filteredLocations = dateData.locations.filter(location => {
-            const countryCode = location.region_code.substring(0, 2);  // Extract country code from region code
+            const countryCode = location.region_code.substring(0, 2);
             return countryToContinent[countryCode] === currentRegion;
         });
-        // Aggregate data by country
+
         filteredLocations = aggregateDataByCountry(filteredLocations);
     } else if (isCountryCode(currentRegion)) {
-        // Filter locations by country
         filteredLocations = dateData.locations.filter(location => location.region_code.startsWith(currentRegion + '-'));
     } else {
-        // Global view: Aggregate data by country for a uniform display
         filteredLocations = aggregateDataByCountry(dateData.locations);
     }
 
-    // Clear existing rows
     dataTable.removeRows(0, dataTable.getNumberOfRows());
 
-    // Add new rows with tooltip
     const dataRows = filteredLocations.map(location => {
         let tooltip = generateTooltipContent(location);
         return [location.region_code, location.tweet_count, tooltip];
     });
     dataTable.addRows(dataRows);
 
-    // Update Color Axis
-    const tweetCounts = filteredLocations.map(location => location.tweet_count);
-    const minTweetCount = Math.min(...tweetCounts);
-    const maxTweetCount = Math.max(...tweetCounts);
-    defaultOptions.colorAxis.minValue = minTweetCount;
-    defaultOptions.colorAxis.maxValue = maxTweetCount;
+    defaultOptions.colorAxis.minValue = globalMinTweetCount;
+    defaultOptions.colorAxis.maxValue = globalMaxTweetCount;
 
-    // Set Map Region and Resolution Based on Current Selection
     if (isContinentCode(currentRegion)) {
         defaultOptions.region = currentRegion;
         defaultOptions.resolution = 'countries';
@@ -526,26 +451,18 @@ function updateMap(dateData) {
         defaultOptions.region = currentRegion;
         defaultOptions.resolution = 'provinces';
     } else {
-        // Global View
         defaultOptions.region = 'world';
         defaultOptions.resolution = 'countries';
     }
 
-    // Redraw the Map
     chart.draw(dataTable, defaultOptions);
 }
 
-/**
- * Aggregates tweet data by country for the global view to ensure consistency.
- *
- * @param {Array} locations - The array of location data for the selected date.
- * @returns {Array} The aggregated data by country.
- */
 function aggregateDataByCountry(locations) {
     const countryData = {};
 
     locations.forEach(location => {
-        const countryCode = location.region_code.split('-')[0]; // Extract country code
+        const countryCode = location.region_code.split('-')[0];
         if (!countryData[countryCode]) {
             countryData[countryCode] = {
                 region_code: countryCode,
@@ -561,7 +478,6 @@ function aggregateDataByCountry(locations) {
         countryData[countryCode].fake_news_topics = countryData[countryCode].fake_news_topics.concat(location.fake_news_topics);
     });
 
-    // Calculate fake news ratio for each country
     Object.values(countryData).forEach(country => {
         country.fake_news_ratio = country.tweet_count > 0 ? (country.fake_news_count / country.tweet_count).toFixed(4) : 0;
     });
@@ -569,12 +485,6 @@ function aggregateDataByCountry(locations) {
     return Object.values(countryData);
 }
 
-/**
- * Generates the HTML content for the tooltip to display detailed region information.
- *
- * @param {Object} location - The location data containing region details.
- * @returns {String} The HTML content for the tooltip.
- */
 function generateTooltipContent(location) {
     return `<div style="padding:5px;">
                 <strong>${location.region_name}</strong><br/>
@@ -584,14 +494,6 @@ function generateTooltipContent(location) {
             </div>`;
 }
 
-/**
- * Configures interactive behavior for the GeoChart, enabling custom handling of region clicks.
- * Adds an event listener to the chart that triggers when a user clicks on a specific region.
- *
- * Functionality:
- * Sets up a listener to handle click events on regions within the GeoChart.
- * Calls the `zoomRegion()` function to handle region-specific behavior when a user clicks on the map.
- */
 function setupInteraction() {
     google.visualization.events.addListener(chart, 'regionClick', function (event) {
         console.log("Region clicked:", event.region);
@@ -599,15 +501,6 @@ function setupInteraction() {
     });
 }
 
-/**
- * Handles interactions when a region on the map is clicked.
- *
- * Functionality:
- * This function manages the behavior when a user clicks on a region on the map.
- * It adjusts the view and updates the map and sidebar accordingly depending on the type of region clicked.
- *
- * @param {String} region - The code of the region that was clicked by the user.
- */
 function zoomRegion(region) {
     const dayIndex = parseInt(timelineSlider.value, 10);
     const dateData = globalData.data[dayIndex];
@@ -616,7 +509,6 @@ function zoomRegion(region) {
     console.log(`Region clicked: ${region}`);
 
     if (isCountryCode(region)) {
-        // 点击国家
         currentRegion = region;
         selectedSubRegion = null;
         viewMode = 'country';
@@ -627,7 +519,6 @@ function zoomRegion(region) {
         updateContinentFilterForCountry(region);
         updateSidebar(dateData);
     } else if (isSubRegionCode(region)) {
-        // 点击子区域（州/省）
         selectedSubRegion = region;
         viewMode = 'subregion';
         backButton.style.display = 'block';
@@ -636,7 +527,6 @@ function zoomRegion(region) {
         updateMap(dateData);
         setupSidebarForSubRegionView(selectedSubRegion, dateData);
     } else if (isContinentCode(region)) {
-        // 点击大洲
         currentRegion = region;
         selectedSubRegion = null;
         viewMode = 'continent';
@@ -647,7 +537,6 @@ function zoomRegion(region) {
         updateContinentFilterForContinent(region);
         updateSidebar(dateData);
     } else {
-        // 其他情况，返回全球视图
         currentRegion = null;
         selectedSubRegion = null;
         viewMode = 'global';
@@ -657,150 +546,73 @@ function zoomRegion(region) {
     }
 }
 
-/**
- * Opens the Unknown regions popup.
- */
-function openUnknownPopup() {
-    const popupContainer = document.getElementById('popupContainer');
-    const togglePopupBtn = document.getElementById('togglePopupBtn');
-    const popupArrowIcon = document.getElementById('popupArrowIcon');
-
-    console.log('Opening Unknown Popup');
-
-    popupContainer.classList.add('open');
-    updatePopupData();
-
-    popupArrowIcon.style.transform = 'rotate(180deg)';
-}
-
-/**
- * Checks if a given code corresponds to a continent.
- *
- * @param {String} code - The code to validate.
- * @returns {Boolean} True if the code is a continent code, false otherwise.
- */
 function isContinentCode(code) {
     return ['002', '019', '142', '150', '009'].includes(code);
 }
 
-/**
- * Validates whether the given code is a valid country code.
- *
- * A country code should consist of exactly two uppercase letters.
- *
- * @param {string} code - The code to be checked.
- * @returns {boolean} True if the code is a two-letter country code, otherwise false.
- */
 function isCountryCode(code) {
     return /^[A-Z]{2}$/.test(code);
 }
 
-/**
- * Determines whether the provided code is a valid sub-region code.
- *
- * A valid sub-region code follows the format 'XX-YYY' where 'XX' is a two-letter country code
- * and 'YYY' is a 1 to 3 character alphanumeric sub-region identifier.
- *
- * @param {string} code - The sub-region code to be validated.
- * @returns {boolean} True if the code matches the sub-region format, otherwise false.
- */
 function isSubRegionCode(code) {
     return /^[A-Z]{2}-[A-Z0-9]{1,3}$/.test(code);
 }
 
-/**
- * Sets up the timeline slider with the initial configuration and prepares it for user interaction.
- *
- * Functionality:
- * This ensures that the slider starts from the beginning, positions the date label correctly,
- * and handles updates when the user changes the slider's value.
- */
 function initializeTimeline() {
     timelineSlider.max = globalData.data.length - 1;
     timelineSlider.value = 0;
-    updateCurrentLabelPosition(); // Ensure the label starts at the right position
+    updateCurrentLabelPosition();
 
-    // Add event listener to update the label during slider input
     timelineSlider.addEventListener('input', function () {
         const dayIndex = parseInt(this.value, 10);
         updateDisplayForDay(dayIndex);
     });
 }
 
-/**
- * Adjusts the position of the current date label on the timeline slider to align with the slider thumb.
- *
- * Functionality:
- * This function calculates the appropriate position of the current date label on the timeline slider.
- * It ensures that the label is dynamically positioned in accordance with the slider's thumb,
- * so the label stays aligned.
- */
 function updateCurrentLabelPosition() {
     const dayIndex = parseInt(timelineSlider.value, 10);
     const maxDayIndex = parseInt(timelineSlider.max, 10);
     const sliderWidth = timelineSlider.offsetWidth;
     const thumbPosition = (dayIndex / maxDayIndex) * sliderWidth;
-    currentLabel.style.left = `${thumbPosition - currentLabel.offsetWidth / 2}px`; // Dynamically position the label
+    currentLabel.style.left = `${thumbPosition - currentLabel.offsetWidth / 2}px`;
     currentLabel.style.display = 'block';
 }
 
-/**
- * Updates the map, sidebar, and date label based on the selected day from the timeline slider.
- *
- * Functionality:
- * This function is triggered whenever the user interacts with the timeline slider, ensuring that the displayed
- * information corresponds to the chosen date.
- */
 function updateDisplayForDay(dayIndex) {
     const dateData = globalData.data[dayIndex];
-    currentLabel.textContent = dateData.date; // Update the date content
+    currentLabel.textContent = dateData.date;
     timelineSlider.value = dayIndex;
     updateMap(dateData);
     updateSidebar(dateData);
-    updateCurrentLabelPosition(); // Ensure the label position updates during sliding or autoplay
+    updateCurrentLabelPosition();
 
-    // 如果弹出窗口是打开的，更新弹出窗口数据
     const popupContainer = document.getElementById('popupContainer');
     if (popupContainer.classList.contains('open')) {
         updatePopupData();
     }
 }
 
-/**
- * Updates the sidebar with information about the currently selected region and date.
- *
- * Functionality:
- * This function dynamically updates the sidebar content based on the currently selected view.
- * It determines which data to display depending on the user's current selection
- * and uses helper functions to format the content appropriately.
- *
- * @param {Object} dateData - Data for the specific date selected by the user.
- */
 function updateSidebar(dateData) {
     const regionDetails = document.getElementById('regionDetails');
     let regionName;
     let locations = [];
 
     if (viewMode === 'global') {
-        // Global view: 聚合所有国家级别的数据
         regionName = 'Global View';
-        locations = aggregateDataByCountry(dateData.locations);  // 按国家级别聚合数据
+        locations = aggregateDataByCountry(dateData.locations);
         regionDetails.innerHTML = generateSidebarContent(locations, regionName);
     } else if (viewMode === 'continent') {
-        // Continent view: 由 setupSidebarForContinentView 处理
         setupSidebarForContinentView(currentRegion, dateData);
     } else if (viewMode === 'country') {
-        // Country view: 按国家内的子区域聚合数据
         regionName = getRegionName(currentRegion);
         const locationsInCountry = dateData.locations.filter(location => location.region_code.startsWith(currentRegion + '-'));
-        const aggregatedCountryData = aggregateDataByCountry(locationsInCountry); // 按国家级别聚合数据
+        const aggregatedCountryData = aggregateDataByCountry(locationsInCountry);
         regionDetails.innerHTML = generateSidebarContent(aggregatedCountryData, regionName);
     } else if (viewMode === 'subregion') {
-        // Subregion view: 显示单个子区域的数据
         regionName = getRegionName(selectedSubRegion);
         const locationData = dateData.locations.find(location => location.region_code === selectedSubRegion);
         if (locationData) {
-            locations = [locationData];  // 仅显示选定子区域的数据
+            locations = [locationData];
             regionDetails.innerHTML = generateSidebarContent(locations, regionName);
         } else {
             regionDetails.innerHTML = `<h2>${regionName}</h2><p>No data available for this state/province.</p>`;
@@ -808,19 +620,6 @@ function updateSidebar(dateData) {
     }
 }
 
-/**
- * Generates the HTML content to populate the sidebar with statistical data.
- *
- * Functionality:
- * This function takes in a list of locations and the name of a region to generate statistical data
- * about tweets and fake news.
- * It compiles the total tweet count, fake news count, and identifies the most common fake news topics to be displayed
- * in the sidebar.
- *
- * @param {Array} locations - List of locations with their respective data.
- * @param {String} regionName - Name of the region currently being viewed.
- * @returns {String} The HTML markup for the sidebar content.
- */
 function generateSidebarContent(locations, regionName) {
     let totalTweetCount = 0;
     let totalFakeNewsCount = 0;
@@ -834,13 +633,12 @@ function generateSidebarContent(locations, regionName) {
 
     const fakeNewsRatio = totalTweetCount > 0 ? (totalFakeNewsCount / totalTweetCount).toFixed(4) : 0;
 
-    // 统计最常见的假新闻主题
     const topicCounts = {};
     allFakeNewsTopics.forEach(topic => {
         topicCounts[topic] = (topicCounts[topic] || 0) + 1;
     });
     const sortedTopics = Object.keys(topicCounts).sort((a, b) => topicCounts[b] - topicCounts[a]);
-    const topFakeNewsTopics = sortedTopics.length > 0 ? sortedTopics.slice(0, 5) : ['No Topics Available']; // 如果没有数据，则显示默认信息
+    const topFakeNewsTopics = sortedTopics.length > 0 ? sortedTopics.slice(0, 5) : ['No Topics Available'];
 
     return `
         <h2>${regionName}</h2>
@@ -854,15 +652,6 @@ function generateSidebarContent(locations, regionName) {
     `;
 }
 
-/**
- * Populates the sidebar with global data summary information.
- *
- * Functionality:
- * This function is responsible for displaying the total number of tweets, fake news count,
- * the ratio of fake news to total tweets, and the most frequently discussed fake news topics on a global level.
- *
- * @param {Object} dateData - The data object containing information about all locations for the selected date.
- */
 function setupSidebarForGlobalView(dateData) {
     const regionDetails = document.getElementById('regionDetails');
 
@@ -878,15 +667,13 @@ function setupSidebarForGlobalView(dateData) {
 
     const fakeNewsRatio = totalTweetCount > 0 ? (totalFakeNewsCount / totalTweetCount).toFixed(4) : 0;
 
-    // Count Top Fake News Topics
     const topicCounts = {};
     allFakeNewsTopics.forEach(topic => {
         topicCounts[topic] = (topicCounts[topic] || 0) + 1;
     });
     const sortedTopics = Object.keys(topicCounts).sort((a, b) => topicCounts[b] - topicCounts[a]);
-    const topFakeNewsTopics = sortedTopics.slice(0, 5); // Top 5 Topics
+    const topFakeNewsTopics = sortedTopics.slice(0, 5);
 
-    // Update Sidebar Content
     regionDetails.innerHTML = `
         <h2>Global View</h2>
         <p><strong>Total Tweet Count:</strong> ${totalTweetCount}</p>
@@ -900,34 +687,20 @@ function setupSidebarForGlobalView(dateData) {
     `;
 }
 
-/**
- * Populates the sidebar with data summary information specific to a continent.
- *
- * Functionality:
- * This function displays the aggregated statistics of tweets and fake news for all countries within a given continent,
- * as well as detailed information for each individual country in that continent.
- *
- * @param {string} continentCode - The code representing the continent (e.g., '150' for Europe).
- * @param {Object} dateData - The data object containing information about all locations for the selected date.
- */
 function setupSidebarForContinentView(continentCode, dateData) {
     const regionDetails = document.getElementById('regionDetails');
     const regionName = continentNames[continentCode] || continentCode;
 
-    // 获取属于该大洲的所有国家代码
     const countriesInContinent = Object.keys(countryToContinent).filter(countryCode => countryToContinent[countryCode] === continentCode);
 
-    // 过滤出该大洲内的所有位置数据
     const locationsInContinent = dateData.locations.filter(location => countriesInContinent.includes(location.region_code.split('-')[0]));
 
-    // 按国家级别聚合数据
     const aggregatedCountries = aggregateDataByCountry(locationsInContinent);
 
     let totalTweetCount = 0;
     let totalFakeNewsCount = 0;
     let allFakeNewsTopics = [];
 
-    // 计算总的推文数和假新闻数，并收集所有假新闻主题
     aggregatedCountries.forEach(country => {
         totalTweetCount += country.tweet_count;
         totalFakeNewsCount += country.fake_news_count;
@@ -936,15 +709,13 @@ function setupSidebarForContinentView(continentCode, dateData) {
 
     const fakeNewsRatio = totalTweetCount > 0 ? (totalFakeNewsCount / totalTweetCount).toFixed(4) : 0;
 
-    // 计算最常见的假新闻主题
     const topicCounts = {};
     allFakeNewsTopics.forEach(topic => {
         topicCounts[topic] = (topicCounts[topic] || 0) + 1;
     });
     const sortedTopics = Object.keys(topicCounts).sort((a, b) => topicCounts[b] - topicCounts[a]);
-    const topFakeNewsTopics = sortedTopics.length > 0 ? sortedTopics.slice(0, 5) : ['No Topics Available']; // 如果没有数据，则显示默认信息
+    const topFakeNewsTopics = sortedTopics.length > 0 ? sortedTopics.slice(0, 5) : ['No Topics Available'];
 
-    // 构建侧边栏内容
     let content = `
         <h2>${regionName}</h2>
         <p><strong>Total Tweet Count:</strong> ${totalTweetCount}</p>
@@ -956,7 +727,6 @@ function setupSidebarForContinentView(continentCode, dateData) {
         </ul>
     `;
 
-    // 添加各国的详细数据
     if (aggregatedCountries.length > 0) {
         content += `
             <h3>Countries</h3>
@@ -977,32 +747,19 @@ function setupSidebarForContinentView(continentCode, dateData) {
         `;
     }
 
-    // 更新侧边栏内容
     regionDetails.innerHTML = content;
 }
 
-/**
- * Populates the sidebar with data summary information specific to a sub-region (state or province).
- *
- * Functionality:
- * This function displays detailed statistics for a given sub-region, including tweet counts, fake news data,
- * and the most frequently mentioned fake news topics.
- *
- * @param {string} subRegionCode - The code representing the sub-region (e.g., 'AU-NSW' for New South Wales, Australia).
- * @param {Object} dateData - The data object containing information about all locations for the selected date.
- */
 function setupSidebarForSubRegionView(subRegionCode, dateData) {
     const regionDetails = document.getElementById('regionDetails');
-    const regionName = subRegionNames[subRegionCode] || getRegionName(subRegionCode);  // 获取子区域名称
+    const regionName = subRegionNames[subRegionCode] || getRegionName(subRegionCode);
 
-    // Get data for the state/province
     const locationData = dateData.locations.find(location => location.region_code === subRegionCode);
 
-    // Process the list of fake news topics associated with that location.
     if (locationData) {
         const fakeNewsTopicsList = locationData.fake_news_topics
             .map(topic => `<li>${topic}</li>`)
-            .join('');  // 遍历主题列表
+            .join('');
 
         const content = `
             <h2>${locationData.region_name}</h2>
@@ -1018,99 +775,52 @@ function setupSidebarForSubRegionView(subRegionCode, dateData) {
     }
 }
 
-/**
- * Retrieves the full name of a region based on its code.
- *
- * Functionality:
- * This function takes a region code and returns the full name of that region.
- * The region code can represent a continent, country, or sub-region (e.g., state or province).
- *
- * @param {String} regionCode - The region's code.
- * @returns {String} The full name of the region.
- */
 function getRegionName(regionCode) {
     if (isContinentCode(regionCode)) {
-        // Continent Code
         return continentNames[regionCode] || regionCode;
     } else if (isCountryCode(regionCode)) {
-        // Country Code
         return countryNames[regionCode] || regionCode;
     } else if (isSubRegionCode(regionCode)) {
-        // Sub-region Code
         return subRegionNames[regionCode] || regionCode;
     } else {
-        // Other Codes
         return regionCode;
     }
 }
 
-/**
- * Toggles the autoplay feature to either start or stop playing through the timeline.
- *
- * Functionality:
- * This function determines the current state of autoplay (running or stopped) and
- * switches to the opposite state accordingly.
- */
 function toggleAutoPlay() {
-    // if autoplay is currently not running
     if (intervalId === null) {
         startAutoPlay();
-    } else { // running
+    } else {
         stopAutoPlay();
     }
 }
 
-/**
- * Initiates the autoplay, which advances the timeline automatically at set intervals.
- *
- * Functionality:
- * This function sets up a timer that moves the timeline forward at regular intervals,
- * mimicking the user sliding through the timeline. It also updates the display elements
- * and ensures the correct visual feedback for the user.
- */
 function startAutoPlay() {
     if (intervalId !== null) {
         clearInterval(intervalId);
     }
     intervalId = setInterval(() => {
-        incrementDay(); // Increase day index
+        incrementDay();
         currentLabel.style.display = 'block';
-        updateCurrentLabelPosition(); // Update label position during autoplay
+        updateCurrentLabelPosition();
     }, 800);
 
-    // Switch the button icon to the paused state
     const playPauseIcon = document.getElementById('toggleAutoPlayBtn');
     playPauseIcon.classList.remove('fa-play');
     playPauseIcon.classList.add('fa-pause');
 }
 
-/**
- * Stops the autoplay feature, halting any automatic progression of the timeline.
- *
- * Functionality:
- * This function clears the interval responsible for autoplay and resets the autoplay button
- * to reflect that the autoplay is no longer active.
- */
 function stopAutoPlay() {
     if (intervalId !== null) {
         clearInterval(intervalId);
         intervalId = null;
     }
 
-    // Switch the button icon to the play state
     const playPauseIcon = document.getElementById('toggleAutoPlayBtn');
-    playPauseIcon.classList.remove('fa-pause'); // Remove the pause icon
-    playPauseIcon.classList.add('fa-play'); // Add the play icon
+    playPauseIcon.classList.remove('fa-pause');
+    playPauseIcon.classList.add('fa-play');
 }
 
-
-/**
- * Advances the timeline by one day during autoplay.
- *
- * Functionality:
- * This function is responsible for incrementing the day index on the timeline
- * when the autoplay feature is active, ensuring that the display updates to the next day's data.
- */
 function incrementDay() {
     let currentDayIndex = parseInt(timelineSlider.value, 10);
     const maxDayIndex = parseInt(timelineSlider.max, 10);
@@ -1122,13 +832,6 @@ function incrementDay() {
     }
 }
 
-/**
- * Sets up the functionality for the Back button that allows users to navigate back through different map views.
- *
- * Functionality:
- * The Back button enables users to move from a more detailed view (subregion or country)
- * back to a broader view (country or global).
- */
 function setupBackButton() {
     const backButton = document.getElementById('backButton');
     if (backButton) {
@@ -1137,14 +840,12 @@ function setupBackButton() {
             const dateData = globalData.data[dayIndex];
 
             if (viewMode === 'subregion') {
-                // 从子区域视图返回到国家视图
                 selectedSubRegion = null;
                 viewMode = 'country';
                 backButton.innerText = 'Back to the World Map';
                 updateMap(dateData);
                 updateSidebar(dateData);
             } else if (viewMode === 'country' || viewMode === 'continent') {
-                // 从国家或大洲视图返回到全球视图
                 currentRegion = null;
                 selectedSubRegion = null;
                 viewMode = 'global';
@@ -1152,78 +853,54 @@ function setupBackButton() {
                 updateMap(dateData);
                 setupSidebarForGlobalView(dateData);
 
-                // 重置大陆选择器为全球视图
                 const continentSelector = document.getElementById('continentSelector');
                 if (continentSelector) {
-                    continentSelector.value = "000"; // 设置为 "000" 表示全球视图
+                    continentSelector.value = "000";
                 }
             }
         });
     }
 }
 
-/**
- * Updates the display state of the continent filter dropdown based on the view mode.
- *
- * Functionality:
- * This function manages the visibility and state of the continent filter dropdown.
- * Ensures the continent filter is visible and sets its value to the global view setting if applicable.
- *
- * @param {String} viewMode - The current view mode, which determines the filter display state.
- */
 function updateContinentFilter(viewMode) {
     const continentFilter = document.getElementById('continentSelector');
     if (viewMode === 'global') {
-        continentFilter.style.display = 'block'; // Keep Display
+        continentFilter.style.display = 'block';
         continentFilter.value = '000';
     } else {
-        continentFilter.style.display = 'block';  // Show filter in continent or country view
+        continentFilter.style.display = 'block';
     }
 }
 
-/**
- * Zooms into a specific continent or resets the view to the global map based on the selected continent code.
- *
- * Functionality:
- * This function handles changing the map display when the user selects a continent from the dropdown menu.
- * Updates the map view, sidebar, and UI elements accordingly based on the selected continent or global setting.
- *
- * @param {String} continentCode - The code representing the selected continent or global view.
- */
 function zoomToContinent(continentCode) {
     const dayIndex = parseInt(timelineSlider.value, 10);
     const dateData = globalData.data[dayIndex];
 
-    if (continentCode === "000") { // "000" 表示全球视图
-        // 回到全球视图
+    if (continentCode === "000") {
         currentRegion = null;
         viewMode = 'global';
-        updateContinentFilter(viewMode);  // 更新大陆选择器为全球视图
+        updateContinentFilter(viewMode);
 
         updateMap(dateData);
-        setupSidebarForGlobalView(dateData); // 设置全球视图的侧边栏
+        setupSidebarForGlobalView(dateData);
 
-        // 隐藏返回按钮
         const backButton = document.getElementById('backButton');
         backButton.style.display = 'none';
 
-        // 重置大陆选择器为 "000" 表示全球视图
         const continentSelector = document.getElementById('continentSelector');
         if (continentSelector) {
-            continentSelector.value = "000"; // 设置为 "000" 表示全球视图
+            continentSelector.value = "000";
         }
     } else {
-        // 进入特定大陆视图
         currentRegion = continentCode;
         viewMode = 'continent';
-        updateMap(dateData);  // 更新地图显示
-        updateSidebar(dateData);  // 更新侧边栏
+        updateMap(dateData);
+        updateSidebar(dateData);
 
         const backButton = document.getElementById('backButton');
-        backButton.style.display = 'block';  // 显示返回按钮
+        backButton.style.display = 'block';
         backButton.innerText = 'Back to the World Map';
 
-        // 更新大陆选择器为选中的大陆
         const continentSelector = document.getElementById('continentSelector');
         if (continentSelector) {
             continentSelector.value = continentCode;
@@ -1231,14 +908,6 @@ function zoomToContinent(continentCode) {
     }
 }
 
-/**
- * Updates the continent filter dropdown based on the provided country code.
- *
- * Functionality:
- * This function sets the value of the continent selector to the appropriate continent based on the given country code.
- *
- * @param {String} countryCode - The code of the country whose continent needs to be selected in the dropdown.
- */
 function updateContinentFilterForCountry(countryCode) {
     const continentCode = countryToContinent[countryCode];
     const continentSelector = document.getElementById('continentSelector');
@@ -1247,14 +916,6 @@ function updateContinentFilterForCountry(countryCode) {
     }
 }
 
-/**
- * Updates the continent filter dropdown based on the provided continent code.
- *
- * Functionality:
- * This function directly sets the value of the continent selector to the given continent code.
- *
- * @param {String} continentCode - The code of the continent to be set in the dropdown.
- */
 function updateContinentFilterForContinent(continentCode) {
     const continentSelector = document.getElementById('continentSelector');
     if (continentSelector && continentCode) {
@@ -1262,51 +923,46 @@ function updateContinentFilterForContinent(continentCode) {
     }
 }
 
-// Duplicate DOMContentLoaded listener removed to prevent multiple initializations
-
-/**
- * Initializes the popup functionality.
- */
 function initializePopup() {
     const togglePopupBtn = document.getElementById('togglePopupBtn');
     const popupContainer = document.getElementById('popupContainer');
+    const popupArrowIcon = document.getElementById('popupArrowIcon');
 
     console.log('Initializing Popup');
 
-    if (togglePopupBtn && popupContainer) {
-        // 初始状态为展开
+    if (togglePopupBtn && popupContainer && popupArrowIcon) {
         popupContainer.classList.add('open');
+        popupArrowIcon.style.transform = 'rotate(0deg)';
+
+        updatePopupData();
 
         togglePopupBtn.addEventListener('click', function () {
             console.log('Popup toggle button clicked');
-            const isOpen = popupContainer.classList.toggle('open');
+            popupContainer.classList.toggle('open');
 
-            if (isOpen) {
+            if (popupContainer.classList.contains('open')) {
                 console.log('Popup opened');
+                updatePopupData();
+                popupArrowIcon.style.transform = 'rotate(0deg)';
             } else {
                 console.log('Popup closed');
+                popupArrowIcon.style.transform = 'rotate(180deg)';
             }
         });
     } else {
-        console.error('Error initializing popup elements');
+        console.error('The pop-up window related DOM element was not found');
     }
 }
 
-/**
- * Updates the popup data to display detailed information for regions with the code 'Unknown'.
- * This function aggregates all 'Unknown' entries to ensure complete data representation.
- */
 function updatePopupData() {
     const dayIndex = parseInt(timelineSlider.value, 10);
     const dateData = globalData.data[dayIndex];
     console.log(`Updating popup data for day index: ${dayIndex}`);
 
-    // Filter regions with 'Unknown' region_code
     const unknownDataArray = dateData.locations.filter(location => location.region_code === 'Unknown');
     console.log('Unknown Data Array:', unknownDataArray);
 
     if (unknownDataArray.length > 0) {
-        // Aggregate tweet_count and fake_news_count for 'Unknown' regions
         const totalTweetCount = unknownDataArray.reduce((sum, location) => sum + location.tweet_count, 0);
         const totalFakeNewsCount = unknownDataArray.reduce((sum, location) => sum + location.fake_news_count, 0);
         const fakeNewsRatio = totalTweetCount > 0 ? (totalFakeNewsCount / totalTweetCount).toFixed(4) : 0;
@@ -1315,10 +971,10 @@ function updatePopupData() {
         document.getElementById('popupFakeNewsCount').textContent = totalFakeNewsCount;
         document.getElementById('popupFakeNewsRatio').textContent = fakeNewsRatio;
 
-        // Aggregate fake_news_topics
+
         const allFakeNewsTopics = unknownDataArray.flatMap(location => location.fake_news_topics);
         const topicsList = document.getElementById('popupFakeNewsTopics');
-        topicsList.innerHTML = ''; // Clear existing topics
+        topicsList.innerHTML = '';
 
         allFakeNewsTopics.forEach(topic => {
             const li = document.createElement('li');
@@ -1333,3 +989,49 @@ function updatePopupData() {
     }
 }
 
+document.getElementById('screenshotButton').addEventListener('click', function () {
+    const dayIndex = parseInt(document.getElementById('timeline').value, 10);
+    const jsonDataPath = '../../data/processed/map_data.json';
+
+
+    fetch(jsonDataPath)
+        .then(response => response.json())
+        .then(data => {
+            const selectedDateData = data.data[dayIndex];
+
+            const jsonContent = JSON.stringify(selectedDateData, null, 2);
+
+            const blob = new Blob([jsonContent], { type: 'application/json' });
+
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `data-${selectedDateData.date}.json`;
+            link.click();
+
+            URL.revokeObjectURL(link.href);
+        })
+        .catch(error => {
+            console.error('Error fetching or processing data:', error);
+        });
+});
+
+function drawColorBar(minValue, maxValue) {
+    console.log("Drawing color bar with min:", minValue, "and max:", maxValue);
+    const canvas = document.getElementById('colorBarCanvas');
+    const ctx = canvas.getContext('2d');
+    if (ctx) {
+        const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+        gradient.addColorStop(0, color_start);
+        gradient.addColorStop(1, color_end);
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        document.getElementById('minValueLabel').textContent = minValue;
+        document.getElementById('maxValueLabel').textContent = maxValue;
+    } else {
+        console.error("Canvas context not found!");
+    }
+}
