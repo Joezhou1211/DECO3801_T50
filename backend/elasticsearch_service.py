@@ -76,7 +76,7 @@ class ElasticSearchService:
         if filters.get('selectedSentiments'):
             es_query["query"]["bool"]["filter"].append({
                 "terms": {
-                    "sentiment": filters['selectedSentiments']
+                    "sentiment.keyword": filters['selectedSentiments']
                 }
             })
 
@@ -132,6 +132,22 @@ class ElasticSearchService:
                     "hashtag_keynode": filters['hashtagKeynode'] == 'yes'
                 }
             })
+
+        # Time filter 
+        if filters.get('sort_field') and filters.get('sort_order'):
+            if filters['sort_field'] == 'created_at_dt':
+                es_query["sort"] = [{
+                    "created_at_dt": {
+                        "order": filters['sort_order'],
+                        "format": "strict_date_optional_time_nanos"
+                    }
+                }]
+            else:
+                es_query["sort"] = [{
+                    filters['sort_field']: {
+                        "order": filters['sort_order']
+                            }
+                        }]
 
 
         logger.info(f"Constructed ES query: {es_query}")

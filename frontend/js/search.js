@@ -8,6 +8,8 @@ let currentPage = 1;
 let totalPages = 1;
 let locations = [];
 let totalTweetsCount = 0; 
+const MIN_DATE = '2019-11-01';
+const MAX_DATE = '2020-01-31';
 const countryList = [
     'Afghanistan', 'Albania', 'Algeria', 'American Samoa', 'Andorra', 'Angola', 'Anguilla', 
     'Antarctica', 'Antigua and Barbuda', 'Argentina', 'Armenia', 'Aruba', 'Australia', 'New South Wales, Australia', 'Victoria, Australia', 'Queensland, Australia', 
@@ -94,6 +96,27 @@ const getSearchFilters = () => {
 
 const saveCurrentFilters = () => {
     previousFilters = getSearchFilters();
+};
+
+const setDateRanges = () => {
+    flatpickr("#timeRangeStart", {
+        dateFormat: "Y-m-d",
+        minDate: MIN_DATE,
+        maxDate: MAX_DATE,
+        onChange: function(selectedDates, dateStr, instance) {
+            endDatePicker.set('minDate', dateStr);
+            debouncedSearch();
+        }
+    });
+
+    const endDatePicker = flatpickr("#timeRangeEnd", {
+        dateFormat: "Y-m-d",
+        minDate: MIN_DATE,
+        maxDate: MAX_DATE,
+        onChange: function(selectedDates, dateStr, instance) {
+            debouncedSearch();
+        }
+    });
 };
 
 // Search related functions
@@ -388,6 +411,7 @@ const initializeFilters = () => {
     updateAllDisplays();
     updateSentimentFilter();
     populateLocationFilter(); 
+    setDateRanges(); 
 };
 
 
@@ -550,3 +574,4 @@ window.downloadAllData = downloadAllData;
 window.toggleSort = toggleSort;
 window.updateSort = updateSort;
 window.updateLocationFilter = updateLocationFilter;
+
