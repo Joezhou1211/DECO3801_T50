@@ -357,8 +357,24 @@ button:hover {
     margin-top: 20px;
 }
 
+#playPauseBtn:hover #playText {
+    display: inline !important;
+}
+
 #applyFilterBtn:hover {
     background-color: var(--button-hover-color);
+}
+
+#playText {
+    position: absolute;
+    top: -10px;
+    transform: translateX(-70%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    display: none;
 }
 
 #editChartDateIcon, #editTableDateIcon {

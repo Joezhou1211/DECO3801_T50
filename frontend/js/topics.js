@@ -780,6 +780,8 @@ document.getElementById('applyFilterBtn').addEventListener('click', function () 
             const chartData = processChartData(filteredData, null);
             updateChart(chartData);
         }
+
+        checkDateFormatAndToggleIcon();
     } else {
         if (showTable) {
             updateTable(filteredData, selectedDate);
