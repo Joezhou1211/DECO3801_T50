@@ -89,8 +89,11 @@
 
             <!-- Filters section (in a modal window) -->
             <div class="filters-section" id="filtersSection">
-                <button class="reset-button" onclick="resetFilters()">Reset</button>
-                <span class="filter-modal-close" onclick="toggleFilters()">&times;</span>
+                <div class="filters-header">
+                    <button class="reset-button" onclick="resetFilters()">Reset</button>
+                    <span id="filterTotalCount" class="filter-total-count"></span>
+                    <span class="filter-modal-close" onclick="toggleFilters()">&times;</span>
+                </div>
                 
                 <div class="filters-container">
                     <div class="filters-left">
@@ -196,14 +199,6 @@
                             <input type="range" id="extendedEntities" min="0" max="4" value="0" step="1" oninput="updateDisplay('extendedEntities')">
                         </div>
                         <div class="filter-item">
-                            <label for="nodeType">Node Type:</label>
-                            <select id="nodeType" onchange="debouncedSearch()">
-                                <option value="all">All</option>
-                                <option value="parent">Parent</option>
-                                <option value="child">Child</option>
-                            </select>
-                        </div>
-                        <div class="filter-item">
                             <label for="authorKeynode">Author Keynode:</label>
                             <select id="authorKeynode" onchange="debouncedSearch()">
                                 <option value="all">All</option>
@@ -226,13 +221,14 @@
 
             <!-- Download section -->
             <div class="download-section" id="downloadSection" style="display: none;">
-                <div class="results-count">
-                    <span id="resultsCountDisplay">0</span>
+                <div class="results-summary">
+                    <span id="resultsCountDisplay"></span>
                 </div>
-                <span id="selectedCountDisplay"></span> 
-                <button id="selectAllButton" onclick="toggleSelectAll()"><i class="fas fa-square"></i> Select All</button>
-                <button id="downloadButton" onclick="downloadSelected()" disabled><i class="fa-solid fa-download"></i> Download Selected</button>
-                <button id="downloadAllButton" onclick="downloadAllData()"><i class="fa-solid fa-download"></i> Download All Data</button>
+                <div class="download-actions">
+                    <button id="selectAllButton" onclick="toggleSelectAll()"><i class="fas fa-square"></i> Select All</button>
+                    <button id="downloadButton" onclick="downloadSelected()" disabled><i class="fa-solid fa-download"></i> Download Selected</button>
+                    <button id="downloadAllButton" onclick="downloadAllData()"><i class="fa-solid fa-download"></i> Download All Data</button>
+                </div>
             </div>
 
             <!-- Loading spinner -->

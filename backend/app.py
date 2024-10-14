@@ -9,7 +9,6 @@ import io
 import csv
 
 
-
 app = Flask(__name__, static_folder='../frontend/assets', template_folder='../frontend/pages')
 
 
@@ -126,6 +125,16 @@ def download_all():
         return response
     except Exception as e:
         logger.error(f"Download all error: {str(e)}")
+        return jsonify({"error": str(e)}), 500
+    
+@app.route('/api/locations', methods=['GET'])
+def get_locations():
+    try:
+        locations = es_service.get_unique_locations()
+        print("Fetched locations:", locations)  # 添加这行来打印获取的位置
+        return jsonify(locations)
+    except Exception as e:
+        print("Error fetching locations:", str(e))  # 添加这行来打印错误
         return jsonify({"error": str(e)}), 500
     
 
