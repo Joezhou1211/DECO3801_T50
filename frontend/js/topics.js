@@ -1,9 +1,10 @@
+// Global variables
 let globalData = [];
 let filtered = [];
 let firstDate = null;
 let lastDate = null;
-
 let showTable = false;
+let filterOverlay;
 
 let filters = {
     start_date: null,
@@ -28,6 +29,7 @@ const topics = {
     10: "Health and Mental Well-being"
 };
 
+// Function to download data as CSV
 function downloadCSV(str, data) {
     for(let i = 0 ; i < data.length ; i++ ){
         for(const key in data[i]){
@@ -43,164 +45,109 @@ function downloadCSV(str, data) {
     link.click();
 }
 
+// Event listener for download button
 document.getElementById("downloadBtn").addEventListener('click', () => {
-    downloadCSV("id,created_at,reply,retweet,favorate,quote,sentiment,topic\n", filtered);
+    downloadCSV("id,created_at,reply,retweet,favorite,quote,sentiment,topic\n", filtered);
 });
 
+// Variables for date management
+let dateInputVisible = false;
+let lastValidChartDate = new Date('2019-11-08');
+let lastValidTableDate = new Date('2019-11-08');
+
+// Function to fetch data and initialize charts and tables
 document.addEventListener('DOMContentLoaded', function () {
     fetchData();
+    const filterView = document.getElementById('filterView');
 
-    const minDate = new Date('2019-11-07');
-    const maxDate = new Date('2020-01-25');
+    // Add event listeners to buttons inside the filter box
+    const filterButtons = filterView.querySelectorAll('button');
 
-    let lastValidChartDate = minDate;
-    let lastValidTableDate = minDate;
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove the overlay to restore filter box interaction
+            if (filterOverlay) {
+                filterView.removeChild(filterOverlay);
+                filterOverlay = null;
+            }
 
-
-document.getElementById('editChartDateIcon').addEventListener('click', function() {
-    const chartDate = document.getElementById('chartDate');
-    chartDate.setAttribute('contenteditable', true);
-    chartDate.focus();
-});
-
-document.getElementById('chartDate').addEventListener('keydown', function (e) {
-    if (e.key === 'Enter') {
-        e.preventDefault();
-        applyChartDateChange();
-    }
-});
-
-document.getElementById('chartDate').addEventListener('blur', applyChartDateChange);
-
-function applyChartDateChange() {
-    const chartDateInput = document.getElementById('chartDate').textContent.trim();
-    const dateRangePattern = /^from (\d{1,2} \w{3} \d{4}) to (\d{1,2} \w{3} \d{4})$/;
-    const singleDatePattern = /^(\d{1,2} \w{3} \d{4})$/;
-
-    if (dateRangePattern.test(chartDateInput)) {
-        const [, startDateInput, endDateInput] = chartDateInput.match(dateRangePattern);
-        const startDate = new Date(startDateInput);
-        const endDate = new Date(endDateInput);
-
-        // Validate if dates are within the allowed range
-        if (startDate >= new Date('2019-11-08') && endDate <= new Date('2020-01-24')) {
-            updateChartDateRangeLabel(startDate, endDate);
-            const chartData = processAccumulatedData(globalData, startDate, endDate);
-            updateChart(chartData);
-        } else {
-            alert('Please enter dates between 8 Nov 2019 and 24 Jan 2020.');
-        }
-    } else if (singleDatePattern.test(chartDateInput)) {
-        const newDate = new Date(chartDateInput);
-
-        // Check if the newDate is valid and within the allowed range
-        if (!isNaN(newDate.getTime()) && newDate >= new Date('2019-11-08') && newDate <= new Date('2020-01-24')) {
-            updateChartSingleDateLabel(newDate);
-            const chartData = processChartData(globalData, newDate);
-            updateChart(chartData);
-        } else {
-            alert('Please enter a date between 8 Nov 2019 and 24 Jan 2020.');
-        }
-    } else {
-        alert('Please enter a valid date or date range (e.g., "from 1 Jan 2020 to 24 Jan 2020").');
-    }
-
-    document.getElementById('chartDate').setAttribute('contenteditable', false); // Disable editing
-}
-
-document.getElementById('tableDate').addEventListener('keydown', function (e) {
-    if (e.key === 'Enter') {
-        e.preventDefault();
-        applyTableDateChange();
-    }
-});
-document.getElementById('tableDate').addEventListener('blur', applyTableDateChange);
-
-function applyTableDateChange() {
-    const newDate = new Date(document.getElementById('tableDate').textContent);
-    if (!isNaN(newDate.getTime()) && newDate >= minDate && newDate <= maxDate) {
-        lastValidTableDate = newDate;
-        updateTable(globalData, newDate);
-        document.getElementById('tableDate').setAttribute('contenteditable', false);
-    } else {
-        alert('Please enter a date between 8 Nov 2019 and 24 Jan 2020.');
-        document.getElementById('tableDate').textContent = lastValidTableDate.toLocaleDateString('en-GB', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric'
+            // Optionally, stop the playback if it's running
+            if (isPlaying) {
+                clearInterval(playInterval);
+                playIcon.classList.remove('fa-pause');
+                playIcon.classList.add('fa-play');
+                isPlaying = false;
+            }
         });
-        document.getElementById('tableDate').setAttribute('contenteditable', false);
-    }
-}
-
-
-
-    function fetchData() {
-        fetch('../../data/processed/topic_data.json')
-            .then(response => response.json())
-            .then(data => {
-                globalData = data.map(item => {
-                    return {
-                        ...item,
-                        itemTimestamp: new Date(item.created_at_dt).getTime(),
-                        sentimentCode: item.sentiment.toLowerCase()
-                    };
-                });
-
-                if (globalData.length > 0) {
-                    filtered = globalData;
-                    dates = generateDateArrayFromData(globalData).sort((a, b) => a-b); // 初始化 dates
-                    timeline.max = dates.length - 1;
-                    const initialDate = dates[0];
-                    firstDate = dates[0];
-                    lastDate = dates[dates.length - 1];
-                    const chartData = processChartData(globalData, initialDate);
-                    updateChart(chartData);
-                    updateTable(globalData, initialDate);
-                } else {
-                    console.error('No data available from JSON');
-                }
-            })
-            .catch(error => console.error('Error loading JSON:', error));
-    }
+    });
 });
 
-function bindTableViewBtn() {
-    tableViewBtn.addEventListener('click', function () {
-        if (globalData && dates && dates.length > 0) {
-            tableView.style.display = 'block';
-            chartView.style.display = 'none';
-            filterView.classList.remove('open');
-            const selectedDate = dates[timeline.value];
-            updateTable(globalData, selectedDate);
-        } else {
-            console.error('globalData or dates not initialized.');
-        }
-    });
+// Fetches topic data from JSON and initializes charts and tables
+function fetchData() {
+    fetch('../../data/processed/topic_data.json')
+        .then(response => response.json())
+        .then(data => {
+            globalData = data.map(item => {
+                return {
+                    ...item,
+                    itemTimestamp: item.created_at_dt, 
+                    sentimentCode: item.sentiment.toLowerCase()
+                };
+            });
+
+            if (globalData.length > 0) {
+                filtered = globalData;
+                dates = generateDateArrayFromData(globalData).sort((a, b) => a - b);
+                timeline.max = dates.length - 1;
+                const initialDate = dates[0];
+                firstDate = dates[0];
+                lastDate = dates[dates.length - 1];
+                const chartData = processChartData(globalData, initialDate);
+                updateChart(chartData);
+                updateTable(globalData, initialDate);
+
+                updateChartSingleDateLabel(initialDate);
+                updateTableSingleDateLabel(initialDate);
+
+            } else {
+                console.error('No data available from JSON');
+            }
+        })
+        .catch(error => console.error('Error loading JSON:', error));
 }
 
+// Converts a timestamp to a 'YYYY-MM-DD' formatted date string
+function getDateString(timestamp) {
+    const date = new Date(timestamp);
+    return date.getUTCFullYear() + '-' +
+           ('0' + (date.getUTCMonth() + 1)).slice(-2) + '-' +
+           ('0' + date.getUTCDate()).slice(-2);
+}
+
+// Function to process data for the chart
 function processChartData(data, selectedDate) {
     const topicTweetCounts = {};
     const topicSentiments = {};
+    const topicFakeNewsCounts = {};
 
     for (let key in topics) {
         topicTweetCounts[key] = 0;
+        topicFakeNewsCounts[key] = 0;
         topicSentiments[key] = { positive: 0, neutral: 0, negative: 0 };
     }
+
     let filteredData = data.filter(item => {
         const matchesSentiment = (filters.sentiments.positive && item.sentimentCode === 'positive') ||
                                  (filters.sentiments.neutral && item.sentimentCode === 'neutral') ||
                                  (filters.sentiments.negative && item.sentimentCode === 'negative');
-
         return matchesSentiment;
     });
+
     if (selectedDate) {
-        const startDate = new Date(selectedDate);
-        const endDate = new Date(selectedDate);
-        endDate.setDate(endDate.getDate() + 1);
+        const selectedDateString = getDateString(selectedDate.getTime());
         filteredData = filteredData.filter(item => {
-            const itemDate = new Date(item.created_at_dt);
-            return itemDate >= startDate && itemDate < endDate;
+            const itemDateString = getDateString(item.itemTimestamp);
+            return itemDateString === selectedDateString;
         });
     }
 
@@ -209,6 +156,7 @@ function processChartData(data, selectedDate) {
         const sentiment = item.sentiment;
         if (topicTweetCounts[topicId] !== undefined) {
             topicTweetCounts[topicId] += 1;
+            topicFakeNewsCounts[topicId] += item.fake_news_pred;
             if (sentiment === 'Positive') {
                 topicSentiments[topicId].positive += 1;
             } else if (sentiment === 'Neutral') {
@@ -219,19 +167,20 @@ function processChartData(data, selectedDate) {
         }
     });
 
-    const combined = Object.keys(topics).map((key) => {
+    const combined = Object.keys(topics).map(key => {
         const sentiment = topicSentiments[key];
         const dominantSentiment = getDominantSentiment(sentiment);
-        let sentimentColor = '#6CCB77';
+        let sentimentColor = '#6CCB77'; // Positive
         if (dominantSentiment === 'neutral') {
-            sentimentColor = '#B0BEC5';
+            sentimentColor = '#B0BEC5'; // Neutral
         } else if (dominantSentiment === 'negative') {
-            sentimentColor = '#E57373';
+            sentimentColor = '#E57373'; // Negative
         }
         return {
             label: topics[key],
             count: topicTweetCounts[key],
-            color: sentimentColor
+            color: sentimentColor,
+            fakeNews: topicFakeNewsCounts[key]
         };
     });
 
@@ -239,10 +188,12 @@ function processChartData(data, selectedDate) {
     const labels = combined.map(item => item.label);
     const tweetCounts = combined.map(item => item.count);
     const sentimentColors = combined.map(item => item.color);
+    const fakeNewsCounts = combined.map(item => item.fakeNews);
 
-    return { labels, tweetCounts, sentimentColors };
+    return { labels, tweetCounts, sentimentColors, fakeNewsCounts };
 }
 
+// Function to determine dominant sentiment
 function getDominantSentiment(sentiment) {
     const { positive, neutral, negative } = sentiment;
     if (positive >= neutral && positive >= negative) {
@@ -254,6 +205,7 @@ function getDominantSentiment(sentiment) {
     }
 }
 
+// Function to update the table with data
 function updateTable(data, startDate, endDate = null) {
     let filteredData = data.filter(item => {
         const matchesSentiment = (filters.sentiments.positive && item.sentimentCode === 'positive') ||
@@ -266,15 +218,19 @@ function updateTable(data, startDate, endDate = null) {
     const tableBody = document.querySelector('.topic-table tbody');
 
     if (endDate) {
-        filteredData = filteredData.filter(item => {
-            const itemDate = new Date(item.itemTimestamp);
-            return itemDate >= startDate && itemDate <= endDate;
-        });
+        const startDateString = startDate.toISOString().split('T')[0];
+    const endDateString = endDate.toISOString().split('T')[0];
+    filteredData = filteredData.filter(item => {
+        const itemDateString = new Date(item.itemTimestamp).toISOString().split('T')[0];
+        return itemDateString >= startDateString && itemDateString <= endDateString;
+    });
     } else if (startDate) {
-        filteredData = filteredData.filter(item => {
-            return new Date(item.itemTimestamp).toLocaleDateString('en-GB') === startDate.toLocaleDateString('en-GB');
-        });
-    }
+        const selectedDateString = getDateString(startDate.getTime());
+    filteredData = filteredData.filter(item => {
+        const itemDateString = getDateString(item.itemTimestamp);
+        return itemDateString === selectedDateString;
+    });
+}
 
     for (let key in topics) {
         topicSentiments[key] = { id: key, reply: 0, share: 0, like: 0, quote: 0, positive: 0, neutral: 0, negative: 0 , fake_news: 0};
@@ -287,7 +243,7 @@ function updateTable(data, startDate, endDate = null) {
         topicSentiments[topicId].share += item.retweet_count;
         topicSentiments[topicId].like += item.favourite_count;
         topicSentiments[topicId].quote += item.quote_count;
-        topicSentiments[topicId].fake_news += item.fake_news;
+        topicSentiments[topicId].fake_news += item.fake_news_pred;
         if (sentiment === 'Positive') {
             topicSentiments[topicId].positive += 1;
         } else if (sentiment === 'Neutral') {
@@ -298,27 +254,28 @@ function updateTable(data, startDate, endDate = null) {
     });
 
     let rowsHtml = '';
-    topicSentiments.sort((a,b) => ((b.positive + b.neutral + b.negative) - (a.positive + a.neutral + a.negative)))
+    topicSentiments.sort((a, b) => ((b.positive + b.neutral + b.negative) - (a.positive + a.neutral + a.negative)))
         .forEach(item => {
-        const topicName = topics[item.id] || `Topic ${item.id}`;
-        const positivePercentage = (item.positive / (item.positive + item.neutral + item.negative) * 100).toFixed(2);
-        const neutralPercentage = (item.neutral / (item.positive + item.neutral + item.negative) * 100).toFixed(2);
-        const negativePercentage = (item.negative / (item.positive + item.neutral + item.negative) * 100).toFixed(2);
-        rowsHtml += `
-            <tr class="${isNaN(positivePercentage) ? "bg-gray" : ""}">
-                <td>${topicName}</td>
-                <td>${item.positive + item.neutral + item.negative}</td>
-                <td>${item.reply}</td>
-                <td>${item.share}</td>
-                <td>${item.like}</td>
-                <td>${item.quote}</td>
-                <td>${isNaN(positivePercentage) ? '--' : positivePercentage}%</td>
-                <td>${isNaN(neutralPercentage) ? '--' : neutralPercentage}%</td>
-                <td>${isNaN(negativePercentage) ? '--' : negativePercentage}%</td>
-                <td>${item.fake_news}</td>
-            </tr>
-        `;
-    });
+            const topicName = topics[item.id] || `Topic ${item.id}`;
+            const totalSentiments = item.positive + item.neutral + item.negative;
+            const positivePercentage = ((item.positive / totalSentiments) * 100).toFixed(2);
+            const neutralPercentage = ((item.neutral / totalSentiments) * 100).toFixed(2);
+            const negativePercentage = ((item.negative / totalSentiments) * 100).toFixed(2);
+            rowsHtml += `
+                <tr class="${isNaN(positivePercentage) ? "bg-gray" : ""}">
+                    <td>${topicName}</td>
+                    <td>${totalSentiments}</td>
+                    <td>${item.reply}</td>
+                    <td>${item.share}</td>
+                    <td>${item.like}</td>
+                    <td>${item.quote}</td>
+                    <td>${isNaN(positivePercentage) ? '--' : positivePercentage}%</td>
+                    <td>${isNaN(neutralPercentage) ? '--' : neutralPercentage}%</td>
+                    <td>${isNaN(negativePercentage) ? '--' : negativePercentage}%</td>
+                    <td>${item.fake_news}</td>
+                </tr>
+            `;
+        });
 
     if (filteredData.length === 0) {
         rowsHtml = `<tr><td colspan="10">No data available for this date.</td></tr>`;
@@ -327,11 +284,12 @@ function updateTable(data, startDate, endDate = null) {
     tableBody.innerHTML = rowsHtml;
 }
 
+// Function to generate unique dates from data
 function generateDateArrayFromData(data) {
-    const uniqueDates = [...new Set(data.map(item => new Date(item.created_at_dt).toDateString()))];
-    return uniqueDates.map(dateString => new Date(dateString));
+    const uniqueDateStrings = [...new Set(data.map(item => getDateString(item.itemTimestamp)))];
+    return uniqueDateStrings.map(dateString => new Date(dateString + 'T00:00:00Z'));
 }
-
+// Retrieve and check necessary DOM elements
 const elementsToCheck = [
     { id: 'chartViewBtn', name: 'Chart View Button' },
     { id: 'tableViewBtn', name: 'Table View Button' },
@@ -353,6 +311,7 @@ elementsToCheck.forEach(element => {
     }
 });
 
+// Get references to DOM elements
 const chartViewBtn = document.getElementById('chartViewBtn');
 const tableViewBtn = document.getElementById('tableViewBtn');
 const filterBtn = document.getElementById('filterBtn');
@@ -367,7 +326,8 @@ const tableDate = document.getElementById('tableDate');
 
 let chartInstance = null;
 
-tableViewBtn.addEventListener('click', function () {
+// Event listeners for view buttons
+tableViewBtn.addEventListener('click', function() {
     tableView.style.display = 'block';
     chartView.style.display = 'none';
     filterView.classList.remove('open');
@@ -389,8 +349,7 @@ tableViewBtn.addEventListener('click', function () {
     tableDate.innerText = formattedDate;
 });
 
-
-chartViewBtn.addEventListener('click', function () {
+chartViewBtn.addEventListener('click', function() {
     chartView.style.display = 'block';
     tableView.style.display = 'none';
     filterView.classList.remove('open');
@@ -408,12 +367,13 @@ chartViewBtn.addEventListener('click', function () {
     chartDate.innerText = formattedDate;
 });
 
-
+// Function to update the chart
 function updateChart(chartData) {
     const ctx = document.getElementById('topicChart').getContext('2d');
     if (chartInstance) {
         chartInstance.data.labels = chartData.labels;
         chartInstance.data.datasets[0].data = chartData.tweetCounts;
+        chartInstance.data.datasets[1].data = chartData.fakeNewsCounts;
         chartInstance.data.datasets[0].backgroundColor = chartData.sentimentColors;
         chartInstance.update();
     } else {
@@ -425,23 +385,28 @@ function updateChart(chartData) {
                     label: '# of Tweets',
                     data: chartData.tweetCounts,
                     backgroundColor: chartData.sentimentColors,
-                    borderWidth: 1
+                    barThickness: 16,
+                },{
+                    label: '# of Fake News',
+                    data: chartData.fakeNewsCounts,
+                    backgroundColor: '#66CCFF',
+                    barThickness: 10,
                 }]
             },
             options: {
-                indexAxis: 'y', // This makes the chart horizontal
+                indexAxis: 'y', // Makes the chart horizontal
                 scales: {
                     x: {
                         beginAtZero: true,
                         title: {
                             display: true,
-                            text: 'Total Count', // Y-axis title
+                            text: 'Total Count', // X-axis title
                         }
                     },
                     y: {
                         title: {
                             display: true,
-                            text: 'Topics', // X-axis title
+                            text: 'Topics', // Y-axis title
                         }
                     }
                 },
@@ -455,7 +420,9 @@ function updateChart(chartData) {
                                     {text: 'Sentiment:   ', fillStyle: 'transparent', strokeStyle: 'transparent', borderWidth: 0},
                                     {text: 'Positive', fillStyle: '#6CCB77'},
                                     {text: 'Neutral', fillStyle: '#B0BEC5'},
-                                    {text: 'Negative', fillStyle: '#E57373'}
+                                    {text: 'Negative', fillStyle: '#E57373'},
+                                    {text: 'Fake News:   ', fillStyle: 'transparent', strokeStyle: 'transparent', borderWidth: 0},
+                                    {text: 'Fake News tweets', fillStyle: '#66CCFF'}
                                 ];
                             }
                         }
@@ -466,14 +433,13 @@ function updateChart(chartData) {
     }
 }
 
-
+// Event listeners for view toggle buttons
 tableViewBtn.addEventListener('click', function() {
     tableViewBtn.classList.add('active');
     chartViewBtn.classList.remove('active');
     document.getElementById('checkboxes').classList.add("hidden");
     showTable = true;
 });
-
 
 chartViewBtn.addEventListener('click', function() {
     chartViewBtn.classList.add('active');
@@ -482,11 +448,7 @@ chartViewBtn.addEventListener('click', function() {
     showTable = false;
 });
 
-function SearchWithQuery(query) {
-    console.log("Search query: " + query);
-}
-
-
+// Generate date array
 function generateDateArray(start, end) {
     const dateArray = [];
     let currentDate = new Date(start);
@@ -508,6 +470,7 @@ currentDateLabel.innerText = dates[initialIndex].toLocaleDateString('en-GB', {
     day: 'numeric'
 });
 
+// Function to update date label position
 function updateDatePosition() {
     const timelineWidth = timeline.offsetWidth;
     const max = timeline.max;
@@ -539,65 +502,89 @@ timeline.addEventListener('mouseup', function() {
     currentDateLabel.style.display = 'none';
 });
 
+// Event listener for timeline input
 timeline.addEventListener('input', function () {
-    updateDatePosition();
-    const selectedDate = dates[timeline.value];
-
     if (isPlaying) {
-        const chartData = processAccumulatedData(globalData, dates[0], selectedDate);
-        updateChart(chartData);
-        updateTable(globalData, dates[0], selectedDate);
-    } else {
-        const chartData = processChartData(globalData, selectedDate);
-        updateChart(chartData);
-        updateTable(globalData, selectedDate);
+        clearInterval(playInterval);
+        playIcon.classList.remove('fa-pause');
+        playIcon.classList.add('fa-play');
+        isPlaying = false;
     }
+
+    const selectedDate = dates[timeline.value];
+    updateViewsForSelectedDate(selectedDate);
 });
 
-
-let initialStartDate = new Date('2019-11-08');
-let initialEndDate = new Date('2020-01-24');
-let currentDate = initialStartDate;
-
+// Function to format date
 function formatDate(date) {
-    return date.toLocaleDateString('en-GB', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
-    });
+    const day = date.getUTCDate(); // Get the day of the month (1-31)
+    const month = date.toLocaleString('en-US', { month: 'short', timeZone: 'UTC' }); // Get abbreviated month name
+    const year = date.getUTCFullYear(); // Get the 4-digit year
+    return `${day} ${month} ${year}`; // Combine into '8 Nov 2019' format
 }
 
-function updateChartSingleDateLabel(selectedDate) {
-    const chartDateLabel = document.getElementById('chartDate');
-    chartDateLabel.textContent = formatDate(selectedDate);
+// Function to update date labels and check icon visibility
+function updateViewsForSelectedDate(selectedDate) {
+    const chartData = processChartData(globalData, selectedDate);
+    updateChart(chartData);
+
+    updateTable(globalData, selectedDate);
+
+    const formattedDate = formatDate(selectedDate);
+    chartDate.textContent = formattedDate;
+    tableDate.textContent = formattedDate;
+
+    checkDateFormatAndToggleIcon();
+
+    const selectedDateString = getDateString(selectedDate.getTime());
+    const index = dates.findIndex(date => getDateString(date.getTime()) === selectedDateString);
+    if (index !== -1) {
+        timeline.value = index;
+        updateDatePosition();
+    }
 }
 
-function updateTableSingleDateLabel(selectedDate) {
-    const tableDateLabel = document.getElementById('tableDate');
-    tableDateLabel.textContent = formatDate(selectedDate);
+
+// Function to check date format and toggle icon visibility
+function checkDateFormatAndToggleIcon() {
+    const chartDateText = chartDate.textContent;
+    const tableDateText = tableDate.textContent;
+    const chartIcon = document.getElementById('editChartDateIcon');
+    const tableIcon = document.getElementById('editTableDateIcon');
+
+    const fromToPattern = /from \d{1,2} \w{3} \d{4} to \d{1,2} \w{3} \d{4}/;
+
+    if (fromToPattern.test(chartDateText)) {
+        chartIcon.style.display = 'none';
+    } else {
+        chartIcon.style.display = 'inline';
+    }
+
+    if (fromToPattern.test(tableDateText)) {
+        tableIcon.style.display = 'none';
+    } else {
+        tableIcon.style.display = 'inline';
+    }
 }
 
-function updateChartDateRangeLabel(startDate, endDate) {
-    const chartDateLabel = document.getElementById('chartDate');
-    chartDateLabel.textContent = `from ${formatDate(startDate)} to ${formatDate(endDate)}`;
-}
-
-function updateTableDateRangeLabel(startDate, endDate) {
-    const tableDateLabel = document.getElementById('tableDate');
-    tableDateLabel.textContent = `from ${formatDate(startDate)} to ${formatDate(endDate)}`;
-}
+// Variables for playback control
 let isPlaying = false;
 let playInterval;
 
 const playPauseBtn = document.getElementById('playPauseBtn');
 const playIcon = document.getElementById('playIcon');
 
+// Event listener for play/pause button
 playPauseBtn.addEventListener('click', function () {
     if (isPlaying) {
         clearInterval(playInterval);
         playIcon.classList.remove('fa-pause');
         playIcon.classList.add('fa-play');
         isPlaying = false;
+        if (filterOverlay) {
+            filterView.removeChild(filterOverlay);
+            filterOverlay = null;
+        }
     } else {
         playIcon.classList.remove('fa-play');
         playIcon.classList.add('fa-pause');
@@ -606,9 +593,14 @@ playPauseBtn.addEventListener('click', function () {
     }
 });
 
+// Function to start playing the timeline
 function startPlayingTimeline() {
     let currentValue = parseInt(timeline.value);
     let initialStartDate = dates[0];
+
+    filterOverlay = document.createElement('div');
+    filterOverlay.classList.add('filter-overlay');
+    filterView.appendChild(filterOverlay);
 
     playInterval = setInterval(function () {
         if (currentValue < timeline.max) {
@@ -630,52 +622,71 @@ function startPlayingTimeline() {
     }, 500);
 }
 
-
-timeline.addEventListener('input', function () {
-    if (isPlaying) {
-        clearInterval(playInterval);
-        playIcon.classList.remove('fa-pause');
-        playIcon.classList.add('fa-play');
-        isPlaying = false;
-    }
-
-    const selectedDate = dates[timeline.value];
-
-    updateChartSingleDateLabel(selectedDate);
-    updateTableSingleDateLabel(selectedDate);
-
-    const chartData = processChartData(globalData, selectedDate);
-    updateChart(chartData);
-    updateTable(globalData, selectedDate);
-});
-
-function updateTimelineAndChart(value) {
-    const selectedDate = dates[value];
-    const chartData = processAccumulatedData(globalData, dates[0], selectedDate); // 从开始日期累积到选中的日期
-    updateChart(chartData);
-    updateTable(globalData, dates[0], selectedDate); // 更新表格为累积数据
+// Function to uqdate\e single date labels
+function updateChartSingleDateLabel(selectedDate) {
+    const chartDateLabel = document.getElementById('chartDate');
+    chartDateLabel.textContent = formatDate(selectedDate);
+    checkDateFormatAndToggleIcon();
 }
 
+function updateTableSingleDateLabel(selectedDate) {
+    const tableDateLabel = document.getElementById('tableDate');
+    tableDateLabel.textContent = formatDate(selectedDate);
+    checkDateFormatAndToggleIcon();
+}
+// Function to update date range labels
+function updateChartDateRangeLabel(startDate, endDate) {
+    chartDate.textContent = `from ${formatDate(startDate)} to ${formatDate(endDate)}`;
+    checkDateFormatAndToggleIcon();
+}
+
+function updateTableDateRangeLabel(startDate, endDate) {
+    tableDate.textContent = `from ${formatDate(startDate)} to ${formatDate(endDate)}`;
+    checkDateFormatAndToggleIcon();
+}
+
+// Function to update timeline and chart during playback
+function updateTimelineAndChart(value) {
+    const selectedDate = dates[value];
+
+    if (isPlaying) {
+        // Accumulated data processing
+        const chartData = processAccumulatedData(globalData, dates[0], selectedDate);
+        updateChart(chartData);
+        updateTable(globalData, dates[0], selectedDate);
+    } else {
+        // Single date processing
+        updateViewsForSelectedDate(selectedDate);
+    }
+}
+
+// Function to process accumulated data
 function processAccumulatedData(data, startDate, endDate) {
     const topicTweetCounts = {};
     const topicSentiments = {};
+    const topicFakeNewsCounts = {};
 
     for (let key in topics) {
         topicTweetCounts[key] = 0;
+        topicFakeNewsCounts[key] = 0;
         topicSentiments[key] = { positive: 0, neutral: 0, negative: 0 };
     }
 
-    // 累积从 startDate 到 endDate 的数据
+    const startDateString = getDateString(startDate.getTime());
+    const endDateString = getDateString(endDate.getTime());
+
     const filteredData = data.filter(item => {
-        const itemDate = new Date(item.created_at_dt);
-        return itemDate >= startDate && itemDate <= endDate;
+        const itemDateString = getDateString(item.itemTimestamp);
+        return itemDateString >= startDateString && itemDateString <= endDateString;
     });
+
 
     filteredData.forEach(item => {
         const topicId = item.main_topic;
         const sentiment = item.sentiment;
         if (topicTweetCounts[topicId] !== undefined) {
             topicTweetCounts[topicId] += 1;
+            topicFakeNewsCounts[topicId] += item.fake_news_pred;
             if (sentiment === 'Positive') {
                 topicSentiments[topicId].positive += 1;
             } else if (sentiment === 'Neutral') {
@@ -698,7 +709,8 @@ function processAccumulatedData(data, startDate, endDate) {
         return {
             label: topics[key],
             count: topicTweetCounts[key],
-            color: sentimentColor
+            color: sentimentColor,
+            fakeNews: topicFakeNewsCounts[key]
         };
     });
 
@@ -706,11 +718,12 @@ function processAccumulatedData(data, startDate, endDate) {
     const labels = combined.map(item => item.label);
     const tweetCounts = combined.map(item => item.count);
     const sentimentColors = combined.map(item => item.color);
+    const fakeNewsCounts = combined.map(item => item.fakeNews);
 
-    return { labels, tweetCounts, sentimentColors };
+    return { labels, tweetCounts, sentimentColors, fakeNewsCounts };
 }
 
-
+// Function to filter data based on filters
 function filterData(data, filters, useDateRange) {
     let startTimestamp, endTimestamp;
     if (useDateRange) {
@@ -731,6 +744,7 @@ function filterData(data, filters, useDateRange) {
     });
 }
 
+// Event listener for applying filters
 document.getElementById('applyFilterBtn').addEventListener('click', function () {
     const positive = document.getElementById('positive').checked;
     const neutral = document.getElementById('neutral').checked;
@@ -756,20 +770,12 @@ document.getElementById('applyFilterBtn').addEventListener('click', function () 
     filtered = filteredData;
     const selectedDate = dates[timeline.value];
     if (useDateRange) {
-        const formattedStartDate = new Date(startDate).toLocaleDateString('en-GB', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric'
-        });
-        const formattedEndDate = new Date(endDate).toLocaleDateString('en-GB', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric'
-        });
+        const formattedStartDate = formatDate(new Date(startDate));
+        const formattedEndDate = formatDate(new Date(endDate));
         if (showTable) {
             tableDate.innerText = `from ${formattedStartDate} to ${formattedEndDate}`;
             updateTable(filteredData, null);
-        }else{
+        } else {
             chartDate.innerText = `from ${formattedStartDate} to ${formattedEndDate}`;
             const chartData = processChartData(filteredData, null);
             updateChart(chartData);
@@ -777,7 +783,7 @@ document.getElementById('applyFilterBtn').addEventListener('click', function () 
     } else {
         if (showTable) {
             updateTable(filteredData, selectedDate);
-        }else{
+        } else {
             const chartData = processChartData(filteredData, selectedDate);
             updateChart(chartData);
         }
@@ -786,47 +792,94 @@ document.getElementById('applyFilterBtn').addEventListener('click', function () 
     filterView.classList.remove('open');
 });
 
+// Event listeners for filter view
 closeFilterBtn.addEventListener('click', function () {
     filterView.classList.remove('open');
 });
 
-document.getElementById('filterBtn').addEventListener('click', function () {
+filterBtn.addEventListener('click', function () {
     filterView.classList.toggle('open');
 });
 
-
-
-
-let lastVisibility = null;
-
+// Function to check timeline visibility
 function checkTimelineVisibility() {
-    const timeline = document.querySelector('.timeline-container');
-    const rect = timeline.getBoundingClientRect();
-    const isVisible = rect.bottom <= window.innerHeight && rect.top >= 500;
-
-    if (isVisible !== lastVisibility) {
-        lastVisibility = isVisible;
-
-        if (!isVisible) {
-            timeline.style.position = 'fixed';
-            timeline.style.bottom = '10px';
-            timeline.style.left = '30px';
-            timeline.style.height = '18px';
-            timeline.style.width = 'calc(100% - 100px)';
-            timeline.style.backgroundColor = 'white';
-            timeline.style.borderRadius = '20px';
-            timeline.style.boxShadow = '0px 0px 3px 1px gray';
-        } else {
-            timeline.style.position = '';
-            timeline.style.bottom = '';
-            timeline.style.left = '';
-            timeline.style.width = '';
-            timeline.style.backgroundColor = '';
-            timeline.style.borderRadius = '';
-            timeline.style.boxShadow = '';
-        }
+    const timelineContainer = document.querySelector('.timeline-container');
+    const rect = timelineContainer.getBoundingClientRect();
+    const isVisible = rect.top >= 650 || rect.bottom >= window.innerHeight;
+    if (!isVisible) {
+        timelineContainer.style.position = 'fixed';
+        timelineContainer.style.bottom = '10px';
+        timelineContainer.style.left = '30px';
+        timelineContainer.style.height = '18px';
+        timelineContainer.style.width = 'calc(100% - 100px)';
+        timelineContainer.style.backgroundColor = 'white';
+        timelineContainer.style.borderRadius = '20px';
+        timelineContainer.style.boxShadow = '0px 0px 3px 1px gray';
+    } else {
+        timelineContainer.style.position = '';
+        timelineContainer.style.bottom = '';
+        timelineContainer.style.left = '';
+        timelineContainer.style.width = '';
+        timelineContainer.style.backgroundColor = '';
+        timelineContainer.style.borderRadius = '';
+        timelineContainer.style.boxShadow = '';
     }
 }
 
 window.addEventListener('scroll', checkTimelineVisibility);
 window.addEventListener('resize', checkTimelineVisibility);
+
+// Event listeners for date icon clicks (Chart and Table)
+document.getElementById('editChartDateIcon').addEventListener('click', function () {
+    handleDateInput('chart');
+});
+
+document.getElementById('editTableDateIcon').addEventListener('click', function () {
+    handleDateInput('table');
+});
+
+// Function to handle date input for chart and table
+function handleDateInput(type) {
+    if (!dateInputVisible) {
+        const input = document.createElement('input');
+        input.type = 'date';
+        input.min = '2019-11-08';
+        input.max = '2020-01-24';
+        input.value = new Date(type === 'chart' ? lastValidChartDate : lastValidTableDate).toISOString().slice(0, 10);
+
+        input.addEventListener('change', function () {
+            const selectedDate = new Date(input.value + 'T00:00:00Z');
+            if (selectedDate >= new Date('2019-11-08') && selectedDate <= new Date('2020-01-24')) {
+                if (type === 'chart') {
+                    lastValidChartDate = selectedDate;
+                } else {
+                    lastValidTableDate = selectedDate;
+                }
+                updateViewsForSelectedDate(selectedDate);
+            }
+        });
+
+        input.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                input.remove();
+                dateInputVisible = false;
+            }
+        });
+
+        const iconId = type === 'chart' ? 'editChartDateIcon' : 'editTableDateIcon';
+        document.getElementById(iconId).after(input);
+        input.focus();
+        dateInputVisible = true;
+
+        input.addEventListener('blur', function () {
+            input.remove();
+            dateInputVisible = false;
+        });
+    } else {
+        const input = document.querySelector(`#${type === 'chart' ? 'editChartDateIcon' : 'editTableDateIcon'} + input`);
+        if (input) {
+            input.remove();
+        }
+        dateInputVisible = false;
+    }
+}
