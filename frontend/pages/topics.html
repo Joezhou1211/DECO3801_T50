@@ -51,8 +51,9 @@
     </div>
 </header>
 
-    <!-- Topic Modeling Content -->
+<!-- Topic Modeling Content -->
 <div class="topic-container">
+    <!-- Header with Title and Buttons -->
     <div class="topic-header">
         <h1>Topic Modelling</h1>
         <div class="button-group">
@@ -70,94 +71,95 @@
                     <i class="fas fa-chart-bar"></i> Chart
                 </button>
             </div>
-
+        </div>
     </div>
-</div>
 
-
-            <div id="chartView" class="topic-content">
-                <h2>Top Engaged Topics, <span id="chartDate" contenteditable="true"></span>
-                    <i id="editChartDateIcon" class="fas fa-pencil-alt" style="cursor: pointer;"></i></h2>
-                <p>The most discussed topics ranked by interaction, with dominant sentiment indicated by color bars.</p>
-                <canvas id="topicChart" width="350" height="110"></canvas>
+    <!-- Chart View -->
+    <div id="chartView" class="topic-content">
+        <h2>Top Engaged Topics, <span id="chartDate"></span>
+            <i id="editChartDateIcon" class="fas fa-calendar-alt" style="cursor: pointer;"></i>
+        </h2>
+        <p>The most discussed topics ranked by interaction, with dominant sentiment indicated by color bars.</p>
+        <canvas id="topicChart" width="350" height="110"></canvas>
+    </div>
+    <!-- Table View -->
+    <div id="tableView" class="topic-content" style="display: none;">
+        <h2>Detailed Topic Engagement, <span id="tableDate"></span>
+            <i id="editTableDateIcon" class="fas fa-calendar-alt" style="cursor: pointer;"></i></h2>
+        <p>Detailed table showing topic interactions, sentiment distribution(in percentages), and fake news tweets.</p>
+        <div class="topic-table-wrapper">
+        <table class="topic-table">
+            <thead>
+                <tr>
+                    <th>Topic</th>
+                    <th>Total tweets</th>
+                    <th>Reply</th>
+                    <th>Share</th>
+                    <th>Like</th>
+                    <th>Quote Count</th>
+                    <th>Positive (%)</th>
+                    <th>Neutral (%)</th>
+                    <th>Negative (%)</th>
+                    <th>Fake news tweets</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
             </div>
-
-
-            <div id="tableView" class="topic-content" style="display: none;">
-                <h2>Detailed Topic Engagement, <span id="tableDate" contenteditable="true"></span>
-                    <i id="editTableDateIcon" class="fas fa-pencil-alt" style="cursor: pointer;"></i></h2>
-                <p>Detailed table showing topic interactions, sentiment distribution(in percentages), and fake news tweets.</p>
-                <div class="topic-table-wrapper">
-                <table class="topic-table">
-                    <thead>
-                        <tr>
-                            <th>Topic</th>
-                            <th>Total tweets</th>
-                            <th>Reply</th>
-                            <th>Share</th>
-                            <th>Like</th>
-                            <th>Quote Count</th>
-                            <th>Positive (%)</th>
-                            <th>Neutral (%)</th>
-                            <th>Negative (%)</th>
-                            <th>Fake news tweets</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                    </div>
+    </div>
+    <!-- filter View -->
+    <div id="filterView" class="filter-section">
+        <button class="close-btn" id="closeFilter">Close</button>
+        <h2>Filter Options</h2>
+        <!-- sentiment -->
+        <div id="checkboxes">
+            <label for="sentiment">Sentiment Category</label>
+            <div>
+                <input type="checkbox" id="positive" name="sentiment" value="positive" checked>
+                <label for="positive">Positive</label>
             </div>
-
-
-            <div id="filterView" class="filter-section">
-                <button class="close-btn" id="closeFilter">Close</button>
-                <h2>Filter Options</h2>
-                <div id="checkboxes">
-                    <label for="sentiment">Sentiment Category</label>
-                    <div>
-                        <input type="checkbox" id="positive" name="sentiment" value="positive" checked>
-                        <label for="positive">Positive</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="neutral" name="sentiment" value="neutral" checked>
-                        <label for="neutral">Neutral</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="negative" name="sentiment" value="negative" checked>
-                        <label for="negative">Negative</label>
-                    </div>
-                </div>
-
-
-                <label for="date">Date Range</label>
-                <div>
-                    <input type="checkbox" id="useDateRange">
-                    <label for="useDateRange">Apply Date Range</label>
-                    <i class="fa-solid fa-circle-info tooltip"><span class="tooltiptext">From 8 Nov 2019 to 24 Jan 2020</span></i>
-                </div>
-                <input type="date" id="startDate" name="startDate" value="2020-01-01" min="2019-11-08" max="2020-01-24">
-                <input type="date" id="endDate" name="endDate" value="2020-01-24" min="2019-11-08" max="2020-01-24">
-
-
-                <button id="applyFilterBtn">Apply</button>
+            <div>
+                <input type="checkbox" id="neutral" name="sentiment" value="neutral" checked>
+                <label for="neutral">Neutral</label>
             </div>
-
-            <!-- Timeline container -->
-            <div class="timeline-container">
-                <button id="playPauseBtn">
-                    <i id="playIcon" class="fas fa-play"></i>
-                </button>
-
-                <span id="startDateLabel">8 Nov 2019</span>
-                <div class="slider-container">
-                    <input type="range" id="timeline" min="0" max="119" value="0">
-                    <div id="currentDateLabel">1 Feb 2020</div>
-                </div>
-                <!-- <input type="range" id="timeline" min="0" max="119" value="0"> -->
-                <span id="currentDateLabel">1 Feb 2020</span>
-                <span id="endDateLabel">24 Jan 2020</span>
+            <div>
+                <input type="checkbox" id="negative" name="sentiment" value="negative" checked>
+                <label for="negative">Negative</label>
             </div>
+        </div>
+
+
+        <!-- date range -->
+        <label for="date">Date Range</label>
+        <div>
+            <input type="checkbox" id="useDateRange">
+            <label for="useDateRange">Apply Date Range</label>
+            <i class="fa-solid fa-circle-info tooltip"><span class="tooltiptext">From 8 Nov 2019 to 24 Jan 2020</span></i>
+        </div>
+        <input type="date" id="startDate" name="startDate" value="2020-01-01" min="2019-11-08" max="2020-01-24">
+        <input type="date" id="endDate" name="endDate" value="2020-01-24" min="2019-11-08" max="2020-01-24">
+
+
+        <button id="applyFilterBtn">Apply</button>
+    </div>
+
+    <!-- Timeline container -->
+    <div class="timeline-container">
+        <button id="playPauseBtn">
+            <i id="playIcon" class="fas fa-play"></i>
+        </button>
+
+        <span id="startDateLabel">8 Nov 2019</span>
+
+        <div class="slider-container">
+            <input type="range" id="timeline" min="0" max="119" value="0">
+            <div id="currentDateLabel">1 Feb 2020</div>
+        </div>
+
+        <span id="currentDateLabel">1 Feb 2020</span>
+        <span id="endDateLabel">24 Jan 2020</span>
+    </div>
 
 
 <script src="/js/topics.js"></script>
