@@ -128,18 +128,6 @@
     font-size: 1rem;
     color: #777;
 }
-/*!* Remove the underline from the link *!*/
-/*.feature-link {*/
-/*    text-decoration: none;*/
-/*    color: inherit; !* Inherits text color to maintain styling *!*/
-/*    display: block;*/
-/*    transition: transform 0.3s ease, box-shadow 0.3s ease;*/
-/*}*/
-
-/*.feature-link:hover .feature-box-horizontal {*/
-/*    transform: translateY(-5px);*/
-/*    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);*/
-/*}*/
 
 
 .content-section {
