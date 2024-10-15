@@ -5,22 +5,23 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Interactive Diagram</title>
 
+    <!-- Linking external stylesheets -->
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/contact.css" rel="stylesheet">
 
+    <!-- D3.js script for data visualization -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
 
+<!-- Header section with logo, navigation, and user settings -->
 <header class="header">
-    <!-- Team Logo -->
     <div class="logo">
         <a href="/index.html">
             <img src="/assets/logo.png" alt="Website Logo">
         </a>
     </div>
 
-    <!-- Navigation bar -->
     <nav class="nav">
         <a href="/index.html">Home</a>
         <a href="/topics.html">Topics</a>
@@ -29,27 +30,28 @@
         <a href="/search.html">Data</a>
     </nav>
 
-    <!-- Setting and Help -->
     <div class="setting-container">
-        <!-- Help Icon -->
+        <!-- Help Icon with link to Help page -->
         <div class="help-icon">
             <a href="/help.html">
                 <img src="/assets/help-icon.png" alt="Help Icon" title="Help and support">
             </a>
         </div>
 
-        <!-- User Icon -->
+        <!-- User Icon with dropdown menu -->
         <div class="user-icon">
             <img id="userAvatar" src="/assets/user.png" alt="User Icon">
             <div class="dropdown-menu" id="dropdownMenu">
-                <a href="/setting.html" rel="stylesheet">Setting</a>
+                <a href="/setting.html">Setting</a>
                 <a href="#" id="logout">Logout</a>
             </div>
         </div>
     </div>
 </header>
 
+<!-- Settings page structure -->
 <div class="settings-container">
+    <!-- Sidebar navigation for settings options -->
     <div class="sidebar1">
         <ul>
             <li><a href="/setting.html">My details</a></li>
@@ -58,17 +60,20 @@
         </ul>
     </div>
 
+    <!-- Content area displaying contact information -->
     <div class="settings-content">
-         <div class="section">
+        <div class="section">
             <div class="text-container">
                 <h2>Team E-mail</h2>
-                <p>
-                    E-mails: s49509875@uq.sutdent.au
-                </p>
+                <p>E-mail: s49509875@uq.student.au</p>
             </div>
         </div>
+    </div>
 </div>
+
+<!-- Linking JavaScript files -->
 <script src="/js/contact.js"></script>
 <script src="/js/main.js"></script>
 </body>
 </html>
+
