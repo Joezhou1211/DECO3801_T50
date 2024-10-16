@@ -375,6 +375,7 @@ button:hover {
     border-radius: 4px;
     font-size: 12px;
     display: none;
+    margin-left: 8px;
 }
 
 #editChartDateIcon, #editTableDateIcon {

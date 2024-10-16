@@ -27,7 +27,7 @@ const VIEW_MODES = {
 
 document.addEventListener("DOMContentLoaded", function () {
     setupEventListeners();
-    initializeChart();
+    // initializeChart();
     initializePopup();
 });
 
@@ -56,7 +56,7 @@ function setupEventListeners() {
 
 google.charts.load('current', {
     'packages': ['geochart'],
-    'mapsApiKey': 'YOUR_GOOGLE_MAPS_API_KEY'
+    'mapsApiKey': ''
 });
 google.charts.setOnLoadCallback(initializeChart);
 
@@ -543,7 +543,8 @@ function initializePopup() {
 
 function updatePopupData() {
     const dayIndex = parseInt(timelineSlider.value, 10);
-    const { locations = [] } = globalData.data[dayIndex] || {};
+    // const { locations = [] } = globalData.data[dayIndex] || {};
+    const { locations = [] } = (globalData.data && globalData.data[dayIndex]) || {};
   
     const unknownData = aggregateData(locations.filter(location => location.region_code === 'Unknown'), loc => 'Unknown')[0] || {};
   

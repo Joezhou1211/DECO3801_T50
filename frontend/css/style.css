@@ -11,7 +11,6 @@
     --button-hover-color: #00382e;
 }
 
-/* Global Style: Apply default styles for the entire document. */
 body, html {
     margin: 0;
     font-family: var(--font-family);
@@ -19,10 +18,9 @@ body, html {
     font-size: var(--nav-link-font-size);
 }
 
-/* Header Style: Define the appearance of the fixed header at the top of the page. */
+/* Header */
 .header {
     display: flex;
-    /*justify-content: space-between;*/
     align-items: center;
     padding: 0 20px;
     background-color: #fff;
@@ -35,19 +33,16 @@ body, html {
     box-sizing: border-box;
 }
 
-/* Logo Style: Customize the appearance of the logo within the header. */
 .header .logo img {
     height: 40px;
     width: auto;
 }
 
-/* Navigation bar style: Set the layout and styling of navigation links. */
 .nav {
     display: flex;
     gap: 20px;
     padding-left: 40px;
 }
-
 
 .nav a {
     position: relative;
@@ -91,12 +86,6 @@ body, html {
     color: var(--primary-color);
 }
 
-/* Settings container: Style the area that contains user settings and icons. */
-/*.setting-container {*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    gap: 10px;*/
-/*}*/
 .setting-container {
 display: flex;
     align-items: center;
@@ -124,7 +113,6 @@ display: flex;
     background-color: var(--button-hover-color);
 }
 
-/* Button Style: General styling for all buttons across the application. */
 button {
     padding: 8px 15px;
     border-radius: var(--button-radius);
@@ -141,51 +129,48 @@ button:hover {
     background-color: var(--button-hover-color);
 }
 
-/* Data-box link style: Maintain link styling consistent with the rest of the page. */
 .data-box a {
     color: inherit;
     text-decoration: none;
 }
 
-/* User icon style: Position and layout settings for the user avatar icon. */
 .user-icon {
     position: relative;
     display: inline-block;
 }
 
 .user-icon img {
-    width: 28px; /* Same size as help icon */
+    width: 28px;
     height: 28px;
     cursor: pointer;
-    transition: all 0.3s ease; /* Smooth transition */
+    transition: all 0.3s ease;
 }
 .user-icon:hover img {
-    content: url('../assets/user-hover.png'); /* Change to green help icon on hover */
+    content: url('../assets/user-hover.png');
 }
 
 /* Help Icon Container */
-/* Help Icon */
 .help-icon {
     margin-right: 10px;
 }
 
 .help-icon img {
-    width: 25px; /* Adjust size if needed */
+    width: 25px;
     height: 25px;
     cursor: pointer;
-    border-radius: 50%; /* Optional: makes it circular */
+    border-radius: 50%;
 }
 
 .help-icon a:hover img {
-    filter: brightness(0.9); /* Slight hover effect */
+    filter: brightness(0.9);
 }
 
 .help-icon:hover img {
-    content: url('../assets/help-icon-hover.png'); /* Change to green help icon on hover */
+    content: url('../assets/help-icon-hover.png');
 }
 
 
-/* Dropdown menu style: Set the visibility and design of the user dropdown menu. */
+/* Dropdown menu */
 .dropdown-menu {
     display: none;
     position: absolute;
@@ -198,7 +183,7 @@ button:hover {
     min-width: 120px;
 }
 
-/* Dropdown menu links: Style the links within the dropdown menu for user options. */
+/* Dropdown menu links */
 .dropdown-menu a {
     color: black;
     padding: 10px 20px;
@@ -217,11 +202,11 @@ button:hover {
 
 @media screen and (max-width: 1200px) {
     .nav {
-        align-items: flex-start; /* Align links to the left */
+        align-items: flex-start;
     }
 
     .nav a {
-        font-size: 13px; /* Adjust font size for smaller screens */
+        font-size: 13px;
         padding: 2px;
     }
 }
