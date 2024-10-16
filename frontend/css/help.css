@@ -40,8 +40,8 @@
     padding: 20px;
     border-right: 1px solid #ddd;
     position: sticky;
-    top: calc(var(--header-height) + 10px); /* Adjust the top value to make space for the header */
-    height: fit-content; /* Ensures the sidebar fits its content */
+    top: calc(var(--header-height) + 10px);
+    height: fit-content;
 }
 
 .sidebar-nav ul {
@@ -73,7 +73,7 @@
 
 /* Section Styling */
 .section {
-    scroll-margin-top: calc(var(--header-height) + 20px); /* Adjust based on your header height */
+    scroll-margin-top: calc(var(--header-height) + 20px);
     margin-bottom: 50px;
 }
 
