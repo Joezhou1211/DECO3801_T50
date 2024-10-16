@@ -179,7 +179,7 @@ window.MapConstants = {
         'PT': 'Portugal',
         'PR': 'Puerto Rico',
         'QA': 'Qatar',
-        'RE': 'R鑼卽nion',
+        'RE': 'Réunion',
         'RO': 'Romania',
         'RU': 'Russia',
         'RW': 'Rwanda',

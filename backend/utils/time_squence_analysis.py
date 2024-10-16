@@ -18,9 +18,9 @@ time_sequance[time_frame] = pd.to_datetime(time_sequance[time_frame], errors='co
 # tweets count
 df = pd.read_csv('../../data/processed/final_data(old).csv')
 df['created_at'] = pd.to_datetime(df['created_at'], errors='coerce')
-df = df.dropna(subset=['created_at'])  # drop NaN values
+df = df.dropna(subset=['created_at'])
 
-df['hour'] = df['created_at'].dt.to_period('h')  # group by hours
+df['hour'] = df['created_at'].dt.to_period('h')
 tweet_counts = df.groupby('hour').size()
 tweet_counts.index = tweet_counts.index.to_timestamp()
 

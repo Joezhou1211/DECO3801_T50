@@ -31,5 +31,5 @@ document.getElementById('changePasswordForm').addEventListener('submit', functio
 // Handle logout
 function logout() {
     // Redirect to login page
-    window.location.href = 'login.html'; // Update the path if necessary
+    window.location.href = 'login.html';
 }

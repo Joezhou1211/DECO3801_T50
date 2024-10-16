@@ -22,22 +22,49 @@ This project endeavors to construct a rigorous analytical framework that bridges
 
 ### 2.3 Create and Activate Virtual Environment
 
-    Windows run: .\setup_virtual_env.ps1
-    Mac Run:    
+Windows run: 
+
+    .\setup_virtual_env.ps1
+Mac Run:  
+  
     chmod +x
     setup_virtual_env.sh ./setup_virtual_env.sh
 
 ### 2.4 Install Dependencies
 
     pip install -r requirements.txt
+
+Here are all the dependencies below:
+
+    sentence-transformers==3.1.1
+    dateparser==1.2.0
+    elasticsearch==8.15.1
+    flask
+    flask-cors==5.0.0
+    eventregistry==9.1
+    requests==2.31.0
+    numpy==1.26.4
+    spacy==3.8.2
+    thinc==8.3.2
+    google-generativeai==0.8.3
+    pandas
     
-    If any installations fail, manually install the required package like: pip install flask==2.2.2
+If any installations fail, manually install the required package like: pip install flask==2.2.2
 
 ### 2.5 Install SpaCy Model
 
     python -m spacy download en_core_web_sm
 
-### 2.6 Run the Application
+### 2.6 Read Data(Not necessary)
+
+    cd backend
+    python data_importer.py
+
+After successfully running it, you should see the output below.
+
+![Image Description](frontend/assets/d869878957cdb6930f0c31105fda900.png)
+
+### 2.7 Run the Application
 
     cd backend
     python app.py

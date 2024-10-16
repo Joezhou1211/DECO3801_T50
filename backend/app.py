@@ -131,10 +131,10 @@ def download_all():
 def get_locations():
     try:
         locations = es_service.get_unique_locations()
-        print("Fetched locations:", locations)  # 添加这行来打印获取的位置
+        print("Fetched locations:", locations)
         return jsonify(locations)
     except Exception as e:
-        print("Error fetching locations:", str(e))  # 添加这行来打印错误
+        print("Error fetching locations:", str(e))
         return jsonify({"error": str(e)}), 500
     
 

@@ -7,6 +7,7 @@ API_KEY = "MjEydmlwSUJxRDFPeEJTNEFHYXc6RkdqaEl1QUJTNDJzR0E1S2ZfTTNsZw=="
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+
 class ElasticSearchService:
     def __init__(self, index_name):
         self.es = Elasticsearch(
@@ -14,7 +15,7 @@ class ElasticSearchService:
             api_key=API_KEY
         )
         self.index_name = index_name
-        
+
     def search(self, filters, page=1, page_size=50):
         """
         Perform a search with filters and return paginated results.
@@ -146,9 +147,8 @@ class ElasticSearchService:
                 es_query["sort"] = [{
                     filters['sort_field']: {
                         "order": filters['sort_order']
-                            }
-                        }]
-
+                    }
+                }]
 
         logger.info(f"Constructed ES query: {es_query}")
 
@@ -158,9 +158,9 @@ class ElasticSearchService:
             total_count = count_response['count']
 
             es_query["_source"] = ["_id", "deidentname", "text", "created_at_dt", "location", "dominant_topic",
-                                "sentiment", "influence_tweet_factor", "influence_user", "retweet_count",
-                                "reply_count", "quote_count", "favourite_count", "node_type",
-                                "author_keynode", "hashtag_keynode", "extended_entities_count", "verified"]
+                                   "sentiment", "influence_tweet_factor", "influence_user", "retweet_count",
+                                   "reply_count", "quote_count", "favourite_count", "node_type",
+                                   "author_keynode", "hashtag_keynode", "extended_entities_count", "verified"]
             response = self.es.search(index=self.index_name, body=es_query)
             results = []
             for hit in response['hits']['hits']:
@@ -193,7 +193,7 @@ class ElasticSearchService:
                     "_id": selected_ids
                 }
             },
-            "_source": True  
+            "_source": True
         }
 
         try:
@@ -213,8 +213,8 @@ class ElasticSearchService:
             resp = self.es.search(
                 index=self.index_name,
                 body={"query": {"match_all": {}}},
-                scroll='2m',  
-                size=10000
+                scroll='2m',
+                size=200000
             )
 
             scroll_id = resp['_scroll_id']
@@ -229,7 +229,7 @@ class ElasticSearchService:
         except Exception as e:
             logger.error(f"Error retrieving all data: {str(e)}")
             raise
-        
+
     def get_unique_locations(self):
         try:
             aggs_query = {
@@ -248,7 +248,8 @@ class ElasticSearchService:
             locations = [bucket['key'] for bucket in response['aggregations']['unique_locations']['buckets']]
             return locations
         except Exception as e:
-            print("Error in get_unique_locations:", str(e))  
+            print("Error in get_unique_locations:", str(e))
             raise
-    
+
+
 es_service = ElasticSearchService('final_data_index')

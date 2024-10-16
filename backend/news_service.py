@@ -68,7 +68,6 @@ def search_google_news(query: str):
         response.raise_for_status()
         search_data = response.json()
 
-        # 提取搜索结果
         articles = []
         for item in search_data.get('items', []):
             metatags = item.get('pagemap', {}).get('metatags', [{}])[0]
@@ -92,10 +91,8 @@ def search_google_news(query: str):
 # Combine results from multiple news sources
 def aggregate_news_results(query: str):
     google_news = search_google_news(query)
-    # 其他的搜索源查询函数也应该在此调用
-    all_news = google_news  # 假设您集成了其他新闻来源
+    all_news = google_news
 
-    # 去重
     unique_titles = list({article['title']: article for article in all_news}.values())
     return {i + 1: article for i, article in enumerate(unique_titles)}
 

@@ -11,7 +11,7 @@
         if (storedUser && storedUser.username === username && storedUser.password === password) {
             alert('Logged in successfully!');
             // Redirect to the homepage after successful login
-            window.location.href = 'index.html'; // Make sure to update this to your actual homepage
+            window.location.href = 'index.html';
         } else {
             // Show error message if login fails
             document.getElementById('error-message').style.display = 'block';
