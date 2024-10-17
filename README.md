@@ -97,7 +97,7 @@ Once registered, use the login page to sign in with your new credentials and beg
 
 Once logged in, you will see the main dashboard of the application, where key insights and data visualizations are provided, including the number of total tweets, fake news tweets, and sentiment analysis.
 
-![Image Description](frontend/assets/529c199c245027bd0f20ea5c0a5202a.png)
+![Image Description](frontend/assets/1729177864265.jpg)
 
 ## 4. Features and Technologies
 
