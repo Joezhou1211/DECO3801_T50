@@ -29,7 +29,7 @@ if es.indices.exists(index=index_name):
 es.indices.create(index=index_name)
 logger.info(f"Created new index: {index_name}")
 
-df = pd.read_csv('../data/processed/Search_data.csv', parse_dates=['created_at_dt'])
+df = pd.read_csv('../../../DECO/data/processed/Search_data.csv', parse_dates=['created_at_dt'])
 logger.info(f"Read {len(df)} records from CSV file")
 
 records = df.to_dict(orient='records')
