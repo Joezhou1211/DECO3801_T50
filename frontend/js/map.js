@@ -356,14 +356,16 @@ function generateSidebarContent(locations, regionName, viewMode) {
         </div>
         <h3>Top Fake News Topics</h3>
         <ul class="topic-list">
-            ${sortedTopics.slice(0, 5).map(({ topic, count }) => `
+            ${sortedTopics.length > 0 ? sortedTopics.map(({ topic, count }) => `
                 <li class="topic-item">
                     <span class="topic-name">${topic}</span>
                     <span class="topic-count" title="${count} fake news articles">${count}</span>
                 </li>
-            `).join('')}
+            `).join('') : '<li class="no-data-message">No Data</li>'}
         </ul>
     `;
+
+
 
     if (viewMode === 'continent') {
         content += `

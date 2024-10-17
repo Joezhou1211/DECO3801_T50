@@ -3,7 +3,7 @@ from dash import Dash, dcc, html
 from dash.dependencies import Input, Output
 import pandas as pd
 
-df = pd.read_csv('../../data/processed/final_data(main_topic).csv')
+df = pd.read_csv('../../../../../DECO/data/processed/final_data(main_topic).csv')
 df = df[['_id', 'created_at', 'sentiment', 'weighted_sentiment',   'main-topic', 'influence_tweet_factor']]
 
 # to datetime and add day and hour columns
