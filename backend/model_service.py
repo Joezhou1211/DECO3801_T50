@@ -93,7 +93,7 @@ def evaluate_news(original_query: str, news_articles: dict):
             avg_similarity * 0.60 +
             time_match_ratio * 0.20 +
             location_match_ratio * 0.10 +
-            numeric_match_ratio * 0.05
+            numeric_match_ratio * 0.10
     )
     fake_news_probability = max(0, min((1 - overall_score) * 100, 100))
 
