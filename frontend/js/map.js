@@ -27,8 +27,6 @@ const VIEW_MODES = {
 
 document.addEventListener("DOMContentLoaded", function () {
     setupEventListeners();
-    // initializeChart();
-    initializePopup();
 });
 
 function setupEventListeners() {
