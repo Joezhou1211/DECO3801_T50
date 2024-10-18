@@ -43,7 +43,7 @@ Here are all the dependencies below:
     flask-cors==5.0.0
     eventregistry==9.1
     requests==2.31.0
-    numpy==1.26.4
+    numpy>=1.26.4,<2.0.3
     spacy==3.8.2
     thinc==8.3.2
     google-generativeai==0.8.3
