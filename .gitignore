@@ -15,7 +15,5 @@ data/processed/tweet_chain_optimized.json
 data/processed/Search_data.json
 data/processed/fake_data.json
 data/processed/old_map_data.json
-DECO3801_T50/data/processed/topic_data(old).json
-DECO3801_T50/data/processed/old_map_data.json
-DECO3801_T50/data/processed/Search_data.csv
-DECO3801_T50/data/processed/fake_data.json
+data/processed/topic_data(old).json
+data/processed/Search_data.csv
