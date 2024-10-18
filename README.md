@@ -62,7 +62,7 @@ If any installations fail, manually install the required package like: pip insta
 
 After successfully running it, you should see the output below.
 
-![Image Description](frontend/assets/d869878957cdb6930f0c31105fda900.png)
+![Image Description](frontend/assets/readme-1.jpg)
 
 ### 2.7 Run the Application
 
@@ -71,7 +71,7 @@ After successfully running it, you should see the output below.
 
 After successfully running the application, navigate to the second website.
 
-![Image Description](frontend/assets/2069d06a8591c85351fa0fd16c1ea5d.png)
+![Image Description](frontend/assets/readme-2.png)
 
 ## 3. Register and Login
 
@@ -79,19 +79,19 @@ After successfully running the application, navigate to the second website.
 
 After running the application, you will see the login page as shown below. If you don’t have an account, click on the "Register" link to create a new account.
 
-![Image Description](frontend/assets/68dc82f6be9352cc6e2280ca67a1c43.png)
+![Image Description](frontend/assets/readme-3.png)
 
 ### 3.2 Register a New User
 
 To register, enter the required token (which is 123456), your email, username, and password as shown in the image below. Use the same email address (123@123.gov) as both the email and username for this demo.
 
-![Image Description](frontend/assets/8cfef0d95c171201f01cba6899511bb.png)
+![Image Description](frontend/assets/readme-4.png)
 
 ### 3.3 Login
 
 Once registered, use the login page to sign in with your new credentials and begin using the application.
 
-![Image Description](frontend/assets/839a5493cc0860ea507a89207ca6fde.png)
+![Image Description](frontend/assets/readme-5.png)
 
 ### 3.4 Using the Application
 
@@ -113,151 +113,136 @@ The project leverages a variety of tools and technologies across different stage
 project_root/                                          
 ├── backend/
 │   ├── notebooks/
-│   │   ├── fake_news_model_final.ipynb
-│   │   ├── LDA_modeling_main+sub.ipynb
-│   │   ├── location_json.ipynb
-│   │   ├── model_1.ipynb
-│   │   ├── NMF_modeling.ipynb
-│   │   ├── pattern_regonisation & sampling.ipynb
-│   │   ├── preprocess+pre_LDA.ipynb
-│   │   ├── sentiment.ipynb
-│   │   └── tweets_chain.ipynb
+│   │   ├── fake_news_model_final.ipynb          # Fake news detection model notebook
+│   │   ├── LDA_modeling_main+sub.ipynb          # LDA topic modeling notebook
+│   │   ├── location_json.ipynb                  # Location data to JSON conversion notebook
+│   │   ├── NMF_modeling.ipynb                   # NMF topic modeling notebook
+│   │   ├── pattern_regonisation & sampling.ipynb# Pattern recognition and sampling notebook
+│   │   ├── preprocess+pre_LDA.ipynb             # Preprocessing for LDA notebook
+│   │   ├── sentiment.ipynb                      # Sentiment analysis notebook
+│   │   └── tweets_chain.ipynb                   # Tweets chain analysis notebook
 │   ├── utils/
-│   │   ├── CSV_to_Json.py
-│   │   ├── LDA_wordcloud.png
-│   │   ├── main_LDA_visualization.html
-│   │   ├── map_page_data_outputer.ipynb
-│   │   ├── pre_LDA_visualization.html
-│   │   ├── Time_Series & Topic & Sentiment Analysis Graph.py
-│   │   ├── time_squence_analysis.py
-│   │   └── topic_page_data_outporter.ipynb
-│   ├── app.py
-│   ├── data_importer.py
-│   ├── elasticsearch_service.py
-│   ├── model_service.py
-│   └── news_service.py
+│   │   ├── CSV_to_Json.py                       # CSV to JSON conversion script
+│   │   ├── LDA_wordcloud.png                    # LDA word cloud image
+│   │   ├── main_LDA_visualization.html          # Main LDA visualization HTML
+│   │   ├── map_page_data_outputer.ipynb         # Map page data output notebook
+│   │   ├── pre_LDA_visualization.html           # Pre-LDA visualization HTML
+│   │   ├── Time_Series & Topic & Sentiment Analysis Graph.py # Time series, topic, and sentiment analysis script
+│   │   ├── time_squence_analysis.py             # Time sequence analysis script
+│   │   └── topic_page_data_outporter.ipynb      # Topic page data output notebook
+│   ├── app.py                                   # Main Flask app script
+│   ├── data_importer.py                         # Data importing script
+│   ├── elasticsearch_service.py                 # Elasticsearch service script
+│   ├── model_service.py                         # Model-related service script
+│   └── news_service.py                          # News analysis service script
 ├── data/
 │   ├── processed/
-│   │   ├── daily_weighted_sentiment_vader.csv
-│   │   ├── fake.csv
-│   │   ├── fake_news_data.json
-│   │   ├── final_data(filtered).json
-│   │   ├── final_data(main_topic).csv
-│   │   ├── final_data(old).csv
-│   │   ├── final_data.csv
-│   │   ├── final_data.json
-│   │   ├── final_data_cleaned.csv
-│   │   ├── hourly_weighted_sentiment_vader.csv
-│   │   ├── location.json
-│   │   ├── location_counts.json
-│   │   ├── output.json
-│   │   ├── topic_data(final).json
-│   │   ├── topic_data(parent&child).csv
-│   │   ├── topic_data.json
-│   │   ├── topic_timeline.csv
-│   │   ├── tweet_chain_optimized.json
-│   │   ├── tweets_with_final_nmf_topics_final.csv
-│   │   └── whole_data(parent&child).csv
-│   └── raw/
-│       ├── v_forest.bson
-│       └── v_forest.csv
+│   │   ├── topic_data.json                      # Processed topic data in JSON format
+│   │   ├── map_data.json                        # Processed map data in JSON format
 ├── frontend/
 │   ├── assets/
-│   │   ├── fakenews.png
-│   │   ├── index map1.png
-│   │   ├── logo.png
-│   │   ├── map.png
-│   │   ├── misleading1.png
-│   │   ├── model1.png
-│   │   ├── model2.png
-│   │   ├── search-file.png
-│   │   ├── Single Newwork Analysis.jpg
-│   │   ├── statistics.png
-│   │   ├── user.png
-│   │   ├── user_icon.png
-│   │   └── visible.png
+│   │   ├── bushfire.jpeg                        # Bushfire image
+│   │   ├── contact.png                          # Contact page icon
+│   │   ├── fakenews.png                         # Fake news image
+│   │   ├── find-detectnews.jpg                  # Detect news image
+│   │   ├── find-detecttweet.jpg                 # Detect tweet image
+│   │   ├── find-detecttweet1.jpg                # Detect tweet alternate image
+│   │   ├── find-map.png                         # Map find image
+│   │   ├── find-map0.png                        # Map find version 0
+│   │   ├── find-map1.png                        # Map find version 1
+│   │   ├── find-map2.png                        # Map find version 2
+│   │   ├── find-map3.png                        # Map find version 3
+│   │   ├── find-map4.png                        # Map find version 4
+│   │   ├── find-map5.png                        # Map find version 5
+│   │   ├── find-map6.png                        # Map find version 6
+│   │   ├── find-map7.png                        # Map find version 7
+│   │   ├── find-name.jpg                        # Name find image
+│   │   ├── find-search.png                      # Search find image
+│   │   ├── find-search0.png                     # Search find version 0
+│   │   ├── find-search1.png                     # Search find version 1
+│   │   ├── find-search2.png                     # Search find version 2
+│   │   ├── find-search3.png                     # Search find version 3
+│   │   ├── find-search4.png                     # Search find version 4
+│   │   ├── find-search5.png                     # Search find version 5
+│   │   ├── find-search6.png                     # Search find version 6
+│   │   ├── find-search7.png                     # Search find version 7
+│   │   ├── find-search8.png                     # Search find version 8
+│   │   ├── find-search9.png                     # Search find version 9
+│   │   ├── find-search10.png                    # Search find version 10
+│   │   ├── find-security.jpg                    # Security find image
+│   │   ├── find-setting.jpg                     # Settings find image
+│   │   ├── find-topic.png                       # Topic find image
+│   │   ├── find-topic0.png                      # Topic find version 0
+│   │   ├── find-topic1.png                      # Topic find version 1
+│   │   ├── find-topic2.png                      # Topic find version 2
+│   │   ├── find-topic3.png                      # Topic find version 3
+│   │   ├── find-topic4.png                      # Topic find version 4
+│   │   ├── find-topic5.png                      # Topic find version 5
+│   │   ├── find-topic6.png                      # Topic find version 6
+│   │   ├── find-topic7.png                      # Topic find version 7
+│   │   ├── find-topic8.png                      # Topic find version 8
+│   │   ├── find-topic9.png                      # Topic find version 9
+│   │   ├── help-icon.png                        # Help icon
+│   │   ├── help-icon-hover.png                  # Help icon hover state
+│   │   ├── index map1.png                       # Index page map image
+│   │   ├── logo.png                             # Website logo
+│   │   ├── map.png                              # Map image
+│   │   ├── misleading1.png                      # Misleading information image
+│   │   ├── model2.png                           # Model image 2
+│   │   ├── readme-1.jpg                         # Readme file image 5
+│   │   ├── readme-2.png                         # Readme file image 5
+│   │   ├── readme-3.png                         # Readme file image 5
+│   │   ├── readme-4.png                         # Readme file image 5
+│   │   ├── readme-5.png                         # Readme file image 5
+│   │   ├── search-file.png                      # Search file image
+│   │   ├── statistics.png                       # Statistics image
+│   │   ├── user.png                             # User icon
+│   │   ├── user-hover.png                       # User icon hover state
+│   │   ├── user_icon.png                        # Alternative user icon
+│   │   └── visible.png                          # Visibility icon
 │   ├── css/
-│   │   ├── contact.css
-│   │   ├── fakeNews.css
-│   │   ├── help.css
-│   │   ├── index.css
-│   │   ├── logIn.css
-│   │   ├── map.css
-│   │   ├── search.css
-│   │   ├── setting.css
-│   │   ├── style.css
-│   │   └── topics.css
+│   │   ├── contact.css                          # Contact page stylesheet
+│   │   ├── fakeNews.css                         # Fake news page stylesheet
+│   │   ├── help.css                             # Help page stylesheet
+│   │   ├── index.css                            # Index page stylesheet
+│   │   ├── logIn.css                            # Login page stylesheet
+│   │   ├── map.css                              # Map page stylesheet
+│   │   ├── search.css                           # Search page stylesheet
+│   │   ├── setting.css                          # Settings page stylesheet
+│   │   ├── style.css                            # Global stylesheet
+│   │   └── topics.css                           # Topics page stylesheet
 │   ├── js/
-│   │   ├── contact.js
-│   │   ├── fakeNews.js
-│   │   ├── forgetpassword.js
-│   │   ├── index.js
-│   │   ├── logIn.js
-│   │   ├── main.js
-│   │   ├── map.js
-│   │   ├── register.js
-│   │   ├── search.js
-│   │   ├── security.js
-│   │   ├── setting.js
-│   │   └── topics.js
+│   │   ├── constant.js                          # Constant variables JavaScript file
+│   │   ├── contact.js                           # Contact page JavaScript
+│   │   ├── fakeNews.js                          # Fake news page JavaScript
+│   │   ├── forgetpassword.js                    # Forgot password page JavaScript
+│   │   ├── index.js                             # Index page JavaScript
+│   │   ├── logIn.js                             # Login page JavaScript
+│   │   ├── main.js                              # Main JavaScript file
+│   │   ├── map.js                               # Map page JavaScript
+│   │   ├── register.js                          # Register page JavaScript
+│   │   ├── search.js                            # Search page JavaScript
+│   │   ├── security.js                          # Security page JavaScript
+│   │   ├── setting.js                           # Settings page JavaScript
+│   │   └── topics.js                            # Topics page JavaScript
 │   └── pages/
-│       ├── contact.html
-│       ├── fakeNews.html
-│       ├── forgetpassword.html
-│       ├── help.html
-│       ├── index.html
-│       ├── logIn.html
-│       ├── map.html
-│       ├── register.html
-│       ├── search.html
-│       ├── security.html
-│       ├── setting.html
-│       └── topics.html
-├── models/
-│   ├── main_topics/
-│   │   ├── corpus_subtopics
-│   │   ├── corpus_subtopics.index
-│   │   ├── dictionary_subtopics
-│   │   ├── lda_model_subtopics
-│   │   ├── lda_model_subtopics.expElogbeta.npy
-│   │   ├── lda_model_subtopics.id2word
-│   │   └── lda_model_subtopics.state
-│   └── pre_topics/
-│       ├── corpus.mm
-│       ├── corpus.mm.index
-│       ├── dictionary.gensim
-│       ├── final_nmf_model.pkl
-│       ├── lda_model.gensim
-│       ├── lda_model.gensim.expElogbeta.npy
-│       ├── lda_model.gensim.id2word
-│       └── lda_model.gensim.state
-├── UI/
-│   ├── UI assets/
-│   │   ├── Network Side Bar In.png
-│   │   ├── Network Side Bar Out.png
-│   │   ├── Topic Slider Bar In.png
-│   │   ├── Topic Slider Bar Out.png
-│   │   ├── Twitters.png
-│   │   ├── map.png
-│   │   ├── network.png
-│   │   ├── network full version.png
-│   │   ├── webframe 1.png
-│   │   ├── webframe 2.png
-│   │   └── webframe 3.png
-│   └── UX assets/
-│       ├── Deeply analysis of user group.png
-│       ├── Further relational researchs.png
-│       ├── Research and design reason.png
-│       ├── Research of visualization.png
-│       ├── Target audience mindmap.png
-│       ├── Website Purpose& Fake news imapct.png
-│       ├── site map.jpg
-│       └── first version of LFI.jpg
-├── .gitattributes
-├── .gitignore
-├── README.md
-├── requirements.txt
-├── setup_virtual_env.ps1
-└── setup_virtual_env.sh
+│       ├── contact.html                         # Contact page HTML
+│       ├── fakeNews.html                        # Fake news page HTML
+│       ├── forgetpassword.html                  # Forgot password page HTML
+│       ├── help.html                            # Help page HTML
+│       ├── index.html                           # Index page HTML
+│       ├── logIn.html                           # Login page HTML
+│       ├── map.html                             # Map page HTML
+│       ├── register.html                        # Register page HTML
+│       ├── search.html                          # Search page HTML
+│       ├── security.html                        # Security page HTML
+│       ├── setting.html                         # Settings page HTML
+│       └── topics.html                          # Topics page HTML
+├── .gitignore                                    # Git ignore rules
+├── README.md                                     # Project documentation
+├── requirements.txt                              # Project dependencies
+├── setup_virtual_env.ps1                         # Windows virtual environment setup script
+└── setup_virtual_env.sh                          # Linux/macOS virtual environment setup script
+
 ```
 
